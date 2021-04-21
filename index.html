@@ -97,31 +97,31 @@
       <div class='list-h'>
         
           
-            <a href="/v3/getting-started/"
+            <a href="/Class"
               
               
-              id="v3getting-started">
-              <i class='fas fa-book-open fa-fw'></i><p>CS</p>
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
             </a>
           
-            <a href="/faqs/"
+            <a href="/Project"
               
               
-              id="faqs">
-              <i class='fas fa-book fa-fw'></i><p>DS</p>
+              id="Project">
+              <i class='fas fa-project-diagram fa-fw'></i><p>Project</p>
             </a>
           
-            <a href="/examples/"
+            <a href="/Life"
               
               
-              id="examples">
-              <i class='fas fa-envelope fa-fw'></i><p>Life</p>
+              id="Life">
+              <i class='fas fa-book fa-fw'></i><p>Life</p>
             </a>
           
-            <a href="/contributors/"
+            <a href="/AboutMe"
               
               
-              id="contributors">
+              id="AboutMe">
               <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
             </a>
           
@@ -232,7 +232,7 @@
       <div class="m_search">
         <form name="searchform" class="form u-search-form">
           <i class="icon fas fa-search fa-fw"></i>
-          <input type="text" class="input u-search-input" placeholder="Search..." />
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
         </form>
       </div>
 
@@ -382,20 +382,8 @@
         
           
         
-        
           
         
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
         
           
         
@@ -463,8 +451,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -473,6 +461,14 @@
           
             
               
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
 
             
           
@@ -543,49 +539,13 @@
 <p>Given a connected and undirected graph, a <em>spanning tree</em> of that graph is a subgraph that is a tree and connects all the vertices together. </p>
 <p>A <em>minimum spanning tree (MST)</em> or minimum weight spanning tree for a weighted, connected and undirected graph is a spanning tree with weight less than or equal to the weight of every other spanning tree. The weight of a spanning tree is the sum of weights given to each edge of the spanning tree.</p>
 <p>A minimum spanning tree has (V – 1) edges where V is the number of vertices in the given graph.</p>
-<h1 id="Kruskal’s"><a href="#Kruskal’s" class="headerlink" title="Kruskal’s"></a>Kruskal’s</h1><h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><ol>
-<li><p>Sort all the edges in non-decreasing order of their weight.</p>
-</li>
-<li><p>Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If cycle is not formed, include this edge. Else, discard it.</p>
-<p>Use UnionFind algo to detect cycle</p>
-</li>
-<li><p>Repeat step#2 until there are (V-1) edges in the spanning tree.</p>
-</li>
-</ol>
-<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Graph</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,vertices</span>):</span></span><br><span class="line">    self.V=vertices</span><br><span class="line">    self.graph=[]</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">addEdge</span>(<span class="params">self,u,v,w</span>):</span></span><br><span class="line">    self.graph.append([u,v,w])</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">self,parent,i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> parent[i]==i:</span><br><span class="line">      <span class="keyword">return</span> i</span><br><span class="line">    <span class="keyword">return</span> self.find(parent,parent[i])</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">self,parent,rank,x,y</span>):</span></span><br><span class="line">    xroot=self.find(parent,x)</span><br><span class="line">    yroot=self.find(parent,y)</span><br><span class="line">    <span class="keyword">if</span> rank[xroot] &lt; rank[yroot]: </span><br><span class="line">      parent[xroot] = yroot </span><br><span class="line">    <span class="keyword">elif</span> rank[xroot] &gt; rank[yroot]: </span><br><span class="line">      parent[yroot] = xroot </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      praent[yroot]=xroot</span><br><span class="line">      rank[xroot]+=<span class="number">1</span></span><br><span class="line">      </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">KruskalMST</span>(<span class="params">self</span>):</span></span><br><span class="line">    res=[]</span><br><span class="line">    </span><br><span class="line">    i=<span class="number">0</span> <span class="comment"># an index variable, used for sorted edges</span></span><br><span class="line">    e=<span class="number">0</span> <span class="comment"># an index variable, used for result[]</span></span><br><span class="line">    </span><br><span class="line">    self.graph=sorted(self.graph,key=<span class="keyword">lambda</span> item:item[<span class="number">2</span>])</span><br><span class="line">    </span><br><span class="line">    parent=[]</span><br><span class="line">    rank=[]</span><br><span class="line">    <span class="keyword">for</span> node <span class="keyword">in</span> range(self.V):</span><br><span class="line">      parent.append(node)</span><br><span class="line">      rank.append(<span class="number">0</span>)</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> e&lt;self.V<span class="number">-1</span>:</span><br><span class="line">      u,v,w=self.graph[i]</span><br><span class="line">      i=i+<span class="number">1</span></span><br><span class="line">      x=self.find(parent,u)</span><br><span class="line">      y=self.find(parent,v)</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> x!=y:</span><br><span class="line">        e=e+<span class="number">1</span></span><br><span class="line">        res.append([u,v,w])</span><br><span class="line">        self.union(parent,rank,x,y)</span><br><span class="line">    </span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<p>Time: O(ElogE) or O(ElogV)</p>
-<h1 id="Prim’s"><a href="#Prim’s" class="headerlink" title="Prim’s"></a>Prim’s</h1><p>It starts with an empty spanning tree. The idea is to maintain two sets of vertices. The first set contains the vertices already included in the MST, the other set contains the vertices not yet included. At every step, it considers all the edges that connect the two sets, and picks the minimum weight edge from these edges. After picking the edge, it moves the other endpoint of the edge to the set containing MST. </p>
-<h2 id="Why"><a href="#Why" class="headerlink" title="Why?"></a>Why?</h2><p>The idea behind Prim’s algorithm is simple, a spanning tree means all vertices must be connected. So the two disjoint subsets (discussed above) of vertices must be connected to make a <em>Spanning</em> Tree. And they must be connected with the minimum weight edge to make it a <em>Minimum</em> Spanning Tree.</p>
-<h2 id="Algorithms-1"><a href="#Algorithms-1" class="headerlink" title="Algorithms"></a>Algorithms</h2><ol>
-<li><p>Create a set <code>mstSet</code> that keeps track of vertices already included in MST</p>
-</li>
-<li><p>Assign a key value to all vertices in the input graph. Initialize all key values as INFINITE. Assign key value as 0 for the first vertex so that it is picked first.</p>
-</li>
-<li><p>While mstSet doesn’t include all vertices</p>
-<ol>
-<li>pick a vertex u which is not there in mstSet and has minimum key value</li>
-<li>include u to mstSet</li>
-<li>Update key value of all adjacent vertices of u. To update the key values, iterate through all adjacent vertices. For every adjacent vertex v, if weight of edge u-v is less than the previous key value of v, update the key value as weight of u-v</li>
-</ol>
-</li>
-</ol>
-<p>The idea of using key values is to pick the minimum weight edge from <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Cut_(graph_theory)">cut</a>. The key values are used only for vertices which are not yet included in MST, the key value for these vertices indicate the minimum weight edges connecting them to the set of vertices included in MST.</p>
-<h2 id="Implementation-1"><a href="#Implementation-1" class="headerlink" title="Implementation"></a>Implementation</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Graph</span>():</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,vertices</span>):</span></span><br><span class="line">    self.V=vertices</span><br><span class="line">    self.graph=[[<span class="number">0</span> <span class="keyword">for</span> column <span class="keyword">in</span> range(vertices)] <span class="keyword">for</span> row <span class="keyword">in</span> range(vertices)]</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">minKey</span>(<span class="params">self,key,mstSet</span>):</span></span><br><span class="line">    minimum=float(<span class="string">&quot;-inf&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> range(self.V):</span><br><span class="line">      <span class="keyword">if</span> key[v]&lt;minimum <span class="keyword">and</span> mstSet[v]==<span class="literal">False</span>:</span><br><span class="line">        minimum=key[v]</span><br><span class="line">        min_index=v</span><br><span class="line">    <span class="keyword">return</span> min_index</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">primMST</span>(<span class="params">self</span>):</span></span><br><span class="line">    key=[float(<span class="string">&quot;inf&quot;</span>)]*self.V</span><br><span class="line">    parent=[<span class="literal">None</span>]*self.V</span><br><span class="line">    key[<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">    mstSet=[<span class="literal">False</span>]*self.V</span><br><span class="line">    </span><br><span class="line">    parent[<span class="number">0</span>]=<span class="number">-1</span></span><br><span class="line">    <span class="keyword">for</span> cout <span class="keyword">in</span> range(self.V):</span><br><span class="line">      u=self.minKey(key,mstSet)</span><br><span class="line">      mstSet[u]=<span class="literal">True</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">for</span> v <span class="keyword">in</span> range(self.V):</span><br><span class="line">        <span class="keyword">if</span> self.graph[u][v]&gt;<span class="number">0</span> <span class="keyword">and</span> mstSet[v]==<span class="literal">False</span>:</span><br><span class="line">          key[v]=self.graph[u][v]</span><br><span class="line">          parent[v]=u</span><br><span class="line">     </span><br></pre></td></tr></table></figure>
-
-<p>Time: <code>O(V**2)</code></p>
-<h1 id="Connecting-Cities-with-Minimum-Cost-1135"><a href="#Connecting-Cities-with-Minimum-Cost-1135" class="headerlink" title="Connecting Cities with Minimum Cost 1135"></a>Connecting Cities with Minimum Cost 1135</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minimumCost</span>(<span class="params">N,connections</span>):</span></span><br><span class="line">  parents=[x <span class="keyword">for</span> x <span class="keyword">in</span> range(N)]</span><br><span class="line">  ranks=[<span class="number">1</span>]*N</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">u</span>):</span></span><br><span class="line">    <span class="keyword">while</span> u!=parents[u]:</span><br><span class="line">      parents[u]=parents[parents[u]]</span><br><span class="line">      u=parents[u]</span><br><span class="line">    <span class="keyword">return</span> u</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">u,v</span>):</span></span><br><span class="line">    root_u,root_v=find(u),find(v)</span><br><span class="line">    <span class="keyword">if</span> root_u==root_v:</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> ranks[root_v] &gt; ranks[root_u]:</span><br><span class="line">                root_u, root_v = root_v, root_u</span><br><span class="line">            parents[root_v] = root_u</span><br><span class="line">            ranks[root_u] += ranks[root_v]</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">  connections.sort(key=<span class="keyword">lambda</span> x:x[<span class="number">2</span>])</span><br><span class="line">  ans=<span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> u,v,val <span class="keyword">in</span> connections:</span><br><span class="line">    <span class="keyword">if</span> union(u<span class="number">-1</span>,v<span class="number">-1</span>):</span><br><span class="line">      ans+=val</span><br><span class="line">  groups=len(&#123;find(x) fo x <span class="keyword">in</span> parents&#125;)</span><br><span class="line">  <span class="keyword">return</span> ans <span class="keyword">if</span> groups==<span class="number">1</span> <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="Min-Cost-to-Connect-All-Nodes"><a href="#Min-Cost-to-Connect-All-Nodes" class="headerlink" title="Min Cost to Connect All Nodes"></a>Min Cost to Connect All Nodes</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: n &#x3D; 6, edges &#x3D; [[1, 4], [4, 5], [2, 3]], newEdges &#x3D; [[1, 2, 5], [1, 3, 10], [1, 6, 2], [5, 6, 5]]</span><br><span class="line">Output: 7</span><br><span class="line">Explanation:</span><br><span class="line">There are 3 connected components [1, 4, 5], [2, 3] and [6].</span><br><span class="line">We can connect these components into a single component by connecting node 1 to node 2 and node 1 to node 6 at a minimum cost of 5 + 2 &#x3D; 7.</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_min_cost</span>(<span class="params">num_nodes,base_mst,poss_mst</span>):</span></span><br><span class="line">  parents=[i <span class="keyword">for</span> i <span class="keyword">in</span> range(num_nodes)]</span><br><span class="line">  ranks=[<span class="number">1</span>]*num_nodes</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">x</span>):</span></span><br><span class="line">    <span class="keyword">if</span> parents[x]!=x:</span><br><span class="line">      parents[x]=find(parents[x])</span><br><span class="line">    <span class="keyword">return</span> parents[x]</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">x,y</span>):</span></span><br><span class="line">    root_u,root_v=find(u),find(v)</span><br><span class="line">    <span class="keyword">if</span> root_u==root_v:</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> ranks[root_v] &gt; ranks[root_u]:</span><br><span class="line">                root_u, root_v = root_v, root_u</span><br><span class="line">            parents[root_v] = root_u</span><br><span class="line">            ranks[root_u] += ranks[root_v]</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">     </span><br><span class="line">  <span class="keyword">for</span> a,b <span class="keyword">in</span> base_mst:</span><br><span class="line">    <span class="keyword">if</span> find(a)!=find(b):</span><br><span class="line">      union(a,b)</span><br><span class="line">      </span><br><span class="line">  poss_mst.sort(key=<span class="keyword">lambda</span> x:x[<span class="number">2</span>])</span><br><span class="line">  ans=<span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> u,v,cost <span class="keyword">in</span> poss_mst:</span><br><span class="line">    <span class="keyword">if</span> union(u,v):</span><br><span class="line">      ans+=cost</span><br><span class="line">  groups=len(&#123;find(x) <span class="keyword">for</span> x <span class="keyword">in</span> range(num_nodes)&#125;)</span><br><span class="line">  <span class="keyword">return</span> ans <span class="keyword">if</span> groups==<span class="number">1</span> <span class="keyword">else</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-
       
     </div>
     
+      
+        <a class= "readmore" href="/2020/08/17/MST/">
+          阅读全文 <i class="fas fa-chevron-right"></i>
+        </a>
       
     
   </section>
@@ -622,8 +582,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -634,9 +594,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/Leetcode/' rel="nofollow">
+    <a href='/categories/interview/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>Leetcode</p>
+      <p>interview</p>
     </a>
   </div>
 
@@ -707,9 +667,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Dynamic inserting values and also keep the array sorted: Priority Queue, Heap</p>
-<p>Top K largest / smallest:</p>
-<p>Leetcode: Merge k Sorted Lists (23), K Closest Points to Origin (973), Top K Frequent Words (692), Kth Largest Element in an Array (215), </p>
-<p>Two Heaps:</p>
+<p><em>Top K largest / smallest:</em></p>
+<p>Leetcode: Merge k Sorted Lists (23), K Closest Points to Origin (973), Top K Frequent Words (692), Kth Largest Element in an Array (215)</p>
+<p><em>Two Heaps:</em></p>
 <p>Find Median from Data Stream (295)</p>
 <p>Python: default is minHeap, you have to use -num to have maxHeap</p>
 <p>Priority Queue is an extension of queue with following properties:</p>
@@ -718,142 +678,12 @@
 <li>an element with high priority is dequeueed before an element with low priority</li>
 <li>if two elements have the same priority, they are served according to the order in the queue</li>
 </ul>
-<p>A typical priority queue supports following operations.<br><strong>insert(item, priority):</strong> Inserts an item with given priority.<br><strong>getHighestPriority():</strong> Returns the highest priority item.<br><strong>deleteHighestPriority():</strong> Removes the highest priority item.</p>
+<p>A typical priority queue supports following operations.<br><code>insert(item, priority)</code>: Inserts an item with given priority.<br><code>getHighestPriority()</code>: Returns the highest priority item.<br><code>deleteHighestPriority()</code>: Removes the highest priority item.</p>
       
     </div>
     
       
         <a class= "readmore" href="/2020/08/16/PriorityQueue/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/15/IMC-VO/">
-      IMC-VO
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
-    <p>Gilmore</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/interview/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>interview</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 15, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/08/15/IMC-VO/" class="leancloud_visitors" data-flag-title="IMC-VO">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/08/15/IMC-VO/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/15/IMC-VO/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>Explained your favourite project to a <strong><em>non-technical</em></strong> people</p>
-<p>(1min)</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/15/IMC-VO/">
           阅读全文 <i class="fas fa-chevron-right"></i>
         </a>
       
@@ -892,8 +722,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -976,7 +806,7 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Now OA 8.16</p>
+        <p>Timeline: OA 8.16 – no response</p>
       
     </div>
     
@@ -1020,8 +850,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -1104,7 +934,7 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Now OA2</p>
+        <p>Timeline: 8.13 –&gt; 8.13 –&gt; 8.21</p>
       
     </div>
     
@@ -1148,8 +978,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -1275,8 +1105,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -1287,9 +1117,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/Java/' rel="nofollow">
+    <a href='/categories/interview/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>OOP/Java</p>
+      <p>interview</p>
     </a>
   </div>
 
@@ -1403,8 +1233,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -1415,9 +1245,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/Java/' rel="nofollow">
+    <a href='/categories/interview/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>OOP/Java</p>
+      <p>interview</p>
     </a>
   </div>
 
@@ -1518,8 +1348,8 @@
         
           
   <h2 class="title">
-    <a href="/2020/08/12/BFS/">
-      BFS
+    <a href="/2020/08/12/DFS-Tree/">
+      DFS-Tree
     </a>
   </h2>
 
@@ -1532,8 +1362,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -1544,9 +1374,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/Leetcode/' rel="nofollow">
+    <a href='/categories/interview/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>Leetcode</p>
+      <p>interview</p>
     </a>
   </div>
 
@@ -1574,7 +1404,7 @@
     <a class='notlink'>
       <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
       
-      <span id="/2020/08/12/BFS/" class="leancloud_visitors" data-flag-title="BFS">
+      <span id="/2020/08/12/DFS-Tree/" class="leancloud_visitors" data-flag-title="DFS-Tree">
       <p>
         <span class="leancloud-visitors-count"></span>
       </p>
@@ -1589,9 +1419,9 @@
               
 <div class="new-meta-item comments-count">
   
-  <a href="/2020/08/12/BFS/#comments">
+  <a href="/2020/08/12/DFS-Tree/#comments">
     <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/12/BFS/">0</span>
+    <span class="valine-comment-count" data-xid="/2020/08/12/DFS-Tree/">0</span>
     <span class="leancloud-comments-count">&nbsp;</span>
   </a>
 </div>
@@ -1616,10 +1446,19 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Here DFS is just like recursion, two things to be noted in <kbd>def dfs()</kbd>:</p>
+<ul>
+<li>pass arguments down  <kbd>sums, target</kbd></li>
+<li>have returns up <kbd>res from root.left, root.right</kbd></li>
+</ul>
+<p>For matrix, we have 2 fixed directions <kbd>root.left</kbd> / <kbd>root.right</kbd> to traverse. We should pay attention to <span class='p blue'>Return value + Pass down arguments + Parent child relationship</span>.</p>
       
     </div>
     
+      
+        <a class= "readmore" href="/2020/08/12/DFS-Tree/">
+          阅读全文 <i class="fas fa-chevron-right"></i>
+        </a>
       
     
   </section>
@@ -1642,8 +1481,8 @@
         
           
   <h2 class="title">
-    <a href="/2020/08/12/Queue/">
-      Queue
+    <a href="/2020/08/12/DFS-Graph/">
+      DFS-Graph
     </a>
   </h2>
 
@@ -1656,8 +1495,141 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Aug 12, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              
+  <div class="new-meta-item browse valine">
+    <a class='notlink'>
+      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+      
+      <span id="/2020/08/12/DFS-Graph/" class="leancloud_visitors" data-flag-title="DFS-Graph">
+      <p>
+        <span class="leancloud-visitors-count"></span>
+      </p>
+      </span>
+    </a>
+  </div>
+
+
+            
+          
+            
+              
+<div class="new-meta-item comments-count">
+  
+  <a href="/2020/08/12/DFS-Graph/#comments">
+    <i class="fas fa-comment-dots fa-fw"></i>
+    <span class="valine-comment-count" data-xid="/2020/08/12/DFS-Graph/">0</span>
+    <span class="leancloud-comments-count">&nbsp;</span>
+  </a>
+</div>
+
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Here DFS is just like recursion, two things to be noted in <kbd>def dfs()</kbd>:</p>
+<ul>
+<li>pass arguments down  <kbd>sums, target</kbd></li>
+<li>have returns up <kbd>res from root.left, root.right</kbd></li>
+</ul>
+<p>For matrix, we have 2 fixed directions <kbd>root.left</kbd> / <kbd>root.right</kbd> to traverse. We should pay attention to <span class='p blue'>Return value + Pass down arguments + Parent child relationship</span>.</p>
+      
+    </div>
+    
+      
+        <a class= "readmore" href="/2020/08/12/DFS-Graph/">
+          阅读全文 <i class="fas fa-chevron-right"></i>
+        </a>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2020/08/12/OOP_java/">
+      OOP-Basics
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -1690,7 +1662,7 @@
     <a class='notlink'>
       <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
       
-      <span id="/2020/08/12/Queue/" class="leancloud_visitors" data-flag-title="Queue">
+      <span id="/2020/08/12/OOP_java/" class="leancloud_visitors" data-flag-title="OOP-Basics">
       <p>
         <span class="leancloud-visitors-count"></span>
       </p>
@@ -1705,9 +1677,9 @@
               
 <div class="new-meta-item comments-count">
   
-  <a href="/2020/08/12/Queue/#comments">
+  <a href="/2020/08/12/OOP_java/#comments">
     <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/08/12/Queue/">0</span>
+    <span class="valine-comment-count" data-xid="/2020/08/12/OOP_java/">0</span>
     <span class="leancloud-comments-count">&nbsp;</span>
   </a>
 </div>
@@ -1732,7 +1704,26 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="OOP"><a href="#OOP" class="headerlink" title="OOP"></a>OOP</h1><p>Object-Oriented Programming or OOPs refers to languages that uses objects in programming. Object-oriented programming aims to implement real-world entities like inheritance, hiding, polymorphism etc in programming. The main aim of OOP is to bind together the data and the functions that operate on them so that no other part of the code can access this data except that function.</p>
+<h1 id="Polymorphism"><a href="#Polymorphism" class="headerlink" title="Polymorphism"></a>Polymorphism</h1><p>Polymorphism refers to the ability of OOPs programming languages to differentiate between entities with the same name efficiently. This is done by Java with the help of the signature and declaration of these entities.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">pulic <span class="class"><span class="keyword">class</span> <span class="title">Sum</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Overload sum()</span></span><br><span class="line"> <span class="comment">// This sum takes two int parameters </span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x+y);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Overload sum()</span></span><br><span class="line">  <span class="comment">// this sum takes three int parameter</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x+y+z);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Overload sum()</span></span><br><span class="line">  <span class="comment">// this sum takes two double parameters</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">sum</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x+y);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Driver code</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">    Sum s=<span class="keyword">new</span> Sum();</span><br><span class="line">    System.out.println(s.sum(<span class="number">10</span>,<span class="number">20</span>));</span><br><span class="line">    System.out.println(s.sum(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>));</span><br><span class="line">    System.out.println(s.sum(<span class="number">10.5</span>,<span class="number">20.5</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h1><p> Inheritance is an important pillar of OOP(Object Oriented Programming). It is the mechanism in java by which one class is allow to inherit the features(fields and methods) of another class.</p>
+<ul>
+<li><strong>Super Class:</strong> The class whose features are inherited is known as superclass(or a base class or a parent class).</li>
+<li><strong>Sub Class:</strong> The class that inherits the other class is known as subclass(or a derived class, extended class, or child class). The subclass can add its own fields and methods in addition to the superclass fields and methods.</li>
+<li><strong>Reusability:</strong> Inheritance supports the concept of “reusability”, i.e. when we want to create a new class and there is already a class that includes some of the code that we want, we can derive our new class from the existing class. By doing this, we are reusing the fields and methods of the existing class.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">derived</span>-<span class="title">class</span> <span class="keyword">extends</span> <span class="title">base</span>-<span class="title">class</span> </span>&#123;</span><br><span class="line">  <span class="comment">// methods and fields</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Encapsulation"><a href="#Encapsulation" class="headerlink" title="Encapsulation"></a>Encapsulation</h1><p>Encapsulation is defined as the wrapping up of data under a single unit. It is the mechanism that binds together code and the data it manipulates. Another way to think about encapsulation is, it is a protective shield that prevents the data from being accessed by the code outside this shield.</p>
+<ul>
+<li>Technically in encapsulation, the variables or data of a class is hidden from any other class and can be accessed only through any member function of own class in which they are declared.</li>
+<li>As in encapsulation, the data in a class is hidden from other classes, so it is also known as <strong>data-hiding</strong>.</li>
+<li>Encapsulation can be achieved by Declaring all the variables in the class as private and writing public methods in the class to set and get the values of variables.</li>
+</ul>
+<h1 id="Abstraction"><a href="#Abstraction" class="headerlink" title="Abstraction"></a>Abstraction</h1><p>Data Abstraction is the property by virtue of which only the essential details are displayed to the user.The trivial or the non-essentials units are not displayed to the user.</p>
+
       
     </div>
     
@@ -1752,7 +1743,7 @@
       <div class="prev-next">
         
         <p class="current">
-          1 / 3
+          1 / 2
         </p>
         
           <a class="next" rel="next" href="/page/2/">
@@ -1856,24 +1847,9 @@
       <ul class="entry navigation">
         
           <li><a class="flat-box"
-            title="/categories/Java/" href="/categories/Java/"
-            id="categoriesJava"
-            ><div class='name'>Java</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Leetcode/" href="/categories/Leetcode/"
-            id="categoriesLeetcode"
-            ><div class='name'>Leetcode</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/OOP/" href="/categories/OOP/"
-            id="categoriesOOP"
-            ><div class='name'>OOP</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
             title="/categories/interview/" href="/categories/interview/"
             id="categoriesinterview"
-            ><div class='name'>interview</div><div class='badge'>(3)</div></a></li>
+            ><div class='name'>interview</div><div class='badge'>(14)</div></a></li>
         
       </ul>
     </div>
@@ -1897,7 +1873,7 @@
 
 
     <div class='content'>
-      <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 20.67px; color: #6c6c6c">Java</a> <a href="/tags/LC/" style="font-size: 24px; color: #555">LC</a> <a href="/tags/Leetcode/" style="font-size: 14px; color: #999">Leetcode</a> <a href="/tags/Leetcode-new/" style="font-size: 14px; color: #999">Leetcode-new</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/en-interviews/" style="font-size: 17.33px; color: #828282">en-interviews</a> <a href="/tags/interviews/" style="font-size: 14px; color: #999">interviews</a>
+      <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/tags/LC/" style="font-size: 24px; color: #555">LC</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/OOP/" style="font-size: 19px; color: #777">OOP</a> <a href="/tags/interview/" style="font-size: 19px; color: #777">interview</a>
     </div>
   </section>
 
@@ -2434,7 +2410,7 @@
       visitor: 'true',
       highlight: 'true',
       mathJax: 'false',
-      enableQQ: 'true',
+      enableQQ: 'false',
       requiredFields: requiredFields,
       emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
       emojiMaps: emojiMaps

@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,7 +16,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>Archive - Gilmore&#39;s Blog</title>
+  <title>tag - Gilmore&#39;s Blog</title>
   
 
   
@@ -79,7 +77,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover ' style="display: none;">
+    <cover class='cover page' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -95,31 +93,31 @@
       <div class='list-h'>
         
           
-            <a href="/v3/getting-started/"
+            <a href="/Class"
               
               
-              id="v3getting-started">
-              <i class='fas fa-book-open fa-fw'></i><p>CS</p>
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
             </a>
           
-            <a href="/faqs/"
+            <a href="/Project"
               
               
-              id="faqs">
-              <i class='fas fa-book fa-fw'></i><p>DS</p>
+              id="Project">
+              <i class='fas fa-project-diagram fa-fw'></i><p>Project</p>
             </a>
           
-            <a href="/examples/"
+            <a href="/Life"
               
               
-              id="examples">
-              <i class='fas fa-envelope fa-fw'></i><p>Life</p>
+              id="Life">
+              <i class='fas fa-book fa-fw'></i><p>Life</p>
             </a>
           
-            <a href="/contributors/"
+            <a href="/AboutMe"
               
               
-              id="contributors">
+              id="AboutMe">
               <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
             </a>
           
@@ -230,7 +228,7 @@
       <div class="m_search">
         <form name="searchform" class="form u-search-form">
           <i class="icon fas fa-search fa-fw"></i>
-          <input type="text" class="input u-search-input" placeholder="Search..." />
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
         </form>
       </div>
 
@@ -318,7 +316,7 @@
   
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper' id="pjax-container">
       
         <!--此文件用来存放一些不方便取值的变量--> 
@@ -337,16 +335,16 @@
  
 <script> 
   // 处理封面 此时 jquery 还没加载 
-  if ("blog" == "none") { // 移除封面 
+  if ("none" == "none") { // 移除封面 
     document.getElementsByClassName('cover')[0].style.display = "none"; 
     document.getElementsByClassName('l_body')[0].classList.add("nocover"); 
     document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
   } else { 
-    if ("blog" == "blog") { // 半屏 
+    if ("none" == "blog") { // 半屏 
       document.getElementsByClassName('cover')[0].classList.remove("full"); 
       document.getElementsByClassName('cover')[0].classList.add("half"); 
       document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
-    } else if ("blog" == "docs") { // 全屏 
+    } else if ("none" == "docs") { // 全屏 
       document.getElementsByClassName('cover')[0].classList.remove("half"); 
       document.getElementsByClassName('cover')[0].classList.add("full"); 
       document.getElementsByClassName('scroll-down')[0].style.display = ""; 
@@ -361,598 +359,163 @@
       
 
 <div class='l_main'>
-	
-	  <article id="archive-page" class="post article white-box reveal shadow">
-	    <section class="archive">
-	      
-	        
-	          
-						
-							
-		            
-			          <div class="archive-item archive-year mark">
-			            <h2>2020</h2>
-			          </div>
-		      		
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/17/MST/">
-		              <time>08-17</time>
-		              <span class="title">
-		                
-		                  MST
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/16/PriorityQueue/">
-		              <time>08-16</time>
-		              <span class="title">
-		                
-		                  PriorityQueue
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/15/IMC-VO/">
-		              <time>08-15</time>
-		              <span class="title">
-		                
-		                  IMC-VO
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/13/VMware-OA/">
-		              <time>08-13</time>
-		              <span class="title">
-		                
-		                  VMware-OA
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/13/Amazon-OA/">
-		              <time>08-13</time>
-		              <span class="title">
-		                
-		                  Amazon-OA
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/12/Design-Pattern-Introduction/">
-		              <time>08-12</time>
-		              <span class="title">
-		                
-		                  Design-Pattern-Introduction
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/12/OOP-DesignCode/">
-		              <time>08-12</time>
-		              <span class="title">
-		                
-		                  OOP-DesignCode
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/12/OOP-Basics/">
-		              <time>08-12</time>
-		              <span class="title">
-		                
-		                  OOP-Basics
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/12/BFS/">
-		              <time>08-12</time>
-		              <span class="title">
-		                
-		                  BFS
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/12/Queue/">
-		              <time>08-12</time>
-		              <span class="title">
-		                
-		                  Queue
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/12/DFS-Tree/">
-		              <time>08-12</time>
-		              <span class="title">
-		                
-		                  DFS-Tree
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/12/DFS-Graph/">
-		              <time>08-12</time>
-		              <span class="title">
-		                
-		                  DFS-Graph
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/12/OOP_java/">
-		              <time>08-12</time>
-		              <span class="title">
-		                
-		                  OOP-Basics
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/12/DFS-Matrix/">
-		              <time>08-12</time>
-		              <span class="title">
-		                
-		                  DFS-Matrix
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/10/Multi-Thread/">
-		              <time>08-10</time>
-		              <span class="title">
-		                
-		                  Multi-Thread
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/10/DFS-BFS/">
-		              <time>08-10</time>
-		              <span class="title">
-		                
-		                  DFS&BFS
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/09/Graph1/">
-		              <time>08-09</time>
-		              <span class="title">
-		                
-		                  Graph1
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/04/Sorting/">
-		              <time>08-04</time>
-		              <span class="title">
-		                
-		                  Sorting
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/04/Stack/">
-		              <time>08-04</time>
-		              <span class="title">
-		                
-		                  Stack
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/04/Backtracking/">
-		              <time>08-04</time>
-		              <span class="title">
-		                
-		                  Backtracking
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/08/04/DFS1/">
-		              <time>08-04</time>
-		              <span class="title">
-		                
-		                  DFS1
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/07/31/UnionFind/">
-		              <time>07-31</time>
-		              <span class="title">
-		                
-		                  UnionFind
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/07/31/New-LC-07-31-2020/">
-		              <time>07-31</time>
-		              <span class="title">
-		                
-		                  New LC 07/31/2020
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	          
-						
-							
-		          <div class="archive-item archive-post mark">
-		            <a class='ai' href="/2020/04/30/Content-for-Machine-learning/">
-		              <time>04-30</time>
-		              <span class="title">
-		                
-		                  Content for Machine learning
-		                
-		                
-										
-										
-		              </span>
-		            </a>
-		          </div>
-						
-	      
-	    </section>
-	  </article>
-	
+  
+
+  
+    <article id="page" class="post white-box reveal shadow article-type-page" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/Project/index.html">
+      tag
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Apr 15, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-15T22:09:02-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Apr 15, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+      </section>
+    </article>
+  
+
+  
+    
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> Comments</p>
+      
+      <section id="comments">
+        <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+      </section>
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
 </div>
 <aside class='l_side'>
   
   
-    
-    
-
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='/images/favion.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">Gilmore's Blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://github.com/Gilemore"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://music.163.com/#/user/home?id=63035382"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-  
 
   
     
     
-  
-
-  <section class="widget category shadow desktop">
-    
-  <header>
-    
-      <a href='/blog_2/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
-    
-  </header>
 
 
-    <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Java/" href="/categories/Java/"
-            id="categoriesJava"
-            ><div class='name'>Java</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Leetcode/" href="/categories/Leetcode/"
-            id="categoriesLeetcode"
-            ><div class='name'>Leetcode</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/OOP/" href="/categories/OOP/"
-            id="categoriesOOP"
-            ><div class='name'>OOP</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/interview/" href="/categories/interview/"
-            id="categoriesinterview"
-            ><div class='name'>interview</div><div class='badge'>(3)</div></a></li>
-        
-      </ul>
-    </div>
-  </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 20.67px; color: #6c6c6c">Java</a> <a href="/tags/LC/" style="font-size: 24px; color: #555">LC</a> <a href="/tags/Leetcode/" style="font-size: 14px; color: #999">Leetcode</a> <a href="/tags/Leetcode-new/" style="font-size: 14px; color: #999">Leetcode-new</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/en-interviews/" style="font-size: 17.33px; color: #828282">en-interviews</a> <a href="/tags/interviews/" style="font-size: 14px; color: #999">interviews</a>
-    </div>
-  </section>
-
-
-  
 
   
 
 
 </aside>
 
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
 
 
     </div>
@@ -1478,7 +1041,7 @@
       visitor: 'true',
       highlight: 'true',
       mathJax: 'false',
-      enableQQ: 'true',
+      enableQQ: 'false',
       requiredFields: requiredFields,
       emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
       emojiMaps: emojiMaps

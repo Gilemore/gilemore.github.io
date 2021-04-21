@@ -16,15 +16,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>IMC-VO - Gilmore&#39;s Blog</title>
-  
-    <meta name="keywords" content="interviews">
+  <title>machine-learning - Gilmore&#39;s Blog</title>
   
 
-  
-    <meta name="description" content="
-Explained your favourite project to a non-technical people
-(1min)">
   
 
   <!-- feed -->
@@ -83,7 +77,7 @@ Explained your favourite project to a non-technical people
   
   
   <div class="cover-wrapper">
-    <cover class='cover post' style="display: none;">
+    <cover class='cover page' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -99,31 +93,31 @@ Explained your favourite project to a non-technical people
       <div class='list-h'>
         
           
-            <a href="/v3/getting-started/"
+            <a href="/Class"
               
               
-              id="v3getting-started">
-              <i class='fas fa-book-open fa-fw'></i><p>CS</p>
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
             </a>
           
-            <a href="/faqs/"
+            <a href="/Project"
               
               
-              id="faqs">
-              <i class='fas fa-book fa-fw'></i><p>DS</p>
+              id="Project">
+              <i class='fas fa-project-diagram fa-fw'></i><p>Project</p>
             </a>
           
-            <a href="/examples/"
+            <a href="/Life"
               
               
-              id="examples">
-              <i class='fas fa-envelope fa-fw'></i><p>Life</p>
+              id="Life">
+              <i class='fas fa-book fa-fw'></i><p>Life</p>
             </a>
           
-            <a href="/contributors/"
+            <a href="/AboutMe"
               
               
-              id="contributors">
+              id="AboutMe">
               <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
             </a>
           
@@ -234,7 +228,7 @@ Explained your favourite project to a non-technical people
       <div class="m_search">
         <form name="searchform" class="form u-search-form">
           <i class="icon fas fa-search fa-fw"></i>
-          <input type="text" class="input u-search-input" placeholder="Search..." />
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
         </form>
       </div>
 
@@ -331,8 +325,8 @@ Explained your favourite project to a non-technical people
  
  
 <div id="pjax-data" style="display: none"> 
-  <div id="pjax-ispage">true</div> 
-  <div id="pjax-pageTitle">IMC-VO</div> 
+  <div id="pjax-ispage">false</div> 
+  <div id="pjax-pageTitle"></div> 
   <div id="pjax-enable-cover">true</div> 
   <div id="pjax-comment-path">none</div> 
   <div id="pjax-comment-placeholder">none</div> 
@@ -368,7 +362,7 @@ Explained your favourite project to a non-technical people
   
 
   
-    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+    <article id="page" class="post white-box reveal shadow article-type-page" itemscope itemprop="blogPost">
       
 
 
@@ -380,8 +374,8 @@ Explained your favourite project to a non-technical people
         
           
   <h1 class="title">
-    <a href="/2020/08/15/IMC-VO/">
-      IMC-VO
+    <a href="/AboutMe/index.html">
+      machine-learning
     </a>
   </h1>
 
@@ -394,8 +388,8 @@ Explained your favourite project to a non-technical people
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -404,14 +398,6 @@ Explained your favourite project to a non-technical people
           
             
               
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/interview/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>interview</p>
-    </a>
-  </div>
-
 
             
           
@@ -419,7 +405,7 @@ Explained your favourite project to a non-technical people
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 15, 2020</p>
+    <p>发布于：Oct 15, 2019</p>
   </a>
 </div>
 
@@ -443,116 +429,7 @@ Explained your favourite project to a non-technical people
         <div class="article-entry" itemprop="articleBody">
           
           
-          <ol>
-<li><p>Explained your favourite project to a <strong><em>non-technical</em></strong> people</p>
-<p>(1min)</p>
-<a id="more"></a>
-
-<p>My favourite project is one recommendation system, where we recommended books to users and achieved great precision result at top 500 recommendation.  We built a collaborative filtering system based on the rating history of readers and books, then used Spark to implemented this model. We also think about the cold-start problem that when a new book comes out, there is no reading history for this book, so there is no way to recommend this book in this model. So we built a KNN model using data about the books themselves, for example, books with similar category and same publisher may have a similar rating and we got greater precision result. This project improved my practical skills and is related to real-life application which is interesting and meaningful. </p>
-</li>
-<li><p>Describe a time you received critical feedback and what have you done to improve</p>
-<p>My professor gave me some critical feedback to my research project when I was a bio statistical research intern at Duke Kunshan University. </p>
-<p>My research project was showing my expected result and I was very satisfied about the result. But my professor noticed some small problems about the project and that would cause the twist of my result.</p>
-<p>I was anxious about this problem since I totally ignored about this and went well for the following studies. But I agreed with my professor that this is a critical problem and would influence all the following studies. </p>
-<p>So I started to worked on that problem and dig deep to find out the source for this problem. Fortunately I was able to find and fixed it. Then I went on to revise all the following studies. But it is totally worth since more problems would have come up if I keep ignoring it. </p>
-</li>
-<li><p>immutable datamodels are always threadsafe? </p>
-<p>No. Immutable objects are always thread-safe, but its references may not be. In the sense, the reference to an immutable object can be altered, even after it is created. </p>
-</li>
-<li><p>quick sort is always the most efficient/fastest sorting algorithm?</p>
-<p>No. there are a lot of different situations we can have other more efficient  sorting algorithm. For example, in some conditions, non-comparison based sorting algorithms like counting sort and bucket sort are more efficient.</p>
-</li>
-<li><p>hashmap lookup is more efficient than linear search</p>
-<p>Generally yes.  Hashmap lookup has O(1) time complexity, while linear search has to loop through all the data and has O(n) time complexity, here n is the number of data. </p>
-</li>
-<li><p>running a task on one thread can be faster than running it on two thread</p>
-<p>Yes. Multiple threads work best when they run independently. This means that any over utilisation of a shared resource will limit or even make using multiple threads slower.</p>
-</li>
-<li><p>O(N^2) is always slower than O(N)</p>
-<p>No. Big-O-notation says nothing about the speed itself, only about how the speed will change when you change <code>n</code>.</p>
-</li>
-<li><p>设计借书系统,里面有提到要实现借书还书的功能，以及查找快要overdue的书<br>(1 min think/ 3 mins speak)</p>
-</li>
-<li><p>how did you find out this job opportunity and why imc</p>
-</li>
-</ol>
-
           
-            <div class='article_footer'>
-              
-                
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-<section class="widget copyright  desktop mobile">
-  <div class='content'>
-    
-      <blockquote>
-        
-          
-            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-          
-        
-          
-            <p>本文永久链接是：<a href=http://yoursite.com/2020/08/15/IMC-VO/>http://yoursite.com/2020/08/15/IMC-VO/</a></p>
-          
-        
-      </blockquote>
-    
-  </div>
-</section>
-
-  
-
-  
-    
-    
-
-<section class="widget qrcode  desktop mobile">
-  
-
-  <div class='content article-entry'>
-    
-      
-        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/qrcode/github@volantis.png'
-        
-          height='64px'
-        ></div>
-      
-    
-      
-        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/qrcode/github@volantis.png'
-        
-          height='64px'
-        ></div>
-      
-    
-  </div>
-</section>
-
-  
-
-
-              
-            </div>
           
         </div>
         
@@ -563,10 +440,10 @@ Explained your favourite project to a non-technical people
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-16T21:28:43-04:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2019-10-15T15:33:23-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Aug 16, 2020</p>
+    <p>更新于：Oct 15, 2019</p>
   </a>
 </div>
 
@@ -574,9 +451,6 @@ Explained your favourite project to a non-technical people
       
         
           
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/interviews/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>interviews</p></a></div>
-
 
         
       
@@ -587,55 +461,6 @@ Explained your favourite project to a non-technical people
       
         
           
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/08/15/IMC-VO/&title=IMC-VO - Gilmore's Blog&summary=
-Explained your favourite project to a non-technical people
-(1min)"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/08/15/IMC-VO/&title=IMC-VO - Gilmore's Blog&summary=
-Explained your favourite project to a non-technical people
-(1min)"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/08/15/IMC-VO/&title=IMC-VO - Gilmore's Blog&summary=
-Explained your favourite project to a non-technical people
-(1min)"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png">
-          
-        </a>
-      
-    
-  </div>
-</div>
-
-
 
         
       
@@ -644,26 +469,6 @@ Explained your favourite project to a non-technical people
 
 
         
-        
-          <div class="prev-next">
-            
-              <a class='prev' href='/2020/08/16/PriorityQueue/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>PriorityQueue</p>
-                <p class='content'>Dynamic inserting values and also keep the array sorted: Priority Queue, Heap
-Top K largest / sma...</p>
-              </a>
-            
-            
-              <a class='next' href='/2020/08/13/VMware-OA/'>
-                <p class='title'>VMware-OA<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>Now OA 8.16
-
-
-Multiple Choices
-FIFO System, 4 pages, 一开始没有load，先access 100个不同的page，按某个顺序，再反着来。总共有...</p>
-              </a>
-            
-          </div>
         
       </section>
     </article>
@@ -674,7 +479,7 @@ FIFO System, 4 pages, 一开始没有load，先access 100个不同的page，按�
 
   <article class="post white-box reveal comments shadow">
     <section class="article typo">
-      <p ct><i class='fas fa-comments'></i> 评论</p>
+      <p ct><i class='fas fa-comments'></i> Comments</p>
       
       <section id="comments">
         <div id="valine_container" class="valine_thread">
@@ -1236,7 +1041,7 @@ FIFO System, 4 pages, 一开始没有load，先access 100个不同的page，按�
       visitor: 'true',
       highlight: 'true',
       mathJax: 'false',
-      enableQQ: 'true',
+      enableQQ: 'false',
       requiredFields: requiredFields,
       emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
       emojiMaps: emojiMaps

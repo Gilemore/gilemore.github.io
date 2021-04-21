@@ -18,11 +18,11 @@
   
   <title>VMware-OA - Gilmore&#39;s Blog</title>
   
-    <meta name="keywords" content="en-interviews">
+    <meta name="keywords" content="interview">
   
 
   
-    <meta name="description" content="Now OA 8.16">
+    <meta name="description" content="Timeline: OA 8.16 – no response">
   
 
   <!-- feed -->
@@ -97,31 +97,31 @@
       <div class='list-h'>
         
           
-            <a href="/v3/getting-started/"
+            <a href="/Class"
               
               
-              id="v3getting-started">
-              <i class='fas fa-book-open fa-fw'></i><p>CS</p>
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
             </a>
           
-            <a href="/faqs/"
+            <a href="/Project"
               
               
-              id="faqs">
-              <i class='fas fa-book fa-fw'></i><p>DS</p>
+              id="Project">
+              <i class='fas fa-project-diagram fa-fw'></i><p>Project</p>
             </a>
           
-            <a href="/examples/"
+            <a href="/Life"
               
               
-              id="examples">
-              <i class='fas fa-envelope fa-fw'></i><p>Life</p>
+              id="Life">
+              <i class='fas fa-book fa-fw'></i><p>Life</p>
             </a>
           
-            <a href="/contributors/"
+            <a href="/AboutMe"
               
               
-              id="contributors">
+              id="AboutMe">
               <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
             </a>
           
@@ -232,7 +232,7 @@
       <div class="m_search">
         <form name="searchform" class="form u-search-form">
           <i class="icon fas fa-search fa-fw"></i>
-          <input type="text" class="input u-search-input" placeholder="Search..." />
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
         </form>
       </div>
 
@@ -392,8 +392,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -441,7 +441,7 @@
         <div class="article-entry" itemprop="articleBody">
           
           
-          <p>Now OA 8.16</p>
+          <p>Timeline: OA 8.16 – no response</p>
 <a id="more"></a>
 
 <h2 id="Multiple-Choices"><a href="#Multiple-Choices" class="headerlink" title="Multiple Choices"></a>Multiple Choices</h2><ol>
@@ -537,24 +537,17 @@
 <h3 id="Modify-an-Array"><a href="#Modify-an-Array" class="headerlink" title="Modify an Array"></a>Modify an Array</h3><p>Given an array of integers, the cost to change an element is the absolute difference between its initial value and its new value. For example, if the element is initially 10, it can be changed to 7 or 13 for a cost of 3. Determine the minimum cost to sort the array either ascending or descending along its length. </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># n=6</span></span><br><span class="line"><span class="comment"># arr=[0,1,2,5,6,5,7]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-
 <h3 id="Fun-with-Anagrams"><a href="#Fun-with-Anagrams" class="headerlink" title="Fun with Anagrams"></a>Fun with Anagrams</h3><p>Given an array of strings, remove each string that is an anagram of an earlier string, then return the remaining array in sorted order</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">funwithAnagrams</span>(<span class="params">strs</span>):</span></span><br><span class="line">    d=set()</span><br><span class="line">    res=[]</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> strs:</span><br><span class="line">        counter=[<span class="number">0</span>]*<span class="number">26</span></span><br><span class="line">        <span class="keyword">for</span> ss <span class="keyword">in</span> s:</span><br><span class="line">            counter[ord(ss)-ord(<span class="string">&#x27;a&#x27;</span>)]+=<span class="number">1</span></span><br><span class="line">        counter=tuple(counter)</span><br><span class="line">        <span class="keyword">if</span> counter <span class="keyword">not</span> <span class="keyword">in</span> d:</span><br><span class="line">            res.append(s)</span><br><span class="line">            d.add(counter)</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  </span><br><span class="line">str=[<span class="string">&#x27;code&#x27;</span>,<span class="string">&#x27;doce&#x27;</span>,<span class="string">&#x27;ecod&#x27;</span>,<span class="string">&#x27;framer&#x27;</span>,<span class="string">&#x27;frame&#x27;</span>]</span><br><span class="line">funwithAnagrams(strs) <span class="comment"># [&#x27;code&#x27;,&#x27;framer&#x27;,&#x27;frame&#x27;]</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="https://lh6.googleusercontent.com/dWUHaDpFm8phRxpOGukQ42zu5Nt8xYnqOHY292PN224zGqfDwVwnYCAHCpaE8LGesnKZ_q3vNpyHAwep9AJ7QL1ORhLi2rLdLI0zM6qJA1836cU-3cSnD4ofLHJ6h--G8-8XOwSn" alt="img"></p>
-<ol>
-<li><p>Valid Parenthesis</p>
-<p>输入是&lt;&lt;&lt;&gt;&gt;&gt;和数字，问是否可以在数字限制的次数内改变string让它平衡，和valid-parentheses差不多，记录&lt;&gt;出现的次数就行。</p>
+<h3 id="Valid-Parenthesis"><a href="#Valid-Parenthesis" class="headerlink" title="Valid Parenthesis"></a>Valid Parenthesis</h3><p>输入是&lt;&lt;&lt;&gt;&gt;&gt;和数字，问是否可以在数字限制的次数内改变string让它平衡，和valid-parentheses差不多，记录&lt;&gt;出现的次数就行。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validParenthesis</span>(<span class="params">strs,num</span>):</span></span><br><span class="line">    st=[]</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> strs:</span><br><span class="line">        <span class="keyword">if</span> s==<span class="string">&quot;&lt;&quot;</span>:</span><br><span class="line">            st.append(<span class="string">&quot;&lt;&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> s==<span class="string">&quot;&gt;&quot;</span>:</span><br><span class="line">            <span class="keyword">if</span> st:</span><br><span class="line">                st.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                num-=<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> st: num-=len(st)</span><br><span class="line">    <span class="keyword">return</span> num&gt;=<span class="number">0</span></span><br><span class="line">                </span><br></pre></td></tr></table></figure>
 
 
 
-</li>
-</ol>
-<ol start="2">
-<li></li>
-</ol>
+
+
 
           
             <div class='article_footer'>
@@ -642,10 +635,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-16T21:30:12-04:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T14:43:29-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Aug 16, 2020</p>
+    <p>更新于：Apr 21, 2021</p>
   </a>
 </div>
 
@@ -654,7 +647,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/en-interviews/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>en-interviews</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/interview/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>interview</p></a></div>
 
 
         
@@ -666,49 +659,6 @@
       
         
           
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
-    
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/08/13/VMware-OA/&title=VMware-OA - Gilmore's Blog&summary=Now OA 8.16"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/08/13/VMware-OA/&title=VMware-OA - Gilmore's Blog&summary=Now OA 8.16"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
-          
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/08/13/VMware-OA/&title=VMware-OA - Gilmore's Blog&summary=Now OA 8.16"
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png">
-          
-        </a>
-      
-    
-  </div>
-</div>
-
-
 
         
       
@@ -720,28 +670,22 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/08/15/IMC-VO/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>IMC-VO</p>
-                <p class='content'>
-Explained your favourite project to a non-technical people
-(1min)
-
-
-My favourite project is one ...</p>
+              <a class='prev' href='/2020/08/16/PriorityQueue/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>PriorityQueue</p>
+                <p class='content'>Dynamic inserting values and also keep the array sorted: Priority Queue, Heap
+Top K largest / sma...</p>
               </a>
             
             
               <a class='next' href='/2020/08/13/Amazon-OA/'>
                 <p class='title'>Amazon-OA<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>Now OA2
+                <p class='content'>Timeline: 8.13 –&gt; 8.13 –&gt; 8.21
 
 
-OA1和地里一摸一样的面经，祈祷OA2
+OA1 (8.13)当天就做完了，祈祷OA2
 
 Check Pair Sum Exists: 
-12// line 19sum --&gt; arr[i][j]
-
-Remove C...</p>
+12// line ...</p>
               </a>
             
           </div>
@@ -755,7 +699,7 @@ Remove C...</p>
 
   <article class="post white-box reveal comments shadow">
     <section class="article typo">
-      <p ct><i class='fas fa-comments'></i> 评论</p>
+      <p ct><i class='fas fa-comments'></i> Comments</p>
       
       <section id="comments">
         <div id="valine_container" class="valine_thread">
@@ -796,7 +740,7 @@ Remove C...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Multiple-Choices"><span class="toc-text">Multiple Choices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Coding"><span class="toc-text">Coding</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Arrange-Word-LC1451"><span class="toc-text">Arrange Word LC1451</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-Subsequence"><span class="toc-text">Build Subsequence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Break-Palindrome"><span class="toc-text">Break Palindrome</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number-of-Subarrays"><span class="toc-text">Number of Subarrays</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Even-Subarrays"><span class="toc-text">Even Subarrays</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maximal-Square"><span class="toc-text">Maximal Square</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Remove-an-Increasing-Subsequence-from-an-Array-to-ensure-that-the-Array-only-contains-unique-element"><span class="toc-text">Remove an Increasing Subsequence from an Array to ensure that the Array only contains unique element</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Group-Anagrams"><span class="toc-text">Group Anagrams</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intelligent-Substring"><span class="toc-text">Intelligent Substring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Efficient-Shipping"><span class="toc-text">Efficient Shipping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fewest-Coins-LC76E"><span class="toc-text">Fewest Coins LC76E</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modify-an-Array"><span class="toc-text">Modify an Array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fun-with-Anagrams"><span class="toc-text">Fun with Anagrams</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Multiple-Choices"><span class="toc-text">Multiple Choices</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Coding"><span class="toc-text">Coding</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Arrange-Word-LC1451"><span class="toc-text">Arrange Word LC1451</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-Subsequence"><span class="toc-text">Build Subsequence</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Break-Palindrome"><span class="toc-text">Break Palindrome</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number-of-Subarrays"><span class="toc-text">Number of Subarrays</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Even-Subarrays"><span class="toc-text">Even Subarrays</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maximal-Square"><span class="toc-text">Maximal Square</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Remove-an-Increasing-Subsequence-from-an-Array-to-ensure-that-the-Array-only-contains-unique-element"><span class="toc-text">Remove an Increasing Subsequence from an Array to ensure that the Array only contains unique element</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Group-Anagrams"><span class="toc-text">Group Anagrams</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intelligent-Substring"><span class="toc-text">Intelligent Substring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Efficient-Shipping"><span class="toc-text">Efficient Shipping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fewest-Coins-LC76E"><span class="toc-text">Fewest Coins LC76E</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Modify-an-Array"><span class="toc-text">Modify an Array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fun-with-Anagrams"><span class="toc-text">Fun with Anagrams</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Valid-Parenthesis"><span class="toc-text">Valid Parenthesis</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -1331,7 +1275,7 @@ Remove C...</p>
       visitor: 'true',
       highlight: 'true',
       mathJax: 'false',
-      enableQQ: 'true',
+      enableQQ: 'false',
       requiredFields: requiredFields,
       emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
       emojiMaps: emojiMaps

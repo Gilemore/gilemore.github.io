@@ -95,31 +95,31 @@
       <div class='list-h'>
         
           
-            <a href="/v3/getting-started/"
+            <a href="/Class"
               
               
-              id="v3getting-started">
-              <i class='fas fa-book-open fa-fw'></i><p>CS</p>
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
             </a>
           
-            <a href="/faqs/"
+            <a href="/Project"
               
               
-              id="faqs">
-              <i class='fas fa-book fa-fw'></i><p>DS</p>
+              id="Project">
+              <i class='fas fa-project-diagram fa-fw'></i><p>Project</p>
             </a>
           
-            <a href="/examples/"
+            <a href="/Life"
               
               
-              id="examples">
-              <i class='fas fa-envelope fa-fw'></i><p>Life</p>
+              id="Life">
+              <i class='fas fa-book fa-fw'></i><p>Life</p>
             </a>
           
-            <a href="/contributors/"
+            <a href="/AboutMe"
               
               
-              id="contributors">
+              id="AboutMe">
               <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
             </a>
           
@@ -230,7 +230,7 @@
       <div class="m_search">
         <form name="searchform" class="form u-search-form">
           <i class="icon fas fa-search fa-fw"></i>
-          <input type="text" class="input u-search-input" placeholder="Search..." />
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
         </form>
       </div>
 
@@ -369,8 +369,6 @@
         
           
         
-          
-        
       
     
     
@@ -403,8 +401,8 @@
             
               
 <div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
     <p>Gilmore</p>
   </a>
 </div>
@@ -413,6 +411,14 @@
           
             
               
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
 
             
           
@@ -487,174 +493,13 @@
 <li>friend circle</li>
 </ul>
 <p>其实union find就是更加规范化的一种图相关的算法，通常这些题目也可以用dfs或者bfs来解决。之后等在刷dfs和bfs回来整理union-find看看哪些更加适合union find。</p>
-<h1 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h1><p> a disjoint-set data structure is a data structure that keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets.</p>
-<p>a union-find algorithm is an algorithm that performs two useful opertations on disjoint subsets:</p>
-<ul>
-<li>Union: join two disjoint subsets into one</li>
-<li>Find: determine which subset a particular element is in. This can be used for determining if two elements are in the same subset</li>
-</ul>
-<h1 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h1><p>Take Union-find as a class and add <code>find</code> <code>union</code> methods.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,m,edges</span>):</span></span><br><span class="line">    <span class="comment"># m: total number of nodes</span></span><br><span class="line">    <span class="comment"># edges: whether two connected or not (can also move this into Solution method)</span></span><br><span class="line">    self.parent=[i <span class="keyword">for</span> i <span class="keyword">in</span> range(m)]</span><br><span class="line">    self.g=collections.defaultdict(list)</span><br><span class="line">    <span class="keyword">for</span> i,j <span class="keyword">in</span> edges:</span><br><span class="line">      self.g[i].append(j)</span><br><span class="line">    <span class="comment"># for optimization </span></span><br><span class="line">    self.size=[<span class="number">1</span>]*m</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">self,i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> self.parent[i]!=i:</span><br><span class="line">      self.parent[i]=self.finds(self.parent[i])</span><br><span class="line">    <span class="keyword">return</span> self.parent[i]</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">self,i,j</span>):</span></span><br><span class="line">    x=self.find(i)</span><br><span class="line">    y=self.find(j)</span><br><span class="line">    <span class="comment"># no optimization</span></span><br><span class="line">    self.parent[x]=y</span><br><span class="line">    <span class="comment"># optimization with rank</span></span><br><span class="line">    <span class="keyword">if</span> self.size[x]&lt;self.size[y]:</span><br><span class="line">      self.parent[x]=y</span><br><span class="line">      self.size[y]+=self.size[x]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      self.parent[y]=x</span><br><span class="line">      self.size[x]+=self.size[y]</span><br></pre></td></tr></table></figure>
-
-<h1 id="Graph-Valid-Tree"><a href="#Graph-Valid-Tree" class="headerlink" title="Graph Valid Tree"></a>Graph Valid Tree</h1><p>Given <code>n</code> nodes labeled from <code>0</code> to <code>n-1</code> and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree.</p>
-<p>Example1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: n&#x3D;5, edges&#x3D;[[0,1],[0,2],[0,3],[1,4]]</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
-
-<p>Example2</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: n&#x3D;5, edges&#x3D;[[0,1],[1,2],[2,3],[1,3],[1,4]]</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure>
-
-<p>Valid Tree:</p>
-<ul>
-<li>a single connected component </li>
-<li>no cycle</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validTree</span>(<span class="params">n,edges</span>):</span></span><br><span class="line">  u=UnionFind(n,edges)</span><br><span class="line">  <span class="keyword">if</span> len(edges)!=n<span class="number">-1</span>:</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> u.g:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> u.g[j]:</span><br><span class="line">      x=u.find(i)</span><br><span class="line">      y=u.find(j)</span><br><span class="line">      <span class="keyword">if</span> x==y:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">      u.union(x,y)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,n,edges</span>):</span></span><br><span class="line">    self.parent=[i <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">    self.size=[<span class="number">1</span>]*n</span><br><span class="line">    self.g=collections.defaultdict(list)</span><br><span class="line">    <span class="keyword">for</span> i,j <span class="keyword">in</span> edges:</span><br><span class="line">      self.g[i].append(j)</span><br><span class="line">      </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">self,i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> parent[i]!=i:</span><br><span class="line">      parent[i]=self.find(parent[i])</span><br><span class="line">    <span class="keyword">return</span> parent[i]</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">self,i,j</span>):</span></span><br><span class="line">    x=self.find(i)</span><br><span class="line">    y=self.find(j)</span><br><span class="line">    <span class="keyword">if</span> self.size[x]&lt;self.size[y]:</span><br><span class="line">      self.parent[x]=y</span><br><span class="line">      self.size[x]+=self.size[y]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      self.parent[y]=x</span><br><span class="line">      self.size[y]+=self.size[x]</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="Number-of-Islands-II"><a href="#Number-of-Islands-II" class="headerlink" title="Number of Islands II"></a>Number of Islands II</h1><p>a 2d grid map. count the number of isaldns after each addLand operation</p>
-<p>Example</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: m&#x3D;3, n&#x3D;3, positions&#x3D;[[0,0], [0,1], [1,2], [2,1]]</span><br><span class="line">Output: [1,1,2,3]</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numIslands2</span>(<span class="params">m,n,positions</span>):</span></span><br><span class="line">  res=[]</span><br><span class="line">  counter=<span class="number">0</span></span><br><span class="line">  u=UnionFind()</span><br><span class="line">  <span class="keyword">for</span> po <span class="keyword">in</span> positions:</span><br><span class="line">    i,j=po</span><br><span class="line">    <span class="keyword">if</span> i*n+j <span class="keyword">in</span> u.parent:</span><br><span class="line">      res.append(counter)</span><br><span class="line">      <span class="keyword">continue</span></span><br><span class="line">    u.parent[i*n+j]=i*n+j</span><br><span class="line">    counter+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> k,v <span class="keyword">in</span> [(),(),(),()]:</span><br><span class="line">      <span class="keyword">if</span> k&gt;=<span class="number">0</span> <span class="keyword">and</span> v&gt;=<span class="number">0</span> <span class="keyword">and</span> k&lt;m <span class="keyword">and</span> v&lt;n:</span><br><span class="line">        <span class="comment"># important step!!</span></span><br><span class="line">        <span class="keyword">if</span> k*n+v <span class="keyword">in</span> u.parent:</span><br><span class="line">          counter=u.union(k*n+v,i*n+j,counter)</span><br><span class="line">    res.append(counter)</span><br><span class="line"> <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.parent=&#123;&#125;</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">self,i</span>):</span></span><br><span class="line">    <span class="keyword">if</span> self.parent[i]!=i:</span><br><span class="line">      self.parent[i]=self.find(self.parent[i])</span><br><span class="line">    <span class="keyword">return</span> self.parent[i]</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">self,i,j,counter</span>):</span></span><br><span class="line">    a=self.find(i)</span><br><span class="line">    b=self.find(j)</span><br><span class="line">    <span class="keyword">if</span> a==b:</span><br><span class="line">      <span class="keyword">return</span> counter</span><br><span class="line">    self.parent[a]=b</span><br><span class="line">    <span class="keyword">return</span> counter<span class="number">-1</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Number-of-Connected-Components-in-an-Undirected-Graph-323"><a href="#Number-of-Connected-Components-in-an-Undirected-Graph-323" class="headerlink" title="Number of Connected Components in an Undirected Graph 323"></a>Number of Connected Components in an Undirected Graph 323</h1><p>Given <code>n</code> nodes labeled from <code>0</code> to <code>n - 1</code> and a list of undirected edges (each edge is a pair of nodes), write a function to find the number of connected components in an undirected graph.</p>
-<p>You can assume that no duplicate edges will appear in <code>edges</code>. Since all edges are undirected, <code>[0, 1]</code> is the same as <code>[1, 0]</code> and thus will not appear together in <code>edges</code>.</p>
-<p>Example:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: n &#x3D; 5 and edges &#x3D; [[0, 1], [1, 2], [3, 4]]</span><br><span class="line"></span><br><span class="line">     0          3</span><br><span class="line">     |          |</span><br><span class="line">     1 --- 2    4 </span><br><span class="line"></span><br><span class="line">Output: 2</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">countComponents</span>(<span class="params">self, n: int, edges: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">        u=UnionFind(n,edges)</span><br><span class="line">        counter=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(u.parent)):</span><br><span class="line">            <span class="keyword">if</span> u.parent[i]==i:</span><br><span class="line">                counter+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> counter</span><br><span class="line">                </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,n,edges</span>):</span></span><br><span class="line">        self.parent=[i <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">        self.size=[<span class="number">1</span>]*n</span><br><span class="line">        <span class="keyword">for</span> i,j <span class="keyword">in</span> edges:</span><br><span class="line">            self.union(i,j)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">self,i,j</span>):</span></span><br><span class="line">        x=self.find(i)</span><br><span class="line">        y=self.find(j)</span><br><span class="line">        <span class="keyword">if</span> self.size[x]&lt;self.size[y]:</span><br><span class="line">            self.parent[x]=y</span><br><span class="line">            self.size[y]+=self.size[x]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.parent[y]=x</span><br><span class="line">            self.size[x]+=self.size[y]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">self,i</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self.parent[i]!=i:</span><br><span class="line">            self.parent[i]=self.find(self.parent[i])</span><br><span class="line">        <span class="keyword">return</span> self.parent[i]</span><br></pre></td></tr></table></figure>
-
-<h1 id="Friend-Circles-547"><a href="#Friend-Circles-547" class="headerlink" title="Friend Circles 547"></a>Friend Circles 547</h1><p>There are <strong>N</strong> students in a class. Some of them are friends, while some are not. Their friendship is transitive in nature. For example, if A is a <strong>direct</strong> friend of B, and B is a <strong>direct</strong> friend of C, then A is an <strong>indirect</strong> friend of C. And we defined a friend circle is a group of students who are direct or indirect friends.</p>
-<p>Given a <strong>N*N</strong> matrix <strong>M</strong> representing the friend relationship between students in the class. If M[i][j] = 1, then the ith and jth students are <strong>direct</strong> friends with each other, otherwise not. And you have to output the total number of friend circles among all the students.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">[[1,1,0],</span><br><span class="line"> [1,1,0],</span><br><span class="line"> [0,0,1]]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation:The 0th and 1st students are direct friends, so they are in a friend circle. </span><br><span class="line">The 2nd student himself is in a friend circle. So return 2.</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnionFind</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,m</span>):</span></span><br><span class="line">        self.parent=[i <span class="keyword">for</span> i <span class="keyword">in</span> range(m)]</span><br><span class="line">        self.size=[<span class="number">1</span>]*m</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find</span>(<span class="params">self,i</span>):</span></span><br><span class="line">        <span class="keyword">if</span> self.parent[i]!=i:</span><br><span class="line">            self.parent[i]=self.find(self.parent[i])</span><br><span class="line">        <span class="keyword">return</span> self.parent[i]</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">union</span>(<span class="params">self,i,j</span>):</span></span><br><span class="line">        x=self.find(i)</span><br><span class="line">        y=self.find(j)</span><br><span class="line">        <span class="keyword">if</span> self.size[x]&lt;self.size[y]:</span><br><span class="line">            self.parent[x]=y</span><br><span class="line">            self.size[y]+=self.size[x]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.parent[y]=x</span><br><span class="line">            self.size[x]+=self.size[y]</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findCircleNum</span>(<span class="params">self, M: List[List[int]]</span>) -&gt; int:</span></span><br><span class="line">        m=len(M)</span><br><span class="line">        u=UnionFind(m)</span><br><span class="line">        counter=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,m):</span><br><span class="line">                <span class="keyword">if</span> M[i][j]==<span class="number">1</span>:</span><br><span class="line">                    u.union(i,j)</span><br><span class="line">        print(u.parent)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(u.parent)):</span><br><span class="line">            <span class="keyword">if</span> u.parent[i]==i:</span><br><span class="line">                counter+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> counter</span><br></pre></td></tr></table></figure>
-
-
       
     </div>
     
       
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/07/31/New-LC-07-31-2020/">
-      New LC 07/31/2020
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
-    <p>Gilmore</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jul 31, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/07/31/New-LC-07-31-2020/" class="leancloud_visitors" data-flag-title="New LC 07/31/2020">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2020/07/31/New-LC-07-31-2020/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2020/07/31/New-LC-07-31-2020/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="641-Design-a-Circular-Deque"><a href="#641-Design-a-Circular-Deque" class="headerlink" title="641 Design a Circular Deque"></a>641 Design a Circular Deque</h1>
-      
-    </div>
-    
+        <a class= "readmore" href="/2020/07/31/UnionFind/">
+          阅读全文 <i class="fas fa-chevron-right"></i>
+        </a>
       
     
   </section>
@@ -761,24 +606,9 @@
       <ul class="entry navigation">
         
           <li><a class="flat-box"
-            title="/categories/Java/" href="/categories/Java/"
-            id="categoriesJava"
-            ><div class='name'>Java</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Leetcode/" href="/categories/Leetcode/"
-            id="categoriesLeetcode"
-            ><div class='name'>Leetcode</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/OOP/" href="/categories/OOP/"
-            id="categoriesOOP"
-            ><div class='name'>OOP</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
             title="/categories/interview/" href="/categories/interview/"
             id="categoriesinterview"
-            ><div class='name'>interview</div><div class='badge'>(3)</div></a></li>
+            ><div class='name'>interview</div><div class='badge'>(14)</div></a></li>
         
       </ul>
     </div>
@@ -802,7 +632,7 @@
 
 
     <div class='content'>
-      <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 20.67px; color: #6c6c6c">Java</a> <a href="/tags/LC/" style="font-size: 24px; color: #555">LC</a> <a href="/tags/Leetcode/" style="font-size: 14px; color: #999">Leetcode</a> <a href="/tags/Leetcode-new/" style="font-size: 14px; color: #999">Leetcode-new</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/en-interviews/" style="font-size: 17.33px; color: #828282">en-interviews</a> <a href="/tags/interviews/" style="font-size: 14px; color: #999">interviews</a>
+      <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/tags/LC/" style="font-size: 24px; color: #555">LC</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/OOP/" style="font-size: 19px; color: #777">OOP</a> <a href="/tags/interview/" style="font-size: 19px; color: #777">interview</a>
     </div>
   </section>
 
@@ -1347,7 +1177,7 @@
       visitor: 'true',
       highlight: 'true',
       mathJax: 'false',
-      enableQQ: 'true',
+      enableQQ: 'false',
       requiredFields: requiredFields,
       emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
       emojiMaps: emojiMaps
