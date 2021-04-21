@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#3.0.0-rc.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+  <title>Stack - Gilmore&#39;s Blog</title>
+  
+
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post' style="display: none;">
+      <div class='cover-body'>
+  <div class='a'>
+    
+      <img no-lazy class='logo' src='/images/favion.png'/>
+    
+    
+      <p class="title">Gilmore</p>
+    
+    
+  </div>
+  <div class='b'>
+    <div class='menu navigation dock'>
+      <div class='list-h'>
+        
+          
+            <a href="/v3/getting-started/"
+              
+              
+              id="v3getting-started">
+              <i class='fas fa-book-open fa-fw'></i><p>CS</p>
+            </a>
+          
+            <a href="/faqs/"
+              
+              
+              id="faqs">
+              <i class='fas fa-book fa-fw'></i><p>DS</p>
+            </a>
+          
+            <a href="/examples/"
+              
+              
+              id="examples">
+              <i class='fas fa-envelope fa-fw'></i><p>Life</p>
+            </a>
+          
+            <a href="/contributors/"
+              
+              
+              id="contributors">
+              <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+    </cover>
+    <header class="l_header shadow floatabl blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='/images/favion.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  </div>
+  
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper' id="pjax-container">
+      
+        <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">true</div> 
+  <div id="pjax-pageTitle">Stack</div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path">none</div> 
+  <div id="pjax-comment-placeholder">none</div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("none" == "none") { // 移除封面 
+    document.getElementsByClassName('cover')[0].style.display = "none"; 
+    document.getElementsByClassName('l_body')[0].classList.add("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("none" == "blog") { // 半屏 
+      document.getElementsByClassName('cover')[0].classList.remove("full"); 
+      document.getElementsByClassName('cover')[0].classList.add("half"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("none" == "docs") { // 全屏 
+      document.getElementsByClassName('cover')[0].classList.remove("half"); 
+      document.getElementsByClassName('cover')[0].classList.add("full"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover')[0].style.display = ""; 
+    document.getElementsByClassName('l_body', 'show')[0].classList.remove("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+
+      
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/08/04/Stack/">
+      Stack
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Aug 4, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p>[TOC]</p>
+<h1 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h1><p>Stack is a <strong><em>linear data structure</em></strong> which follows a particular order in which the operations are performed. The order maybe FILO or LIFO.</p>
+<p>The stack can help us solve recursive problems –&gt; still think from the subproblems, from sub-problems to problems, what operation order it follows?</p>
+<p>I originally thought stack is easy…………..sorry, wrong impression</p>
+<h1 id="Categories"><a href="#Categories" class="headerlink" title="Categories"></a>Categories</h1><h1 id="Stack-Realization"><a href="#Stack-Realization" class="headerlink" title="Stack Realization"></a>Stack Realization</h1><h2 id="Implement-Queue-using-Stacks-232"><a href="#Implement-Queue-using-Stacks-232" class="headerlink" title="Implement Queue using Stacks 232"></a>Implement Queue using Stacks 232</h2><p>Implement the following operations of a queue using stacks.</p>
+<ul>
+<li>push(x) – Push element x to the back of queue.</li>
+<li>pop() – Removes the element from in front of queue.</li>
+<li>peek() – Get the front element.</li>
+<li>empty() – Return whether the queue is empty.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MyQueue queue &#x3D; new MyQueue();</span><br><span class="line"></span><br><span class="line">queue.push(1);</span><br><span class="line">queue.push(2);  </span><br><span class="line">queue.peek();  &#x2F;&#x2F; returns 1</span><br><span class="line">queue.pop();   &#x2F;&#x2F; returns 1</span><br><span class="line">queue.empty(); &#x2F;&#x2F; returns false</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyQueue</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.st=[]</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">push</span>(<span class="params">self,x</span>):</span></span><br><span class="line">    self.st.append(x)</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">peek</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self.st[<span class="number">0</span>]</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">pop</span>(<span class="params">self</span>):</span></span><br><span class="line">    t=self.st[<span class="number">-1</span>]</span><br><span class="line">    <span class="keyword">del</span> self.st[<span class="number">-1</span>]</span><br><span class="line">    <span class="keyword">return</span> t</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">empty</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> len(self.st)==<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Min-Stack-155"><a href="#Min-Stack-155" class="headerlink" title="Min Stack 155"></a>Min Stack 155</h2><p>Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.</p>
+<ul>
+<li>push(x) – Push element x onto stack.</li>
+<li>pop() – Removes the element on top of the stack.</li>
+<li>top() – Get the top element.</li>
+<li>getMin() – Retrieve the minimum element in the stack.</li>
+</ul>
+<p>Methods <code>pop</code>, <code>top</code> and <code>getMin</code> operations will always be called on <strong>non-empty</strong> stacks.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinStack</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.st=[]</span><br><span class="line">    self.min=[]</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">push</span>(<span class="params">self,x</span>):</span></span><br><span class="line">    self.st.append(x)</span><br><span class="line">    <span class="keyword">if</span> self.min:</span><br><span class="line">      self.min.append(min(x,self.min[<span class="number">-1</span>]))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      self.min.append(x)</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">pop</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.st.pop()</span><br><span class="line">    self.min.pop()</span><br><span class="line">   </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">top</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self.st[<span class="number">-1</span>]</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">getMin</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self.min[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="Parentheses"><a href="#Parentheses" class="headerlink" title="Parentheses"></a>Parentheses</h1><p><code>[]</code> itself will be stored in the stack, but others like index or actual result can be stored in the stack too</p>
+<h2 id="Valid-Parentheses-20-cowboy-hat-face"><a href="#Valid-Parentheses-20-cowboy-hat-face" class="headerlink" title="Valid Parentheses 20 :cowboy_hat_face:"></a>Valid Parentheses 20 :cowboy_hat_face:</h2><p><strong><em>thought:</em></strong> must be a pair, if the left one then append in the stack, if the right one then pop out from the stack and check it is the corresponding left one.</p>
+<p>stack: <code>(</code> or <code>&#123;</code> or <code>[</code> , because we have three possible pairs so we must store the exact format in the stack.</p>
+<p>False: when two does not match or there are no left or there are still some after traversal</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;()&quot;</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;()[]&#123;&#125;&quot;</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validParentheses</span>(<span class="params">s</span>):</span></span><br><span class="line">  st=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">    <span class="keyword">if</span> s[i]==<span class="string">&quot;(&quot;</span> <span class="keyword">or</span> s[i]==<span class="string">&quot;[&quot;</span> <span class="keyword">or</span> s[i]==<span class="string">&quot;&#123;&quot;</span>:</span><br><span class="line">      st.append(s[i])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">not</span> st: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">      t=st.pop()</span><br><span class="line">      <span class="keyword">if</span> t!=<span class="string">&quot;[&quot;</span> <span class="keyword">and</span> s[i]==<span class="string">&quot;]&quot;</span>: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">      <span class="keyword">if</span> t!=<span class="string">&quot;&#123;&quot;</span> <span class="keyword">and</span> s[i]==<span class="string">&quot;&#125;&quot;</span>: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">      <span class="keyword">if</span> t!=<span class="string">&quot;(&quot;</span> <span class="keyword">and</span> s[i]==<span class="string">&quot;)&quot;</span>: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">  <span class="keyword">if</span> st: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Decode-String-394-cowboy-hat-face"><a href="#Decode-String-394-cowboy-hat-face" class="headerlink" title="Decode String 394 :cowboy_hat_face:"></a>Decode String 394 :cowboy_hat_face:</h2><p>Stack: because we need to return final result, so we store temporary result in the stack</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;3[a]2[bc]&quot;</span><br><span class="line">Output: &quot;aaabcbc&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;3[a2[c]]&quot;</span><br><span class="line">Output: &quot;accaccacc&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decodeString</span>(<span class="params">s</span>):</span></span><br><span class="line">  st=[]</span><br><span class="line">  i=<span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> i&lt;len(s):</span><br><span class="line">    num,letter=<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">while</span> st <span class="keyword">and</span> s[i].isdigit():</span><br><span class="line">       num+=s[i]</span><br><span class="line">       i+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> num:</span><br><span class="line">      st.append(nums)</span><br><span class="line">    <span class="keyword">while</span> st <span class="keyword">and</span> (<span class="string">&quot;a&quot;</span>&lt;=s[i]&lt;=<span class="string">&quot;z&quot;</span> <span class="keyword">or</span> <span class="string">&quot;A&quot;</span>&lt;=s[i]&lt;=<span class="string">&quot;Z&quot;</span>):</span><br><span class="line">      letter+=s[i]</span><br><span class="line">      i+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> letter:</span><br><span class="line">      st.append(letter)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> i&lt;len(s) <span class="keyword">and</span> s[i]==<span class="string">&quot;[&quot;</span>:</span><br><span class="line">      st.append(s[i])</span><br><span class="line">      i+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> i&lt;len(s) <span class="keyword">and</span> s[i]==<span class="string">&quot;]&quot;</span>:</span><br><span class="line">      l=<span class="string">&quot;&quot;</span></span><br><span class="line">      <span class="keyword">while</span> st <span class="keyword">and</span> st[<span class="number">-1</span>]!=<span class="string">&quot;[&quot;</span>:</span><br><span class="line">        l=st.pop()+l</span><br><span class="line">      <span class="keyword">if</span> st: bracket=st.pop()</span><br><span class="line">      <span class="keyword">if</span> st: n=st.pop()</span><br><span class="line">      st.append(int(n)*l)</span><br><span class="line">      i+=<span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(st)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Minimum-Remove-to-Make-Valid-Parentheses-1249-cowboy-hat-face"><a href="#Minimum-Remove-to-Make-Valid-Parentheses-1249-cowboy-hat-face" class="headerlink" title="Minimum Remove to Make Valid Parentheses 1249 :cowboy_hat_face:"></a>Minimum Remove to Make Valid Parentheses 1249 :cowboy_hat_face:</h2><p>because we need to make changes in the <code>s</code> , so we store the idx.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;lee(t(c)o)de)&quot;</span><br><span class="line">Output: &quot;lee(t(c)o)de&quot;</span><br><span class="line">Explanation: &quot;lee(t(co)de)&quot; , &quot;lee(t(c)ode)&quot; would also be accepted.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;a)b(c)d&quot;</span><br><span class="line">Output: &quot;ab(c)d&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validparentheses</span>(<span class="params">s</span>):</span></span><br><span class="line">  st=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">    <span class="keyword">if</span> s[i]==<span class="string">&quot;(&quot;</span>:</span><br><span class="line">      st.append(i)</span><br><span class="line">    <span class="keyword">elif</span> s[i]==<span class="string">&quot;)&quot;</span>:</span><br><span class="line">      <span class="keyword">if</span> st:</span><br><span class="line">        st.pop()</span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        s[i]=<span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> st:</span><br><span class="line">    s[i]=<span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(s)</span><br><span class="line">      </span><br></pre></td></tr></table></figure>
+
+<h1 id="Object-Integer"><a href="#Object-Integer" class="headerlink" title="Object Integer"></a>Object Integer</h1><h2 id="Min-Parser-385-star2"><a href="#Min-Parser-385-star2" class="headerlink" title="Min Parser 385 :star2:"></a>Min Parser 385 :star2:</h2><p>recursive + <code>[]</code></p>
+<p>—&gt;&gt;&gt;-</p>
+<p>Given a nested list of integers represented as a string, implement a parser to deserialize it.</p>
+<p>Each element is either an integer, or a list – whose elements may also be integers or other lists.</p>
+<p><strong>Note:</strong> You may assume that the string is well-formed:</p>
+<ul>
+<li>String is non-empty.</li>
+<li>String does not contain white spaces.</li>
+<li>String contains only digits <code>0-9</code>, <code>[</code>, <code>-</code> <code>,</code>, <code>]</code>.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Given s &#x3D; &quot;[123,[456,[789]]]&quot;,</span><br><span class="line"></span><br><span class="line">Return a NestedInteger object containing a nested list with 2 elements:</span><br><span class="line"></span><br><span class="line">1. An integer containing value 123.</span><br><span class="line">2. A nested list containing two elements:</span><br><span class="line">    i.  An integer containing value 456.</span><br><span class="line">    ii. A nested list with one element:</span><br><span class="line">         a. An integer containing value 789.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">serialize</span>(<span class="params">s</span>):</span></span><br><span class="line">  i=<span class="number">0</span></span><br><span class="line">  st=[]</span><br><span class="line">  last=<span class="literal">None</span></span><br><span class="line">  num=<span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="keyword">for</span> t <span class="keyword">in</span> s:</span><br><span class="line">    <span class="keyword">if</span> t==<span class="string">&quot;-&quot;</span> <span class="keyword">or</span> t.isdigit():</span><br><span class="line">      num+=t</span><br><span class="line">    <span class="keyword">elif</span> t==<span class="string">&quot;,&quot;</span> <span class="keyword">and</span> num:</span><br><span class="line">      <span class="keyword">if</span> st:</span><br><span class="line">        st[<span class="number">-1</span>].add(NestedInteger((int(num))))</span><br><span class="line">      num=<span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">elif</span> t==<span class="string">&quot;[&quot;</span>:</span><br><span class="line">      new=NestedInteger()</span><br><span class="line">      <span class="keyword">if</span> st:</span><br><span class="line">        st[<span class="number">-1</span>].add(new)</span><br><span class="line">      st.append(elem)</span><br><span class="line">    <span class="keyword">elif</span> t==<span class="string">&quot;]&quot;</span>:</span><br><span class="line">      <span class="keyword">if</span> st:</span><br><span class="line">        st[<span class="number">-1</span>].add(NestedInteger(int(num)))</span><br><span class="line">      last=st.pop()</span><br><span class="line">  <span class="keyword">return</span> last <span class="keyword">if</span> last <span class="keyword">else</span> NestedInteger(int(num))</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Flatten-Nested-List-Iterator-341-star2"><a href="#Flatten-Nested-List-Iterator-341-star2" class="headerlink" title="Flatten Nested List Iterator 341 :star2:"></a>Flatten Nested List Iterator 341 :star2:</h2><p>Given a nested list of integers, implement an iterator to flatten it.</p>
+<p>Each element is either an integer, or a list – whose elements may also be integers or other lists.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [[1,1],2,[1,1]]</span><br><span class="line">Output: [1,1,2,1,1]</span><br><span class="line">Explanation: By calling next repeatedly until hasNext returns false, </span><br><span class="line">             the order of elements returned by next should be: [1,1,2,1,1].</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,[4,[6]]]</span><br><span class="line">Output: [1,4,6]</span><br><span class="line">Explanation: By calling next repeatedly until hasNext returns false, </span><br><span class="line">             the order of elements returned by next should be: [1,4,6].</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NestedIterator</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,nestedList</span>):</span></span><br><span class="line">    self.stack=list(reversed(nestedList))</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">make_stack</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">while</span> self.stack <span class="keyword">and</span> <span class="keyword">not</span> self.stack[<span class="number">-1</span>].isInteger():</span><br><span class="line">      tmp=self.stack.pop().getList()</span><br><span class="line">      self.stack.extend(reversed(tmp))</span><br><span class="line">      </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">next</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.make_stack()</span><br><span class="line">    <span class="keyword">return</span> self.stack.pop().getList()</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hasNext</span>(<span class="params">self</span>):</span></span><br><span class="line">    self.make_stack()</span><br><span class="line">    <span class="keyword">return</span> len(self.stack)&gt;<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h1><h2 id="preorder"><a href="#preorder" class="headerlink" title="preorder"></a>preorder</h2><h2 id="inorder"><a href="#inorder" class="headerlink" title="inorder"></a>inorder</h2><h2 id="postorder"><a href="#postorder" class="headerlink" title="postorder"></a>postorder</h2><h2 id="Binary-Search-Tree-Iterator-173"><a href="#Binary-Search-Tree-Iterator-173" class="headerlink" title="Binary Search Tree Iterator 173"></a>Binary Search Tree Iterator 173</h2><p><strong><em>use stack in inorder and separate the steps</em></strong></p>
+<p>Implement an iterator over a binary search tree (BST). Your iterator will be initialized with the root node of a BST.</p>
+<p>Calling <code>next()</code> will return the next smallest number in the BST.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,root</span>):</span></span><br><span class="line">    self.st=[]</span><br><span class="line">    cur=root</span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">      self.st.append(cur)</span><br><span class="line">      cur=cur.left</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">next</span>(<span class="params">self</span>):</span></span><br><span class="line">    tmp=self.st.pop()</span><br><span class="line">    <span class="keyword">if</span> tmp.right:</span><br><span class="line">      cur=tmp.right</span><br><span class="line">      <span class="keyword">while</span> cur:</span><br><span class="line">        self.st.append(cur)</span><br><span class="line">        cur=cur.left</span><br><span class="line">    <span class="keyword">return</span> tmp.val</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hasNext</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> len(self.st)&gt;<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Verify-Preorder-Sequence-in-Binary-Search-Tree-255"><a href="#Verify-Preorder-Sequence-in-Binary-Search-Tree-255" class="headerlink" title="Verify Preorder Sequence in Binary Search Tree 255"></a>Verify Preorder Sequence in Binary Search Tree 255</h2><ol start="236">
+<li>Lowest Common Ancestor of a Binary Tree</li>
+</ol>
+<h1 id="Array-related"><a href="#Array-related" class="headerlink" title="Array related"></a>Array related</h1><h2 id="Simplify-Path-71-cowboy-hat-face"><a href="#Simplify-Path-71-cowboy-hat-face" class="headerlink" title="Simplify Path 71 :cowboy_hat_face:"></a>Simplify Path 71 :cowboy_hat_face:</h2><p>find path for directory. first go through the operation and find the pattern –&gt; check which pattern it follows.</p>
+<p>—&gt;&gt;&gt;–</p>
+<p>Given an <strong>absolute path</strong> for a file (Unix-style), simplify it. Or in other words, convert it to the <strong>canonical path</strong>.</p>
+<p>In a UNIX-style file system, a period <code>.</code> refers to the current directory. Furthermore, a double period <code>..</code> moves the directory up a level.</p>
+<p>Note that the returned canonical path must always begin with a slash <code>/</code>, and there must be only a single slash <code>/</code> between two directory names. The last directory name (if it exists) <strong>must not</strong> end with a trailing <code>/</code>. Also, the canonical path must be the <strong>shortest</strong> string representing the absolute path.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;&#x2F;a&#x2F;..&#x2F;..&#x2F;b&#x2F;..&#x2F;c&#x2F;&#x2F;.&#x2F;&#x2F;&quot;</span><br><span class="line">Output: &quot;&#x2F;c&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">simplifyPath</span>(<span class="params">path</span>):</span></span><br><span class="line">  <span class="comment"># example: /home/</span></span><br><span class="line">  path=path.split(<span class="string">&quot;/&quot;</span>) <span class="comment"># [&quot;&quot;,&quot;home&quot;,&quot;&quot;]</span></span><br><span class="line">  st=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(path)):</span><br><span class="line">    <span class="keyword">if</span> path[i]==<span class="string">&quot;.&quot;</span> <span class="keyword">or</span> path[i]==<span class="string">&quot;&quot;</span>:</span><br><span class="line">      <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">elif</span> path[i]==<span class="string">&quot;..&quot;</span>:</span><br><span class="line">      <span class="keyword">if</span> st: st.pop()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      st.append(path[i])</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;/&quot;</span>+<span class="string">&quot;/&quot;</span>.join(st)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Backspace-String-Compare-844-cowboy-hat-face"><a href="#Backspace-String-Compare-844-cowboy-hat-face" class="headerlink" title="Backspace String Compare 844 :cowboy_hat_face:"></a>Backspace String Compare 844 :cowboy_hat_face:</h2><p>—&gt;&gt;&gt;-</p>
+<p>Given two strings <code>S</code> and <code>T</code>, return if they are equal when both are typed into empty text editors. <code>#</code> means a backspace character.</p>
+<p>Note that after backspacing an empty text, the text will continue empty.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: S &#x3D; &quot;ab#c&quot;, T &#x3D; &quot;ad#c&quot;</span><br><span class="line">Output: true</span><br><span class="line">Explanation: Both S and T become &quot;ac&quot;.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span>(<span class="params">string</span>):</span></span><br><span class="line">  st=[]</span><br><span class="line">  <span class="keyword">for</span> s <span class="keyword">in</span> string:</span><br><span class="line">    <span class="keyword">if</span> s==<span class="string">&quot;#&quot;</span>:</span><br><span class="line">      <span class="keyword">if</span> st:</span><br><span class="line">        st.pop()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      st.append(s)</span><br><span class="line">  <span class="keyword">return</span> st</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backspace</span>(<span class="params">S,T</span>):</span></span><br><span class="line">  st1=change(S)</span><br><span class="line">  st2=change(T)</span><br><span class="line">  <span class="keyword">return</span> st1==st2</span><br></pre></td></tr></table></figure>
+
+<h2 id="Evaluate-Reverse-Polish-Notation-150-cowboy-hat-face"><a href="#Evaluate-Reverse-Polish-Notation-150-cowboy-hat-face" class="headerlink" title="Evaluate Reverse Polish Notation 150 :cowboy_hat_face:"></a>Evaluate Reverse Polish Notation 150 :cowboy_hat_face:</h2><p>—&gt;&gt;&gt;–</p>
+<p>Evaluate the value of an arithmetic expression in <a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish Notation</a>.</p>
+<p>Valid operators are <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>. Each operand may be an integer or another expression.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>Division between two integers should truncate toward zero.</li>
+<li>The given RPN expression is always valid. That means the expression would always evaluate to a result and there won’t be any divide by zero operation.</li>
+</ul>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;2&quot;, &quot;1&quot;, &quot;+&quot;, &quot;3&quot;, &quot;*&quot;]</span><br><span class="line">Output: 9</span><br><span class="line">Explanation: ((2 + 1) * 3) &#x3D; 9</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evalPrn</span>(<span class="params">tokens</span>):</span></span><br><span class="line">  st=[]</span><br><span class="line">  <span class="keyword">for</span> t <span class="keyword">in</span> tokens:</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> st <span class="keyword">or</span> (t!=<span class="string">&quot;-&quot;</span> <span class="keyword">or</span> t!=<span class="string">&quot;+&quot;</span> <span class="keyword">or</span> t!=<span class="string">&quot;/&quot;</span> <span class="keyword">or</span> t!=<span class="string">&quot;*&quot;</span>):</span><br><span class="line">      st.append(int(t))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      a=st.pop()</span><br><span class="line">      b=st.pop()</span><br><span class="line">      <span class="keyword">if</span> t==<span class="string">&quot;+&quot;</span>:</span><br><span class="line">        st.append(a+b)</span><br><span class="line">      <span class="keyword">if</span> t==<span class="string">&quot;-&quot;</span>:</span><br><span class="line">        st.append(b-a)</span><br><span class="line">      <span class="keyword">if</span> t==<span class="string">&quot;/&quot;</span>:</span><br><span class="line">        st.append(int(b/a))</span><br><span class="line">      <span class="keyword">if</span> t==<span class="string">&quot;*&quot;</span>:</span><br><span class="line">        st.append(a*b)</span><br><span class="line">  <span class="keyword">return</span> st[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Validate-Stack-Sequences-946-cowboy-hat-face"><a href="#Validate-Stack-Sequences-946-cowboy-hat-face" class="headerlink" title="Validate Stack Sequences 946 :cowboy_hat_face:"></a>Validate Stack Sequences 946 :cowboy_hat_face:</h2><p>Given two sequences <code>pushed</code> and <code>popped</code> <strong>with distinct values</strong>, return <code>true</code> if and only if this could have been the result of a sequence of push and pop operations on an initially empty stack. </p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: pushed &#x3D; [1,2,3,4,5], popped &#x3D; [4,5,3,2,1]</span><br><span class="line">Output: true</span><br><span class="line">Explanation: We might do the following sequence:</span><br><span class="line">push(1), push(2), push(3), push(4), pop() -&gt; 4,</span><br><span class="line">push(5), pop() -&gt; 5, pop() -&gt; 3, pop() -&gt; 2, pop() -&gt; 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: pushed &#x3D; [1,2,3,4,5], popped &#x3D; [4,3,5,1,2]</span><br><span class="line">Output: false</span><br><span class="line">Explanation: 1 cannot be popped before 2.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validStack</span>(<span class="params">pushed,popped</span>):</span></span><br><span class="line">  st=[]</span><br><span class="line">  i,j=<span class="number">0</span>,<span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> i&lt;len(pushed) <span class="keyword">and</span> j&lt;len(popped):</span><br><span class="line">    <span class="keyword">while</span> i&lt;len(pushed) <span class="keyword">and</span> (<span class="keyword">not</span> st <span class="keyword">or</span> st[<span class="number">-1</span>]!=popped[j]):</span><br><span class="line">      st.append(pushed[i])</span><br><span class="line">      i+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> j&lt;len(popped) <span class="keyword">and</span> (st <span class="keyword">and</span> st[<span class="number">-1</span>]==popped[j]):</span><br><span class="line">      st.pop</span><br><span class="line">      j+=<span class="number">1</span></span><br><span class="line"> <span class="keyword">return</span> len(st)==<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Daily-Temperatures-739-cowboy-hat-face"><a href="#Daily-Temperatures-739-cowboy-hat-face" class="headerlink" title="Daily Temperatures 739 :cowboy_hat_face:"></a>Daily Temperatures 739 :cowboy_hat_face:</h2><p>—&gt;&gt;&gt;</p>
+<p>Given a list of daily temperatures <code>T</code>, return a list such that, for each day in the input, tells you how many days you would have to wait until a warmer temperature. If there is no future day for which this is possible, put <code>0</code> instead.</p>
+<p>For example, given the list of temperatures <code>T = [73, 74, 75, 71, 69, 72, 76, 73]</code>, your output should be <code>[1, 1, 4, 2, 1, 1, 0, 0]</code>.</p>
+<p><strong>Note:</strong> The length of <code>temperatures</code> will be in the range <code>[1, 30000]</code>. Each temperature will be an integer in the range <code>[30, 100]</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dailyTemperature</span>(<span class="params">T</span>):</span></span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> T: <span class="keyword">return</span> []</span><br><span class="line">  res=[<span class="number">0</span>]*len(T)</span><br><span class="line">  st=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(T)):</span><br><span class="line">    <span class="keyword">while</span> st <span class="keyword">and</span> T[i]&gt;T[st[<span class="number">-1</span>]]:</span><br><span class="line">      idx=st.pop()</span><br><span class="line">      res[idx]=i-idx</span><br><span class="line">      st.append(i)</span><br><span class="line">  <span class="keyword">for</span> idx <span class="keyword">in</span> st:</span><br><span class="line">    res[idx]=<span class="number">0</span></span><br><span class="line">  <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h2 id="Trapping-Water-42-star2"><a href="#Trapping-Water-42-star2" class="headerlink" title="Trapping Water 42 :star2:"></a>Trapping Water 42 :star2:</h2><p>core idea: <strong><em>still recursive</em></strong> </p>
+<p>valid trapping water must be:  <code>a, b and c</code> should be <code>a&gt;b and b&lt;c</code>, e.g. <code>[2,1,3]</code></p>
+<p>Think about stack:</p>
+<p> <code>[2]</code> –&gt; <code>[2,1]</code>–&gt;<code>[2,1,3]</code> pops out 3 and find trapping water</p>
+<p><code>[2,1,0]</code> –&gt; <code>[2,1,0,1]</code> pops out 0 and find trapping water: (min(1,1)-0)*len()</p>
+<p>–&gt; <code>[2,1,3]</code> pops out 3 and find trapping water: (min(2,3)-1)*len</p>
+<p>because we need to calculate the length of trapping water, we need to store index in the stack.</p>
+<p>we also need to think about other situations like <code>[1,3]</code> or <code>[2,1]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">trappingwater</span>(<span class="params">height</span>):</span></span><br><span class="line">  i=<span class="number">0</span></span><br><span class="line">  res=<span class="number">0</span></span><br><span class="line">  st=[]</span><br><span class="line">  <span class="keyword">while</span> i&lt;len(height):</span><br><span class="line">    <span class="keyword">while</span> st <span class="keyword">and</span> height[i]&gt;height[st[<span class="number">-1</span>]]:</span><br><span class="line">      idx=st.pop()</span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">not</span> st:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      res+=(min(height[i],height[st[<span class="number">-1</span>]])-height[idx])*(i-st[<span class="number">-1</span>]<span class="number">-1</span>)</span><br><span class="line">    st.append(i)</span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Time: <code>O(n)</code></p>
+<p>Space: <code>O(n)</code></p>
+<h2 id="Exclusive-Time-of-Functions-636-star2"><a href="#Exclusive-Time-of-Functions-636-star2" class="headerlink" title="Exclusive Time of Functions 636 :star2:"></a>Exclusive Time of Functions 636 :star2:</h2><p><span style="color:red; font-weight: bold">Core Idea:</span> different orders to consider, status from 0 to 1 to 2 (how to coordinate this)</p>
+<p>Use stack to store status!!! instead of time</p>
+<p>–&gt;&gt;&gt;—–</p>
+<p>On a <strong>single threaded</strong> CPU, we execute some functions. Each function has a unique id between <code>0</code> and <code>N-1</code>.</p>
+<p>We store logs in timestamp order that describe when a function is entered or exited.</p>
+<p>Each log is a string with this format: <code>&quot;&#123;function_id&#125;:&#123;&quot;start&quot; | &quot;end&quot;&#125;:&#123;timestamp&#125;&quot;</code>. For example, <code>&quot;0:start:3&quot;</code> means the function with id <code>0</code> <strong>started at the beginning</strong> of timestamp <code>3</code>. <code>&quot;1:end:2&quot;</code> means the function with id <code>1</code> <strong>ended at the end</strong> of timestamp <code>2</code>.</p>
+<p>A function’s <em>exclusive time</em> is the number of units of time spent in this function. Note that this does <strong>not</strong> include any recursive calls to child functions.</p>
+<p>The CPU is <strong>single threaded</strong> which means that only one function is being executed at a given time unit.</p>
+<p>Return the exclusive time of each function, sorted by their function id.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exclusiveTime</span>(<span class="params">n,logs</span>):</span></span><br><span class="line">  res=[<span class="number">0</span>]*n</span><br><span class="line">  tmp=logs[<span class="number">0</span>].split(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">  prev=int(tmp[<span class="number">0</span>])</span><br><span class="line">  i=<span class="number">1</span></span><br><span class="line">  st=[int(tmp[<span class="number">2</span>])]</span><br><span class="line">  <span class="keyword">while</span> i&lt;len(logs):</span><br><span class="line">    tmp=logs[i].split(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> tmp[<span class="number">1</span>]==<span class="string">&quot;start&quot;</span>:</span><br><span class="line">      <span class="keyword">if</span> st:</span><br><span class="line">        res[st[<span class="number">-1</span>]]+=int(tmp[<span class="number">2</span>])-prev</span><br><span class="line">      st.append(int(tmp[<span class="number">0</span>]))</span><br><span class="line">      prev=int(tmp[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      res[st[<span class="number">-1</span>]]+=int(tmp[<span class="number">2</span>])-prev+<span class="number">1</span></span><br><span class="line">      st.pop()</span><br><span class="line">      prev=int(tmp[<span class="number">2</span>])+<span class="number">1</span></span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Basic-Calculator-224-star2"><a href="#Basic-Calculator-224-star2" class="headerlink" title="Basic Calculator 224 :star2:"></a>Basic Calculator 224 :star2:</h2><p><span style="color:red; font-weight: bold">Core Idea:</span> different orders considered  <code>1</code> and <code>()</code> and <code>+/-</code></p>
+<p>Use stack to store status!!!</p>
+<p>–&gt;&gt;&gt;—–</p>
+<p>with parentheses, we all know we should use stack to solve sub-expression and then calculate the whole expression. </p>
+<p>because we are getting the temporary results, we still store num and operand and <code>()</code> in stack.</p>
+<p>The hardest thing is how to do with the order between <code>1</code> and <code>()</code> and <code>+/-</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">evaluate</span>(<span class="params">self,st</span>):</span></span><br><span class="line">    res=st.pop() <span class="keyword">if</span> st <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> st <span class="keyword">and</span> st[<span class="number">-1</span>]!=<span class="string">&quot;)&quot;</span>:</span><br><span class="line">      sign=st.pop()</span><br><span class="line">      <span class="keyword">if</span> sign==<span class="string">&quot;+&quot;</span>:</span><br><span class="line">        res+=st.pop()</span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        res-=st.pop()</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">calculate</span>(<span class="params">self,s</span>):</span></span><br><span class="line">    st=[]</span><br><span class="line">    n,num=<span class="number">0</span>,<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">      ch=s[i]</span><br><span class="line">      <span class="keyword">if</span> ch.isdigit():</span><br><span class="line">        num+=(<span class="number">10</span>**n*int(ch))</span><br><span class="line">        n+=<span class="number">1</span></span><br><span class="line">      <span class="keyword">elif</span> ch!=<span class="string">&quot; &quot;</span>: <span class="comment"># countless edge cases</span></span><br><span class="line">        <span class="keyword">if</span> n:</span><br><span class="line">          st.append(num)</span><br><span class="line">          n,num=<span class="number">0</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> ch==<span class="string">&quot;(&quot;</span>:</span><br><span class="line">          res=self.evaluate(st)</span><br><span class="line">          st.pop() <span class="comment"># pop &quot;)&quot;</span></span><br><span class="line">          st.append(res)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">          st.append(ch)</span><br><span class="line">     <span class="keyword">if</span> n:</span><br><span class="line">      st.append(num)</span><br><span class="line">     <span class="keyword">return</span> self.evaluate(st)</span><br><span class="line">          </span><br></pre></td></tr></table></figure>
+
+<h2 id="Asteroid-Collision-735-star2"><a href="#Asteroid-Collision-735-star2" class="headerlink" title="Asteroid Collision 735 :star2:"></a>Asteroid Collision 735 :star2:</h2><p>逻辑请不要混乱….注意<code>while</code>后有三种判断情况，然后有<code>flag</code>记录有没有进行改改变</p>
+<p>—&gt;&gt;&gt;—</p>
+<p>We are given an array <code>asteroids</code> of integers representing asteroids in a row.</p>
+<p>For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.</p>
+<p>Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: </span><br><span class="line">asteroids &#x3D; [10, 2, -5]</span><br><span class="line">Output: [10]</span><br><span class="line">Explanation: </span><br><span class="line">The 2 and -5 collide resulting in -5.  The 10 and -5 collide resulting in 10.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">collision</span>(<span class="params">asteroids</span>):</span></span><br><span class="line">  st=[]</span><br><span class="line">  <span class="keyword">for</span> a <span class="keyword">in</span> asteroids:</span><br><span class="line">    flag=<span class="literal">False</span></span><br><span class="line">    <span class="keyword">while</span> st <span class="keyword">and</span> st[<span class="number">-1</span>]&gt;<span class="number">0</span> <span class="keyword">and</span> a&lt;<span class="number">0</span>:</span><br><span class="line">      <span class="keyword">if</span> -a=st[<span class="number">-1</span>]:</span><br><span class="line">        st.pop()</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      <span class="keyword">elif</span> st[<span class="number">-1</span>]&gt;-a:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">      <span class="keyword">elif</span> st[<span class="number">-1</span>]&lt;-a:</span><br><span class="line">        st.pop()</span><br><span class="line">        flag=<span class="literal">True</span></span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">   <span class="keyword">if</span> flag:</span><br><span class="line">    st.append(a)</span><br><span class="line"> <span class="keyword">return</span> st</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Largest-Rectangle-in-Histogram-84-star2"><a href="#Largest-Rectangle-in-Histogram-84-star2" class="headerlink" title="Largest Rectangle in Histogram 84 :star2:"></a>Largest Rectangle in Histogram 84 :star2:</h2><p>how to update the largest rectangle  think about right and left boundary in stack</p>
+<p>consider we are finding the maximize area of histogram, including height and width</p>
+<p>—&gt;&gt;&gt;-</p>
+<p>Given <em>n</em> non-negative integers representing the histogram’s bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [2,1,5,6,2,3]</span><br><span class="line">Output: 10</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">largestRectangleHistogram</span>(<span class="params">heights</span>):</span></span><br><span class="line">  heights.append(<span class="number">0</span>)</span><br><span class="line">  <span class="comment"># what if there is only ascending order in heights</span></span><br><span class="line">  <span class="comment"># what if one height in the histogram</span></span><br><span class="line">  st=[<span class="number">-1</span>]</span><br><span class="line">  ans=<span class="number">0</span></span><br><span class="line">  i=<span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> i&lt;len(heights):</span><br><span class="line">    <span class="keyword">while</span> heights[i]&lt;heights[st[<span class="number">-1</span>]]:</span><br><span class="line">      h=heights[st.pop()]</span><br><span class="line">      w=i-st[<span class="number">-1</span>]<span class="number">-1</span></span><br><span class="line">      ans=max(ans,h*w)</span><br><span class="line">    st.append(i)</span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Maximum-Rectangle-85-based-on-84-star2-star2"><a href="#Maximum-Rectangle-85-based-on-84-star2-star2" class="headerlink" title="Maximum Rectangle 85 (based on 84) :star2: :star2:"></a>Maximum Rectangle 85 (based on 84) :star2: :star2:</h2><p>connect with 84!!!</p>
+<p>—&gt;&gt;&gt;-<br>Given a 2D binary matrix filled with 0’s and 1’s, find the largest rectangle containing only 1’s and return its area.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line">[</span><br><span class="line">  [&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;,&quot;0&quot;],</span><br><span class="line">  [&quot;1&quot;,&quot;0&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;],</span><br><span class="line">  [&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;,&quot;1&quot;],</span><br><span class="line">  [&quot;1&quot;,&quot;0&quot;,&quot;0&quot;,&quot;1&quot;,&quot;0&quot;]</span><br><span class="line">]</span><br><span class="line">Output: 6</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maximumHistogram</span>(<span class="params">dp</span>):</span></span><br><span class="line">  dp.append(<span class="number">0</span>)</span><br><span class="line">  st=[<span class="number">-1</span>]</span><br><span class="line">  ans=<span class="number">0</span></span><br><span class="line">  i=<span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> i&lt;len(dp):</span><br><span class="line">    <span class="keyword">while</span> dp[i]&lt;dp[st[<span class="number">-1</span>]]:</span><br><span class="line">      h=dp[st.pop()]</span><br><span class="line">      w=i-st[<span class="number">-1</span>]<span class="number">-1</span></span><br><span class="line">      ans=max(ans,h*w)</span><br><span class="line">    st.append(i)</span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">  dp.pop()</span><br><span class="line">  <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maximumRec</span>(<span class="params">matrix</span>):</span></span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> matrix: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">  dp=[<span class="number">0</span>]*len(matrix[<span class="number">0</span>])</span><br><span class="line">  maxarea=<span class="number">0</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(matrix)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(matrix[<span class="number">0</span>])):</span><br><span class="line">      <span class="keyword">if</span> matri[i][j]==<span class="string">&quot;1&quot;</span>:</span><br><span class="line">        dp[j]=dp[j]+<span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        dp[j]=<span class="number">0</span></span><br><span class="line">    maxarea=max(maxarea,maximumHistogram(dp))</span><br><span class="line">  <span class="keyword">return</span> maxarea</span><br></pre></td></tr></table></figure>
+
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=http://yoursite.com/2020/08/04/Stack/>http://yoursite.com/2020/08/04/Stack/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/qrcode/github@volantis.png'
+        
+          height='64px'
+        ></div>
+      
+    
+      
+        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/qrcode/github@volantis.png'
+        
+          height='64px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-08-11T11:05:33-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Aug 11, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/08/04/Stack/&title=Stack - Gilmore's Blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/08/04/Stack/&title=Stack - Gilmore's Blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/08/04/Stack/&title=Stack - Gilmore's Blog&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2020/08/04/Sorting/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Sorting</p>
+                <p class='content'>[TOC]
+Categories
+Compare function change: Largets Number 179
+
+Time complexity to  O(n)
+
+swap: Sor...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/08/04/Backtracking/'>
+                <p class='title'>Backtracking<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>ref: https://www.1point3acres.com/bbs/thread-583166-1-1.html
+Backtrackingdfs:
+12345def dfs(root):...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      <section id="comments">
+        <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+      </section>
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Implement-Queue-using-Stacks-232"><span class="toc-text">Implement Queue using Stacks 232</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Min-Stack-155"><span class="toc-text">Min Stack 155</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Valid-Parentheses-20-cowboy-hat-face"><span class="toc-text">Valid Parentheses 20 :cowboy_hat_face:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Decode-String-394-cowboy-hat-face"><span class="toc-text">Decode String 394 :cowboy_hat_face:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Minimum-Remove-to-Make-Valid-Parentheses-1249-cowboy-hat-face"><span class="toc-text">Minimum Remove to Make Valid Parentheses 1249 :cowboy_hat_face:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Min-Parser-385-star2"><span class="toc-text">Min Parser 385 :star2:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flatten-Nested-List-Iterator-341-star2"><span class="toc-text">Flatten Nested List Iterator 341 :star2:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#preorder"><span class="toc-text">preorder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#inorder"><span class="toc-text">inorder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#postorder"><span class="toc-text">postorder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Search-Tree-Iterator-173"><span class="toc-text">Binary Search Tree Iterator 173</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Verify-Preorder-Sequence-in-Binary-Search-Tree-255"><span class="toc-text">Verify Preorder Sequence in Binary Search Tree 255</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Simplify-Path-71-cowboy-hat-face"><span class="toc-text">Simplify Path 71 :cowboy_hat_face:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backspace-String-Compare-844-cowboy-hat-face"><span class="toc-text">Backspace String Compare 844 :cowboy_hat_face:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Evaluate-Reverse-Polish-Notation-150-cowboy-hat-face"><span class="toc-text">Evaluate Reverse Polish Notation 150 :cowboy_hat_face:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Validate-Stack-Sequences-946-cowboy-hat-face"><span class="toc-text">Validate Stack Sequences 946 :cowboy_hat_face:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Daily-Temperatures-739-cowboy-hat-face"><span class="toc-text">Daily Temperatures 739 :cowboy_hat_face:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Trapping-Water-42-star2"><span class="toc-text">Trapping Water 42 :star2:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Exclusive-Time-of-Functions-636-star2"><span class="toc-text">Exclusive Time of Functions 636 :star2:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic-Calculator-224-star2"><span class="toc-text">Basic Calculator 224 :star2:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Asteroid-Collision-735-star2"><span class="toc-text">Asteroid Collision 735 :star2:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Largest-Rectangle-in-Histogram-84-star2"><span class="toc-text">Largest Rectangle in Histogram 84 :star2:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maximum-Rectangle-85-based-on-84-star2-star2"><span class="toc-text">Maximum Rectangle 85 (based on 84) :star2: :star2:</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+    </div>
+    
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="/atom.xml"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="mailto:me@xxx.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/Gilemore"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://music.163.com/#/user/home?id=63035382"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+</div>
+      
+    
+      
+        Use
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <div>
+    
+      
+  
+
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='option'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick='document.execCommand("copy")'><i class='fa fa-copy fa-fw'></i>Copy Text</a>
+        <hr id='hr-text'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>Copy Link</a>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>Open Link in New Tab</a>
+        <hr id='hr-href'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>Copy Image Link</a>
+        <hr id='hr-src'>
+      </li>
+      <li class='navigation'>
+        <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+      </li>
+      <hr>
+      
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/faqs/
+        
+        
+        
+        
+          id="https:volantisjsorgfaqs"
+        >
+        <i class='fa fa-question fa-fw'></i> 常见问题
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/examples/
+        
+        
+        
+        
+          id="https:volantisjsorgexamples"
+        >
+        <i class='fa fa-rss fa-fw'></i> 示例博客
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/contributors/
+        
+        
+        
+        
+          id="https:volantisjsorgcontributors"
+        >
+        <i class='fa fa-fan fa-spin fa-fw'></i> 加入社区
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://github.com/volantis-x/volantis-docs/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xvolantis-docs"
+        >
+        <i class='fa fa-code-branch fa-fw'></i> 本站源码
+      </a>
+    </li>
+  
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' href=https://github.com/volantis-x/hexo-theme-volantis/
+        
+        
+        
+        
+          id="https:githubcomvolantis-xhexo-theme-volantis"
+        >
+        <i class='fa fa-code-branch fa-fw'></i> 主题源码
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          <li class='music name'>
+            <p class='nav music-title fix-cursor-default'></p>
+          </li>
+          <li class='music ctrl'>
+            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
+            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
+            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
+          </li>
+          <li class='music volume'>
+            <a class='nav volume'>
+              <div class="aplayer-volume-bar-wrap">
+                <div class="aplayer-volume-bar fix-cursor-pointer">
+                  <div class="aplayer-volume"></div>
+                  <i class='left fa fa-volume-off fa-fw'></i>
+                  <i class='right fa fa-volume-up fa-fw'></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+  <script>
+    window.document.oncontextmenu = function (event) {
+      if (event.ctrlKey) return true;
+      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
+      return popMenu(event);
+    };
+    document.addEventListener("click", function (event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      mymenu.style.display = "none";
+    });
+    function popMenu(event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      var menuContent = document.getElementById('rightmenu-content');
+      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
+      mymenu.style.top = event.clientY + "px";
+      mymenu.style.display = 'block';
+      if (event.clientX * 2 > screenWidth) {
+        menuContent.classList.add('left');
+      } else {
+        menuContent.classList.remove('left');
+      }
+      if (event.clientY * 2 > screenHeight) {
+        menuContent.classList.add('top');
+      } else {
+        menuContent.classList.remove('top');
+      }
+
+      let hrText = document.getElementById('hr-text');
+      let hrSrc = document.getElementById('hr-src');
+      let hrHref = document.getElementById('hr-href');
+
+      // 选中图片
+      let copySrc = document.getElementById('menu-copy-src');
+      if (copySrc != undefined) {
+        if (event.target.currentSrc) {
+          copySrc.style.display = 'block';
+          copySrc.addEventListener("click", function (e) {
+            copyString(event.target.currentSrc);
+          },{once: true});
+          hrSrc.style.display = 'block';
+        } else {
+          copySrc.style.display = 'none';
+          hrSrc.style.display = 'none';
+        }
+      }
+
+      // 选中按钮
+      // 判断是不是按钮
+      let href = '';
+      if (event.path) {
+        for (i = 0; i < event.path.length; i++) {
+          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
+            href = event.path[i].href;
+          }
+        }
+      }
+
+      let copyText = document.getElementById('menu-copy-text');
+      copyText.style.display = 'none';
+      hrText.style.display = 'none';
+      if (href.length == 0) {
+        // 选中文本
+        if (window.getSelection().toString()) {
+          copyText.style.display = 'block';
+          hrText.style.display = 'block';
+        }
+      }
+
+      // 在新标签页打开
+      let openHref = document.getElementById('menu-open-href');
+      if (openHref != undefined) {
+        if (href.length > 0) {
+          openHref.style.display = 'block';
+          openHref.addEventListener("click", function (e) {
+            window.open(href);
+          },{once: true});
+          hrHref.style.display = 'block';
+        } else {
+          openHref.style.display = 'none';
+          hrHref.style.display = 'none';
+        }
+      }
+      // 复制链接
+      let copyHref = document.getElementById('menu-copy-href');
+      if (copyHref != undefined) {
+        if (href.length > 0) {
+          copyHref.style.display = 'block';
+          copyHref.addEventListener("click", function (e) {
+            copyString(href);
+          },{once: true});
+        } else {
+          copyHref.style.display = 'none';
+        }
+      }
+
+      // 有音乐播放器
+      if (true == true) {
+        // 如果有aplayer，初始化一下
+      	try {
+      		checkAPlayer();
+          updateTitle();
+      	} catch (error) {
+      		console.log(error);
+      	}
+      }
+
+      return false; // 该行代码确保系统自带的右键菜单不会被调出
+    }
+    function hideMenu() {
+      document.getElementById('rightmenu-wrapper').style.display = 'none';
+    }
+    function copyString(str) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      document.body.appendChild(input);
+      input.setAttribute('value', str);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    document.execCommand('click');
+  </script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  <script>
+    let APlayerController = new Object();
+    APlayerController.id = '3175833810';  // 设定全局音乐播放ID
+    APlayerController.volume = '0.7';
+  </script>
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+    
+<script src="/js/aplayer.js"></script>
+
+  
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    let pageUrl = $.trim($('#pjax-comment-path').text()) === "none" ? 
+      decodeURI(window.location.pathname) : $.trim($('#pjax-comment-path').text());
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) === "none" ?
+      "快来评论吧~" : $.trim($('#"pjax-comment-placeholder').text());
+
+    let ALLPATH = '';
+    if(ALLPATH != '') pageUrl = ALLPATH;
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: pageUrl,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'true',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
+
+
+<!-- darkmodejs -->
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        clipboard.off('success').on('success', function (e) {
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    $(function () {
+        pjax_initCopyCode()
+    });
+</script>
+
+
+<!-- scrollreveal -->
+
+<!-- ******************************** -->
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+<!-- ******************************** -->
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+
+  
+    
+<script src="/js/search.js"></script>
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      $.fancybox.close();    // 关闭弹窗
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+
+      try{
+        pjax_fancybox();
+        
+          
+          if ('.cover') {
+            $('.cover').backstretch("resize");
+          } else {
+            $.backstretch("resize");
+          }
+        
+        
+        
+        
+          pjax_initCopyCode();
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
+  </div>
+</body>
+</html>
