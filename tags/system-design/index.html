@@ -89,6 +89,8 @@
       <p class="title">Gilmore</p>
     
     
+      <p class="subtitle">Random thoughts...</p>
+    
   </div>
   <div class='b'>
     <div class='menu navigation dock'>
@@ -131,7 +133,7 @@
 
       <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
     </cover>
-    <header class="l_header shadow floatabl blur">
+    <header class="l_header shadow floatable blur">
   <div class='container'>
   <div class='wrapper'>
     <div class='nav-sub'>
@@ -318,7 +320,7 @@
   
 
 
-  <div class="l_body nocover">
+  <div class="l_body">
     <div class='body-wrapper' id="pjax-container">
       
         <!--此文件用来存放一些不方便取值的变量--> 
@@ -337,16 +339,16 @@
  
 <script> 
   // 处理封面 此时 jquery 还没加载 
-  if ("none" == "none") { // 移除封面 
+  if ("blog" == "none") { // 移除封面 
     document.getElementsByClassName('cover')[0].style.display = "none"; 
     document.getElementsByClassName('l_body')[0].classList.add("nocover"); 
     document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
   } else { 
-    if ("none" == "blog") { // 半屏 
+    if ("blog" == "blog") { // 半屏 
       document.getElementsByClassName('cover')[0].classList.remove("full"); 
       document.getElementsByClassName('cover')[0].classList.add("half"); 
       document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
-    } else if ("none" == "docs") { // 全屏 
+    } else if ("blog" == "docs") { // 全屏 
       document.getElementsByClassName('cover')[0].classList.remove("half"); 
       document.getElementsByClassName('cover')[0].classList.add("full"); 
       document.getElementsByClassName('scroll-down')[0].style.display = ""; 
@@ -395,7 +397,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -446,7 +448,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 11, 2021</p>
+    <p>Release on：Jan 11, 2021</p>
   </a>
 </div>
 
@@ -475,18 +477,6 @@
             
           
             
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/11/Design-Data-Intensive-Application-2-5/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/11/Design-Data-Intensive-Application-2-5/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
           
             
               
@@ -511,7 +501,7 @@
     
       
         <a class= "readmore" href="/2021/01/11/Design-Data-Intensive-Application-2-5/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -523,7 +513,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -574,7 +564,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 11, 2021</p>
+    <p>Release on：Jan 11, 2021</p>
   </a>
 </div>
 
@@ -603,18 +593,6 @@
             
           
             
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/11/Distributed-System-Lecture-4/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/11/Distributed-System-Lecture-4/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
           
             
               
@@ -639,7 +617,7 @@
     
       
         <a class= "readmore" href="/2021/01/11/Distributed-System-Lecture-4/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -651,7 +629,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -702,7 +680,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 11, 2021</p>
+    <p>Release on：Jan 11, 2021</p>
   </a>
 </div>
 
@@ -731,18 +709,6 @@
             
           
             
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/11/Distributed-System-Lecture-3/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/11/Distributed-System-Lecture-3/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
           
             
               
@@ -767,7 +733,7 @@
     
       
         <a class= "readmore" href="/2021/01/11/Distributed-System-Lecture-3/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -779,7 +745,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -830,7 +796,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 8, 2021</p>
+    <p>Release on：Jan 8, 2021</p>
   </a>
 </div>
 
@@ -859,18 +825,6 @@
             
           
             
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/08/Distributed-System-Lecture-2/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/08/Distributed-System-Lecture-2/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
           
             
               
@@ -895,7 +849,7 @@
     
       
         <a class= "readmore" href="/2021/01/08/Distributed-System-Lecture-2/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -907,7 +861,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -958,7 +912,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 6, 2021</p>
+    <p>Release on：Jan 6, 2021</p>
   </a>
 </div>
 
@@ -986,18 +940,6 @@
 
             
           
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/06/Dynamo-paper-reading-and-related-project/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/06/Dynamo-paper-reading-and-related-project/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
             
           
             
@@ -1027,7 +969,7 @@
     
       
         <a class= "readmore" href="/2021/01/06/Dynamo-paper-reading-and-related-project/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -1039,7 +981,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -1090,7 +1032,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 6, 2021</p>
+    <p>Release on：Jan 6, 2021</p>
   </a>
 </div>
 
@@ -1119,18 +1061,6 @@
             
           
             
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/06/Design-Data-Intensive-Application-2-4/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/06/Design-Data-Intensive-Application-2-4/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
           
             
               
@@ -1155,7 +1085,7 @@
     
       
         <a class= "readmore" href="/2021/01/06/Design-Data-Intensive-Application-2-4/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -1167,7 +1097,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -1218,7 +1148,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 4, 2021</p>
+    <p>Release on：Jan 4, 2021</p>
   </a>
 </div>
 
@@ -1247,18 +1177,6 @@
             
           
             
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/04/Design-Data-Intensive-Application-2-3/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/04/Design-Data-Intensive-Application-2-3/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
           
             
               
@@ -1283,7 +1201,7 @@
     
       
         <a class= "readmore" href="/2021/01/04/Design-Data-Intensive-Application-2-3/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -1295,7 +1213,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -1346,7 +1264,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 3, 2021</p>
+    <p>Release on：Jan 3, 2021</p>
   </a>
 </div>
 
@@ -1375,18 +1293,6 @@
             
           
             
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/03/Design-Data-Intensive-Application-2-2-summary/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/03/Design-Data-Intensive-Application-2-2-summary/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
-            
           
             
               
@@ -1411,7 +1317,7 @@
     
       
         <a class= "readmore" href="/2021/01/03/Design-Data-Intensive-Application-2-2-summary/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -1423,7 +1329,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -1474,7 +1380,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 3, 2021</p>
+    <p>Release on：Jan 3, 2021</p>
   </a>
 </div>
 
@@ -1502,18 +1408,6 @@
 
             
           
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/03/Design-Data-Intensive-Application-2-2/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/03/Design-Data-Intensive-Application-2-2/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
             
           
             
@@ -1545,7 +1439,7 @@
     
       
         <a class= "readmore" href="/2021/01/03/Design-Data-Intensive-Application-2-2/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -1557,7 +1451,7 @@
       
         
           <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+            <article class="post white-box shadow floatable blur reveal ">
   
 
 
@@ -1608,7 +1502,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jan 2, 2021</p>
+    <p>Release on：Jan 2, 2021</p>
   </a>
 </div>
 
@@ -1636,18 +1530,6 @@
 
             
           
-            
-              
-<div class="new-meta-item comments-count">
-  
-  <a href="/2021/01/02/Design-Data-Intensive-Application-2-1-summary/#comments">
-    <i class="fas fa-comment-dots fa-fw"></i>
-    <span class="valine-comment-count" data-xid="/2021/01/02/Design-Data-Intensive-Application-2-1-summary/">0</span>
-    <span class="leancloud-comments-count">&nbsp;</span>
-  </a>
-</div>
-
-
             
           
             
@@ -1678,7 +1560,7 @@
     
       
         <a class= "readmore" href="/2021/01/02/Design-Data-Intensive-Application-2-1-summary/">
-          阅读全文 <i class="fas fa-chevron-right"></i>
+          Read More <i class="fas fa-chevron-right"></i>
         </a>
       
     
@@ -1700,7 +1582,7 @@
         </p>
         
           <a class="next" rel="next" href="/tags/system-design/page/2/">
-            <section class="post next white-box shadow">
+            <section class="post next white-box shadow floatable blur">
               &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
             </section>
           </a>
@@ -1723,7 +1605,7 @@
     
     
 
-<section class="widget blogger shadow desktop mobile">
+<section class="widget blogger shadow floatable blur desktop mobile">
   <div class='content'>
     
       
@@ -1777,7 +1659,7 @@
     
   
 
-  <section class="widget category shadow desktop">
+  <section class="widget category shadow floatable blur desktop">
     
   <header>
     
@@ -1821,7 +1703,7 @@
     
   
 
-  <section class="widget tagcloud shadow desktop mobile">
+  <section class="widget tagcloud shadow floatable blur desktop mobile">
     
   <header>
     
@@ -1837,6 +1719,113 @@
 
 
   
+
+  
+    
+    
+
+<section class="widget shadow floatable blur desktop">
+  
+  <header>
+    
+      <i class="fas fa-award fa-fw" aria-hidden="true"></i><span class='name'>Website Info</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="webinfo">
+      
+        <div class="webinfo-item">
+          <div>Articles：</div>
+          <div>41 </div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>Age：</div>
+          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
+        </div>
+        <script>
+          var BirthDay = new Date(new Date('2020/04/30'));
+          var today = new Date();
+          var timeold = (today.getTime() - BirthDay.getTime());
+          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
+          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' ';
+        </script>
+      
+
+
+      
+
+      
+
+      
+
+      
+        <div class="webinfo-item">
+          <div>Last Update：</div>
+          
+            <div id="last-update" style="display: none;">Thu Apr 22 2021 14:00:23 GMT-0400 (Eastern Daylight Time)</div>
+            <div id="last-update-show">2021-04-22 </div>
+          
+        </div>
+        
+        <script> 
+          function timeago(dateTimeStamp) { 
+              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示 
+              var hour = minute * 60; 
+              var day = hour * 24; 
+              var week = day * 7; 
+              var month = day * 30; 
+              var now = new Date().getTime(); //获取当前时间毫秒 
+              var diffValue = now - dateTimeStamp; //时间差 
+              if (diffValue < 0) { 
+                  return; 
+              } 
+              var minC = diffValue / minute; //计算时间差的分，时，天，周，月 
+              var hourC = diffValue / hour; 
+              var dayC = diffValue / day; 
+              var weekC = diffValue / week; 
+              var monthC = diffValue / month; 
+              if (monthC >= 1 && monthC <= 3) { 
+                  result = " " + parseInt(monthC) + " 月前" 
+              } else if (weekC >= 1 && weekC <= 3) { 
+                  result = " " + parseInt(weekC) + " 周前" 
+              } else if (dayC >= 1 && dayC <= 6) { 
+                  result = " " + parseInt(dayC) + " 天前" 
+              } else if (hourC >= 1 && hourC <= 23) { 
+                  result = " " + parseInt(hourC) + " 小时前" 
+              } else if (minC >= 1 && minC <= 59) { 
+                  result = " " + parseInt(minC) + " 分钟前" 
+              } else if (diffValue >= 0 && diffValue <= minute) { 
+                  result = "刚刚" 
+              } else { 
+                  var datetime = new Date(); 
+                  datetime.setTime(dateTimeStamp); 
+                  var Nyear = datetime.getFullYear(); 
+                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1; 
+                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate(); 
+                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours(); 
+                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes(); 
+                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds(); 
+                  result = Nyear + "-" + Nmonth + "-" + Ndate 
+              } 
+              return result; 
+          } 
+          var lastUpDate = document.getElementById('last-update').innerHTML; 
+          try { 
+            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate)); 
+          } catch (error) { 
+            document.getElementById('last-update-show').innerHTML = '2021-04-22 '; 
+          } 
+        </script> 
+        
+      
+    </div>
+  </div>
+</section>
 
   
 
@@ -1902,22 +1891,8 @@
       
     
       
-        <div><p>Blog content follows the <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
-</div>
-      
-    
-      
-        Use
-        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
-        as theme, total visits
-          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-          times
-        
-      
-    
-      
         <div class='copyright'>
-        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+        <p><a href="/">Copyright © 2017-2021</a></p>
 
         </div>
       
@@ -1951,94 +1926,6 @@
       </li>
       <hr>
       
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/faqs/
-        
-        
-        
-        
-          id="https:volantisjsorgfaqs"
-        >
-        <i class='fa fa-question fa-fw'></i> 常见问题
-      </a>
-    </li>
-  
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/examples/
-        
-        
-        
-        
-          id="https:volantisjsorgexamples"
-        >
-        <i class='fa fa-rss fa-fw'></i> 示例博客
-      </a>
-    </li>
-  
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://volantis.js.org/contributors/
-        
-        
-        
-        
-          id="https:volantisjsorgcontributors"
-        >
-        <i class='fa fa-fan fa-spin fa-fw'></i> 加入社区
-      </a>
-    </li>
-  
-        
-      
-        
-          <hr>
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://github.com/volantis-x/volantis-docs/
-        
-        
-        
-        
-          id="https:githubcomvolantis-xvolantis-docs"
-        >
-        <i class='fa fa-code-branch fa-fw'></i> 本站源码
-      </a>
-    </li>
-  
-        
-      
-        
-          
-    <li>
-      <a class='vlts-menu fix-cursor-default' href=https://github.com/volantis-x/hexo-theme-volantis/
-        
-        
-        
-        
-          id="https:githubcomvolantis-xhexo-theme-volantis"
-        >
-        <i class='fa fa-code-branch fa-fw'></i> 主题源码
-      </a>
-    </li>
-  
-        
-      
-        
-          <hr>
         
       
         
@@ -2239,8 +2126,8 @@
 
     <script type="text/javascript">
       $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/001.jpg"];
-        if ('true' == 'true') {
+        var imgs=["/images/omoide016.jpeg"];
+        if ('false' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/
             var n = arr.length;
