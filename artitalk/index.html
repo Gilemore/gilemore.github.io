@@ -16,13 +16,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>OOP-Basics - Gilmore&#39;s Blog</title>
-  
-    <meta name="keywords" content="OOP">
+  <title>说说 - Gilmore&#39;s Blog</title>
   
 
-  
-    <meta name="description" content="Object-Oriented Programming or OOPs refers to languages that uses objects in programming. Object-oriented programming aims to implement real-world entities l...">
   
 
   <!-- feed -->
@@ -81,7 +77,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover post' style="display: none;">
+    <cover class='cover artitalk' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -331,8 +327,8 @@
  
  
 <div id="pjax-data" style="display: none"> 
-  <div id="pjax-ispage">true</div> 
-  <div id="pjax-pageTitle">OOP-Basics</div> 
+  <div id="pjax-ispage">false</div> 
+  <div id="pjax-pageTitle"></div> 
   <div id="pjax-enable-cover">true</div> 
   <div id="pjax-comment-path">none</div> 
   <div id="pjax-comment-placeholder">none</div> 
@@ -368,7 +364,7 @@
   
 
   
-    <article id="post" class="post white-box reveal shadow floatable blur article-type-post" itemscope itemprop="blogPost">
+    <article id="artitalk" class="post white-box reveal shadow floatable blur article-type-artitalk" itemscope itemprop="blogPost">
       
 
 
@@ -380,8 +376,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/08/12/OOP-Basics/">
-      OOP-Basics
+    <a href="/artitalk/index.html">
+      说说
     </a>
   </h1>
 
@@ -404,14 +400,6 @@
           
             
               
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/interview/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>interview</p>
-    </a>
-  </div>
-
 
             
           
@@ -419,7 +407,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>Release on：Aug 12, 2020</p>
+    <p>Release on：Apr 22, 2021</p>
   </a>
 </div>
 
@@ -442,146 +430,13 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
+              <div id="artitalk_main"></div>
           
-          <p>Object-Oriented Programming or OOPs refers to languages that uses objects in programming. Object-oriented programming aims to implement real-world entities like inheritance, hiding, polymorphism etc in programming. The main aim of OOP is to bind together the data and the functions that operate on them so that no other part of the code can access this data except that function.</p>
-<p>Here we include <span class='p blue'>Polymorphism + Inheritance + Encapsulation + Abstraction</span></p>
-<a id="more"></a>
-
-<h1 id="Polymorphism"><a href="#Polymorphism" class="headerlink" title="Polymorphism"></a>Polymorphism</h1><p>Polymorphism refers to the ability of OOPs programming languages to differentiate between entities with the same name efficiently. This is done by Java with the help of the signature and declaration of these entities.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">pulic <span class="class"><span class="keyword">class</span> <span class="title">Sum</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Overload sum()</span></span><br><span class="line"> <span class="comment">// This sum takes two int parameters </span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x+y);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Overload sum()</span></span><br><span class="line">  <span class="comment">// this sum takes three int parameter</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> z)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x+y+z);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Overload sum()</span></span><br><span class="line">  <span class="comment">// this sum takes two double parameters</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">sum</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">double</span> y)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x+y);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Driver code</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">    Sum s=<span class="keyword">new</span> Sum();</span><br><span class="line">    System.out.println(s.sum(<span class="number">10</span>,<span class="number">20</span>));</span><br><span class="line">    System.out.println(s.sum(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>));</span><br><span class="line">    System.out.println(s.sum(<span class="number">10.5</span>,<span class="number">20.5</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h1><p> Inheritance is an important pillar of OOP(Object Oriented Programming). It is the mechanism in java by which one class is allow to inherit the features(fields and methods) of another class.</p>
-<ul>
-<li><strong>Super Class:</strong> The class whose features are inherited is known as superclass(or a base class or a parent class).</li>
-<li><strong>Sub Class:</strong> The class that inherits the other class is known as subclass(or a derived class, extended class, or child class). The subclass can add its own fields and methods in addition to the superclass fields and methods.</li>
-<li><strong>Reusability:</strong> Inheritance supports the concept of “reusability”, i.e. when we want to create a new class and there is already a class that includes some of the code that we want, we can derive our new class from the existing class. By doing this, we are reusing the fields and methods of the existing class.</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">derived</span>-<span class="title">class</span> <span class="keyword">extends</span> <span class="title">base</span>-<span class="title">class</span> </span>&#123;</span><br><span class="line">  <span class="comment">// methods and fields</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Encapsulation"><a href="#Encapsulation" class="headerlink" title="Encapsulation"></a>Encapsulation</h1><p>Encapsulation is defined as the wrapping up of data under a single unit. It is the mechanism that binds together code and the data it manipulates. Another way to think about encapsulation is, it is a protective shield that prevents the data from being accessed by the code outside this shield.</p>
-<ul>
-<li>Technically in encapsulation, the variables or data of a class is hidden from any other class and can be accessed only through any member function of own class in which they are declared.</li>
-<li>As in encapsulation, the data in a class is hidden from other classes, so it is also known as <strong>data-hiding</strong>.</li>
-<li>Encapsulation can be achieved by Declaring all the variables in the class as private and writing public methods in the class to set and get the values of variables.</li>
-</ul>
-<h1 id="Abstraction"><a href="#Abstraction" class="headerlink" title="Abstraction"></a>Abstraction</h1><p>Data Abstraction is the property by virtue of which only the essential details are displayed to the user. The trivial or the non-essentials units are not displayed to the user.</p>
-<p>Data Abstraction may also be defined as the process of identifying only the required characteristics of an object ignoring the irrelevant details. The properties and behaviours of an object differentiate it from other objects of similar type and also help in classifying/grouping the objects.</p>
-<h1 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h1><p>A class is a user defined blueprint or prototype from which objects are created. It represents the set of properties or methods that are common to all objects of one type. In general, class declarations can include these components, in order:</p>
-<ol>
-<li><strong>Modifiers</strong>: A class can be public or has default access (Refer <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/access-specifiers-for-classes-or-interfaces-in-java/">this</a> for details).</li>
-<li><strong>Class name:</strong> The name should begin with a initial letter (capitalized by convention).</li>
-<li><strong>Superclass(if any):</strong> The name of the class’s parent (superclass), if any, preceded by the keyword extends. A class can only extend (subclass) one parent.</li>
-<li><strong>Interfaces(if any):</strong> A comma-separated list of interfaces implemented by the class, if any, preceded by the keyword implements. A class can implement more than one interface.</li>
-<li><strong>Body:</strong> The class body surrounded by braces, { }.</li>
-</ol>
-<h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><p>It is a basic unit of Object Oriented Programming and represents the real life entities. A typical Java program creates many objects, which as you know, interact by invoking methods. An object consists of:</p>
-<ol>
-<li><strong>State</strong> : It is represented by attributes of an object. It also reflects the properties of an object.</li>
-<li><strong>Behavior</strong> : It is represented by methods of an object. It also reflects the response of an object with other objects.</li>
-<li><strong>Identity</strong> : It gives a unique name to an object and enables one object to interact with other objects.</li>
-</ol>
-<h1 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h1><p>A method is a collection of statements that perform some specific task and return result to the caller. A method can perform some specific task without returning anything. Methods allow us to <strong>reuse</strong> the code without retyping the code. In Java, every method must be part of some class which is different from languages like C, C++ and Python.<br>Methods are <strong>time savers</strong> and help us to <strong>reuse</strong> the code without retyping the code.</p>
-<h2 id="Method-Declaration"><a href="#Method-Declaration" class="headerlink" title="Method Declaration"></a>Method Declaration</h2><ul>
-<li><strong>Access Modifier</strong>: Defines <strong>access type</strong> of the method i.e. from where it can be accessed in your application. In Java, there 4 type of the access specifiers.<ul>
-<li><strong>public:</strong> accessible in all class in your application.</li>
-<li><strong>protected:</strong> accessible within the package in which it is defined and in its <strong>subclass(es)(including subclasses declared outside the package)</strong></li>
-<li><strong>private:</strong> accessible only within the class in which it is defined.</li>
-<li><strong>default (declared/defined without using any modifier):</strong> accessible within same class and package within which its class is defined.</li>
-</ul>
-</li>
-<li><strong>The return type</strong>: The data type of the value returned by the method or void if does not return a value.</li>
-<li><strong>Method Name</strong>: the rules for field names apply to method names as well, but the convention is a little different.</li>
-<li><strong>Parameter list</strong>: Comma separated list of the input parameters are defined, preceded with their data type, within the enclosed parenthesis. If there are no parameters, you must use empty parentheses ().</li>
-<li><strong>Exception list</strong>: The exceptions you expect by the method can throw, you can specify these exception(s).</li>
-<li><strong>Method body</strong>: it is enclosed between braces. The code you need to be executed to perform your intended operations.</li>
-</ul>
-<img src='/images/OOP-Basics/methods.png'>
-
-
           
-            <div class='article_footer'>
-              
-                
-  
-    
-    
-
-
-
-  
-
-  
-    
-    
-
-
-
-  
-
-  
-
-
-              
-            </div>
+          
           
         </div>
         
-          
-
-
-  <section class='meta' id="footer-meta">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T14:47:36-04:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Apr 21, 2021</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-  
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/OOP/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>OOP</p></a></div>
-
-
-        
-      
-        
-          
-
-        
-      
-        
-          
-
-        
-      
-    </div>
-  </section>
-
-
-        
-        
-          <div class="prev-next">
-            
-              <a class='prev' href='/2020/08/12/OOP-DesignCode/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>OOP-DesignCode</p>
-                <p class='content'>From Structured Programming to Procedural Programming Approach to OOP Approach…we then have class...</p>
-              </a>
-            
-            
-              <a class='next' href='/2020/08/12/DFS-Tree/'>
-                <p class='title'>DFS-Tree<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>Here DFS is just like recursion, two things to be noted in def dfs():
-
-pass arguments down  sums,...</p>
-              </a>
-            
-          </div>
         
       </section>
     </article>
@@ -602,20 +457,6 @@ pass arguments down  sums,...</p>
 
 
 
-  <section class="widget toc-wrapper shadow floatable blur desktop mobile" id="toc-div" >
-    
-  <header>
-    
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>Table of Content</span>
-    
-  </header>
-
-
-    <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Method-Declaration"><span class="toc-text">Method Declaration</span></a></li></ol>
-    </div>
-  </section>
-
 
   
 
@@ -623,6 +464,24 @@ pass arguments down  sums,...</p>
 </aside>
 
 
+<script>
+  if (window.AV != undefined) { delete window.AV;}
+  var appID ="ogP8qj3veMh0LFpFWMPOyF0X-MdYXbMMI";
+  var appKEY ="nHXLd3N3Jgh460t2iRQKWAtr";
+  
+  
+  
+  
+  
+  
+      var lazy=1;
+  
+  
+  
+  
+  
+</script>
+<script async type="text/javascript" src="https://cdn.jsdelivr.net/npm/artitalk"></script>
 
     </div>
     
