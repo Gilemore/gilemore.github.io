@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#3.0.0-rc.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+  <title>PriorityQueue - Gilmore&#39;s Blog</title>
+  
+    <meta name="keywords" content="LC">
+  
+
+  
+    <meta name="description" content="Dynamic inserting values and also keep the array sorted: Priority Queue, Heap
+Top K largest / smallest:
+Leetcode: Merge k Sorted Lists (23), K Closest Points...">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post' style="display: none;">
+      <div class='cover-body'>
+  <div class='a'>
+    
+      <img no-lazy class='logo' src='/images/favion.png'/>
+    
+    
+      <p class="title">Gilmore</p>
+    
+    
+      <p class="subtitle">Random thoughts...</p>
+    
+  </div>
+  <div class='b'>
+    <div class='menu navigation dock'>
+      <div class='list-h'>
+        
+          
+            <a href="/Class"
+              
+              
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
+            </a>
+          
+            <a href="/archives"
+              
+              
+              id="archives">
+              <i class='fas fa-folder-open fa-fw'></i><p>Archive</p>
+            </a>
+          
+            <a href="/Random"
+              
+              
+              id="Random">
+              <i class='fas fa-book fa-fw'></i><p>Random</p>
+            </a>
+          
+            <a href="/AboutMe"
+              
+              
+              id="AboutMe">
+              <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+    </cover>
+    <header class="l_header shadow floatable blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='/images/favion.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  </div>
+  
+
+
+  <div class="l_body">
+    <div class='body-wrapper' id="pjax-container">
+      
+        <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">true</div> 
+  <div id="pjax-pageTitle">PriorityQueue</div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path">none</div> 
+  <div id="pjax-comment-placeholder">none</div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("blog" == "none") { // 移除封面 
+    document.getElementsByClassName('cover')[0].style.display = "none"; 
+    document.getElementsByClassName('l_body')[0].classList.add("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("blog" == "blog") { // 半屏 
+      document.getElementsByClassName('cover')[0].classList.remove("full"); 
+      document.getElementsByClassName('cover')[0].classList.add("half"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("blog" == "docs") { // 全屏 
+      document.getElementsByClassName('cover')[0].classList.remove("half"); 
+      document.getElementsByClassName('cover')[0].classList.add("full"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover')[0].style.display = ""; 
+    document.getElementsByClassName('l_body', 'show')[0].classList.remove("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+
+      
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow floatable blur article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/08/16/PriorityQueue/">
+      PriorityQueue
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>Release on：Aug 16, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p>Dynamic inserting values and also keep the array sorted: Priority Queue, Heap</p>
+<p><em>Top K largest / smallest:</em></p>
+<p>Leetcode: Merge k Sorted Lists (23), K Closest Points to Origin (973), Top K Frequent Words (692), Kth Largest Element in an Array (215)</p>
+<p><em>Two Heaps:</em></p>
+<p>Find Median from Data Stream (295)</p>
+<p>Python: default is minHeap, you have to use -num to have maxHeap</p>
+<p>Priority Queue is an extension of queue with following properties:</p>
+<ul>
+<li>every item has a priority associated with it</li>
+<li>an element with high priority is dequeueed before an element with low priority</li>
+<li>if two elements have the same priority, they are served according to the order in the queue</li>
+</ul>
+<p>A typical priority queue supports following operations.<br><code>insert(item, priority)</code>: Inserts an item with given priority.<br><code>getHighestPriority()</code>: Returns the highest priority item.<br><code>deleteHighestPriority()</code>: Removes the highest priority item.</p>
+<a id="more"></a>
+
+<h1 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h1><p>Heap is generally preferred for priority queue implementation because heaps provide better performance compared arrays or linked list. </p>
+<p>In a Binary Heap, getHighestPriority() can be implemented in <strong><em>O(1)</em></strong> time</p>
+<p>insert() can be implemented in <strong><em>O(logn)</em></strong> time </p>
+<p>deleteHighestPriority() can also be implemented in <strong><em>O(logn)</em></strong> time.</p>
+<h1 id="Binary-Heap"><a href="#Binary-Heap" class="headerlink" title="Binary Heap"></a>Binary Heap</h1><ul>
+<li>It’s a complete tree (All levels are completely filled except possibly the last level and the last level has all keys as left as possible). This property of Binary Heap makes them suitable to be stored in an array.</li>
+<li>A Binary Heap is either Min Heap or Max Heap. In a Min Binary Heap, the key at root must be minimum among all keys present in Binary Heap. The same property must be recursively true for all nodes in Binary Tree. Max Binary Heap is similar to MinHeap.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">        10                      10</span><br><span class="line">     &#x2F;      \               &#x2F;       \  </span><br><span class="line">   20        100          15         30  </span><br><span class="line">  &#x2F;                      &#x2F;  \        &#x2F;  \</span><br><span class="line">30                     40    50    100   40</span><br></pre></td></tr></table></figure>
+
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>A binary heap is typically represented as an array.</p>
+<ul>
+<li><p>The root element will be at Arr[0].</p>
+</li>
+<li><p>Below table shows indexes of other nodes for the ith node, i.e., Arr[i]:</p>
+<p><code>Arr[(i-1)//2]</code>: Returns the parent node</p>
+<p><code>Arr[2*i+1]</code>: return the left child node</p>
+<p><code>Arr[2*i+2]</code>: return the right child node</p>
+</li>
+</ul>
+<p>The traversal method use to achieve Array representation is <strong>Level Order</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> heappush, heappop, heapify</span><br><span class="line"></span><br><span class="line">li=[<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">heapq.heapify(li)</span><br><span class="line"></span><br><span class="line">print(list(li)) <span class="comment"># [1, 3, 9, 7, 5]</span></span><br><span class="line"></span><br><span class="line">heapq.heappush(li,<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">print(list(li)) <span class="comment"># [1, 3, 4, 7, 5, 9]</span></span><br><span class="line"></span><br><span class="line">print(heapq.heappop(li)) <span class="comment"># 1</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Heap-Sort"><a href="#Heap-Sort" class="headerlink" title="Heap Sort"></a>Heap Sort</h1><p>Heap sort is a comparison based sorting technique based on Binary Heap data structure. It is similar to selection sort where we first find the maximum element and place the maximum element at the end. We repeat the same process for remaining element.</p>
+<p><strong>1.</strong> Build a max heap from the input data.<br><strong>2.</strong> At this point, the largest item is stored at the root of the heap. Replace it with the last item of the heap followed by reducing the size of heap by 1. Finally, heapify the root of tree.<br><strong>3.</strong> Repeat above steps while size of heap is greater than 1.</p>
+<h2 id="Heapify"><a href="#Heapify" class="headerlink" title="Heapify"></a>Heapify</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Input data: <span class="number">4</span>, <span class="number">10</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">1</span></span><br><span class="line">         <span class="number">4</span>(<span class="number">0</span>)</span><br><span class="line">        /   \</span><br><span class="line">     <span class="number">10</span>(<span class="number">1</span>)   <span class="number">3</span>(<span class="number">2</span>)</span><br><span class="line">    /   \</span><br><span class="line"> <span class="number">5</span>(<span class="number">3</span>)    <span class="number">1</span>(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">The numbers <span class="keyword">in</span> bracket represent the indices <span class="keyword">in</span> the array </span><br><span class="line">representation of data.</span><br><span class="line"></span><br><span class="line">Applying heapify procedure to index <span class="number">1</span>:</span><br><span class="line">         <span class="number">4</span>(<span class="number">0</span>)</span><br><span class="line">        /   \</span><br><span class="line">    <span class="number">10</span>(<span class="number">1</span>)    <span class="number">3</span>(<span class="number">2</span>)</span><br><span class="line">    /   \</span><br><span class="line"><span class="number">5</span>(<span class="number">3</span>)    <span class="number">1</span>(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">Applying heapify procedure to index <span class="number">0</span>:</span><br><span class="line">        <span class="number">10</span>(<span class="number">0</span>)</span><br><span class="line">        /  \</span><br><span class="line">     <span class="number">5</span>(<span class="number">1</span>)  <span class="number">3</span>(<span class="number">2</span>)</span><br><span class="line">    /   \</span><br><span class="line"> <span class="number">4</span>(<span class="number">3</span>)    <span class="number">1</span>(<span class="number">4</span>)</span><br><span class="line">The heapify procedure calls itself recursively to build heap</span><br><span class="line"> <span class="keyword">in</span> top down manner.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapify</span>(<span class="params">arr,n,i</span>):</span></span><br><span class="line">  <span class="comment"># initialize largest as root</span></span><br><span class="line">  largest=i</span><br><span class="line">  l=<span class="number">2</span>*i+<span class="number">1</span></span><br><span class="line">  r=<span class="number">2</span>*i+<span class="number">2</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># see if left child of root exists and is greater than root</span></span><br><span class="line">  <span class="keyword">if</span> l&lt;n <span class="keyword">and</span> arr[largest]&lt;arr[lb]:</span><br><span class="line">    largest=l</span><br><span class="line">  <span class="keyword">if</span> r&lt;n <span class="keyword">and</span> arr[largest]&lt;arr[r]:</span><br><span class="line">    largest=r</span><br><span class="line">    </span><br><span class="line">  <span class="comment"># change root, if needed</span></span><br><span class="line">  <span class="keyword">if</span> largest!=i:</span><br><span class="line">    arr[i],arr[largest]=arr[largest],arr[i]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># heapify the root</span></span><br><span class="line">    heapify(arr,n,largest)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># the main function to sort an array of given size</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heapSort</span>(<span class="params">arr</span>):</span></span><br><span class="line">  n=len(arr)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># build a maxheap</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n//<span class="number">2</span>,<span class="number">-1</span>,<span class="number">-1</span>):</span><br><span class="line">    heapify(arr,n,i)</span><br><span class="line">   </span><br><span class="line">  <span class="comment"># one by one extract elements</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-1</span>,<span class="number">0</span>,<span class="number">-1</span>):</span><br><span class="line">    arr[i],arr[<span class="number">0</span>]=arr[<span class="number">0</span>],arr[i]</span><br><span class="line">    heapify(arr,i,<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="Merge-K-sorted-Arrays"><a href="#Merge-K-sorted-Arrays" class="headerlink" title="Merge K sorted Arrays"></a>Merge K sorted Arrays</h1><h2 id="Naive"><a href="#Naive" class="headerlink" title="Naive"></a>Naive</h2><ol>
+<li>create a output array of size n*k</li>
+<li>traverse the matrix from start to end and insert all the elements in output array</li>
+<li>sort and print the output array</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge1</span>(<span class="params">k,n,arr</span>):</span></span><br><span class="line">  new=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(arr)):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(arr[i])):</span><br><span class="line">      new.append(arr[i][j])</span><br><span class="line">  </span><br><span class="line">  new.sort()</span><br><span class="line">  <span class="keyword">return</span> new</span><br></pre></td></tr></table></figure>
+
+<p>time: <code>O(nklog(nk))</code></p>
+<p>space: <code>O(n*k)</code></p>
+<h2 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h2><p>The process might begin with merging arrays into groups of two. After the first merge, we have k/2 arrays. Again merge arrays in groups, now we have k/4 arrays. This is similar to merge sort. Divide k arrays into two halves containing an equal number of arrays until there are two arrays in a group. This is followed by merging the arrays in a bottom-up manner.</p>
+<ol>
+<li>Create a recursive function which takes k arrays and returns the output array.</li>
+<li>In the recursive function, if the value of k is 1 then return the array else if the value of k is 2 then merge the two arrays in linear time and return the array.</li>
+<li>If the value of k is greater than 2 then divide the group of k elements into two equal halves and recursively call the function, i.e 0 to k/2 array in one recursive function and k/2 to k array in another recursive function.</li>
+<li>Print the output array.</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeArrays</span>(<span class="params">arr1,arr2,n1,n2,arr3</span>):</span></span><br><span class="line">  i,j,k=<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> i&lt;n1 <span class="keyword">and</span> j&lt;n2:</span><br><span class="line">    <span class="keyword">if</span> arr1[i]&lt;arr2[j]:</span><br><span class="line">      arr3[k]=arr1[i]</span><br><span class="line">      k+=<span class="number">1</span></span><br><span class="line">      i+=<span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      arr3[k]=arr2[j]</span><br><span class="line">      k+=<span class="number">1</span></span><br><span class="line">      j+=<span class="number">1</span></span><br><span class="line">  <span class="keyword">while</span> i&lt;n1:</span><br><span class="line">    arr3[k]=arr1[i]</span><br><span class="line">    k+=<span class="number">1</span></span><br><span class="line">    i+=<span class="number">1</span></span><br><span class="line">  <span class="keyword">while</span> j&lt;n2:</span><br><span class="line">    arr3[k]=arr2[j]</span><br><span class="line">    k+=<span class="number">1</span></span><br><span class="line">    j+=<span class="number">1</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeKArrays</span>(<span class="params">arr,i,j,output</span>):</span></span><br><span class="line">  n=len(arr)</span><br><span class="line">  <span class="keyword">if</span> i==j:</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> range(n):</span><br><span class="line">      output=arr[i][p]</span><br><span class="line">      <span class="keyword">return</span> </span><br><span class="line">  <span class="keyword">if</span> j-i==<span class="number">1</span>:</span><br><span class="line">    mergeArrays(arr[i],arr[j],n,n,output)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  </span><br><span class="line">  out1,out2=[],[]</span><br><span class="line">  mergeKArrays(arr,i,(i+j)//<span class="number">2</span>,out1)</span><br><span class="line">  mergeKArrays(arr,(i+j)//<span class="number">2</span>+<span class="number">1</span>,j,out2)</span><br><span class="line">  </span><br><span class="line">  mergeKArrays(out1,out2,n*(((i+j)//<span class="number">2</span>)-i+<span class="number">1</span>),n*(j-((i+j)//<span class="number">2</span>)),output)</span><br></pre></td></tr></table></figure>
+
+<p>time: <code>O(n*k*logk)</code></p>
+<p>space: <code>O(n*k*logk)</code></p>
+<h2 id="Min-Heap"><a href="#Min-Heap" class="headerlink" title="Min Heap"></a>Min Heap</h2><ol>
+<li>Create a min heap and insert the first element of all k arrays</li>
+<li>run a loop until the size of MinHeap is greater than zero</li>
+<li>remove the top lement of the minheap and print the element</li>
+<li>now insert the next element from the same array in which the removed element belonged</li>
+<li>if the array doesn’t have any more elements, then replace root with infinite. After replacing the root, heapify the tree.</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> List, Optional</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinHeapNode</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,el,i,j</span>):</span></span><br><span class="line">    self.element=el <span class="comment"># the elements to be sorted</span></span><br><span class="line">    self.i=i <span class="comment"># index of array from which element is taken</span></span><br><span class="line">    self.j=j <span class="comment"># index of next element to be picked from array</span></span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MinHeap</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,ar,size</span>):</span></span><br><span class="line">    self.heap_size=size</span><br><span class="line">    self.heap_arr=ar</span><br><span class="line">    i=(self.heap_size<span class="number">-1</span>)//<span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> i&gt;=<span class="number">0</span>:</span><br><span class="line">      self.min_heapify(i)</span><br><span class="line">      i-=<span class="number">1</span></span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">min_heapify</span>(<span class="params">self,i</span>):</span></span><br><span class="line">    l=<span class="number">2</span>*i+<span class="number">1</span></span><br><span class="line">    r=<span class="number">2</span>*i+<span class="number">2</span></span><br><span class="line">    smallest=i</span><br><span class="line">    <span class="keyword">if</span> i&lt;self.heap_size <span class="keyword">and</span> self.heap_arr[l].element&lt;self.heap_arr[i].element:</span><br><span class="line">      smallest=l</span><br><span class="line">    <span class="keyword">if</span> i&lt;self.heap_size <span class="keyword">and</span> self.heap_arr[r].element&lt; self.heap_arr[smallest].element:</span><br><span class="line">      smallest=r</span><br><span class="line">    <span class="keyword">if</span> smallest!=i:</span><br><span class="line">      self.heap_arr[i],self.heap_arr[smallest]=self.heap_arr[smallest],self.heap_arr[i]</span><br><span class="line">      self.min_heapify(smallest)</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">get_min</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">if</span> self.heap_size&lt;=<span class="number">0</span>:</span><br><span class="line">      print(<span class="string">&quot;Heap underflow&quot;</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> self.heap_arr[<span class="number">0</span>]</span><br><span class="line">      </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">replace_min</span>(<span class="params">self,root</span>):</span></span><br><span class="line">    self.heap_arr[<span class="number">0</span>]=root</span><br><span class="line">    self.min_heapify(<span class="number">0</span>)</span><br><span class="line">      </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">merge_k_sorted_arrays</span>(<span class="params">arr,k</span>):</span></span><br><span class="line">    h_arr=[]</span><br><span class="line">    result_size=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(arr)):</span><br><span class="line">      node=MinHeapNode(arr[i][<span class="number">0</span>],i,<span class="number">1</span>)</span><br><span class="line">      h_arr.append(node)</span><br><span class="line">      result_size+=len(arr[i])</span><br><span class="line">    </span><br><span class="line">    min_heap=MinHeap(h_arr,k)</span><br><span class="line">    result=[<span class="number">0</span>]*result_size</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(result_size):</span><br><span class="line">      root=min_heap.get_min()</span><br><span class="line">      result[i]=root.element</span><br><span class="line">      <span class="keyword">if</span> root.j&lt;len(arr[root.i]):</span><br><span class="line">        root.element=arr[root.i][root.j]</span><br><span class="line">        root.j+=<span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        root.element=float(<span class="string">&quot;inf&quot;</span>)</span><br><span class="line">        min_heap.replace_min(root)</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> result:</span><br><span class="line">      print(x,end=<span class="string">&quot; &quot;</span>)</span><br><span class="line">    print()</span><br></pre></td></tr></table></figure>
+
+<p>Time: <code>O(nklogk)</code></p>
+<p>space: <code>O(k)</code></p>
+<h1 id="Kth-Smallest-Element-in-a-Sorted-Matrix"><a href="#Kth-Smallest-Element-in-a-Sorted-Matrix" class="headerlink" title="Kth Smallest Element in a Sorted Matrix"></a>Kth Smallest Element in a Sorted Matrix</h1><p>ven a <em>n</em> x <em>n</em> matrix where each of the rows and columns are sorted in ascending order, find the kth smallest element in the matrix.</p>
+<p>Note that it is the kth smallest element in the sorted order, not the kth distinct element.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">matrix &#x3D; [</span><br><span class="line">   [ 1,  5,  9],</span><br><span class="line">   [10, 11, 13],</span><br><span class="line">   [12, 13, 15]</span><br><span class="line">],</span><br><span class="line">k &#x3D; 8,</span><br><span class="line"></span><br><span class="line">return 13.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kthSmallest</span>(<span class="params">matrix,k</span>):</span></span><br><span class="line">  q=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(matrix)):</span><br><span class="line">    heapq.heappush(q,(matrix[i][<span class="number">0</span>],i,<span class="number">1</span>))</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">while</span> k:</span><br><span class="line">    val,idx,ne=heapq.heappop(q)</span><br><span class="line">    <span class="keyword">if</span> ne&lt;len(matrix[idx]):</span><br><span class="line">      heapq.heappush(q,(matrix[idx][ne],idx,ne+<span class="number">1</span>))</span><br><span class="line">  <span class="keyword">return</span> val</span><br></pre></td></tr></table></figure>
+
+<p>Time Complexity:$ \text{let X=} \text{min}(K, N); X + K \log(X)$</p>
+<ul>
+<li>Well the heap construction takes $O(X)$ time.</li>
+<li>After that, we perform $K$ iterations and each iteration has two operations. We extract the minimum element from a heap containing $X$ elements. Then we add a new element to this heap. Both the operations will take $O(log(X))$ time.</li>
+<li>Thus, the total time complexity for this algorithm comes down to be $O(X + Klog(X))$ where $X$ is $ \text{min}(K, N)$</li>
+</ul>
+<h1 id="Merge-k-Sorted-Lists"><a href="#Merge-k-Sorted-Lists" class="headerlink" title="Merge k Sorted Lists"></a>Merge k Sorted Lists</h1><p>Given an array of linked-lists lists, each linked list is sorted in ascending order.</p>
+<p>Merge all the linked-lists into one sort linked-list and return it.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: lists &#x3D; [[1,4,5],[1,3,4],[2,6]]</span><br><span class="line">Output: [1,1,2,3,4,4,5,6]</span><br><span class="line">Explanation: The linked-lists are:</span><br><span class="line">[</span><br><span class="line">  1-&gt;4-&gt;5,</span><br><span class="line">  1-&gt;3-&gt;4,</span><br><span class="line">  2-&gt;6</span><br><span class="line">]</span><br><span class="line">merging them into one sorted list:</span><br><span class="line">1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6</span><br></pre></td></tr></table></figure>
+
+<h2 id="Brute-Force"><a href="#Brute-Force" class="headerlink" title="Brute Force"></a>Brute Force</h2><ul>
+<li>Traverse all the linked lists and collect the values of the nodes into an array.</li>
+<li>Sort and iterate over this array to get the proper value of nodes.</li>
+<li>Create a new sorted linked list and extend it with the new nodes.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeKLists</span>(<span class="params">self,lists</span>):</span></span><br><span class="line">  nodes=[]</span><br><span class="line">  point=head=ListNode(<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">for</span> l <span class="keyword">in</span> lists:</span><br><span class="line">    <span class="keyword">while</span> l:</span><br><span class="line">      nodes.append(l.val)</span><br><span class="line">      l=l.next</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> sorted(nodes):</span><br><span class="line">    point.next=ListNode(x)</span><br><span class="line">    point=point.next</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> head.next</span><br></pre></td></tr></table></figure>
+
+<p>Time: <code>O(NlogN)</code> where <code>N</code> is the total number of nodes</p>
+<p>Space: <code>O(N)</code></p>
+<h2 id="Priority-Queue"><a href="#Priority-Queue" class="headerlink" title="Priority Queue"></a>Priority Queue</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeKLists</span>(<span class="params">lists</span>):</span></span><br><span class="line">  head=point=ListNode(<span class="number">0</span>)</span><br><span class="line">  q=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(lists)):</span><br><span class="line">    l=lists[i]</span><br><span class="line">    <span class="keyword">if</span> l:</span><br><span class="line">      <span class="comment"># for heap, we must have (l.val,i,l) to avoid uncomparable situation for ListNode l</span></span><br><span class="line">      heapq.heappush(q,(l.val,i,l))</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">while</span> q:</span><br><span class="line">    val,idx,node=heapq.heappop(q)</span><br><span class="line">    point.next=ListNode(val)</span><br><span class="line">    point=point.next</span><br><span class="line">       node=node.next</span><br><span class="line">    <span class="keyword">if</span> node:</span><br><span class="line">      heapq.heappush(q,(node.val,idx,node))</span><br><span class="line">  <span class="keyword">return</span> head.next</span><br></pre></td></tr></table></figure>
+
+<p>Time: <code>O(Nlogk)</code></p>
+<ul>
+<li>The comparison cost will be reduced to O(\log k)<em>O</em>(log<em>k</em>) for every pop and insertion to priority queue. But finding the node with the smallest value just costs O(1)<em>O</em>(1) time.</li>
+<li>There are N<em>N</em> nodes in the final linked list.</li>
+</ul>
+<p>Space: <code>O(k)</code></p>
+<h2 id="Merge-lists-one-by-one"><a href="#Merge-lists-one-by-one" class="headerlink" title="Merge lists one by one"></a>Merge lists one by one</h2><p>Merge with Divide And Conquer</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeKLists</span>(<span class="params">lists</span>):</span></span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> lists: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">  amount=len(lists)</span><br><span class="line">  interval=<span class="number">1</span></span><br><span class="line">  <span class="keyword">while</span> interval&lt;amount:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,amount-interval,interval*<span class="number">2</span>):</span><br><span class="line">      lists[i]=self.merge2Lists(lists[i],lists[i+interval])</span><br><span class="line">    interval*=<span class="number">2</span></span><br><span class="line">  <span class="keyword">return</span> list[<span class="number">0</span>] <span class="keyword">if</span> amount&gt;<span class="number">0</span> <span class="keyword">else</span> lists</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge2Lists</span>(<span class="params">l1,l2</span>):</span></span><br><span class="line">  head=point=ListNode(<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</span><br><span class="line">    <span class="keyword">if</span> l1.val&lt;=l2.val:</span><br><span class="line">      point.next=l1</span><br><span class="line">      l1=l1.next</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      point.next=l2</span><br><span class="line">      l2=l1</span><br><span class="line">    point=point.next</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> l1:</span><br><span class="line">    point.next=l1</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> l2:</span><br><span class="line">    point.next=l2</span><br><span class="line">  <span class="keyword">return</span> head.next</span><br></pre></td></tr></table></figure>
+
+<h1 id="K-Closest-Points-to-Origin"><a href="#K-Closest-Points-to-Origin" class="headerlink" title="K Closest Points to Origin"></a>K Closest Points to Origin</h1><p>We have a list of <code>points</code> on the plane. Find the <code>K</code> closest points to the origin <code>(0, 0)</code>.</p>
+<p>(Here, the distance between two points on a plane is the Euclidean distance.)</p>
+<p>You may return the answer in any order. The answer is guaranteed to be unique (except for the order that it is in.)</p>
+<p><strong>Change comparison method</strong>:</p>
+<ul>
+<li>change <code>__lt__</code></li>
+<li>insert new <code>distance</code></li>
+</ul>
+<h2 id="lt"><a href="#lt" class="headerlink" title="__lt__"></a><code>__lt__</code></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,val</span>):</span></span><br><span class="line">    self.x=val[<span class="number">0</span>]</span><br><span class="line">    self.y=val[<span class="number">1</span>]</span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span>(<span class="params">self,other</span>):</span></span><br><span class="line">    <span class="keyword">return</span> self.x**<span class="number">2</span>+self.y**<span class="number">2</span>&gt;other.x**<span class="number">2</span>+other.y**<span class="number">2</span></span><br><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">kClosest</span>(<span class="params">self,points,K</span>):</span></span><br><span class="line">    q=[]</span><br><span class="line">    <span class="keyword">for</span> point <span class="keyword">in</span> points:</span><br><span class="line">      node=Point(point)</span><br><span class="line">      heapq.heappush(q,node)</span><br><span class="line">      <span class="keyword">if</span> len(q)&gt;K:</span><br><span class="line">        heapq.heappop(q)</span><br><span class="line">      </span><br><span class="line">    res=[]</span><br><span class="line">    <span class="keyword">while</span> q <span class="keyword">and</span> K&gt;<span class="number">0</span>:</span><br><span class="line">      node=heapq.heappop(q)</span><br><span class="line">      res.append([node.x,node.y])</span><br><span class="line">      K-=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> res[::<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+<h2 id="New-distance"><a href="#New-distance" class="headerlink" title="New distance"></a>New distance</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">kClosest</span>(<span class="params">points,K</span>):</span></span><br><span class="line">  q=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(points)):</span><br><span class="line">    point=points[i]</span><br><span class="line">    distance=-point[<span class="number">0</span>]**<span class="number">2</span>-point[<span class="number">1</span>]**<span class="number">2</span></span><br><span class="line">    heapq.heappush(q,(distance,i,point))</span><br><span class="line">    <span class="keyword">if</span> len(q)&gt;K:</span><br><span class="line">      heapq.heappop(q)</span><br><span class="line">    </span><br><span class="line">  res=[]</span><br><span class="line">  <span class="keyword">while</span> q:</span><br><span class="line">    distance,idx,point=heapq.heappop(q)</span><br><span class="line">    res.append(point)</span><br><span class="line">  <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h2 id="Top-K-Frequent-Words"><a href="#Top-K-Frequent-Words" class="headerlink" title="Top K Frequent Words"></a>Top K Frequent Words</h2><p>Given a non-empty list of words, return the <em>k</em> most frequent elements.</p>
+<p>Your answer should be sorted by frequency from highest to lowest. If two words have the same frequency, then the word with the lower alphabetical order comes first.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;the&quot;, &quot;day&quot;, &quot;is&quot;, &quot;sunny&quot;, &quot;the&quot;, &quot;the&quot;, &quot;the&quot;, &quot;sunny&quot;, &quot;is&quot;, &quot;is&quot;], k &#x3D; 4</span><br><span class="line">Output: [&quot;the&quot;, &quot;is&quot;, &quot;sunny&quot;, &quot;day&quot;]</span><br><span class="line">Explanation: &quot;the&quot;, &quot;is&quot;, &quot;sunny&quot; and &quot;day&quot; are the four most frequent words,</span><br><span class="line">    with the number of occurrence being 4, 3, 2 and 1 respectively.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Word</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,word,frequency</span>):</span></span><br><span class="line">    self.word=word</span><br><span class="line">    self.frequency=frequency</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span>(<span class="params">self,other</span>):</span></span><br><span class="line">    <span class="keyword">if</span> self.frequency&lt;other.frequency:</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">elif</span> self.frequency==other.frequency:</span><br><span class="line">      <span class="keyword">return</span> self.word&gt;other.word</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">topKFrequent</span>(<span class="params">self,words,k</span>):</span></span><br><span class="line">  d=collections.Counter(words)</span><br><span class="line">  q=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(d)):</span><br><span class="line">    t=list(d.keys())[i]</span><br><span class="line">    v=d[t]</span><br><span class="line">    word=Word(t,v)</span><br><span class="line">    heapq.heappush(q,word)</span><br><span class="line">    <span class="keyword">if</span> len(q)&gt;k:</span><br><span class="line">      heapq.heappop(q)</span><br><span class="line">  res=[]</span><br><span class="line">  <span class="keyword">while</span> q:</span><br><span class="line">    word=heapq.heappop(q)</span><br><span class="line">    res.append(word.word)</span><br><span class="line">  <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h1 id="Kth-Largest-Element-in-an-Array"><a href="#Kth-Largest-Element-in-an-Array" class="headerlink" title="Kth Largest Element in an Array"></a>Kth Largest Element in an Array</h1><p>Find the <strong>k</strong>th largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,2,1,5,6,4] and k &#x3D; 2</span><br><span class="line">Output: 5</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,2,3,1,2,4,5,5,6] and k &#x3D; 4</span><br><span class="line">Output: 4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findKthLargest</span>(<span class="params">nums,k</span>):</span></span><br><span class="line">  q=[]</span><br><span class="line">  <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">    heapq.heappush(q,num)</span><br><span class="line">    <span class="keyword">if</span> len(q)&gt;k:</span><br><span class="line">      heapq.heappop(q)</span><br><span class="line">  res=heapq.heappop(q)</span><br><span class="line">  <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h1 id="Top-K-Frequent-Elements"><a href="#Top-K-Frequent-Elements" class="headerlink" title="Top K Frequent Elements"></a>Top K Frequent Elements</h1><p>Given a non-empty array of integers, return the <strong><em>k\</em></strong> most frequent elements.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: nums &#x3D; [1,1,1,2,2,3], k &#x3D; 2</span><br><span class="line">Output: [1,2]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: nums &#x3D; [1], k &#x3D; 1</span><br><span class="line">Output: [1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note:</strong></p>
+<ul>
+<li>You may assume <em>k</em> is always valid, 1 ≤ <em>k</em> ≤ number of unique elements.</li>
+<li>Your algorithm’s time complexity <strong>must be</strong> better than O(<em>n</em> log <em>n</em>), where <em>n</em> is the array’s size.</li>
+<li>It’s guaranteed that the answer is unique, in other words the set of the top k frequent elements is unique.</li>
+<li>You can return the answer in any order.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> collections</span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">topKFrequent</span>(<span class="params">nums,k</span>):</span></span><br><span class="line">  d=collections.Counter(nums)</span><br><span class="line">  q=[]</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(d)):</span><br><span class="line">    t=list(d.keys())[i]</span><br><span class="line">    v=d[t]</span><br><span class="line">    heapq.heappush(q,(v,t))</span><br><span class="line">    <span class="keyword">if</span> len(q)&gt;k:</span><br><span class="line">      heapq.heappop(q)</span><br><span class="line">  res=[]</span><br><span class="line">  <span class="keyword">while</span> q:</span><br><span class="line">    val,num=heapq.heapop(q)</span><br><span class="line">    res.append(num)</span><br><span class="line">  <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h1 id="Reorganize-String"><a href="#Reorganize-String" class="headerlink" title="Reorganize String"></a>Reorganize String</h1><p>Given a string <code>S</code>, check if the letters can be rearranged so that two characters that are adjacent to each other are not the same.</p>
+<p>If possible, output any possible result. If not possible, return the empty string.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: S &#x3D; &quot;aab&quot;</span><br><span class="line">Output: &quot;aba&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: S &#x3D; &quot;aaab&quot;</span><br><span class="line">Output: &quot;&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note:</strong></p>
+<ul>
+<li><code>S</code> will consist of lowercase letters and have length in range <code>[1, 500]</code>.</li>
+</ul>
+<h2 id="Sort-by-Count"><a href="#Sort-by-Count" class="headerlink" title="Sort by Count"></a>Sort by Count</h2><p>Find the count of each character, and use it to sort the string by count.</p>
+<p>If at some point the number of occurrences of some character is greater than <code>(N + 1) / 2</code>, the task is impossible.</p>
+<p>Otherwise, interleave the characters in the order described above.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reorganizeString</span>(<span class="params">self,S</span>):</span></span><br><span class="line">  N=len(S)</span><br><span class="line">  A=[]</span><br><span class="line">  <span class="keyword">for</span> c,x <span class="keyword">in</span> sorted((S.count(x),x) <span class="keyword">for</span> x <span class="keyword">in</span> set(S)):</span><br><span class="line">    <span class="keyword">if</span> c&gt;(N+<span class="number">1</span>)/<span class="number">2</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">    A.extend(c*x)</span><br><span class="line">  ans=[<span class="literal">None</span>]*N</span><br><span class="line">  ans[::<span class="number">2</span>],ans[<span class="number">1</span>::<span class="number">2</span>]=A[N//<span class="number">2</span>:],A[:N//<span class="number">2</span>]</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(ans)</span><br></pre></td></tr></table></figure>
+
+<p>Time: <code>O(A(N+logA))</code></p>
+<p>Space: <code>O(N)</code></p>
+<h2 id="Greedy-Heap"><a href="#Greedy-Heap" class="headerlink" title="Greedy Heap"></a>Greedy Heap</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reorganizeString</span>(<span class="params">self,S</span>):</span></span><br><span class="line">  pq=[(-S.count(x),x) <span class="keyword">for</span> x <span class="keyword">in</span> set(S)]</span><br><span class="line">  heapq.heapify(pq)</span><br><span class="line">  <span class="keyword">for</span> nc,x <span class="keyword">in</span> pq:</span><br><span class="line">    <span class="keyword">if</span> -nc&gt;(len(S)+<span class="number">1</span>)/<span class="number">2</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">     ans=[]</span><br><span class="line">  <span class="keyword">while</span> len(pq)&gt;=<span class="number">2</span>:</span><br><span class="line">    nct1,ch1=heapq.heappop(pq)</span><br><span class="line">    nct2,ch2=heapq.heappop(pq)</span><br><span class="line">    ans.extend([ch1,ch2])</span><br><span class="line">    <span class="keyword">if</span> nct1+<span class="number">1</span>: heapq.heappush(pq,(nct1+<span class="number">1</span>,ch1))</span><br><span class="line">    <span class="keyword">if</span> nct2+<span class="number">1</span>: heapq.heappush(pq,(nct2+<span class="number">1</span>,ch2))</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(ans)+(pq[<span class="number">0</span>][<span class="number">1</span>] <span class="keyword">if</span> pq <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<h2 id="Kth-Largest-Element-in-a-Stream"><a href="#Kth-Largest-Element-in-a-Stream" class="headerlink" title="Kth Largest Element in a Stream"></a>Kth Largest Element in a Stream</h2><p>Design a class to find the <strong>k</strong>th largest element in a stream. Note that it is the kth largest element in the sorted order, not the kth distinct element.</p>
+<p>Your <code>KthLargest</code> class will have a constructor which accepts an integer <code>k</code> and an integer array <code>nums</code>, which contains initial elements from the stream. For each call to the method <code>KthLargest.add</code>, return the element representing the kth largest element in the stream.</p>
+<p><strong>Example:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int k &#x3D; 3;</span><br><span class="line">int[] arr &#x3D; [4,5,8,2];</span><br><span class="line">KthLargest kthLargest &#x3D; new KthLargest(3, arr);</span><br><span class="line">kthLargest.add(3);   &#x2F;&#x2F; returns 4</span><br><span class="line">kthLargest.add(5);   &#x2F;&#x2F; returns 5</span><br><span class="line">kthLargest.add(10);  &#x2F;&#x2F; returns 5</span><br><span class="line">kthLargest.add(9);   &#x2F;&#x2F; returns 8</span><br><span class="line">kthLargest.add(4);   &#x2F;&#x2F; returns 8</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note:</strong><br>You may assume that <code>nums</code>‘ length ≥ <code>k-1</code> and <code>k</code> ≥ 1.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KthLargest</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,k,nums</span>):</span></span><br><span class="line">    self.k=k</span><br><span class="line">    self.q=[]</span><br><span class="line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">      heapq.heappush(self.q,num)</span><br><span class="line">      <span class="keyword">if</span> len(self.q)&gt;self.k:</span><br><span class="line">        heapq.heappop(self.q)</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">self,val</span>):</span></span><br><span class="line">    heapq.heappush(self.q,val)</span><br><span class="line">    <span class="keyword">if</span> len(self.q)&gt;self.k:</span><br><span class="line">      heap.heappop(self.q)</span><br><span class="line">    <span class="keyword">return</span> self.q[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h1 id="Find-Median-from-Data-Stream"><a href="#Find-Median-from-Data-Stream" class="headerlink" title="Find Median from Data Stream"></a>Find Median from Data Stream</h1><p>Brute force: every time we add num, we sort the whole array <code>O(nlogn)</code>. and Every time we want median, we get the middle of arr <code>O(1)</code>.</p>
+<p>Two Heaps:</p>
+<ul>
+<li>create one minHeap and maxHeap</li>
+<li>call addNum(), keep the size of minHeap and that of maxHeap the same / differ no more than 1</li>
+<li>call findMedian(), root sum of two heap</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        initialize your data structure here.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.minHeap=[]</span><br><span class="line">        self.maxHeap=[]</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addNum</span>(<span class="params">self, num: int</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.minHeap)==<span class="number">0</span>:</span><br><span class="line">            heapq.heappush(self.minHeap,-num)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> num&lt;=-self.minHeap[<span class="number">0</span>]:</span><br><span class="line">            heapq.heappush(self.minHeap,-num)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            heapq.heappush(self.maxHeap,num)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">if</span> len(self.minHeap)&gt;len(self.maxHeap)+<span class="number">1</span>:</span><br><span class="line">            new=heapq.heappop(self.minHeap)</span><br><span class="line">            heapq.heappush(self.maxHeap,-new)</span><br><span class="line">        <span class="keyword">elif</span> len(self.maxHeap)&gt;len(self.minHeap)+<span class="number">1</span>:</span><br><span class="line">            new=heapq.heappop(self.maxHeap)</span><br><span class="line">            heapq.heappush(self.minHeap,-new)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMedian</span>(<span class="params">self</span>) -&gt; float:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.minHeap)==len(self.maxHeap):</span><br><span class="line">            <span class="keyword">return</span> (self.maxHeap[<span class="number">0</span>]-self.minHeap[<span class="number">0</span>])/<span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> -self.minHeap[<span class="number">0</span>] <span class="keyword">if</span> len(self.minHeap)&gt;len(self.maxHeap) <span class="keyword">else</span> self.maxHeap[<span class="number">0</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T14:38:30-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：Apr 21, 2021</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/LC/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>LC</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2020/08/17/MST/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>MST</p>
+                <p class='content'>Minimum Spanning Tree (MST) 生成树
+Given a connected and undirected graph, a spanning tree of that g...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/08/13/VMware-OA/'>
+                <p class='title'>VMware-OA<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>Timeline: OA 8.16 – no response
+
+
+Multiple Choices
+FIFO System, 4 pages, 一开始没有load，先access 100个不同...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow floatable blur desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>Table of Content</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-text">Storage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heapify"><span class="toc-text">Heapify</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Naive"><span class="toc-text">Naive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Merge-Sort"><span class="toc-text">Merge Sort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Min-Heap"><span class="toc-text">Min Heap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Brute-Force"><span class="toc-text">Brute Force</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Priority-Queue"><span class="toc-text">Priority Queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Merge-lists-one-by-one"><span class="toc-text">Merge lists one by one</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lt"><span class="toc-text">__lt__</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#New-distance"><span class="toc-text">New distance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Top-K-Frequent-Words"><span class="toc-text">Top K Frequent Words</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sort-by-Count"><span class="toc-text">Sort by Count</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Greedy-Heap"><span class="toc-text">Greedy Heap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kth-Largest-Element-in-a-Stream"><span class="toc-text">Kth Largest Element in a Stream</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+    </div>
+    
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+              <a href="mailto:shirleylee1389@gmail.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/Gilemore"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2021</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <div>
+    
+      
+  
+
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='option'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick='document.execCommand("copy")'><i class='fa fa-copy fa-fw'></i>Copy Text</a>
+        <hr id='hr-text'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>Copy Link</a>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>Open Link in New Tab</a>
+        <hr id='hr-href'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>Copy Image Link</a>
+        <hr id='hr-src'>
+      </li>
+      <li class='navigation'>
+        <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+      </li>
+      <hr>
+      
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          <li class='music name'>
+            <p class='nav music-title fix-cursor-default'></p>
+          </li>
+          <li class='music ctrl'>
+            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
+            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
+            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
+          </li>
+          <li class='music volume'>
+            <a class='nav volume'>
+              <div class="aplayer-volume-bar-wrap">
+                <div class="aplayer-volume-bar fix-cursor-pointer">
+                  <div class="aplayer-volume"></div>
+                  <i class='left fa fa-volume-off fa-fw'></i>
+                  <i class='right fa fa-volume-up fa-fw'></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+  <script>
+    window.document.oncontextmenu = function (event) {
+      if (event.ctrlKey) return true;
+      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
+      return popMenu(event);
+    };
+    document.addEventListener("click", function (event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      mymenu.style.display = "none";
+    });
+    function popMenu(event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      var menuContent = document.getElementById('rightmenu-content');
+      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
+      mymenu.style.top = event.clientY + "px";
+      mymenu.style.display = 'block';
+      if (event.clientX * 2 > screenWidth) {
+        menuContent.classList.add('left');
+      } else {
+        menuContent.classList.remove('left');
+      }
+      if (event.clientY * 2 > screenHeight) {
+        menuContent.classList.add('top');
+      } else {
+        menuContent.classList.remove('top');
+      }
+
+      let hrText = document.getElementById('hr-text');
+      let hrSrc = document.getElementById('hr-src');
+      let hrHref = document.getElementById('hr-href');
+
+      // 选中图片
+      let copySrc = document.getElementById('menu-copy-src');
+      if (copySrc != undefined) {
+        if (event.target.currentSrc) {
+          copySrc.style.display = 'block';
+          copySrc.addEventListener("click", function (e) {
+            copyString(event.target.currentSrc);
+          },{once: true});
+          hrSrc.style.display = 'block';
+        } else {
+          copySrc.style.display = 'none';
+          hrSrc.style.display = 'none';
+        }
+      }
+
+      // 选中按钮
+      // 判断是不是按钮
+      let href = '';
+      if (event.path) {
+        for (i = 0; i < event.path.length; i++) {
+          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
+            href = event.path[i].href;
+          }
+        }
+      }
+
+      let copyText = document.getElementById('menu-copy-text');
+      copyText.style.display = 'none';
+      hrText.style.display = 'none';
+      if (href.length == 0) {
+        // 选中文本
+        if (window.getSelection().toString()) {
+          copyText.style.display = 'block';
+          hrText.style.display = 'block';
+        }
+      }
+
+      // 在新标签页打开
+      let openHref = document.getElementById('menu-open-href');
+      if (openHref != undefined) {
+        if (href.length > 0) {
+          openHref.style.display = 'block';
+          openHref.addEventListener("click", function (e) {
+            window.open(href);
+          },{once: true});
+          hrHref.style.display = 'block';
+        } else {
+          openHref.style.display = 'none';
+          hrHref.style.display = 'none';
+        }
+      }
+      // 复制链接
+      let copyHref = document.getElementById('menu-copy-href');
+      if (copyHref != undefined) {
+        if (href.length > 0) {
+          copyHref.style.display = 'block';
+          copyHref.addEventListener("click", function (e) {
+            copyString(href);
+          },{once: true});
+        } else {
+          copyHref.style.display = 'none';
+        }
+      }
+
+      // 有音乐播放器
+      if (true == true) {
+        // 如果有aplayer，初始化一下
+      	try {
+      		checkAPlayer();
+          updateTitle();
+      	} catch (error) {
+      		console.log(error);
+      	}
+      }
+
+      return false; // 该行代码确保系统自带的右键菜单不会被调出
+    }
+    function hideMenu() {
+      document.getElementById('rightmenu-wrapper').style.display = 'none';
+    }
+    function copyString(str) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      document.body.appendChild(input);
+      input.setAttribute('value', str);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    document.execCommand('click');
+  </script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["/images/omoide016.jpeg"];
+        if ('false' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  <script>
+    let APlayerController = new Object();
+    APlayerController.id = '3175833810';  // 设定全局音乐播放ID
+    APlayerController.volume = '0.7';
+  </script>
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+    
+<script src="/js/aplayer.js"></script>
+
+  
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    let pageUrl = $.trim($('#pjax-comment-path').text()) === "none" ? 
+      decodeURI(window.location.pathname) : $.trim($('#pjax-comment-path').text());
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) === "none" ?
+      "快来评论吧~" : $.trim($('#"pjax-comment-placeholder').text());
+
+    let ALLPATH = '';
+    if(ALLPATH != '') pageUrl = ALLPATH;
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: pageUrl,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'false',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
+
+
+<!-- darkmodejs -->
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        clipboard.off('success').on('success', function (e) {
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    $(function () {
+        pjax_initCopyCode()
+    });
+</script>
+
+
+<!-- scrollreveal -->
+
+<!-- ******************************** -->
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+<!-- ******************************** -->
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+
+  
+    
+<script src="/js/search.js"></script>
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      $.fancybox.close();    // 关闭弹窗
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+
+      try{
+        pjax_fancybox();
+        
+          
+          if ('.cover') {
+            $('.cover').backstretch("resize");
+          } else {
+            $.backstretch("resize");
+          }
+        
+        
+        
+        
+          pjax_initCopyCode();
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
+  </div>
+</body>
+</html>

@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#3.0.0-rc.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+  <title>Design Data Intensive Application (2-1) - Gilmore&#39;s Blog</title>
+  
+    <meta name="keywords" content="system design">
+  
+
+  
+    <meta name="description" content="Replication: keeping a copy of the same data on multiple machines that are connected via a network.  
+why replication:
+
+keep data geographically close to you...">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post' style="display: none;">
+      <div class='cover-body'>
+  <div class='a'>
+    
+      <img no-lazy class='logo' src='/images/favion.png'/>
+    
+    
+      <p class="title">Gilmore</p>
+    
+    
+      <p class="subtitle">Random thoughts...</p>
+    
+  </div>
+  <div class='b'>
+    <div class='menu navigation dock'>
+      <div class='list-h'>
+        
+          
+            <a href="/Class"
+              
+              
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
+            </a>
+          
+            <a href="/archives"
+              
+              
+              id="archives">
+              <i class='fas fa-folder-open fa-fw'></i><p>Archive</p>
+            </a>
+          
+            <a href="/Random"
+              
+              
+              id="Random">
+              <i class='fas fa-book fa-fw'></i><p>Random</p>
+            </a>
+          
+            <a href="/AboutMe"
+              
+              
+              id="AboutMe">
+              <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+    </cover>
+    <header class="l_header shadow floatable blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='/images/favion.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  </div>
+  
+
+
+  <div class="l_body">
+    <div class='body-wrapper' id="pjax-container">
+      
+        <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">true</div> 
+  <div id="pjax-pageTitle">Design Data Intensive Application (2-1)</div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path">none</div> 
+  <div id="pjax-comment-placeholder">none</div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("blog" == "none") { // 移除封面 
+    document.getElementsByClassName('cover')[0].style.display = "none"; 
+    document.getElementsByClassName('l_body')[0].classList.add("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("blog" == "blog") { // 半屏 
+      document.getElementsByClassName('cover')[0].classList.remove("full"); 
+      document.getElementsByClassName('cover')[0].classList.add("half"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("blog" == "docs") { // 全屏 
+      document.getElementsByClassName('cover')[0].classList.remove("half"); 
+      document.getElementsByClassName('cover')[0].classList.add("full"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover')[0].style.display = ""; 
+    document.getElementsByClassName('l_body', 'show')[0].classList.remove("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+
+      
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow floatable blur article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/12/31/Design-Data-Intensive-Application-2-1/">
+      Design Data Intensive Application (2-1)
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>Release on：Dec 31, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p><span style="color:navy"><strong>Replication</strong></span>: keeping a copy of the same data on multiple machines that are connected via a network.  </p>
+<p>why replication:</p>
+<ul>
+<li>keep data geographically close to your users (to reduce latency)</li>
+<li>allow the system to continue working even if some of its parts have failed and thus increase availability</li>
+<li>scale out the number of machines that can serve read queries (and thus increase read throughput)</li>
+</ul>
+<p>Now we just assume that your dataset is so small that each machine can hold a copy of the entire dataset. </p>
+<p>All of the difficulty in replication lies in handling changes to replicated data. We are going to discuss three popular algorithms for replicating changes between nodes:</p>
+<ul>
+<li><strong>single-leader</strong></li>
+<li><strong>Multi-leader</strong></li>
+<li><strong>leaderless</strong></li>
+</ul>
+<a id="more"></a>
+
+<h1 id="Leaders-and-Followers"><a href="#Leaders-and-Followers" class="headerlink" title="Leaders and Followers"></a>Leaders and Followers</h1><p><span style="color:navy"><strong>Replica</strong></span>: each node that stores a copy of the database</p>
+<p><span style="color:navy"><strong>leader-based replication</strong></span> (active/passive or master-slave repliaction):</p>
+<p><img src="/image/leader-based.png" alt="Leader-based (master-slave) replication"></p>
+<ol>
+<li>One of the replicas is designated the leader (also known as master or primary). When clients want to write to the database, they must send their requests to the leader, which first writes the new data to its local storage.</li>
+<li>The other replicas are known as followers (read replicas, slaves, secondaries, or hot standbys). Whenever the leader writes new data to its local storage, it also sends the data change to all of its followers as part of a <em><u>replication log</u></em> or <em><u>change stream</u></em>. Each follower takes the log from the leader and updates its local copy of the database accordingly, by applying all writes in the same order as they were processed on the leader. </li>
+<li>When a client wants to read from the database, it can query either the leader or any of the followers. However, writes are only accepted on the leader (the followers are read-only from the client’s point of view)</li>
+</ol>
+<h2 id="Synchronous-Versus-Asynchronous-Replication"><a href="#Synchronous-Versus-Asynchronous-Replication" class="headerlink" title="Synchronous Versus Asynchronous Replication"></a>Synchronous Versus Asynchronous Replication</h2><p>An important detail of a replicated system is whether the replication happens synchronously or asynchronously. </p>
+<p><img src="/image/leader-follower-communication.png" alt="Leader-based replication with one synchronous and one asynchronous follower"></p>
+<ul>
+<li><p>the replication to follower 1 is synchronous:</p>
+<p>the leader waits until follower 1 has confirmed that it received the write before reporting success to the user, and before making the write visible to other clients. </p>
+</li>
+<li><p>The replication to follower 2 is asynchronous: </p>
+<p>the leader sends the message, but doesn’t wait for a response from the follower. </p>
+</li>
+</ul>
+<p><u><em>Advantage</em></u> of synchronous replication:</p>
+<p>the follower is guaranteed to have an up-to-date copy of the data that is consistent with the leader. </p>
+<p><u><em>Disadvantage</em></u> of synchronous replication:</p>
+<p>if the synchronous follower doesn’t respond, the write cannot be processed. The leader must block all writes and wait until the synchronous replica is available again. </p>
+<p><em><u>semi-synchronous</u></em>: </p>
+<ul>
+<li>one of the followers is synchronous, and the other are synchronous. If the synchronous follower becomes unavailable or slow, one of the aasynchronous followers is made synchronous. This guarantees that you have an up-to-date copy of the data on at least two nodes: the leader and one synchronous follower.</li>
+</ul>
+<p>Often, leader-based replication is configured to be completely asynchronous.</p>
+<h2 id="Setting-Up-New-Followers"><a href="#Setting-Up-New-Followers" class="headerlink" title="Setting Up New Followers"></a>Setting Up New Followers</h2><p>How to ensure the new follower has an accurate copy of the leader’s data?</p>
+<p>Simply copying data files from one node to another is typically not sufficient: clients are constantly writing to the database, and the data is always in flux, so a standard file copy would see different parts of the database at different points in time. </p>
+<p>Actually, setting up a follower can usually be done without downtime:</p>
+<ol>
+<li>take a consistent snapshot of the leader’s database at some point in time –if possible, without taking a lock on the entire database. </li>
+<li>Copy the snapshot to the new follower node</li>
+<li>the follower connects to the leader and requests all the data changes that have happened since the snapshot was taken. This requires that the snapshot is associated with an exact position in the leader’s replication log. That position can be called <em>log sequence number</em> or <em>binlog coordinates</em>.</li>
+<li>When the follower has processed the backlog of data changes since the snapshot, we say it has caught up. It can now continue to process data changes from the leader as they happen.</li>
+</ol>
+<h2 id="Handling-Node-Outages"><a href="#Handling-Node-Outages" class="headerlink" title="Handling Node Outages"></a>Handling Node Outages</h2><p>How do you achieve high availability with leader-based replication?</p>
+<h3 id="Follower-failure-Catch-up-recovery"><a href="#Follower-failure-Catch-up-recovery" class="headerlink" title="Follower failure: Catch-up recovery"></a>Follower failure: Catch-up recovery</h3><p>On its local disk, each follower keeps a log of the data changes it has received from the leader. </p>
+<p>If a follower fails, it can recover quite easily:</p>
+<p>From its log, it knows the last transaction that was processed before the fault occurred. Thus, the follower can connect to the leader and request all the data changes that occurred during the time when the follower was disconnected. When it has applied these changes, it has caught up to the leader and can continue receiving a stream of data changes as before. </p>
+<h3 id="Leader-failure-Failover"><a href="#Leader-failure-Failover" class="headerlink" title="Leader failure: Failover"></a>Leader failure: Failover</h3><p><span style="color:navy"><strong>failover</strong></span>: one of the followers needs to be promoted to be the new leader, clients need to be reconfigured to send their writes to the new leader, and the other followers need to start consuming data changes from the new leader. </p>
+<p>An automatic failover process usually consists of the following steps:</p>
+<ul>
+<li><p>Determining that the leader has failed. </p>
+<p>use timeout: nodes frequently bounce messages back and forth between each other, so if a node doesn’t respond for some period of time - say, 30 seconds - it is assumed to be dead. </p>
+</li>
+<li><p>Choosing a new leader</p>
+<p>this can be done through an election process (where the leader is chosen by a majority of the remaining replicas), or a new leader could be appointed by a previously elected controller node. The best candidate for leadership is usually the replica with the most up-to-date data changes from the old leader (to minimize any data loss). </p>
+</li>
+<li><p>Reconfiguring the system to use the new leader</p>
+<p>Clients now need to send their write requests to the new leader. If the old leader comes back, it might still believe that it is the leader, not realizing that the other replicas have forced it to step down. The system needs to ensure that the old leader becomes a follower and recognizes the new leader. </p>
+</li>
+</ul>
+<p>Failover is fraught with things that can go wrong:</p>
+<ul>
+<li><p>if asynchronous replication is used, the new leader may not have received all the writes from the older leader before it failed. If the former rejoins the cluster after a new leader has been chosen, what should happen to those writes? The new leader may have received conflicting writes in the meantime. </p>
+<p>The most common solution is for the older leader’s unreplicated writes to simple be discarded, which may violate clients’ durability expections. </p>
+</li>
+<li><p>Discarding writes is especially dangerous if other storage systems outside the database need to be coordinated with the database contents. </p>
+</li>
+<li><p>split brain: two nodes both believe that they are the leader. If both leaders accpet writes, and there is no process for resolving conflicts, data is likely to be lost or corrupted. As a safety catch, some systems have a mechanism to shut down one node if two leaders are detected. However, if this mechanism is not carefully designed, you can end up with both nodes being shut down. </p>
+</li>
+<li><p>What is the right timeout before the leader is declared dead? A longer timeout means a longer time to recovery in the case where the leader fails. However, if the timeout is too short, there could be unnecessary failovers. </p>
+</li>
+</ul>
+<h2 id="Implementation-of-Replication-Logs"><a href="#Implementation-of-Replication-Logs" class="headerlink" title="Implementation of Replication Logs"></a>Implementation of Replication Logs</h2><h3 id="Statement-based-replication"><a href="#Statement-based-replication" class="headerlink" title="Statement-based replication"></a>Statement-based replication</h3><p>The leader logs every write request (statement) that it executes and sends that statement log to its followers. </p>
+<p>For a relational database, this means that every <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> statement is forwarded to followers, and each follower parses and executes that SQL statement as if it had been received from a client. </p>
+<p>There are various ways in which this approach to replication can break down:</p>
+<ul>
+<li>any statement that calls a nondeterministic function, such as <code>NOW()</code> to get the current date and time or <code>RAND()</code> to get a random number, is likely to generate a different value on each replica. </li>
+<li>If statements use an autoincrementing column, or if they depend on the existing data in the database (e.g., <code>UPDATE...WHERE &lt;some condition&gt;</code>) , they must be executed in exactly the same order on each replica, or else they may have a different effect. This can be limiting when there are multiple concurrently executing transactions. </li>
+<li>Statements that have side effects (e.g., triggers, stored procedures, user-defined functions) may result in different side effects occurring on each replica, unless the side effects are absolutely deterministic.</li>
+</ul>
+<h3 id="Write-ahead-log-WAL-shipping"><a href="#Write-ahead-log-WAL-shipping" class="headerlink" title="Write-ahead log (WAL) shipping"></a>Write-ahead log (WAL) shipping</h3><p>Usually every write is appended to a log:</p>
+<ul>
+<li>log-structured storage engine, this log is the main place for storage. Log segments are compacted and garbage-collected in the background</li>
+<li>B-tree overwrites individual disk blocks, every modification is first written to a write-ahead log so that the index can be restored to a consistent state after a crash. </li>
+</ul>
+<p>the log is an append-only sequence of bytes containing all writes to the database.</p>
+<p>Disadvantage:</p>
+<p>the log describes the data on a very low level: A WAL contains details of which bytes were changes in whcih disk blocks. This makes replication closely coupled to the storage engine. If the database changes its storage format from one version to another, it is typically not possible to run different versions of the database software on the leader and the followers. </p>
+<p>If the replication protocol allows the follower to use a newer software version than the leader, you can perform a zero-downtime upgrade of the database software by first upgrading the followers and then performing a failover to make one of the upgraded nodes the new leader. If the replication protocol does not allow this version mismatch, as is often the case with WAL shipping, such upgrades require downtime.</p>
+<h3 id="Logical-row-based-log-replication"><a href="#Logical-row-based-log-replication" class="headerlink" title="Logical (row-based) log replication"></a>Logical (row-based) log replication</h3><p><span style="color:navy"><strong>logical log</strong></span>: use different log formats for replication and for storage engine, which allows the replication log to be decoupled from the storage engine internals. </p>
+<p>a logical log for a relational database is usually a sequence of records describing writes to database tables  at the granularity of a row:</p>
+<ul>
+<li>for an inserted row, the log contains the new values of all columns</li>
+<li>for a deleted row, the log contains enough information to uniquely identify the row that was deleted. </li>
+<li>for an updated row, the log contains enough information to uniquely identify the udpated row, and the new values of all columns (or at least the new values of all columsn that changed)</li>
+</ul>
+<h3 id="Trigger-based-replication"><a href="#Trigger-based-replication" class="headerlink" title="Trigger-based replication"></a>Trigger-based replication</h3><p>trigger: register custom application code that is automatically executed when a data change (write transaction) occurs in a database system. </p>
+<p>The trigger has the opportunity to log this change into a separate table, from which it can be read by an external process. That external process can then apply any necessary application logic and replicate the data change to another system.</p>
+<p>Trigger-based replication typically has greater overheads than other replication methods, and is more prone to bugs and limitations than the database’s built-in repli‐ cation. However, it can nevertheless be useful due to its flexibility.</p>
+<h1 id="Problems-with-Replication-Lag"><a href="#Problems-with-Replication-Lag" class="headerlink" title="Problems with Replication Lag"></a>Problems with Replication Lag</h1><p>if an application reads from an <em>asynchronous</em> follower, it may see out‐ dated information if the follower has fallen behind. This leads to apparent inconsis‐ tencies in the database: if you run the same query on the leader and a follower at the same time, you may get different results, because not all writes have been reflected in the follower.</p>
+<p><span style="color:navy"><strong>eventual consistency</strong></span>: This inconsistency is just a temporary state—if you stop writing to the database and wait a while, the followers will eventually catch up and become consistent with the leader.</p>
+<p><span style="color:navy"><strong>replication lag</strong></span>:  the delay between a write happening on the leader and being reflected on a follower.</p>
+<h2 id="Reading-Your-Own-Writes"><a href="#Reading-Your-Own-Writes" class="headerlink" title="Reading Your Own Writes"></a>Reading Your Own Writes</h2><p><img src="/image/asynchronous-problem.png" alt="A user makes a write, followed by a read from a stable replica. To prevent this anomaly, we need read-after-write consistency"></p>
+<p><span style="color:navy"><strong>read-after-write consistency</strong></span> (read-your-writes consistency): if the user reloads the page, they will always see any updates they submitted themselves. It makes no promises about other users: other users’ updates may not be visible until some later time. However, it reassures the user that their own input has been saved correctly.</p>
+<p>approaches:</p>
+<ul>
+<li>When reading something that the user may have modified, read it from the leader; otherwise, read it from a follower.</li>
+<li>If most things in the application are potentially editable by the user, that approach won’t be effective, as most things would have to be read from the leader (negating the benefit of read scaling). In that case, other criteria may be used to decide whether to read from the leader. For example, you could track the time of the last update and, for one minute after the last update, make all reads from the leader. You could also monitor the replication lag on followers and pre‐ vent queries on any follower that is more than one minute behind the leader.</li>
+<li>timestamp</li>
+</ul>
+<p>Another complication arises when the same user is accessing your service from mul‐ tiple devices, for example a desktop web browser and a mobile app.</p>
+<ul>
+<li>remembering the timestamp of the user’s last update</li>
+<li>route requests from all of a user’s devices to the same datacenter.</li>
+</ul>
+<h2 id="Monotonic-Reads"><a href="#Monotonic-Reads" class="headerlink" title="Monotonic Reads"></a>Monotonic Reads</h2><p>When reading from asynchronous followers,  it’s possible for a user to see things <em>moving backward in time</em>.</p>
+<p><img src="/image/monotonic-reads.png" alt="A user first reads from a fresh replica, then from a stale replica. Time appears to go backward. To prevent this anomaly, we need monotonic reads."></p>
+<p><span style="color:navy"><strong>Monotonic reads</strong></span>: if one user makes several reads in sequence, they will not see time go backward, i.e. they will not read older data after having previously read newer data. </p>
+<p> one approach: make sure that each use always makes their reads from the same replica. </p>
+<h2 id="Consistent-Prefix-Reads"><a href="#Consistent-Prefix-Reads" class="headerlink" title="Consistent Prefix Reads"></a>Consistent Prefix Reads</h2><p>Our third example of replication lag anomalies concerns violation of causality.</p>
+<p><img src="/image/violation-causuality.png" alt="If some partitions are replicated slower than others, an observer may see the answer before they see the question"></p>
+<p><span style="color:navy"><strong>Consistent prefix reads</strong></span>: if a sequence of writes happends in a certain order, then anyone reading those writes will see them appear in the same order. </p>
+<h2 id="Solutions-for-Replication-Lag"><a href="#Solutions-for-Replication-Lag" class="headerlink" title="Solutions for Replication Lag"></a>Solutions for Replication Lag</h2><p><em>transactions</em> exist: they are a way for a database to provide stronger guarantees so that the application can be simpler.</p>
+<h1 id="Multi-Leader-Replication"><a href="#Multi-Leader-Replication" class="headerlink" title="Multi-Leader Replication"></a>Multi-Leader Replication</h1><p><span style="color:navy"><strong>Multi-leader</strong></span> (master-master or active-active): allow more than one node to accept writes. Replication still happens in the same way: each node that processes a write must forward that data change to all the other nodes.</p>
+<p>each leader simultaneously acts as a follower to the other leaders.</p>
+<h2 id="Use-Cases-for-Multi-Leader-Replication"><a href="#Use-Cases-for-Multi-Leader-Replication" class="headerlink" title="Use Cases for Multi-Leader Replication"></a>Use Cases for Multi-Leader Replication</h2><p>It rarely makes sense to use a multi-leader setup within a single datacenter, because the benefits rarely outweigh the added complexity. </p>
+<h3 id="Multi-datacenter-operation"><a href="#Multi-datacenter-operation" class="headerlink" title="Multi-datacenter operation"></a>Multi-datacenter operation</h3><p>In a multi-leader configuration, you can have a leader in each datacenter. Within each datacenter, regular leader-follower replication is used; between datacenters, each datacenter’s leader replicates its changes to the leaders in other datacenters.</p>
+<p><img src="/image/multi-leader-replication.png" alt="Multi-leader replication across multiple datacenters"></p>
+<p>Compare how the single-leader and multi-leader configuration ina multi-datacenter deployment:</p>
+<ul>
+<li>performance<ul>
+<li>Single-leader: every write must go over the internet to the datacenter with the leader. This can add significant latency to writes and might contravene the purpose of having multiple datacenters in the first place</li>
+<li>multi-leader: every write can be processed in the local datacenter and is replicated asynchronously to the other datacenters. Thus, the inter-datacenter network delay is hidden from users, which means the preceived performance may be better</li>
+</ul>
+</li>
+<li>tolerance of datacenter outages<ul>
+<li>single-leader: if the datacenter with the leader fails, failover can promote a follower in another datacenter to be leader</li>
+<li>Multi-leader: each datacenter can continue operating independently of the others, and replication catches up when the failed datacenter comes back online</li>
+</ul>
+</li>
+<li>tolerance of network problems<ul>
+<li>single-leader: very sensitive to problems in this inter-datacenter link, because writes are made synchronously over this link.</li>
+<li>multi-leader: tolerate network problems better, a temporary network interruption does not prevent writes being processed.</li>
+</ul>
+</li>
+</ul>
+<p>Downside: the same data may be concurrently modified in two different datacenters, and those write conflicts must be resolved. </p>
+<h3 id="Clients-with-offline-operation"><a href="#Clients-with-offline-operation" class="headerlink" title="Clients with offline operation"></a>Clients with offline operation</h3><p>case for multi-leader: you have an application that needs to continue to work while it is disconnected from the internet.</p>
+<h3 id="Collaborative-editing"><a href="#Collaborative-editing" class="headerlink" title="Collaborative editing"></a>Collaborative editing</h3><p><em>Real-time collaborative editing</em> applications allow several people to edit a document simultaneously.</p>
+<p>If you want to guarantee that there will be no editing conflicts, the application must obtain a lock on the document before a user can edit it. If another user wants to edit the same document, they first have to wait until the first user has committed their changes and released the lock. This collaboration model is equivalent to single-leader replication with transactions on the leader.</p>
+<p>for faster collaboration, you may want to make the unit of change very small (e.g., a single keystroke) and avoid locking. </p>
+<h2 id="Handling-Write-Conflicts"><a href="#Handling-Write-Conflicts" class="headerlink" title="Handling Write Conflicts"></a>Handling Write Conflicts</h2><p><img src="/image/multi-leader-write-conflict.png" alt="A write conflict caused by two leaders concurrently updating the same record"></p>
+<h3 id="Synchronous-versusd-asynchronous-conflict-detection"><a href="#Synchronous-versusd-asynchronous-conflict-detection" class="headerlink" title="Synchronous versusd asynchronous conflict detection"></a>Synchronous versusd asynchronous conflict detection</h3><p>single-leader: the second writer will either block and wait for the first write to complete, or abort the second write transaction, forcing the user to retry the write.</p>
+<p>Multi-leader: both writes are successful, and the conflict is only detected asynchronously at some later point in time. At that time, it may be too late to ask the user to resolve the conflict.</p>
+<h3 id="Conflict-avoidance"><a href="#Conflict-avoidance" class="headerlink" title="Conflict avoidance"></a>Conflict avoidance</h3><p>if the application can ensure that all writes for a particular record go through the same leader, then conflicts cannot occur.</p>
+<p>For example, in an application where a user can edit their own data, you can ensure that requests from a particular user are always routed to the same datacenter and use the leader in that datacenter for reading and writing.</p>
+<h3 id="Converging-toward-a-consistent-state"><a href="#Converging-toward-a-consistent-state" class="headerlink" title="Converging toward a consistent state"></a>Converging toward a consistent state</h3><p>In a multi-leader configuration, there is no defined ordering of writes, so it’s not clear what the final value should be. If each replica simply applied writes in the order that it saw the writes, the database would end up in an inconsistent state.</p>
+<p><span style="color:navy"><strong>Convergent</strong></span>: all replicas must arrive at the same final value when all changes have been replicated.</p>
+<p>Approaches:</p>
+<ul>
+<li>give each write a unique ID </li>
+<li>Give each replica a unique ID</li>
+<li>somehow merge the values together </li>
+<li>record the conflict in an explicit data structure that preserves all info</li>
+</ul>
+<h3 id="Custom-conflict-resolution-logic"><a href="#Custom-conflict-resolution-logic" class="headerlink" title="Custom conflict resolution logic"></a>Custom conflict resolution logic</h3><p>write conflict resolution logic using application code:</p>
+<ul>
+<li><p>on write</p>
+<p>as soon as the database system detects a conflict in the log of replicated changes, it calls the conflict handler</p>
+</li>
+<li><p>on read</p>
+<p>when a conflict is detected, all the conflicting writes are stored. The next time the data is read, these multiple versions of the data are returned to the application. </p>
+</li>
+</ul>
+<h3 id="What-is-a-conflict"><a href="#What-is-a-conflict" class="headerlink" title="What is a conflict?"></a>What is a conflict?</h3><p>some subtle conflicts</p>
+<h2 id="Multi-Leader-Replication-Topologies"><a href="#Multi-Leader-Replication-Topologies" class="headerlink" title="Multi-Leader Replication Topologies"></a>Multi-Leader Replication Topologies</h2><p><span style="color:navy"><strong>replication topology</strong></span>: the communication paths along which writes are propagated from one node to another. </p>
+<p>With more than 2 leaders, various different topologies are possible:</p>
+<p><img src="/image/topology.png" alt="Three example topologies in which multi-leader replication can be set up"></p>
+<ul>
+<li>All-to-all: every leader sends its writes to every other leader</li>
+<li>circular topology: each node receives writes from one node and forwards those write (+any writes of its own) to one other node</li>
+<li>Star: one designated root node forwards writes to all of the other nodes</li>
+</ul>
+<p>Issues:</p>
+<ul>
+<li><p>node failures lead to interruption of replication messages between other nodes</p>
+</li>
+<li><p>some network links may be faster than others (e.g., due to network congestion), with the result that some replication messages may “overtake” others.</p>
+<p><img src="/image/overtake.png" alt="With multi-leader replication, writes may arrive in the wrong order at some replicas"></p>
+<p>Here simply attach a timestamp to every write is not sufficient, because clocks cannot be trusted to be sufficiently in sync to correctly order these events at leader 2. (version vectors will be used)</p>
+</li>
+</ul>
+<h1 id="Leaderless-Replication"><a href="#Leaderless-Replication" class="headerlink" title="Leaderless Replication"></a>Leaderless Replication</h1><p><span style="color:navy"><strong>Dynamo-style</strong></span>: Allow any replica to directly accept writes from client. </p>
+<p>In some leaderless implementations, the client directly sends its writes to several replicas, while in others, a coordinator node does this on behalf of the client. However, unlike a leader database, that coordinator does not enforce a particular ordering of writes. </p>
+<h2 id="Writing-to-the-Database-When-a-Node-Is-Down"><a href="#Writing-to-the-Database-When-a-Node-Is-Down" class="headerlink" title="Writing to the Database When a Node Is Down"></a>Writing to the Database When a Node Is Down</h2><p><img src="/image/quorum.png" alt="A quorum write, quorum read, and read repair after a node outage"></p>
+<p>When a client reads from the database, it doesn’t just sent its request to one replica: read requests are also sent to several nodes in parallel. Version numbers are used to determine which value is newer.</p>
+<h3 id="Read-repair-and-anti-entropy"><a href="#Read-repair-and-anti-entropy" class="headerlink" title="Read repair and anti-entropy"></a>Read repair and anti-entropy</h3><p>After an unavailable node comes back online, how does it catch up on the writes that it missed?</p>
+<p>Tow mechanisms are often used in Dynamo-style datastore:</p>
+<ul>
+<li><p>Read repair</p>
+<p>When a client makes a read from several nodes in parallel, it can detect any stale responses. The client sees that replica 3 has a stale value and writes the newer value back to that replica. This approach works well for values that are frequently read.</p>
+</li>
+<li><p>Anti-entropy process</p>
+<p>In addition, some datastores have a background process that constantly looks for differences in the data between replicas and copies any missing data from one replica to another. Unlike the replication log in leader-based replication, this <em>anti-entropy process</em> does not copy writes in any particular order, and there may be a significant delay before data is copied.</p>
+</li>
+</ul>
+<p>Note that without an anti-entropy process, values that are rarely read may be missing from some replicas and thus have reduced durability, because read repair is only performed when a value is read by the application.</p>
+<h3 id="Quorums-for-reading-and-writing"><a href="#Quorums-for-reading-and-writing" class="headerlink" title="Quorums for reading and writing"></a>Quorums for reading and writing</h3><p>What if only one out of three replicas accepted the write? How far can we push this?</p>
+<p>if there are $n$ replicas, every write must be confirmed by $w$ nodes to be considered successful, and we must query at least $r$ nodes for each read. as long as $w+r&gt;n$, we expect to get an up-to-date value when reading.</p>
+<p>Reads and writes that obey these $r$ and $w$ values are called <span style="color:navy"><strong>quorum reads and writes</strong></span>. </p>
+<p><img src="/image/quorum-read-write.png" alt="If w+r&gt;n, at least one of the r replicas you read from must have seen the most recent successful write"></p>
+<h2 id="Limitations-of-Quorum-Consistency"><a href="#Limitations-of-Quorum-Consistency" class="headerlink" title="Limitations of Quorum Consistency"></a>Limitations of Quorum Consistency</h2><p>With a smaller $w$ and $r$ you are more likely to read stale values, because it’s more likely that your read didn’t include the node with the latest value.</p>
+<p>But this configuration allows lower latency and higher availability: if there is a network inter‐ ruption and many replicas become unreachable, there’s a higher chance that you can continue processing reads and writes.</p>
+<p>However, even with $w+r&gt;n$, there are likely to be edge cases where stale value are returned:</p>
+<ul>
+<li>If a sloppy quorum is used,  the <em>w</em> writes may end up on different nodes than the <em>r</em> reads</li>
+<li>If two writes occur concurrently, it is not clear which one happened first.</li>
+<li>If a write happens concurrently with a read, the write may be reflected on only some of the replicas. In this case, it’s undetermined whether the read returns the old or the new value.</li>
+<li>If a write succeeded on some replicas but failed on others (for example because the disks on some nodes are full), and overall succeeded on fewer than <em>w</em> replicas </li>
+<li>Even if everything is working correctly, there are edge cases in which you can get unlucky with the timing</li>
+</ul>
+<h3 id="Monitoring-staleness"><a href="#Monitoring-staleness" class="headerlink" title="Monitoring staleness"></a>Monitoring staleness</h3><h2 id="Sloppy-Quorums-and-Hinted-Handoff"><a href="#Sloppy-Quorums-and-Hinted-Handoff" class="headerlink" title="Sloppy Quorums and Hinted Handoff"></a>Sloppy Quorums and Hinted Handoff</h2><p>in a large cluster (with &gt;&gt; n nodes) it’s likely that the client can connect to some database nodes during the network interrupotion, just not to the nodes that it needs to assemble a quorum for a particular value. </p>
+<p>Trade-off:</p>
+<ul>
+<li>Is it better to return errors to all requests for which we cannot reach a quorum of <em>w</em> or <em>r</em> nodes?</li>
+<li>Or should we accept writes anyway, and write them to some nodes that are reachable but aren’t among the <em>n</em> nodes on which the value usually lives?</li>
+</ul>
+<p><span style="color:navy"><strong>sloppy quorum</strong></span>: writes and reads still require $w$ and $r$ successful responses, but those may include nodes that are not among the designated $n$ “home” nodes for a value. </p>
+<p><span style="color:navy"><strong>hinted handoff</strong></span>: once the network interruption is fixed, any writes that one node temporarily accepted on behalf of another node are sent to the appropriate “home” nodes. </p>
+<p>–&gt; increasing write availability</p>
+<p>It’s only an assurance of durability, namely that the data is stored on <em>w</em> nodes somewhere. There is no guarantee that a read of <em>r</em> nodes will see it until the hinted handoff has completed.</p>
+<h3 id="Multi-datacenter-operation-1"><a href="#Multi-datacenter-operation-1" class="headerlink" title="Multi-datacenter operation"></a>Multi-datacenter operation</h3><h2 id="Detecting-Concurrent-Writes"><a href="#Detecting-Concurrent-Writes" class="headerlink" title="Detecting Concurrent Writes"></a>Detecting Concurrent Writes</h2><p>Dynamo-style databases allow several clients to concurrently write to the same key, which means that conflicts will occur even if strict quorums are used.</p>
+<p>The problem is that events may arrive in a different order at different nodes, due to variable network delays and partial failures.</p>
+<p><img src="/image/concurrent-write.png" alt="Concurrent writes in Dynamo-style datastore: there is no well-defined ordering"></p>
+<h3 id="Last-write-wins-discarding-concurrent-writes"><a href="#Last-write-wins-discarding-concurrent-writes" class="headerlink" title="Last write wins (discarding concurrent writes)"></a>Last write wins (discarding concurrent writes)</h3><p> we can attach a timestamp to each write, pick the biggest timestamp as the most “recent,” and discard any writes with an earlier timestamp. This conflict resolution algorithm, called <em>last write wins</em> (LWW).</p>
+<p>LWW achieves the goal of eventual convergence, but at the cost of durability</p>
+<h3 id="The-“happens-before”-relationship-and-concurrency"><a href="#The-“happens-before”-relationship-and-concurrency" class="headerlink" title="The “happens-before” relationship and concurrency"></a>The “happens-before” relationship and concurrency</h3><p>How do we decide whether two operations are concurrent or not?</p>
+<p><span style="color:navy"><strong>concurrent</strong></span>: two operations are <em>concurrent</em> if neither happens before the other (i.e., neither knows about the other)</p>
+<p>Thus, whenever you have two operations A and B, there are three possibilities: </p>
+<ul>
+<li>A happened before B</li>
+<li>B happened before A</li>
+<li>A and B are concurrent</li>
+</ul>
+<p>For defining concurrency, exact time doesn’t matter: we simply call two operations concurrent if they are both unaware of each other, regardless of the physical time at which they occurred.</p>
+<h3 id="Capturing-the-happens-before-relationship"><a href="#Capturing-the-happens-before-relationship" class="headerlink" title="Capturing the happens-before relationship"></a>Capturing the happens-before relationship</h3><p><img src="/image/capture-causuality.png" alt="Capturing causal dependencies between two clients concurrently editing a shopping cart"></p>
+<p><img src="/image/graph-causuality.png" alt="Graph of causal dependencies"></p>
+<h3 id="Merging-concurrently-written-values"><a href="#Merging-concurrently-written-values" class="headerlink" title="Merging concurrently written values"></a>Merging concurrently written values</h3><p>This algo ensures that no data is silently dropped, but it unfortunately requires that the clients do some extra work: if several operations happen concurrently, clients have to clean up afterward by merging the concurrently written values. </p>
+<p>a reasonable approach to merging siblings is to just take the union. However, if you want to allow people to also remove things from their carts, and not just add things, then taking the union of siblings may not yield the right result: if you merge two sibling carts and an item has been removed in only one of them, then the removed item will reappear in the union of the siblings.</p>
+<p><em>tombstone</em>: deletion marker</p>
+<h3 id="Version-vectors"><a href="#Version-vectors" class="headerlink" title="Version vectors"></a>Version vectors</h3><p>How does the algorithm change when there are multiple replicas, but no leader?</p>
+<p>We use a version number <em>per replica</em> as well as per key. Each replica increments its own version number when processing a write, and also keeps track of the version numbers it has seen from each of the other replicas. </p>
+<p><span style="color:navy"><strong>version vector</strong></span>: the collection of version numbers from all the replicas</p>
+<p>The version vector allows the database to distinguish between overwrites and concurrent writes.</p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T15:05:10-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：Apr 21, 2021</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2021/01/02/Design-Data-Intensive-Application-2-1-summary/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Design Data Intensive Application (2-1-summary)</p>
+                <p class='content'>Three modes:
+
+single leader
+multiple leader
+leaderless (Dynamo)
+
+
+
+Table of Contents for Chapter ...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/12/30/Design-Data-Intensive-Application-1-4/'>
+                <p class='title'>Design Data Intensive Application (1-4)<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>Encoding and Evolution
+Backward compatibility and forward compatibility
+
+programming language-spe...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow floatable blur desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>Table of Content</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Synchronous-Versus-Asynchronous-Replication"><span class="toc-text">Synchronous Versus Asynchronous Replication</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Setting-Up-New-Followers"><span class="toc-text">Setting Up New Followers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Handling-Node-Outages"><span class="toc-text">Handling Node Outages</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Follower-failure-Catch-up-recovery"><span class="toc-text">Follower failure: Catch-up recovery</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Leader-failure-Failover"><span class="toc-text">Leader failure: Failover</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementation-of-Replication-Logs"><span class="toc-text">Implementation of Replication Logs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Statement-based-replication"><span class="toc-text">Statement-based replication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Write-ahead-log-WAL-shipping"><span class="toc-text">Write-ahead log (WAL) shipping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Logical-row-based-log-replication"><span class="toc-text">Logical (row-based) log replication</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Trigger-based-replication"><span class="toc-text">Trigger-based replication</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-Your-Own-Writes"><span class="toc-text">Reading Your Own Writes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monotonic-Reads"><span class="toc-text">Monotonic Reads</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Consistent-Prefix-Reads"><span class="toc-text">Consistent Prefix Reads</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Solutions-for-Replication-Lag"><span class="toc-text">Solutions for Replication Lag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Use-Cases-for-Multi-Leader-Replication"><span class="toc-text">Use Cases for Multi-Leader Replication</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-datacenter-operation"><span class="toc-text">Multi-datacenter operation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Clients-with-offline-operation"><span class="toc-text">Clients with offline operation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collaborative-editing"><span class="toc-text">Collaborative editing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Handling-Write-Conflicts"><span class="toc-text">Handling Write Conflicts</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Synchronous-versusd-asynchronous-conflict-detection"><span class="toc-text">Synchronous versusd asynchronous conflict detection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conflict-avoidance"><span class="toc-text">Conflict avoidance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Converging-toward-a-consistent-state"><span class="toc-text">Converging toward a consistent state</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Custom-conflict-resolution-logic"><span class="toc-text">Custom conflict resolution logic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#What-is-a-conflict"><span class="toc-text">What is a conflict?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multi-Leader-Replication-Topologies"><span class="toc-text">Multi-Leader Replication Topologies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Writing-to-the-Database-When-a-Node-Is-Down"><span class="toc-text">Writing to the Database When a Node Is Down</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-repair-and-anti-entropy"><span class="toc-text">Read repair and anti-entropy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quorums-for-reading-and-writing"><span class="toc-text">Quorums for reading and writing</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Limitations-of-Quorum-Consistency"><span class="toc-text">Limitations of Quorum Consistency</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Monitoring-staleness"><span class="toc-text">Monitoring staleness</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sloppy-Quorums-and-Hinted-Handoff"><span class="toc-text">Sloppy Quorums and Hinted Handoff</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-datacenter-operation-1"><span class="toc-text">Multi-datacenter operation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Detecting-Concurrent-Writes"><span class="toc-text">Detecting Concurrent Writes</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Last-write-wins-discarding-concurrent-writes"><span class="toc-text">Last write wins (discarding concurrent writes)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-%E2%80%9Chappens-before%E2%80%9D-relationship-and-concurrency"><span class="toc-text">The “happens-before” relationship and concurrency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Capturing-the-happens-before-relationship"><span class="toc-text">Capturing the happens-before relationship</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Merging-concurrently-written-values"><span class="toc-text">Merging concurrently written values</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Version-vectors"><span class="toc-text">Version vectors</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+    </div>
+    
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+              <a href="mailto:shirleylee1389@gmail.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/Gilemore"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2021</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <div>
+    
+      
+  
+
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='option'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick='document.execCommand("copy")'><i class='fa fa-copy fa-fw'></i>Copy Text</a>
+        <hr id='hr-text'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>Copy Link</a>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>Open Link in New Tab</a>
+        <hr id='hr-href'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>Copy Image Link</a>
+        <hr id='hr-src'>
+      </li>
+      <li class='navigation'>
+        <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+      </li>
+      <hr>
+      
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          <li class='music name'>
+            <p class='nav music-title fix-cursor-default'></p>
+          </li>
+          <li class='music ctrl'>
+            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
+            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
+            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
+          </li>
+          <li class='music volume'>
+            <a class='nav volume'>
+              <div class="aplayer-volume-bar-wrap">
+                <div class="aplayer-volume-bar fix-cursor-pointer">
+                  <div class="aplayer-volume"></div>
+                  <i class='left fa fa-volume-off fa-fw'></i>
+                  <i class='right fa fa-volume-up fa-fw'></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+  <script>
+    window.document.oncontextmenu = function (event) {
+      if (event.ctrlKey) return true;
+      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
+      return popMenu(event);
+    };
+    document.addEventListener("click", function (event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      mymenu.style.display = "none";
+    });
+    function popMenu(event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      var menuContent = document.getElementById('rightmenu-content');
+      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
+      mymenu.style.top = event.clientY + "px";
+      mymenu.style.display = 'block';
+      if (event.clientX * 2 > screenWidth) {
+        menuContent.classList.add('left');
+      } else {
+        menuContent.classList.remove('left');
+      }
+      if (event.clientY * 2 > screenHeight) {
+        menuContent.classList.add('top');
+      } else {
+        menuContent.classList.remove('top');
+      }
+
+      let hrText = document.getElementById('hr-text');
+      let hrSrc = document.getElementById('hr-src');
+      let hrHref = document.getElementById('hr-href');
+
+      // 选中图片
+      let copySrc = document.getElementById('menu-copy-src');
+      if (copySrc != undefined) {
+        if (event.target.currentSrc) {
+          copySrc.style.display = 'block';
+          copySrc.addEventListener("click", function (e) {
+            copyString(event.target.currentSrc);
+          },{once: true});
+          hrSrc.style.display = 'block';
+        } else {
+          copySrc.style.display = 'none';
+          hrSrc.style.display = 'none';
+        }
+      }
+
+      // 选中按钮
+      // 判断是不是按钮
+      let href = '';
+      if (event.path) {
+        for (i = 0; i < event.path.length; i++) {
+          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
+            href = event.path[i].href;
+          }
+        }
+      }
+
+      let copyText = document.getElementById('menu-copy-text');
+      copyText.style.display = 'none';
+      hrText.style.display = 'none';
+      if (href.length == 0) {
+        // 选中文本
+        if (window.getSelection().toString()) {
+          copyText.style.display = 'block';
+          hrText.style.display = 'block';
+        }
+      }
+
+      // 在新标签页打开
+      let openHref = document.getElementById('menu-open-href');
+      if (openHref != undefined) {
+        if (href.length > 0) {
+          openHref.style.display = 'block';
+          openHref.addEventListener("click", function (e) {
+            window.open(href);
+          },{once: true});
+          hrHref.style.display = 'block';
+        } else {
+          openHref.style.display = 'none';
+          hrHref.style.display = 'none';
+        }
+      }
+      // 复制链接
+      let copyHref = document.getElementById('menu-copy-href');
+      if (copyHref != undefined) {
+        if (href.length > 0) {
+          copyHref.style.display = 'block';
+          copyHref.addEventListener("click", function (e) {
+            copyString(href);
+          },{once: true});
+        } else {
+          copyHref.style.display = 'none';
+        }
+      }
+
+      // 有音乐播放器
+      if (true == true) {
+        // 如果有aplayer，初始化一下
+      	try {
+      		checkAPlayer();
+          updateTitle();
+      	} catch (error) {
+      		console.log(error);
+      	}
+      }
+
+      return false; // 该行代码确保系统自带的右键菜单不会被调出
+    }
+    function hideMenu() {
+      document.getElementById('rightmenu-wrapper').style.display = 'none';
+    }
+    function copyString(str) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      document.body.appendChild(input);
+      input.setAttribute('value', str);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    document.execCommand('click');
+  </script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["/images/omoide016.jpeg"];
+        if ('false' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  <script>
+    let APlayerController = new Object();
+    APlayerController.id = '3175833810';  // 设定全局音乐播放ID
+    APlayerController.volume = '0.7';
+  </script>
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+    
+<script src="/js/aplayer.js"></script>
+
+  
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    let pageUrl = $.trim($('#pjax-comment-path').text()) === "none" ? 
+      decodeURI(window.location.pathname) : $.trim($('#pjax-comment-path').text());
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) === "none" ?
+      "快来评论吧~" : $.trim($('#"pjax-comment-placeholder').text());
+
+    let ALLPATH = '';
+    if(ALLPATH != '') pageUrl = ALLPATH;
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: pageUrl,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'false',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
+
+
+<!-- darkmodejs -->
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        clipboard.off('success').on('success', function (e) {
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    $(function () {
+        pjax_initCopyCode()
+    });
+</script>
+
+
+<!-- scrollreveal -->
+
+<!-- ******************************** -->
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+<!-- ******************************** -->
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+
+  
+    
+<script src="/js/search.js"></script>
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      $.fancybox.close();    // 关闭弹窗
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+
+      try{
+        pjax_fancybox();
+        
+          
+          if ('.cover') {
+            $('.cover').backstretch("resize");
+          } else {
+            $.backstretch("resize");
+          }
+        
+        
+        
+        
+          pjax_initCopyCode();
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
+  </div>
+</body>
+</html>

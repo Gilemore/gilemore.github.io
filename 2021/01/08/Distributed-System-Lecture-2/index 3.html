@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#3.0.0-rc.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+  <title>Distributed System Lecture 2 - Gilmore&#39;s Blog</title>
+  
+    <meta name="keywords" content="system design">
+  
+
+  
+    <meta name="description" content="Safety, Liveness, Virtual Clocks">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post' style="display: none;">
+      <div class='cover-body'>
+  <div class='a'>
+    
+      <img no-lazy class='logo' src='/images/favion.png'/>
+    
+    
+      <p class="title">Gilmore</p>
+    
+    
+      <p class="subtitle">Random thoughts...</p>
+    
+  </div>
+  <div class='b'>
+    <div class='menu navigation dock'>
+      <div class='list-h'>
+        
+          
+            <a href="/Class"
+              
+              
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
+            </a>
+          
+            <a href="/archives"
+              
+              
+              id="archives">
+              <i class='fas fa-folder-open fa-fw'></i><p>Archive</p>
+            </a>
+          
+            <a href="/Random"
+              
+              
+              id="Random">
+              <i class='fas fa-book fa-fw'></i><p>Random</p>
+            </a>
+          
+            <a href="/AboutMe"
+              
+              
+              id="AboutMe">
+              <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+    </cover>
+    <header class="l_header shadow floatable blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='/images/favion.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  </div>
+  
+
+
+  <div class="l_body">
+    <div class='body-wrapper' id="pjax-container">
+      
+        <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">true</div> 
+  <div id="pjax-pageTitle">Distributed System Lecture 2</div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path">none</div> 
+  <div id="pjax-comment-placeholder">none</div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("blog" == "none") { // 移除封面 
+    document.getElementsByClassName('cover')[0].style.display = "none"; 
+    document.getElementsByClassName('l_body')[0].classList.add("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("blog" == "blog") { // 半屏 
+      document.getElementsByClassName('cover')[0].classList.remove("full"); 
+      document.getElementsByClassName('cover')[0].classList.add("half"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("blog" == "docs") { // 全屏 
+      document.getElementsByClassName('cover')[0].classList.remove("half"); 
+      document.getElementsByClassName('cover')[0].classList.add("full"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover')[0].style.display = ""; 
+    document.getElementsByClassName('l_body', 'show')[0].classList.remove("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+
+      
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow floatable blur article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2021/01/08/Distributed-System-Lecture-2/">
+      Distributed System Lecture 2
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>Release on：Jan 8, 2021</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p>Safety, Liveness, Virtual Clocks</p>
+<a id="more"></a>
+
+<h1 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h1><h2 id="Safety-and-liveness"><a href="#Safety-and-liveness" class="headerlink" title="Safety and liveness"></a>Safety and liveness</h2><h3 id="Some-reminders-from-Lecture-1"><a href="#Some-reminders-from-Lecture-1" class="headerlink" title="Some reminders from Lecture 1"></a>Some reminders from Lecture 1</h3><ul>
+<li><p>Distributed systems are comprised of many processes (nodes), each of which is <strong><em>isolated</em></strong> from others.</p>
+<p>connected via network, shared-nothing mode</p>
+</li>
+<li><p>processes are connected by an <strong><em>asynchronous</em></strong> network which can arbitrarily delay or drop messages</p>
+</li>
+<li><p>we assume the network is fair: doesn’t look at message content when deciding whether to delay or drop</p>
+<p><strong><em>arbitrarily</em></strong></p>
+</li>
+<li><p>we assume processes can fail</p>
+</li>
+</ul>
+<h3 id="Traces-Schedules"><a href="#Traces-Schedules" class="headerlink" title="Traces/Schedules"></a>Traces/Schedules</h3><p>trace: a sequence of steps, where at each step exactly one process gets to do something</p>
+<p><strong>What can a process do?</strong></p>
+<ul>
+<li>receives one message</li>
+<li>does some computation based on its local state and the message</li>
+<li>sends out one or more messages</li>
+</ul>
+<p><strong>Going back to a trace</strong></p>
+<p>think of trace as a function:<br>$$<br>f: Z^+\rightarrow(P,M)<br>$$<br>where $P$ is the set of processes and $M$ is the set of messages.</p>
+<p>or think of trace as an infinited array or list:<br>$$<br>0 \quad \quad \quad 1 \quad \quad \quad  2,…\<br>p,m_0 \quad q,m_1 \quad p,m_2, …<br>$$<br>where $p,q$ are processes, and $m_1,m_2$ are messages</p>
+<p><strong>Prefixes and adding traces</strong></p>
+<p>Prefix: a portion of a trace</p>
+<p><strong>Protocol correctness as trace properties</strong></p>
+<ul>
+<li><p>Safety:</p>
+<p>something never happen in a trace</p>
+</li>
+<li><p>Liveness:</p>
+<p>eventually something good happens</p>
+<ul>
+<li><p>Uniform Liveness:</p>
+<p>there is <strong><em>some</em></strong> trace suffix (a part of trace) that can be added to any prefix to achieve the liveness property</p>
+</li>
+<li><p>Absoluate Liveness:</p>
+<p>combining a suffix with <strong><em>any</em></strong> prefix ensures liveness</p>
+</li>
+</ul>
+</li>
+<li><p>Any program property $P$ can be split into a liveness property $L$ and a safety property $S$ such that $P=L\bigcup S$</p>
+</li>
+</ul>
+<h2 id="Time-and-its-problems"><a href="#Time-and-its-problems" class="headerlink" title="Time and its problems"></a>Time and its problems</h2><p>why order events in distributed system?</p>
+<ul>
+<li>produce a trace, which we can then use to reason about correctness</li>
+<li>often a requirement for applications</li>
+</ul>
+<p>why complicated in ordering events?</p>
+<ul>
+<li>all information travels at a finite speed, but in networks it is dictated by message delays and latencies</li>
+</ul>
+<h3 id="Causality"><a href="#Causality" class="headerlink" title="Causality"></a>Causality</h3><p>two events $e_0$ and $e_1$ are causally linked:</p>
+<ul>
+<li>$e_0$ results in the occurence of $e_1$</li>
+<li>$e_0$ and $e_1$ are two events in the same process</li>
+<li>$e_0$ is causally linked to $e_2$, which is causally linked to $e_3$ and so on until $e_n$ which is causally linked to $e_1$</li>
+</ul>
+<p>compared the definition with concurrency</p>
+<h2 id="Lamport-Clocks"><a href="#Lamport-Clocks" class="headerlink" title="Lamport Clocks"></a>Lamport Clocks</h2><h3 id="Total-order"><a href="#Total-order" class="headerlink" title="Total order"></a>Total order</h3><p>For any two events $e_1,e_2 \in E$, such that $e_1\neq e_2$, we have either $t(e_1)&lt;t(e_2)$ or $t(e_1)&gt;t(e_2)$ </p>
+<h3 id="On-to-Lamport-clocks"><a href="#On-to-Lamport-clocks" class="headerlink" title="On to Lamport clocks"></a>On to Lamport clocks</h3><p>Create a total order among events:</p>
+<ul>
+<li>all processes send their current clock value in the message</li>
+<li>when a process receives a message it sets its clock to the maximum of the processes current clock and the clock carried in the message</li>
+<li>when sending a message the process increments clock value, and then sends a message with update clock value</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>total order picks an arbitrary order between events that are causally unrelated</li>
+<li>the ordering might significantly disagree from what an external observer might have seen </li>
+</ul>
+<p>–&gt; solution: build a partial order</p>
+<h2 id="Vector-clocks"><a href="#Vector-clocks" class="headerlink" title="Vector clocks"></a>Vector clocks</h2><h3 id="Partial-order"><a href="#Partial-order" class="headerlink" title="Partial order"></a>Partial order</h3><p>For any two events $e_1,e_2 \in E$, such that $e_1\neq e_2$, we have either $t(e_1)&lt;t(e_2)$ or $t(e_1)&gt;t(e_2)$  or $t(e_1)$ can be incomparable to $e_2$.</p>
+<h3 id="Vector-clocks-1"><a href="#Vector-clocks-1" class="headerlink" title="Vector clocks"></a>Vector clocks</h3><ul>
+<li>Clocks are represented as a vector</li>
+<li>Each component corresponds to a single process</li>
+<li>Compare by element</li>
+</ul>
+<h2 id="Consistent-snapshots"><a href="#Consistent-snapshots" class="headerlink" title="Consistent snapshots"></a>Consistent snapshots</h2><p>Consistent:</p>
+<ul>
+<li>record state at each process</li>
+<li>Ensure that the states are recorded in a causally consistent way, i.e. the snapshot should be such that if process $p$ records its state after sending a messgae $m$ to process $q$, then $q$ should only record its state as it exists after it has received message $m$.</li>
+</ul>
+<h1 id="“Time-Clocks-and-the-Ordering-of-Events-in-a-Distributed-System”-Lamport"><a href="#“Time-Clocks-and-the-Ordering-of-Events-in-a-Distributed-System”-Lamport" class="headerlink" title="“Time, Clocks, and the Ordering of Events in a Distributed System” (Lamport)"></a>“Time, Clocks, and the Ordering of Events in a Distributed System” (Lamport)</h1><h2 id="Partial-Order"><a href="#Partial-Order" class="headerlink" title="Partial Order"></a>Partial Order</h2><ul>
+<li><p>the events of a process form a sequence, where $a$ occurs before $b$ in this sequence if $a$ happens before $b$.</p>
+<p>that is, a single process is defined to be a set of events with an a priori total ordering</p>
+</li>
+<li><p>(definition) the relation “happen before” $\rightarrow$ :</p>
+<ul>
+<li>if $a$ and $b$ are events in the same process, and $a$ comes before $b$, then $a \rightarrow b$.</li>
+<li>if $a$ is the sending message by one process and $b$ is the receipt of the same message by another process, then $a \rightarrow b$.</li>
+<li>if $a \rightarrow b$ and $b\rightarrow c$, then $a\rightarrow c$.</li>
+</ul>
+<p><img src="/image/lamport-f1.png" alt="Figure 1: happens before in messages sending among processes"></p>
+<p>or we can say that $a\rightarrow b$ means that it is possible for event $a$ to causally affect event $b$.</p>
+</li>
+<li><p>(current) if $a\nrightarrow b$ and $b\nrightarrow a$, then $a$ and $b$ are concurrent.</p>
+<p>two events are concurrent if neither can causally affect the other.</p>
+<p>For example, $p_3$ and $q_3$ are concurrent in Figure 1. </p>
+</li>
+</ul>
+<h2 id="Logical-Clocks"><a href="#Logical-Clocks" class="headerlink" title="Logical Clocks"></a>Logical Clocks</h2><ul>
+<li><p>clock $C_i$ for each process $P_i$ to be a function which assigns a number $C_i<a>$ to any event $a$ in that process</p>
+</li>
+<li><p>Clock condition: For any events $a, b$: if $a\rightarrow b$ then $C(a)&lt;C(b)$.</p>
+<p>Converse does not hold, since that would imply that any two concurrent events must occur at the same time</p>
+</li>
+<li><p>$\rightarrow$ Holds if two conditions satisfy:</p>
+<ul>
+<li>if $a$ and $b$ are events in process $P_i$, and $a$ comes before $b$, then $C_i(a)&lt;C_i(b)$</li>
+<li>if $a$ is the sending of a message by process $P_i$ and $b$ is the receipt of that message by process $P_j$, then  $C_j(a)&lt;C_j(b)$</li>
+</ul>
+</li>
+<li><p>To meet 2 conditions above, how do we implement the clock?</p>
+<ul>
+<li>Condition 1: Each process $P_i$ increments $C_i$ between any two successive events</li>
+<li>Condition 2:<ul>
+<li>if event $a$ is the sending of a message $m$ by process $P_i$, then the message $m$ contains a timestamp $T_m=C_i(a)$.</li>
+<li>Upon receiving a message $m$, process $P_j$ sets $C_j$ greater than or equal to its present value and greater than $T_m$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Ordering-the-Events-Totally"><a href="#Ordering-the-Events-Totally" class="headerlink" title="Ordering the Events Totally"></a>Ordering the Events Totally</h2><ul>
+<li><p>we simply order the events by the time they occurred. To break ties, we use any arbitrary total ordering $&lt;$ of the processes. </p>
+</li>
+<li><p>$\Rightarrow$ (a way of completing the “happened before” partial ordering to a total ordering): if $a$ is an event in process $P_i$ and $b$ is an event in process $P_j$, then $a \Rightarrow b$ if and only is either:</p>
+<ul>
+<li>$C_i(a)&lt;C_j(b)$</li>
+<li>$C_i(a)=C_j(b)$ and $P_i&lt;P_j$</li>
+</ul>
+</li>
+<li><p>if $a\rightarrow b$ then $a\Rightarrow b$.</p>
+</li>
+<li><p>The synchronization for a distributed multiprocess system is specified in term of a <strong><em>State Machine</em></strong>, consisting of a set $C$ of possible commands, a set of $S$ of possible states, and a function $e: C \times S \rightarrow S$. The relation $e(C,S)=S’$ means that executing the command $C$ with the machine in state $S$ causes the machine state to change to $S’$.</p>
+</li>
+<li><p>we will just observe that the entire concept of <u><em>failure</em></u> is only meaningful in the context of <u><em>physical time</em></u>. </p>
+</li>
+</ul>
+<h2 id="Anomalous-Behavior"><a href="#Anomalous-Behavior" class="headerlink" title="Anomalous Behavior"></a>Anomalous Behavior</h2><p>some external information, how to solve anomalous behavior?</p>
+<ul>
+<li>explicitly introduce into the system the necessary information about the ordering $\rightarrow$</li>
+<li>construct a system of clocks which satisfies the “Strong Clock Condition”: For any events $a,b$ in $\Phi$, if $a\longrightarrow b$, then $C(a)&lt;C(b)$. (Here $\longrightarrow$ denote the “happens before” for all system events $\Phi$)</li>
+</ul>
+<h2 id="Physical-Clocks"><a href="#Physical-Clocks" class="headerlink" title="Physical Clocks"></a>Physical Clocks</h2><h2 id="Questions-asked-after-this-paper"><a href="#Questions-asked-after-this-paper" class="headerlink" title="Questions asked after this paper"></a>Questions asked after this paper</h2><p>Consider a distributed system where the only events are sending and receiving messages. Give pseudocode that each process should run when sending or receiving messages in order to maintain a Lamport clock.</p>
+<p><strong><u><em>Answer:</em></u></strong></p>
+<p>Here we have $P_i$ represents $i$th process and $C_i$ represents the corresponding counter for $P_i$.</p>
+<ol>
+<li><p>all processes start with counter at 0:</p>
+<p>$P_1: C_1=0, P_2: C_2=0,…P_i: C_i=0, … P_j: C_j=0…$ </p>
+</li>
+<li><p>SendMessage($i$, $C_i$, message)</p>
+<p>$C_i=C_i+1$</p>
+<p>$T_m=C_i$</p>
+<p>send (message, $T_m$)</p>
+</li>
+<li><p>ReceiveMessage($j$, $C_j$, message, $T_m$)</p>
+<p>$C_j=max(C_j, T_m)+1$</p>
+</li>
+</ol>
+<hr>
+<p>Construct an example for the application that only allows sends and receives where two or more total orders can be assigned to a single event sequence.</p>
+<p>$\rightarrow$ and this leads to Vector clock in the following paper</p>
+<h1 id="Fridge-Timestamps-in-Message-Passing-Systems-That-Preserve-the-Partial-Ordering"><a href="#Fridge-Timestamps-in-Message-Passing-Systems-That-Preserve-the-Partial-Ordering" class="headerlink" title="Fridge: Timestamps in Message-Passing Systems That Preserve the Partial Ordering"></a>Fridge: Timestamps in Message-Passing Systems That Preserve the Partial Ordering</h1><h2 id="A-Total-Ordering"><a href="#A-Total-Ordering" class="headerlink" title="A Total Ordering"></a>A Total Ordering</h2><p>introduce Lamport Clock</p>
+<h2 id="Problem-Statement"><a href="#Problem-Statement" class="headerlink" title="Problem Statement"></a>Problem Statement</h2><ul>
+<li>implement the relation $\rightarrow$ (“happen before”) in which $a\rightarrow b$ iff $a$ must occur before $b$ in all possible event interleavings for this particular distributed computation, i.e. $a$ can causally affect $b$.</li>
+<li>if $a\nrightarrow b$ and $b\nrightarrow a$ then the two events may have occurred concurrently, i.e. they form part of a consistent slice of the global program state, that is, $a\leftrightarrow b$.</li>
+</ul>
+<h2 id="Partial-Ordering"><a href="#Partial-Ordering" class="headerlink" title="Partial Ordering"></a>Partial Ordering</h2><p><strong>Asynchronous Commmunication</strong></p>
+<p>timestamps are represented as an array $[c_1,c_2,…c_n]$, with an integer clock value for every process in the network. Let $e_p$ represent an event $e$ executed by process $p$, and $T_{e_p}$ the timestamp array attached to the permanent record of the execution of this event. </p>
+<p>For example, the following timestamp $[4,7,6,12]$ attached to an event $x$ in process 2 had local clock value $T_{x_2}[2]=7$ when $x$ was executed, while the last known clock value for process 4 was $T_{x_2}[4]=12$.</p>
+<p>Rules about timestamp:</p>
+<ul>
+<li><p>Initially all values are zero</p>
+</li>
+<li><p>the local clock vaue is incremented at least once before each atomic event</p>
+</li>
+<li><p>The current value of the entire timestamp array is piggybacked on every outgoing signal</p>
+</li>
+<li><p>upon receiving a signal, a process sets the value of each entry in the timestamp array to be the maximum of the two corresponding values in the local array, and in the piggybacked array received. </p>
+<p>The value corresponding to the sender, however, is a special case and is set to be one greater than the value received (to allow for transit time), but only if the local value is not already greater than that received:</p>
+<p>if local_array[q] &lt;= other_array[q] then</p>
+<p>​    local_array[q]:=1+other_array[q]</p>
+<p>for i:=1 to n do</p>
+<p>​    local_array[i]:=max(local_array[i],other_array[i])</p>
+</li>
+<li><p>Values in the timestamp arrays are never decremented.</p>
+</li>
+</ul>
+<p><img src="/image/vector-clock.png" alt="Use of timestamp arrays for asynchronous timestamp"></p>
+<ul>
+<li><p>Timestamps attached to the stored records of events as compared as follows:<br>$$<br>e_p \rightarrow f_q \quad iff \quad T_{e_p}[p]&lt;T_{f_q}[p]<br>$$<br>event $e_p$ must have occurred before event $f_q$ iff process $q$ has received a signal from $p$ that was sent after, or at the samne time as, the execution of $e_p$.</p>
+<p>so in the figure above we can see that<br>$$<br>w\rightarrow y \quad \text{since} \quad 2&lt;4\<br>l \leftrightarrow v \quad \text{since} \quad (1\nless 0)\and(1\nless 0)\<br>d \leftrightarrow z \quad \text{since} \quad (4\nless 2)\and(5\nless 4)\<br>b \rightarrow q \quad \text{since} \quad 2&lt;4\<br>$$</p>
+</li>
+<li><p>Noticed the “overtaking” situation</p>
+<p><img src="/image/overtaking.png" alt="Example illustrating use of timestamp arrays during asynchronous signal &quot;overtaking&quot;"></p>
+<p>Here we should avoid having $z=[7,4]$. When we set $z$, we should have $[\max(6,5), \max(0,3)+1]$, here we already have $6&gt;5$ so no need to add one to $6$.</p>
+</li>
+</ul>
+<p><strong>Synchronous Communication</strong></p>
+<p><img src="/image/Failure-sync-lamport.png" alt="Failure of Lamport&#39;s algorithm when applied to synchronous communication"></p>
+<p>In the figure, event $a$ is timestamped earlier than event $b$ although $a$ must occur after $b$.</p>
+<p>Here instead of incrementing 1 in the clock, we increment some finite amount of time (for response involved).</p>
+<p> how to solve?</p>
+<ul>
+<li><p>exchanging timestamps during the communication event, both processes setting their local clock to be equal to the largest value ==&gt;</p>
+<p>receiving process sending back a dummy message with its local clock value to its communication partner, and both processes then adjusting their local clocks accordingly. </p>
+</li>
+<li><p>Rule 3 : during a communication event, the two processes involved exchange timestamp arrays and each element in the local array is set to be the maximum of its old value and the corresponding value in the array received, i.e.</p>
+<p>for i:=1 to n do </p>
+<p>​    local_array[i]:=max(local_array[i], other_array[i])</p>
+</li>
+</ul>
+<h2 id="Questions-asked-after-this-paper-1"><a href="#Questions-asked-after-this-paper-1" class="headerlink" title="Questions asked after this paper"></a>Questions asked after this paper</h2><p>Consider a distributed system where the only events are sending and receiving messages. Give pseudocode that each process should run when sending or receiving messages in order to maintain a Vector Clock.</p>
+<p><strong><em>Answer:</em></strong></p>
+<p>Suppose we have $n$ processes $P_1, P_2,…P_i,…P_j,…$ for each process, we have counter $[C_1, C_2, …C_n]$</p>
+<ol>
+<li><p>initially $[C_1=0, C_2=0, …C_n=0]$</p>
+</li>
+<li><p>SendMessage( $i$,  $[C_{1}, C_{2}, …C_{n}]$,​ message)</p>
+<p>$C_{i}=C_{i}+1$</p>
+<p>$[T_{1}, T_{2}, …T_{n}]$=$[C_{1}, C_{2}, …C_{n}]$</p>
+<p>send (message, $[T_{1}, T_{2}, …T_{n}]$)</p>
+</li>
+<li><p>ReceiveMessage( $j$, $[C_1, C_2, …C_n]$, message,  $[T_{1}, T_{2}, …T_{n}]$)</p>
+<p>for $C_k$ in $[C_1, C_2, …C_n]$:</p>
+<p>​        if $k!=i$:</p>
+<p>​                $C_k=max(C_k,T_{k})$</p>
+<p>​        else:</p>
+<p>​                if $C_{j}&lt;=T_{j}$:</p>
+<p>​                        $C_j=1+T_{j}$</p>
+</li>
+</ol>
+<hr>
+<p>Consider a distributed system with three processes, where each process must send at least <strong>one</strong> message to one other process. Construct a scenario (a schedule/sequence of events) where at least a pair of events happen <strong>concurrently</strong>.</p>
+<p><img src="/image/vector-example.png" alt="vector clock example"></p>
+<p>Here we have events $a_6$ and $c_3$ concurrent. </p>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-11T14:29:47-05:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：Jan 11, 2021</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2021/01/11/Distributed-System-Lecture-3/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Distributed System Lecture 3</p>
+                <p class='content'>Consistent Snapshots, Physical Clocks
+
+
+NotesChandy Lamportnow we want to take a “consistent snap...</p>
+              </a>
+            
+            
+              <a class='next' href='/2021/01/06/Dynamo-paper-reading-and-related-project/'>
+                <p class='title'>Dynamo paper reading and related project<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>
+read Dynamo paper 
+related this paper with what I have learned from “Design Data Intensive Appli...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow floatable blur desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>Table of Content</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Safety-and-liveness"><span class="toc-text">Safety and liveness</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Some-reminders-from-Lecture-1"><span class="toc-text">Some reminders from Lecture 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Traces-Schedules"><span class="toc-text">Traces&#x2F;Schedules</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Time-and-its-problems"><span class="toc-text">Time and its problems</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Causality"><span class="toc-text">Causality</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lamport-Clocks"><span class="toc-text">Lamport Clocks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Total-order"><span class="toc-text">Total order</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#On-to-Lamport-clocks"><span class="toc-text">On to Lamport clocks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vector-clocks"><span class="toc-text">Vector clocks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Partial-order"><span class="toc-text">Partial order</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vector-clocks-1"><span class="toc-text">Vector clocks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Consistent-snapshots"><span class="toc-text">Consistent snapshots</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Partial-Order"><span class="toc-text">Partial Order</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Logical-Clocks"><span class="toc-text">Logical Clocks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ordering-the-Events-Totally"><span class="toc-text">Ordering the Events Totally</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Anomalous-Behavior"><span class="toc-text">Anomalous Behavior</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Physical-Clocks"><span class="toc-text">Physical Clocks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Questions-asked-after-this-paper"><span class="toc-text">Questions asked after this paper</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Total-Ordering"><span class="toc-text">A Total Ordering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-Statement"><span class="toc-text">Problem Statement</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Partial-Ordering"><span class="toc-text">Partial Ordering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Questions-asked-after-this-paper-1"><span class="toc-text">Questions asked after this paper</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+    </div>
+    
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+              <a href="mailto:shirleylee1389@gmail.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/Gilemore"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2021</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <div>
+    
+      
+  
+
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='option'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick='document.execCommand("copy")'><i class='fa fa-copy fa-fw'></i>Copy Text</a>
+        <hr id='hr-text'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>Copy Link</a>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>Open Link in New Tab</a>
+        <hr id='hr-href'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>Copy Image Link</a>
+        <hr id='hr-src'>
+      </li>
+      <li class='navigation'>
+        <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+      </li>
+      <hr>
+      
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          <li class='music name'>
+            <p class='nav music-title fix-cursor-default'></p>
+          </li>
+          <li class='music ctrl'>
+            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
+            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
+            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
+          </li>
+          <li class='music volume'>
+            <a class='nav volume'>
+              <div class="aplayer-volume-bar-wrap">
+                <div class="aplayer-volume-bar fix-cursor-pointer">
+                  <div class="aplayer-volume"></div>
+                  <i class='left fa fa-volume-off fa-fw'></i>
+                  <i class='right fa fa-volume-up fa-fw'></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+  <script>
+    window.document.oncontextmenu = function (event) {
+      if (event.ctrlKey) return true;
+      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
+      return popMenu(event);
+    };
+    document.addEventListener("click", function (event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      mymenu.style.display = "none";
+    });
+    function popMenu(event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      var menuContent = document.getElementById('rightmenu-content');
+      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
+      mymenu.style.top = event.clientY + "px";
+      mymenu.style.display = 'block';
+      if (event.clientX * 2 > screenWidth) {
+        menuContent.classList.add('left');
+      } else {
+        menuContent.classList.remove('left');
+      }
+      if (event.clientY * 2 > screenHeight) {
+        menuContent.classList.add('top');
+      } else {
+        menuContent.classList.remove('top');
+      }
+
+      let hrText = document.getElementById('hr-text');
+      let hrSrc = document.getElementById('hr-src');
+      let hrHref = document.getElementById('hr-href');
+
+      // 选中图片
+      let copySrc = document.getElementById('menu-copy-src');
+      if (copySrc != undefined) {
+        if (event.target.currentSrc) {
+          copySrc.style.display = 'block';
+          copySrc.addEventListener("click", function (e) {
+            copyString(event.target.currentSrc);
+          },{once: true});
+          hrSrc.style.display = 'block';
+        } else {
+          copySrc.style.display = 'none';
+          hrSrc.style.display = 'none';
+        }
+      }
+
+      // 选中按钮
+      // 判断是不是按钮
+      let href = '';
+      if (event.path) {
+        for (i = 0; i < event.path.length; i++) {
+          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
+            href = event.path[i].href;
+          }
+        }
+      }
+
+      let copyText = document.getElementById('menu-copy-text');
+      copyText.style.display = 'none';
+      hrText.style.display = 'none';
+      if (href.length == 0) {
+        // 选中文本
+        if (window.getSelection().toString()) {
+          copyText.style.display = 'block';
+          hrText.style.display = 'block';
+        }
+      }
+
+      // 在新标签页打开
+      let openHref = document.getElementById('menu-open-href');
+      if (openHref != undefined) {
+        if (href.length > 0) {
+          openHref.style.display = 'block';
+          openHref.addEventListener("click", function (e) {
+            window.open(href);
+          },{once: true});
+          hrHref.style.display = 'block';
+        } else {
+          openHref.style.display = 'none';
+          hrHref.style.display = 'none';
+        }
+      }
+      // 复制链接
+      let copyHref = document.getElementById('menu-copy-href');
+      if (copyHref != undefined) {
+        if (href.length > 0) {
+          copyHref.style.display = 'block';
+          copyHref.addEventListener("click", function (e) {
+            copyString(href);
+          },{once: true});
+        } else {
+          copyHref.style.display = 'none';
+        }
+      }
+
+      // 有音乐播放器
+      if (true == true) {
+        // 如果有aplayer，初始化一下
+      	try {
+      		checkAPlayer();
+          updateTitle();
+      	} catch (error) {
+      		console.log(error);
+      	}
+      }
+
+      return false; // 该行代码确保系统自带的右键菜单不会被调出
+    }
+    function hideMenu() {
+      document.getElementById('rightmenu-wrapper').style.display = 'none';
+    }
+    function copyString(str) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      document.body.appendChild(input);
+      input.setAttribute('value', str);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    document.execCommand('click');
+  </script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["/images/omoide016.jpeg"];
+        if ('false' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  <script>
+    let APlayerController = new Object();
+    APlayerController.id = '3175833810';  // 设定全局音乐播放ID
+    APlayerController.volume = '0.7';
+  </script>
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+    
+<script src="/js/aplayer.js"></script>
+
+  
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    let pageUrl = $.trim($('#pjax-comment-path').text()) === "none" ? 
+      decodeURI(window.location.pathname) : $.trim($('#pjax-comment-path').text());
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) === "none" ?
+      "快来评论吧~" : $.trim($('#"pjax-comment-placeholder').text());
+
+    let ALLPATH = '';
+    if(ALLPATH != '') pageUrl = ALLPATH;
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: pageUrl,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'false',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
+
+
+<!-- darkmodejs -->
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        clipboard.off('success').on('success', function (e) {
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    $(function () {
+        pjax_initCopyCode()
+    });
+</script>
+
+
+<!-- scrollreveal -->
+
+<!-- ******************************** -->
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+<!-- ******************************** -->
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+
+  
+    
+<script src="/js/search.js"></script>
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      $.fancybox.close();    // 关闭弹窗
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+
+      try{
+        pjax_fancybox();
+        
+          
+          if ('.cover') {
+            $('.cover').backstretch("resize");
+          } else {
+            $.backstretch("resize");
+          }
+        
+        
+        
+        
+          pjax_initCopyCode();
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
+  </div>
+</body>
+</html>

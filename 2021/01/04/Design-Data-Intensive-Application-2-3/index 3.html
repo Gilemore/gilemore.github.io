@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#3.0.0-rc.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+  <title>Design Data Intensive Application (2-3) - Gilmore&#39;s Blog</title>
+  
+    <meta name="keywords" content="system design">
+  
+
+  
+    <meta name="description" content="transactions">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post' style="display: none;">
+      <div class='cover-body'>
+  <div class='a'>
+    
+      <img no-lazy class='logo' src='/images/favion.png'/>
+    
+    
+      <p class="title">Gilmore</p>
+    
+    
+      <p class="subtitle">Random thoughts...</p>
+    
+  </div>
+  <div class='b'>
+    <div class='menu navigation dock'>
+      <div class='list-h'>
+        
+          
+            <a href="/Class"
+              
+              
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
+            </a>
+          
+            <a href="/archives"
+              
+              
+              id="archives">
+              <i class='fas fa-folder-open fa-fw'></i><p>Archive</p>
+            </a>
+          
+            <a href="/Random"
+              
+              
+              id="Random">
+              <i class='fas fa-book fa-fw'></i><p>Random</p>
+            </a>
+          
+            <a href="/AboutMe"
+              
+              
+              id="AboutMe">
+              <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+    </cover>
+    <header class="l_header shadow floatable blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='/images/favion.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  </div>
+  
+
+
+  <div class="l_body">
+    <div class='body-wrapper' id="pjax-container">
+      
+        <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">true</div> 
+  <div id="pjax-pageTitle">Design Data Intensive Application (2-3)</div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path">none</div> 
+  <div id="pjax-comment-placeholder">none</div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("blog" == "none") { // 移除封面 
+    document.getElementsByClassName('cover')[0].style.display = "none"; 
+    document.getElementsByClassName('l_body')[0].classList.add("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("blog" == "blog") { // 半屏 
+      document.getElementsByClassName('cover')[0].classList.remove("full"); 
+      document.getElementsByClassName('cover')[0].classList.add("half"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("blog" == "docs") { // 全屏 
+      document.getElementsByClassName('cover')[0].classList.remove("half"); 
+      document.getElementsByClassName('cover')[0].classList.add("full"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover')[0].style.display = ""; 
+    document.getElementsByClassName('l_body', 'show')[0].classList.remove("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+
+      
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow floatable blur article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2021/01/04/Design-Data-Intensive-Application-2-3/">
+      Design Data Intensive Application (2-3)
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>Release on：Jan 4, 2021</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p>transactions</p>
+<a id="more"></a>
+
+<p><span style="color:navy"><strong>transactions</strong></span>: group several reads and writes together into a logical unit</p>
+<p><span style="color:navy"><strong>commit</strong></span>: the entire transaction succeeds</p>
+<p><span style="color:navy"><strong>abort, rollback</strong></span>: the entire transaction fails</p>
+<h1 id="The-Slippery-Concept-of-a-Transaction"><a href="#The-Slippery-Concept-of-a-Transaction" class="headerlink" title="The Slippery Concept of a Transaction"></a>The Slippery Concept of a Transaction</h1><h2 id="The-Meaning-of-ACID"><a href="#The-Meaning-of-ACID" class="headerlink" title="The Meaning of ACID"></a>The Meaning of ACID</h2><p><span style="color:navy"><strong>ACID</strong></span>: Atomicity, Consistency, Isolation, Durability</p>
+<p><span style="color:navy"><strong>BASE</strong></span>: Basically Available, Soft state, and Eventual Consistency</p>
+<h3 id="Atomicity"><a href="#Atomicity" class="headerlink" title="Atomicity"></a>Atomicity</h3><p><span style="color:navy"><strong>Atomicity</strong></span>: if the writes are grouped together into an atomic transcation, and the transaction cannot be completed (commit) due to a fault, then the transaction is <em>aborted</em> and the database must discard or undo any writes it has made so far in that transaction.</p>
+<h3 id="Consistency"><a href="#Consistency" class="headerlink" title="Consistency"></a>Consistency</h3><p><span style="color:navy"><strong>Consistency</strong></span>: you have certain statements about your data (invariants) that must always be true.</p>
+<p>However, this idea of consistency depends on the application’s notion of invariants, and it’s the application’s responsibility to define its transactions correctly so that they preserve consistency. </p>
+<p><strong><em>Consistency (in the ACID sense) is a property of the application.</em></strong></p>
+<h3 id="Isolation"><a href="#Isolation" class="headerlink" title="Isolation"></a>Isolation</h3><p><img src="/image/race-condition.png" alt="A race condition between two clients concurrently incrementing a counter"></p>
+<p><span style="color:navy"><strong>Isolation</strong></span>: concurrently executing transactions are isolated from each other: they can not step on each other’s toes. </p>
+<p><span style="color:navy"><strong>Serializability</strong></span>: each transaction can pretend that it is the only transaction running on the entire database. (as if transactions run serially) (it carries a performance penalty)</p>
+<h3 id="Durability"><a href="#Durability" class="headerlink" title="Durability"></a>Durability</h3><p><span style="color:navy"><strong>Durability</strong></span>: once a transaction has commited successfully, any data it has written will not be forgotten, even if there is a hardware fault or the database crashes. </p>
+<h2 id="Single-Object-and-Multi-Object-Operations"><a href="#Single-Object-and-Multi-Object-Operations" class="headerlink" title="Single-Object and Multi-Object Operations"></a>Single-Object and Multi-Object Operations</h2><p>in ACID, atomicity and isolation describe what the database should do if a client makes several writes within the same transaction.</p>
+<p><img src="/image/violation-isolation.png" alt="Violating isolation: one transaction reads another transaction&#39;s uncommitted writes (&quot;dirty read&quot;)"></p>
+<p><img src="/image/atomicity-ensures.png" alt="Atomicity ensures that if an error occurs any prior writes from that transaction are undone, to avoid an inconsistent state"></p>
+<p><span style="color:navy"><strong>Multi-object transaction</strong></span>: several pieces of data need to be kept in sync.</p>
+<h3 id="Single-object-writes"><a href="#Single-object-writes" class="headerlink" title="Single-object writes"></a>Single-object writes</h3><p>Storage engines almost universally aim to provide atomicity and isolation on the level of a single object (such as a key-value pair) on one node. </p>
+<p>Atomicity: using a log for crash recovery</p>
+<p>Isolation: using a lock on each object</p>
+<p>Single-object operation is not transaction in the usual sense of the word. A transaction is usually understood as a mechanism for grouping multiple operations on multiple objects into one unit of execution.</p>
+<h3 id="The-need-for-multi-object-transactions"><a href="#The-need-for-multi-object-transactions" class="headerlink" title="The need for multi-object transactions"></a>The need for multi-object transactions</h3><h3 id="Handling-errors-and-aborts"><a href="#Handling-errors-and-aborts" class="headerlink" title="Handling errors and aborts"></a>Handling errors and aborts</h3><p>Datastores with <strong><em>leaderless replication</em></strong> work much more on a “best effort” basis, which could be summarized as “the database will do as much as it can, and if it runs into an error, it won’t undo something it has already done”—so it’s the <strong><em>application’s responsibility</em></strong> to recover from errors.</p>
+<h2 id="Weak-Isolation-Levels"><a href="#Weak-Isolation-Levels" class="headerlink" title="Weak Isolation Levels"></a>Weak Isolation Levels</h2><h2 id="Read-Comitted"><a href="#Read-Comitted" class="headerlink" title="Read Comitted"></a>Read Comitted</h2><p><span style="color:navy"><strong>Read committed</strong></span>: it makes 2 guarantees</p>
+<ol>
+<li>when reading from the database, you will only see the data that has been commited (no dirty reads)</li>
+<li>when writing to the database, you will only overwrite data that has been committed (no dirty writes)</li>
+</ol>
+<h3 id="No-dirty-reads"><a href="#No-dirty-reads" class="headerlink" title="No dirty reads"></a>No dirty reads</h3><p><span style="color:navy"><strong>Dirty read</strong></span>: another transaction see the uncommitted data of one transaction.</p>
+<p><img src="/image/no-dirty-read.png" alt="No dirty reads: user 2 sees the new value for x only after user 1&#39;s transaction has committed"></p>
+<h3 id="No-dirty-writes"><a href="#No-dirty-writes" class="headerlink" title="No dirty writes"></a>No dirty writes</h3><p><span style="color:navy"><strong>Dirty write</strong></span>: the earlier write is part of a transaction that has not yet committed, so the later write overwrites an uncommitted value. </p>
+<p><img src="/image/dirty-write.png" alt="With dirty writes, conflicting writes from different transactions can be mixed up"></p>
+<h3 id="Implementing-read-committed"><a href="#Implementing-read-committed" class="headerlink" title="Implementing read committed"></a>Implementing read committed</h3><p><strong><em>Databases prevent dirty writes by using row-level locks</em></strong>: when a transaction wants to modify a particular object (row or document), it must first acquire a lock on that object. It must then hold that lock until the transaction is committed or aborted.</p>
+<p><strong><em>How to prevent dirty reads?</em></strong></p>
+<p>the approach of requiring read locks does not work well because one long-running write transaction can force many read-only transactions to wait until the long-running transaction has completed. </p>
+<p>So…most databases prevent dirty reads using the approach: for every object that is written, the database remembers both the old committed value and the new value set by the transaction that currently holds the write lock. While the transaction is ongoing, any other transactions that read the object are simply given the old value. Only when the new value is committed do transactions switch over to reading the new value.</p>
+<h2 id="Snapshot-Isolation-and-Repeatable-Read"><a href="#Snapshot-Isolation-and-Repeatable-Read" class="headerlink" title="Snapshot Isolation and Repeatable Read"></a>Snapshot Isolation and Repeatable Read</h2><p><img src="/image/read-skew.png" alt="Read skew: Alice observes the database in an inconsistent state"></p>
+<p><span style="color:navy"><strong>nonrepeatable read</strong></span> (read skew)</p>
+<p><span style="color:navy"><strong>snapshot isolation</strong></span>: each transaction reads from a consistent snapshot of the database – that is, the transaction sees all the data that was committed in the database at the start of the transaction. </p>
+<h3 id="Implementing-snapshot-isolation"><a href="#Implementing-snapshot-isolation" class="headerlink" title="Implementing snapshot isolation"></a>Implementing snapshot isolation</h3><p>Like read committed isolation, implementations of snapshot isolation typically use <strong><em>write locks</em></strong> to prevent dirty writes, which means that a transaction that makes a write can block the progress of another transaction that writes to the same object. </p>
+<p>However, <strong><em>reads do not require any locks</em></strong>.</p>
+<p>This allows a database to handle long-running read queries on a consistent snapshot at the same time as processing writes normally, without any lock contention between the two.</p>
+<p><span style="color:navy"><strong>Multi-version concurrency control (MVCC)</strong></span>: maintains several versions of an object side by side because various in-progress transactions may need to see the state of the database at different points in time.</p>
+<p><img src="/image/MVCC.png" alt="Implementing snapshot isolation using multi-version objects"></p>
+<p> MVCC-based snapshot isolation:</p>
+<ul>
+<li>When a transaction is started, it is given a unique, always-increasingvii transaction ID (<code>txid</code>). Whenever a transaction writes anything to the database, the data it writes is tagged with the transaction ID of the writer.</li>
+<li>Each row in a table has a <code>created_by </code>field, containing the ID of the transaction that inserted this row into the table. Moreover, each row has a <code>deleted_by</code> field, which is initially empty. If a transaction deletes a row, the row isn’t actually deleted from the database, but it is marked for deletion by setting the deleted_by field to the ID of the transaction that requested the deletion. At some later time, when it is certain that no transaction can any longer access the deleted data, a garbage collection process in the database removes any rows marked for deletion and frees their space.</li>
+</ul>
+<h3 id="Visibility-rules-for-observing-a-consistent-snapshot"><a href="#Visibility-rules-for-observing-a-consistent-snapshot" class="headerlink" title="Visibility rules for observing a consistent snapshot"></a>Visibility rules for observing a consistent snapshot</h3><p>When a transaction reads from the database, transaction IDs are used to decide which objects it can see and which are invisible.</p>
+<ul>
+<li>at the start of each transaction, the database makes a list of all the other transactions that are in progress (not yet committed or aborted) at that time. Any writes that those transactions have made are ignored, even if the transactions subsequently commit</li>
+<li>any writes made by aborted transactions are ignored</li>
+<li>any writes made by transactions with a later transaction ID (i.e., which started after the current transaction started) are ignored, regardless of whether those transactions have committed</li>
+<li>all other writes are visible to the application’s queries</li>
+</ul>
+<p>Put another way, an object is visible if both of the following conditions are true:</p>
+<ul>
+<li>At the time when the reader’s transaction started, the transaction that created the object had already committed.</li>
+<li>The object is not marked for deletion, or if it is, the transaction that requested deletion had not yet committed at the time when the reader’s transaction started.</li>
+</ul>
+<h3 id="Indexes-and-snapshot-isolation"><a href="#Indexes-and-snapshot-isolation" class="headerlink" title="Indexes and snapshot isolation"></a>Indexes and snapshot isolation</h3><p>How do indexes work in a multi-version database?</p>
+<ul>
+<li><p>have the index simply point to all versions of an object and require an index query to filter out any object versions that are not visible to the current transaction. When garbage collection removes old object versions that are no longer visible to any transaction, the corresponding index entries can also be removed. </p>
+</li>
+<li><p>another approach is used in CouchDB and LMDB. Although they also use B-trees, they use an <em>append-only/copy-on-write</em> variant that doe not overwrite pages of the tree when they are updated, but instead creates <strong><em>a new copy of each modified page</em></strong>. </p>
+<p>With append-only B-trees, every write transaction (or batch of transactions) creates a new B-tree root, and a particular root is a consistent snapshot of the database at the point in time when it was created. There is no need to filter out objects based on transaction IDs because subsequent writes cannot modify an existing B-tree; they can only create new tree roots. </p>
+<p>However, this approach also requires a background process for compaction and garbage collection.</p>
+</li>
+</ul>
+<h3 id="Repeatable-read-and-naming-confusion"><a href="#Repeatable-read-and-naming-confusion" class="headerlink" title="Repeatable read and naming confusion"></a>Repeatable read and naming confusion</h3><p>PostgreSQL and MySQL call their snapshot isolation level <span style="color:navy"><strong>repeatable read</strong></span>.</p>
+<h2 id="Preventing-Lost-Updates"><a href="#Preventing-Lost-Updates" class="headerlink" title="Preventing Lost Updates"></a>Preventing Lost Updates</h2><p>The read committed and snapshot isolation levels we’ve discussed so far have been primarily about the guarantees of <strong><em>what a read-only transaction can see in the presence of concurrent writes</em></strong>. </p>
+<p><span style="color:navy"><strong>lost update</strong></span>: if an application reads some value from the database, modifies it, and writes back the modified value. If two transactions do this concurrently, one of the modifications can be lost, because the second write does not include the first modification. (often in a <em>read-modify-write cycle</em>)</p>
+<h3 id="Atomic-write-operations"><a href="#Atomic-write-operations" class="headerlink" title="Atomic write operations"></a>Atomic write operations</h3><p>many databases provide atomic update operations, which remove the need to implement read-modify-write cycles in application code:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> counters <span class="keyword">SET</span> <span class="keyword">value</span>=<span class="keyword">value</span>+<span class="number">1</span> <span class="keyword">WHERE</span> <span class="keyword">key</span>=<span class="string">&#x27;foo&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Atomic write operations are usually implemented by:</p>
+<ul>
+<li><p>cursor stability:</p>
+<p>taking an exclusive lock on the object when it is read so taht no other transaction can read it until the update has been applied. </p>
+</li>
+<li><p>force all atomic operations to be excuted on a single thread</p>
+</li>
+</ul>
+<h3 id="Explicit-locking"><a href="#Explicit-locking" class="headerlink" title="Explicit locking"></a>Explicit locking</h3><p>if the database’s built-in atomic operations don’t provide the necessary functionality, the application can explicitly lock objects taht are going to be updated.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span> <span class="keyword">TRANSACTION</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> figures</span><br><span class="line">    <span class="keyword">WHERE</span> <span class="keyword">name</span>=<span class="string">&#x27;robot&#x27;</span> <span class="keyword">AND</span> game_id=<span class="number">222</span></span><br><span class="line">    <span class="keyword">FOR</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="comment">-- The FOR UPDATE clause indicates that the database should take a lock on all rows returned by this query.</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">-- check whether move is valid, then update the position of the pieve that was returned by the pervious SELECT</span></span><br><span class="line"><span class="keyword">UPDATE</span> figures <span class="keyword">SET</span> <span class="keyword">position</span> =<span class="string">&#x27;c4&#x27;</span> <span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">1234</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Automatically-detecting-lost-updates"><a href="#Automatically-detecting-lost-updates" class="headerlink" title="Automatically detecting lost updates"></a>Automatically detecting lost updates</h3><p>allow them to execute in parallel, and if the transaction manager detects a lost update, abort the transaction and force it to retry its read-modify-write cycle</p>
+<p>Advantage: databases can perform this check efficiently in conjuction with snapshot isolation. </p>
+<p>Lost update detection is a great feature, because it doesn’t require application code to use any special database features—you may forget to use a lock or an atomic opera‐ tion and thus introduce a bug, but lost update detection happens automatically and is thus less error-prone.</p>
+<h3 id="Compare-and-set"><a href="#Compare-and-set" class="headerlink" title="Compare-and-set"></a>Compare-and-set</h3><p>In databases that don’t provide transactions, you sometimes find an atomic compare- and-set operation.</p>
+<p>The purpose of this operation is to avoid lost updates by allowing an update to happen only if the value has not changed since you last read it. If the current value does not match what you previously read, the update has no effect, and the read-modify-write cycle must be retried.</p>
+<p>For example, to prevent two users concurrently updating the same wiki page, you might try something like this, expecting the update to occur only if the content of the page hasn’t changed since the user started editing it:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- This may or may not be safe, depending on the database implementation</span></span><br><span class="line"><span class="keyword">UPDATE</span> wiki_pages <span class="keyword">SET</span> <span class="keyword">content</span>=<span class="string">&#x27;new content&#x27;</span></span><br><span class="line"><span class="keyword">WHERE</span> <span class="keyword">id</span>=<span class="number">1234</span> <span class="keyword">AND</span> <span class="keyword">content</span>=<span class="string">&#x27;old content&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>If the content has changed and no longer matches ‘old content’, this update will have no effect, so you need to check whether the update took effect and retry if neces‐ sary. However, if the database allows the WHERE clause to read from <em>an old snapshot</em>, this statement may not prevent lost updates, because the condition may be true even though another concurrent write is occurring. Check whether your database’s compare-and-set operation is safe before relying on it.</p>
+<h3 id="Conflict-resolution-and-replication"><a href="#Conflict-resolution-and-replication" class="headerlink" title="Conflict resolution and replication"></a>Conflict resolution and replication</h3><p>Locks and compare-and-set operations assume that there is a single-up-to-date copy of the data. However, databases with multi-leader or leaderless replication usually allow several writes to happen concurrently and replicate them asynchronously, so they cannot guarantee that there is a single up-to-date copy of the data. Thus, techniques based on locks or compare-and-set do not apply in this context. </p>
+<p>a common approach in such replicated databases is to allow concurrent writes to create several conflicting versions of a value (also known as <em>siblings</em>), and to use application code or special data structures to resolve and merge these versions after the fact.</p>
+<h2 id="Write-Skew-and-Phantoms"><a href="#Write-Skew-and-Phantoms" class="headerlink" title="Write Skew and Phantoms"></a>Write Skew and Phantoms</h2><p>Now imagine that Alice and Bob are the two on-call doctors for a particular shift. Both are feeling unwell, so they both decide to request leave. Unfortunately, they happen to click the button to go off call at approximately the same time. </p>
+<p><img src="/image/write-skew.png" alt="Example of write skew causing an application bug"></p>
+<p>Now no doctor is on call. Your requirement of having at least one doctor on call has been violated.</p>
+<h3 id="Characterizing-write-skew"><a href="#Characterizing-write-skew" class="headerlink" title="Characterizing write skew"></a>Characterizing write skew</h3><p><span style="color:navy"><strong>write skew</strong></span>: if two transactions read the same objects, and then update some of those objects (different transactions may update different objects) –&gt; a generalization of the lost update problem</p>
+<p>Approaches:</p>
+<ul>
+<li>Atomic single-object operations don’t help, as multiple objects are involved.</li>
+<li>Automatically preventing write skew requires true serializable isolation</li>
+<li>in order to specify that at least one doctor must be on call, you would need a constraint that involves multiple objects. Most databases do not have built-in support for such constraints, but you may be able to implement them with triggers or materialized views, depending on the database.</li>
+<li>If you can’t use a serializable isolation level, the second-best option in this case is probably to explicitly lock the rows that the transaction depends on. </li>
+</ul>
+<h3 id="Phantoms-causing-write-skew"><a href="#Phantoms-causing-write-skew" class="headerlink" title="Phantoms causing write skew"></a>Phantoms causing write skew</h3><p>a similar patter for write skew examples:</p>
+<ul>
+<li>a <code>SELECT</code> query checks whether some requirement is satisfied by searching for rows that match some search condition</li>
+<li>Depending on the result of the 1st query, the application code decides how to continue</li>
+<li>if the application decides to go ahead, it makes a rwite (<code>INSERT</code>,<code>UPDATE</code>) to the database and commits the transaction. </li>
+</ul>
+<p><span style="color:navy"><strong>phantom</strong></span>: a write in one transaction changes the result of a search query in another transaction</p>
+<p>Snapshot isolation avoids phantoms in read-only queries, but in read-write transactions like the examples we discussed, phantoms can lead to particularly tricky cases of write skew.</p>
+<h3 id="Materializing-conflicts"><a href="#Materializing-conflicts" class="headerlink" title="Materializing conflicts"></a>Materializing conflicts</h3><p>If the problem of phantoms is that there is no object to which we can attach the locks, perhaps we can artificially introduce a lock object into the database.</p>
+<p><span style="color:navy"><strong>materializing conflicts</strong></span>: it takes a phantom and turns it into a lock conflict on a concrete set of rows that exist in the database.</p>
+<p>Unfortunately, materializing conflicts can be hard and error-prone to figure out how to materialize conflicts, and it’s ugly to let a concurrency control mechanism leak into the application data model.</p>
+<p>A serializable isolation level is much preferable in most cases.</p>
+<h1 id="Serializability"><a href="#Serializability" class="headerlink" title="Serializability"></a>Serializability</h1><p>serializablt isolation guarantees that even though transactions may execute in parallel, the end result is the same as if they had executed one at a time, serially, without any concurrency.</p>
+<p>how to implement serializability:</p>
+<ul>
+<li>literally executing transcations in a serial order</li>
+<li>two-phase locking, which for several decades was the only viable option</li>
+<li>optimistic concurrency control techniques such as serializable snapshot isolation </li>
+</ul>
+<h2 id="Actual-Serial-Execution"><a href="#Actual-Serial-Execution" class="headerlink" title="Actual Serial Execution"></a>Actual Serial Execution</h2><p>a system designed for single-threaded execution can sometimes perform better than a system that supports concurrency, because it can avoid the coordination overhead of locking. However, its throughput is limited to that of a single CPU core.</p>
+<p>In order to make the most of that single thread, transactions need to be structured differently from their tradition form.</p>
+<h3 id="Encapsulating-transactgions-in-stored-procedures"><a href="#Encapsulating-transactgions-in-stored-procedures" class="headerlink" title="Encapsulating transactgions in stored procedures"></a>Encapsulating transactgions in stored procedures</h3><p>almost all OLTP applications keep transactions short by avoiding interactively waiting for a user within a transaction. </p>
+<p>–&gt; this means that a transaction is committed within the same HTTP request, a transaction does not span multiple requests. A new HTTP request starts a new transaction. </p>
+<p>In this interactive style of transaction, a lot of time is spent in <u><em>network communication</em></u> between the application and the database. </p>
+<p>If you were to disallow concurrency in the database and only process one transaction at a time, the throughput would be dreadful because the database would spend most of its time waiting for the application to issue the next query for the current transaction. In this kind of database, it’s necessary to process multiple transactions concurrently in order to get reasonable performance.</p>
+<p>For this reason, systems with single-threaded serial transaction processing don’t allow interactive multi-statement transactions. Instead, the application must submit the entire transaction code to the database ahead of time, as a <em>stored procedure</em>. </p>
+<p><img src="/image/stored-procedure.png" alt="The difference between an interactive transaction and a stored procedure"></p>
+<h3 id="Pros-and-cons-of-stored-procedures"><a href="#Pros-and-cons-of-stored-procedures" class="headerlink" title="Pros and cons of stored procedures"></a>Pros and cons of stored procedures</h3><p>cons:</p>
+<ul>
+<li>each database vendor has its own language for stored procedures and they are ugly</li>
+<li>code running in a database is difficult to manage. </li>
+<li>A database is often much more performance-sensitive than an application server, because a single database instance is often shared by many application servers.</li>
+</ul>
+<p>Pros:</p>
+<ul>
+<li>no need to wait for I/O</li>
+<li>avoid overhead of other concurrency control mechanisms</li>
+<li>achieve quite good throughput on a single thread</li>
+</ul>
+<h3 id="Partitioning"><a href="#Partitioning" class="headerlink" title="Partitioning"></a>Partitioning</h3><p>Executing all transactions serially limits the transaction throughput of the database to the speed of a single CPU core on a single machine.</p>
+<p>If you can find a way of partitioning your dataset so that each transaction only needs to read and write data within a single partition, then each partition can have its own transaction processing thread running independently from the others.</p>
+<h3 id="Summary-of-serial-execution"><a href="#Summary-of-serial-execution" class="headerlink" title="Summary of serial execution"></a>Summary of serial execution</h3><p>Serial execution of transactions has become a viable way of achieving serializable iso‐ lation within certain constraints:</p>
+<ul>
+<li>Every transaction must be small and fast, because it takes only one slow transaction to stall all transaction processing.</li>
+<li>It is limited to use cases where the active dataset can fit in memory. Rarely accessed data could potentially be moved to disk, but if it needed to be accessed in a single-threaded transaction, the system would get very slow.</li>
+<li>Write throughput must be low enough to be handled on a single CPU core, or else transactions need to be partitioned without requiring cross-partition coordination.</li>
+<li>Cross-partition transactions are possible, but there is a hard limit to the extent to which they can be used.</li>
+</ul>
+<h2 id="Two-Phase-Locking-2PL"><a href="#Two-Phase-Locking-2PL" class="headerlink" title="Two-Phase Locking (2PL)"></a>Two-Phase Locking (2PL)</h2><p>Read: several transactions are allowed to concurrently read the same object as long as nobody is writing to it.</p>
+<p>Write: as soon as anyone wants to write an object, exclusive access is required:</p>
+<ul>
+<li>If transaction A has read an object and transaction B wants to write to that object, B must wait until A commits or aborts before it can continue. (This ensures that B can’t change the object unexpectedly behind A’s back.)</li>
+<li>If transaction A has written an object and transaction B wants to read that object, B must wait until A commits or aborts before it can continue.</li>
+</ul>
+<p>difference between 2PL and snapshot isolation:</p>
+<ul>
+<li><p>In 2PL, writers don’t just block other writers; they also block readers and vice versa.</p>
+<p>because <strong><em>2PL provides serializability</em></strong>, it protects against all the race conditions discussed earlier, including lost updates and write skew.</p>
+</li>
+<li><p>In snapshot isolation, readers never block writers, and writers never block readers</p>
+<p>snapshot isolation can not prevent write skew</p>
+</li>
+</ul>
+<h3 id="Implementation-of-two-phase-locking"><a href="#Implementation-of-two-phase-locking" class="headerlink" title="Implementation of two-phase locking"></a>Implementation of two-phase locking</h3><p>2PL is used by the serializable isolation level in MySQL (InnoDB) and SQL Server.</p>
+<p>The blocking of readers and writers is implemented by having a lock on each object in the database. The lock can either be in shared mode or in exclusive mode. </p>
+<p>The name “two- phase” comes from: the first phase (while the transaction is executing) is when the locks are acquired, and the second phase (at the end of the transaction) is when all the locks are released.</p>
+<h3 id="Performance-of-two-phase-locking"><a href="#Performance-of-two-phase-locking" class="headerlink" title="Performance of two-phase locking"></a>Performance of two-phase locking</h3><p>downsides: transaction throughput and response times of queries are significantly worse under two-phase locking than under weak isolation.</p>
+<h3 id="Predicate-locks"><a href="#Predicate-locks" class="headerlink" title="Predicate locks"></a>Predicate locks</h3><p><span style="color:navy"><strong>predicate lock</strong></span>: works similarly to the shared/exclusive lock described earlier, but rather than belonging to a particular object (e.g., one row in a table), it belongs to all objects that match some search condition.</p>
+<h3 id="Index-range-locks"><a href="#Index-range-locks" class="headerlink" title="Index-range locks"></a>Index-range locks</h3><p>predicate locks do not perform well: if there are many locks by active transactions, checking for matching locks becomes time-consuming. </p>
+<p><span style="color:navy"><strong>index-range lock</strong></span>:  a simplified approximation of predicate locking </p>
+<h2 id="Serializable-Snapshot-Isolation-SSI"><a href="#Serializable-Snapshot-Isolation-SSI" class="headerlink" title="Serializable Snapshot Isolation (SSI)"></a>Serializable Snapshot Isolation (SSI)</h2><p>SSI provides full serializability, but has only a small performance penalty com‐ pared to snapshot isolation.</p>
+<h3 id="Pessimistic-versus-optimistic-concurrency-control"><a href="#Pessimistic-versus-optimistic-concurrency-control" class="headerlink" title="Pessimistic versus optimistic concurrency control"></a>Pessimistic versus optimistic concurrency control</h3><p>Two-phase locking is a so-called <em>pessimistic</em> concurrency control mechanism.</p>
+<p>Serial execution is, in a sense, pessimistic to the extreme.</p>
+<p>By contrast, serializable snapshot isolation is an <em>optimistic</em> concurrency control technique: instead of blocking if something poten‐ tially dangerous happens, transactions continue anyway, in the hope that everything will turn out all right.</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><ul>
+<li>Dirty reads (read comitted)</li>
+<li>dirty writes (all transaction implementations)</li>
+<li>read skew (MVCC)</li>
+<li>lost updates (snapshot isolation/manual lock)</li>
+<li>write skew (serializable isolation)</li>
+<li>phantom reads (snapshot isolation + index-range locks)</li>
+</ul>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-06T15:39:42-05:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：Jan 6, 2021</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2021/01/06/Design-Data-Intensive-Application-2-4/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Design Data Intensive Application (2-4)</p>
+                <p class='content'>The Trouble with Distributed Systems 
+
+
+Faults and Partial Failurespartial failure: in a distribu...</p>
+              </a>
+            
+            
+              <a class='next' href='/2021/01/03/Design-Data-Intensive-Application-2-2-summary/'>
+                <p class='title'>Design Data Intensive Application (2-2-summary)<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>Partition Summary
+
+
+Toc
+partitioning and replication
+partition of key-value data
+key range
+hash o...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow floatable blur desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>Table of Content</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Meaning-of-ACID"><span class="toc-text">The Meaning of ACID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Atomicity"><span class="toc-text">Atomicity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Consistency"><span class="toc-text">Consistency</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Isolation"><span class="toc-text">Isolation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Durability"><span class="toc-text">Durability</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Single-Object-and-Multi-Object-Operations"><span class="toc-text">Single-Object and Multi-Object Operations</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Single-object-writes"><span class="toc-text">Single-object writes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-need-for-multi-object-transactions"><span class="toc-text">The need for multi-object transactions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Handling-errors-and-aborts"><span class="toc-text">Handling errors and aborts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Weak-Isolation-Levels"><span class="toc-text">Weak Isolation Levels</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Read-Comitted"><span class="toc-text">Read Comitted</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#No-dirty-reads"><span class="toc-text">No dirty reads</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#No-dirty-writes"><span class="toc-text">No dirty writes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implementing-read-committed"><span class="toc-text">Implementing read committed</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Snapshot-Isolation-and-Repeatable-Read"><span class="toc-text">Snapshot Isolation and Repeatable Read</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Implementing-snapshot-isolation"><span class="toc-text">Implementing snapshot isolation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Visibility-rules-for-observing-a-consistent-snapshot"><span class="toc-text">Visibility rules for observing a consistent snapshot</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Indexes-and-snapshot-isolation"><span class="toc-text">Indexes and snapshot isolation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Repeatable-read-and-naming-confusion"><span class="toc-text">Repeatable read and naming confusion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Preventing-Lost-Updates"><span class="toc-text">Preventing Lost Updates</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Atomic-write-operations"><span class="toc-text">Atomic write operations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Explicit-locking"><span class="toc-text">Explicit locking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Automatically-detecting-lost-updates"><span class="toc-text">Automatically detecting lost updates</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Compare-and-set"><span class="toc-text">Compare-and-set</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conflict-resolution-and-replication"><span class="toc-text">Conflict resolution and replication</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Write-Skew-and-Phantoms"><span class="toc-text">Write Skew and Phantoms</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Characterizing-write-skew"><span class="toc-text">Characterizing write skew</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Phantoms-causing-write-skew"><span class="toc-text">Phantoms causing write skew</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Materializing-conflicts"><span class="toc-text">Materializing conflicts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Actual-Serial-Execution"><span class="toc-text">Actual Serial Execution</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Encapsulating-transactgions-in-stored-procedures"><span class="toc-text">Encapsulating transactgions in stored procedures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pros-and-cons-of-stored-procedures"><span class="toc-text">Pros and cons of stored procedures</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Partitioning"><span class="toc-text">Partitioning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Summary-of-serial-execution"><span class="toc-text">Summary of serial execution</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Two-Phase-Locking-2PL"><span class="toc-text">Two-Phase Locking (2PL)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Implementation-of-two-phase-locking"><span class="toc-text">Implementation of two-phase locking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Performance-of-two-phase-locking"><span class="toc-text">Performance of two-phase locking</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Predicate-locks"><span class="toc-text">Predicate locks</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Index-range-locks"><span class="toc-text">Index-range locks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Serializable-Snapshot-Isolation-SSI"><span class="toc-text">Serializable Snapshot Isolation (SSI)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pessimistic-versus-optimistic-concurrency-control"><span class="toc-text">Pessimistic versus optimistic concurrency control</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+    </div>
+    
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+              <a href="mailto:shirleylee1389@gmail.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/Gilemore"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2021</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <div>
+    
+      
+  
+
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='option'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick='document.execCommand("copy")'><i class='fa fa-copy fa-fw'></i>Copy Text</a>
+        <hr id='hr-text'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>Copy Link</a>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>Open Link in New Tab</a>
+        <hr id='hr-href'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>Copy Image Link</a>
+        <hr id='hr-src'>
+      </li>
+      <li class='navigation'>
+        <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+      </li>
+      <hr>
+      
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          <li class='music name'>
+            <p class='nav music-title fix-cursor-default'></p>
+          </li>
+          <li class='music ctrl'>
+            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
+            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
+            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
+          </li>
+          <li class='music volume'>
+            <a class='nav volume'>
+              <div class="aplayer-volume-bar-wrap">
+                <div class="aplayer-volume-bar fix-cursor-pointer">
+                  <div class="aplayer-volume"></div>
+                  <i class='left fa fa-volume-off fa-fw'></i>
+                  <i class='right fa fa-volume-up fa-fw'></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+  <script>
+    window.document.oncontextmenu = function (event) {
+      if (event.ctrlKey) return true;
+      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
+      return popMenu(event);
+    };
+    document.addEventListener("click", function (event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      mymenu.style.display = "none";
+    });
+    function popMenu(event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      var menuContent = document.getElementById('rightmenu-content');
+      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
+      mymenu.style.top = event.clientY + "px";
+      mymenu.style.display = 'block';
+      if (event.clientX * 2 > screenWidth) {
+        menuContent.classList.add('left');
+      } else {
+        menuContent.classList.remove('left');
+      }
+      if (event.clientY * 2 > screenHeight) {
+        menuContent.classList.add('top');
+      } else {
+        menuContent.classList.remove('top');
+      }
+
+      let hrText = document.getElementById('hr-text');
+      let hrSrc = document.getElementById('hr-src');
+      let hrHref = document.getElementById('hr-href');
+
+      // 选中图片
+      let copySrc = document.getElementById('menu-copy-src');
+      if (copySrc != undefined) {
+        if (event.target.currentSrc) {
+          copySrc.style.display = 'block';
+          copySrc.addEventListener("click", function (e) {
+            copyString(event.target.currentSrc);
+          },{once: true});
+          hrSrc.style.display = 'block';
+        } else {
+          copySrc.style.display = 'none';
+          hrSrc.style.display = 'none';
+        }
+      }
+
+      // 选中按钮
+      // 判断是不是按钮
+      let href = '';
+      if (event.path) {
+        for (i = 0; i < event.path.length; i++) {
+          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
+            href = event.path[i].href;
+          }
+        }
+      }
+
+      let copyText = document.getElementById('menu-copy-text');
+      copyText.style.display = 'none';
+      hrText.style.display = 'none';
+      if (href.length == 0) {
+        // 选中文本
+        if (window.getSelection().toString()) {
+          copyText.style.display = 'block';
+          hrText.style.display = 'block';
+        }
+      }
+
+      // 在新标签页打开
+      let openHref = document.getElementById('menu-open-href');
+      if (openHref != undefined) {
+        if (href.length > 0) {
+          openHref.style.display = 'block';
+          openHref.addEventListener("click", function (e) {
+            window.open(href);
+          },{once: true});
+          hrHref.style.display = 'block';
+        } else {
+          openHref.style.display = 'none';
+          hrHref.style.display = 'none';
+        }
+      }
+      // 复制链接
+      let copyHref = document.getElementById('menu-copy-href');
+      if (copyHref != undefined) {
+        if (href.length > 0) {
+          copyHref.style.display = 'block';
+          copyHref.addEventListener("click", function (e) {
+            copyString(href);
+          },{once: true});
+        } else {
+          copyHref.style.display = 'none';
+        }
+      }
+
+      // 有音乐播放器
+      if (true == true) {
+        // 如果有aplayer，初始化一下
+      	try {
+      		checkAPlayer();
+          updateTitle();
+      	} catch (error) {
+      		console.log(error);
+      	}
+      }
+
+      return false; // 该行代码确保系统自带的右键菜单不会被调出
+    }
+    function hideMenu() {
+      document.getElementById('rightmenu-wrapper').style.display = 'none';
+    }
+    function copyString(str) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      document.body.appendChild(input);
+      input.setAttribute('value', str);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    document.execCommand('click');
+  </script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["/images/omoide016.jpeg"];
+        if ('false' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  <script>
+    let APlayerController = new Object();
+    APlayerController.id = '3175833810';  // 设定全局音乐播放ID
+    APlayerController.volume = '0.7';
+  </script>
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+    
+<script src="/js/aplayer.js"></script>
+
+  
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    let pageUrl = $.trim($('#pjax-comment-path').text()) === "none" ? 
+      decodeURI(window.location.pathname) : $.trim($('#pjax-comment-path').text());
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) === "none" ?
+      "快来评论吧~" : $.trim($('#"pjax-comment-placeholder').text());
+
+    let ALLPATH = '';
+    if(ALLPATH != '') pageUrl = ALLPATH;
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: pageUrl,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'false',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
+
+
+<!-- darkmodejs -->
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        clipboard.off('success').on('success', function (e) {
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    $(function () {
+        pjax_initCopyCode()
+    });
+</script>
+
+
+<!-- scrollreveal -->
+
+<!-- ******************************** -->
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+<!-- ******************************** -->
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+
+  
+    
+<script src="/js/search.js"></script>
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      $.fancybox.close();    // 关闭弹窗
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+
+      try{
+        pjax_fancybox();
+        
+          
+          if ('.cover') {
+            $('.cover').backstretch("resize");
+          } else {
+            $.backstretch("resize");
+          }
+        
+        
+        
+        
+          pjax_initCopyCode();
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
+  </div>
+</body>
+</html>

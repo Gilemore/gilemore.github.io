@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#3.0.0-rc.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+  <title>DFS-Tree - Gilmore&#39;s Blog</title>
+  
+    <meta name="keywords" content="LC">
+  
+
+  
+    <meta name="description" content="Here DFS is just like recursion, two things to be noted in def dfs():
+
+pass arguments down  sums, target
+have returns up res from root.left, root.right
+
+For ...">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  
+</head>
+
+<body>
+  
+  
+  
+  <div class="cover-wrapper">
+    <cover class='cover post' style="display: none;">
+      <div class='cover-body'>
+  <div class='a'>
+    
+      <img no-lazy class='logo' src='/images/favion.png'/>
+    
+    
+      <p class="title">Gilmore</p>
+    
+    
+      <p class="subtitle">Random thoughts...</p>
+    
+  </div>
+  <div class='b'>
+    <div class='menu navigation dock'>
+      <div class='list-h'>
+        
+          
+            <a href="/Class"
+              
+              
+              id="Class">
+              <i class='fas fa-book-open fa-fw'></i><p>Class</p>
+            </a>
+          
+            <a href="/archives"
+              
+              
+              id="archives">
+              <i class='fas fa-folder-open fa-fw'></i><p>Archive</p>
+            </a>
+          
+            <a href="/Random"
+              
+              
+              id="Random">
+              <i class='fas fa-book fa-fw'></i><p>Random</p>
+            </a>
+          
+            <a href="/AboutMe"
+              
+              
+              id="AboutMe">
+              <i class='fas fa-child fa-fw'></i><p>AboutMe</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+      <div class="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+    </cover>
+    <header class="l_header shadow floatable blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+            <img no-lazy class='logo' src='/images/favion.png'/>
+          
+          
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Please don't search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-home fa-fw'></i>FrontPage
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>Category
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-hashtag fa-fw'></i>Tags
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>Archive
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+  </div>
+  
+
+
+  <div class="l_body">
+    <div class='body-wrapper' id="pjax-container">
+      
+        <!--此文件用来存放一些不方便取值的变量--> 
+<!--思路大概是将值藏到重加载的区域内--> 
+ 
+ 
+ 
+<div id="pjax-data" style="display: none"> 
+  <div id="pjax-ispage">true</div> 
+  <div id="pjax-pageTitle">DFS-Tree</div> 
+  <div id="pjax-enable-cover">true</div> 
+  <div id="pjax-comment-path">none</div> 
+  <div id="pjax-comment-placeholder">none</div> 
+</div> 
+ 
+ 
+<script> 
+  // 处理封面 此时 jquery 还没加载 
+  if ("blog" == "none") { // 移除封面 
+    document.getElementsByClassName('cover')[0].style.display = "none"; 
+    document.getElementsByClassName('l_body')[0].classList.add("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.add("show"); 
+  } else { 
+    if ("blog" == "blog") { // 半屏 
+      document.getElementsByClassName('cover')[0].classList.remove("full"); 
+      document.getElementsByClassName('cover')[0].classList.add("half"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = "none"; 
+    } else if ("blog" == "docs") { // 全屏 
+      document.getElementsByClassName('cover')[0].classList.remove("half"); 
+      document.getElementsByClassName('cover')[0].classList.add("full"); 
+      document.getElementsByClassName('scroll-down')[0].style.display = ""; 
+    } 
+    document.getElementsByClassName('cover')[0].style.display = ""; 
+    document.getElementsByClassName('l_body', 'show')[0].classList.remove("nocover"); 
+    document.getElementsByClassName('l_header', 'cover-wrapper')[0].classList.remove("show"); 
+  } 
+</script> 
+
+      
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow floatable blur article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/08/12/DFS-Tree/">
+      DFS-Tree
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>Release on：Aug 12, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p>Here DFS is just like recursion, two things to be noted in <kbd>def dfs()</kbd>:</p>
+<ul>
+<li>pass arguments down  <kbd>sums, target</kbd></li>
+<li>have returns up <kbd>res from root.left, root.right</kbd></li>
+</ul>
+<p>For matrix, we have 2 fixed directions <kbd>root.left</kbd> / <kbd>root.right</kbd> to traverse. We should pay attention to <span class='p blue'>Return value + Pass down arguments + Parent child relationship</span>.</p>
+<a id="more"></a>
+
+
+
+<p>Understanding Recursion in Tree:</p>
+<ul>
+<li><strong><em>passing info upwards : what to return</em></strong></li>
+<li><strong><em>passing info downwards: what to pass in the arguments</em></strong></li>
+</ul>
+<p>For Tree DFS, we use <strong><em>stack</em></strong> to help us implement traversal. </p>
+<p>add level: binary tree right side view </p>
+<p>Backtrack: binary tree right side view, lowest common ancestor of a binary tree, diameter of binary tree</p>
+<p>Stack: Binary Search Tree Iterator 173</p>
+<p>pass down: validate binary search tree, Construct Binary Tree from Preorder and Inorder Traversal</p>
+<h2 id="Root-Issue"><a href="#Root-Issue" class="headerlink" title="Root Issue"></a>Root Issue</h2><h3 id="Binary-Tree-Path-257"><a href="#Binary-Tree-Path-257" class="headerlink" title="Binary Tree Path 257"></a>Binary Tree Path 257</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Input:</span><br><span class="line"></span><br><span class="line">   1</span><br><span class="line"> &#x2F;   \</span><br><span class="line">2     3</span><br><span class="line"> \</span><br><span class="line">  5</span><br><span class="line"></span><br><span class="line">Output: [&quot;1-&gt;2-&gt;5&quot;, &quot;1-&gt;3&quot;]</span><br><span class="line"></span><br><span class="line">Explanation: All root-to-leaf paths are: 1-&gt;2-&gt;5, 1-&gt;3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binaryTreePath</span>(<span class="params">root</span>):</span></span><br><span class="line">  res=[]</span><br><span class="line">  dfs(root,[],res)</span><br><span class="line">  <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">node,path,res</span>):</span></span><br><span class="line">  <span class="keyword">if</span> node:</span><br><span class="line">    path+=[str(node.val)]</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> node.left <span class="keyword">and</span> <span class="keyword">not</span> node.right:</span><br><span class="line">      res.append(<span class="string">&quot;-&gt;&quot;</span>.join(path))</span><br><span class="line">      <span class="keyword">return</span> </span><br><span class="line">    dfs(node.left,path,res)</span><br><span class="line">    dfs(node.right,path,res)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Path-Sum-112"><a href="#Path-Sum-112" class="headerlink" title="Path Sum 112"></a>Path Sum 112</h3><p>Given the below binary tree and <code>sum = 22</code>,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">      5</span><br><span class="line">     &#x2F; \</span><br><span class="line">    4   8</span><br><span class="line">   &#x2F;   &#x2F; \</span><br><span class="line">  11  13  4</span><br><span class="line"> &#x2F;  \      \</span><br><span class="line">7    2      1</span><br></pre></td></tr></table></figure>
+
+<p>return true, as there exist a root-to-leaf path <code>5-&gt;4-&gt;11-&gt;2</code> which sum is 22.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pathSum</span>(<span class="params">root,target</span>):</span></span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">  target-=root.val</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> root.left <span class="keyword">and</span> <span class="keyword">not</span> root.right:</span><br><span class="line">    <span class="keyword">return</span> target==<span class="number">0</span></span><br><span class="line">  <span class="keyword">return</span> pathSum(root.left,target) <span class="keyword">and</span> pathSum(root.right,target)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Backtracking"><a href="#Backtracking" class="headerlink" title="Backtracking"></a>Backtracking</h2><h3 id="Diameter-of-Binary-Tree-543"><a href="#Diameter-of-Binary-Tree-543" class="headerlink" title="Diameter of Binary Tree 543"></a>Diameter of Binary Tree 543</h3><p><strong>Example:</strong><br>Given a binary tree</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    1</span><br><span class="line">   &#x2F; \</span><br><span class="line">  2   3</span><br><span class="line"> &#x2F; \     </span><br><span class="line">4   5    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>Return <strong>3</strong>, which is the length of the path [4,2,1,3] or [5,2,1,3].</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">diameterOfBinaryTree</span>(<span class="params">root</span>):</span></span><br><span class="line">  self.ans=<span class="number">1</span></span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">node</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> node: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    l=helper(node.left)</span><br><span class="line">    r=helper(node.right)</span><br><span class="line">    self.ans=max(self.ans,l+r+<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> max(l,r)+<span class="number">1</span></span><br><span class="line">  </span><br><span class="line">  depth(root)</span><br><span class="line">  <span class="keyword">return</span> self.ans<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Binary-Tree-Maximum-Path-Sum-124"><a href="#Binary-Tree-Maximum-Path-Sum-124" class="headerlink" title="Binary Tree Maximum Path Sum 124"></a>Binary Tree Maximum Path Sum 124</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Input: [-10,9,20,null,null,15,7]</span><br><span class="line"></span><br><span class="line">   -10</span><br><span class="line">   &#x2F; \</span><br><span class="line">  9  20</span><br><span class="line">    &#x2F;  \</span><br><span class="line">   15   7</span><br><span class="line"></span><br><span class="line">Output: 42</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxPathSum</span>(<span class="params">root</span>):</span></span><br><span class="line">  maxsum=float(<span class="string">&quot;-inf&quot;</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">node</span>):</span></span><br><span class="line">    <span class="keyword">nonlocal</span> maxsum</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> node: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    left=max(<span class="number">0</span>,helper(node.left))</span><br><span class="line">    right=max(<span class="number">0</span>,helper(node.right))</span><br><span class="line">    <span class="keyword">if</span> left+right+node.val:</span><br><span class="line">      maxsum=left+right+node.val</span><br><span class="line">    <span class="keyword">return</span> max(left,right)+node.val</span><br><span class="line">  </span><br><span class="line">  helper(root)</span><br><span class="line">  <span class="keyword">return</span> maxsum</span><br></pre></td></tr></table></figure>
+
+<h3 id="Lowest-Common-Ancestor-of-a-Binary-Tree"><a href="#Lowest-Common-Ancestor-of-a-Binary-Tree" class="headerlink" title="Lowest Common Ancestor of a Binary Tree"></a>Lowest Common Ancestor of a Binary Tree</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: root &#x3D; [3,5,1,6,2,0,8,null,null,7,4], p &#x3D; 5, q &#x3D; 4</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lowestCommonAncestor</span>(<span class="params">root,p,q</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">recurse_tree</span>(<span class="params">cur</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> cur:</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    left=recurse_tree(cur.left)</span><br><span class="line">    right=recurse_tree(cur.right)</span><br><span class="line">    mid=cur==q <span class="keyword">or</span> cur==p</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> mid+left+right&gt;=<span class="number">2</span>:</span><br><span class="line">      self.ans=cur</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> mid <span class="keyword">or</span> left <span class="keyword">or</span> right</span><br><span class="line">  </span><br><span class="line">  recurse_tree(root)</span><br><span class="line">  <span class="keyword">return</span> self.ans</span><br></pre></td></tr></table></figure>
+
+<h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><h3 id="Binary-Search-Tree-Iterator-173"><a href="#Binary-Search-Tree-Iterator-173" class="headerlink" title="Binary Search Tree Iterator 173"></a>Binary Search Tree Iterator 173</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">   7</span><br><span class="line"> &#x2F;   \</span><br><span class="line">3    15</span><br><span class="line">    &#x2F;  \</span><br><span class="line">   9   20</span><br><span class="line"></span><br><span class="line">BSTIterator iterator &#x3D; new BSTIterator(root);</span><br><span class="line">iterator.next();    &#x2F;&#x2F; return 3</span><br><span class="line">iterator.next();    &#x2F;&#x2F; return 7</span><br><span class="line">iterator.hasNext(); &#x2F;&#x2F; return true</span><br><span class="line">iterator.next();    &#x2F;&#x2F; return 9</span><br><span class="line">iterator.hasNext(); &#x2F;&#x2F; return true</span><br><span class="line">iterator.next();    &#x2F;&#x2F; return 15</span><br><span class="line">iterator.hasNext(); &#x2F;&#x2F; return true</span><br><span class="line">iterator.next();    &#x2F;&#x2F; return 20</span><br><span class="line">iterator.hasNext(); &#x2F;&#x2F; return false</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BSTIterator</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,root</span>):</span></span><br><span class="line">    self.st=[]</span><br><span class="line">    cur=root</span><br><span class="line">    <span class="keyword">while</span> cur:</span><br><span class="line">      self.st.append(cur)</span><br><span class="line">      cur=cur.left</span><br><span class="line">      </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">next</span>(<span class="params">self</span>):</span></span><br><span class="line">    tmp=st.pop()</span><br><span class="line">    <span class="keyword">if</span> tmp.right:</span><br><span class="line">      cur=tmp.right</span><br><span class="line">      <span class="keyword">while</span> cur:</span><br><span class="line">        self.st.append(cur)</span><br><span class="line">        cur=cur.left</span><br><span class="line">    <span class="keyword">return</span> tmp.val</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">hasNext</span>(<span class="params">self</span>):</span></span><br><span class="line">    <span class="keyword">return</span> len(self.st)&gt;<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Pass-arguments-in-left-and-right"><a href="#Pass-arguments-in-left-and-right" class="headerlink" title="Pass arguments in left and right"></a>Pass arguments in left and right</h2><h3 id="Binary-tree-right-side-view-199"><a href="#Binary-tree-right-side-view-199" class="headerlink" title="Binary tree right side view 199"></a>Binary tree right side view 199</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,2,3,null,5,null,4]</span><br><span class="line">Output: [1, 3, 4]</span><br><span class="line">Explanation:</span><br><span class="line"></span><br><span class="line">   1            &lt;---</span><br><span class="line"> &#x2F;   \</span><br><span class="line">2     3         &lt;---</span><br><span class="line"> \     \</span><br><span class="line">  5     4       &lt;---</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rightSideView</span>(<span class="params">root</span>):</span></span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> []</span><br><span class="line">  rightside=[]</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">root,level</span>):</span></span><br><span class="line">    <span class="keyword">if</span> level==len(rightside):</span><br><span class="line">      rightside.append(root.val)</span><br><span class="line">    <span class="keyword">for</span> child <span class="keyword">in</span> [root.right,root.left]:</span><br><span class="line">      helper(child,level+<span class="number">1</span>)</span><br><span class="line">      </span><br><span class="line">  helper(root,<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">return</span> rightside</span><br></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal-105"><a href="#Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal-105" class="headerlink" title="Construct Binary Tree from Preorder and Inorder Traversal 105"></a>Construct Binary Tree from Preorder and Inorder Traversal 105</h3><p>For example, given</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preorder &#x3D; [3,9,20,15,7]</span><br><span class="line">inorder &#x3D; [9,3,15,20,7]</span><br></pre></td></tr></table></figure>
+
+<p>Return the following binary tree:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">buildTree</span>(<span class="params">preorder,inorder</span>):</span></span><br><span class="line">  <span class="keyword">return</span> build(preorder,<span class="number">0</span>,len(preorder)<span class="number">-1</span>,inorder,<span class="number">0</span>,len(inorder)<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build</span>(<span class="params">preorder,startp,endp,inorder,starti,endi</span>):</span></span><br><span class="line">  <span class="keyword">if</span> startp&gt;endp <span class="keyword">or</span> starti&gt;endi:</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  </span><br><span class="line">  root=TreeNode(preorder[startp])</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(starti,endi+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> inorder[i]==preorder[startp]:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">      </span><br><span class="line">  root.left=build(preorder,startp+<span class="number">1</span>,i-starti+startp,inorder,starti,i<span class="number">-1</span>)</span><br><span class="line">  root.right=build(preorder,i+starti+startp+<span class="number">1</span>,endp,inorder,i+<span class="number">1</span>,endi)</span><br><span class="line">  <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>
+
+<h3 id="Validate-Binary-Search-Tree"><a href="#Validate-Binary-Search-Tree" class="headerlink" title="Validate Binary Search Tree"></a>Validate Binary Search Tree</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    2</span><br><span class="line">   &#x2F; \</span><br><span class="line">  1   3</span><br><span class="line"></span><br><span class="line">Input: [2,1,3]</span><br><span class="line">Output: true</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isValidBST</span>(<span class="params">root</span>):</span></span><br><span class="line">  <span class="keyword">return</span> valid(root,float(<span class="string">&quot;inf&quot;</span>),float(<span class="string">&quot;-inf&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">valid</span>(<span class="params">node,maximum,minimum</span>):</span></span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">  <span class="keyword">if</span> node.val&gt;=maximum <span class="keyword">or</span> node.val&lt;=minimum:</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">  </span><br><span class="line">  left=valid(node.left,node.val,minimum)</span><br><span class="line">  right=valid(node.right,maximum,node.val)</span><br><span class="line">  <span class="keyword">return</span> left <span class="keyword">and</span> right</span><br></pre></td></tr></table></figure>
+
+<h3 id="Maximum-Difference-Between-Node-and-Ancestor-1026"><a href="#Maximum-Difference-Between-Node-and-Ancestor-1026" class="headerlink" title="Maximum Difference Between Node and Ancestor 1026"></a>Maximum Difference Between Node and Ancestor 1026</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Input: [8,3,10,1,6,null,14,null,null,4,7,13]</span><br><span class="line">Output: 7</span><br><span class="line">Explanation: </span><br><span class="line">We have various ancestor-node differences, some of which are given below :</span><br><span class="line">|8 - 3| &#x3D; 5</span><br><span class="line">|3 - 7| &#x3D; 4</span><br><span class="line">|8 - 1| &#x3D; 7</span><br><span class="line">|10 - 13| &#x3D; 3</span><br><span class="line">Among all possible differences, the maximum value of 7 is obtained by |8 - 1| &#x3D; 7.</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">maxAncestorDiff</span>(<span class="params">root</span>):</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">helper</span>(<span class="params">node,high,low</span>):</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> node:</span><br><span class="line">      <span class="keyword">return</span> high-low</span><br><span class="line">    high=max(high,node.val)</span><br><span class="line">    low=min(low,node.val)</span><br><span class="line">    l=helper(node.left,high,low)</span><br><span class="line">    r=helper(node.right,high,low)</span><br><span class="line">    <span class="keyword">return</span> max(l,r)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> helper(root,root.val,root.val)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Binary-Tree-Vertical-Order-Traversal-314"><a href="#Binary-Tree-Vertical-Order-Traversal-314" class="headerlink" title="Binary Tree Vertical Order Traversal 314"></a>Binary Tree Vertical Order Traversal 314</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,9,20,null,null,15,7]</span><br><span class="line"></span><br><span class="line">   3</span><br><span class="line">  &#x2F;\</span><br><span class="line"> &#x2F;  \</span><br><span class="line"> 9  20</span><br><span class="line">    &#x2F;\</span><br><span class="line">   &#x2F;  \</span><br><span class="line">  15   7 </span><br><span class="line"></span><br><span class="line">Output:</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  [9],</span><br><span class="line">  [3,15],</span><br><span class="line">  [20],</span><br><span class="line">  [7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">verticalOrder</span>(<span class="params">root</span>):</span></span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">  self.maxcol=float(<span class="string">&quot;-inf&quot;</span>)</span><br><span class="line">  self.mincol=float(<span class="string">&quot;inf&quot;</span>)</span><br><span class="line">  tmp=[]</span><br><span class="line">  output=[]</span><br><span class="line">  dfs(tmp,<span class="number">0</span>,<span class="number">0</span>,root)</span><br><span class="line">  tmp=sorted(tmp,key=<span class="keyword">lambda</span> x:(x[<span class="number">0</span>],x[<span class="number">1</span>]))</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(self.mincol,self.maxcol+<span class="number">1</span>):</span><br><span class="line">    output.append([])</span><br><span class="line">  <span class="keyword">for</span> i,j,k <span class="keyword">in</span> tmp:</span><br><span class="line">    output[i-self.mincol].append(k)</span><br><span class="line">  <span class="keyword">return</span> output</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs</span>(<span class="params">tmp,row,col,root</span>):</span></span><br><span class="line">  <span class="keyword">if</span> root:</span><br><span class="line">    self.maxcol=max(self.maxcol,col)</span><br><span class="line">    self.mincol=min(self.mincol,col)</span><br><span class="line">    tmp.append((col,row,root.val))</span><br><span class="line">    dfs(tmp,row+<span class="number">1</span>,col<span class="number">-1</span>,root.left)</span><br><span class="line">    dfs(tmp,row+<span class="number">1</span>,col+<span class="number">1</span>,root.right)</span><br></pre></td></tr></table></figure>
+
+<h2 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h2><h3 id="Unique-Binary-Search-Trees-96"><a href="#Unique-Binary-Search-Trees-96" class="headerlink" title="Unique Binary Search Trees 96"></a>Unique Binary Search Trees 96</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Input: 3</span><br><span class="line">Output: 5</span><br><span class="line">Explanation:</span><br><span class="line">Given n &#x3D; 3, there are a total of 5 unique BST&#39;s:</span><br><span class="line"></span><br><span class="line">   1         3     3      2      1</span><br><span class="line">    \       &#x2F;     &#x2F;      &#x2F; \      \</span><br><span class="line">     3     2     1      1   3      2</span><br><span class="line">    &#x2F;     &#x2F;       \                 \</span><br><span class="line">   2     1         2                 3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numTrees</span>(<span class="params">n</span>):</span></span><br><span class="line">  dp=[<span class="number">0</span>]*(n+<span class="number">1</span>)</span><br><span class="line">  dp[<span class="number">0</span>],dp[<span class="number">1</span>]=<span class="number">1</span>,<span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>,n+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,i+<span class="number">1</span>):</span><br><span class="line">      dp[i]+=dp[i-j]*dp[j<span class="number">-1</span>]</span><br><span class="line">  <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="Distribute-Coins-in-Binary-Tree-979"><a href="#Distribute-Coins-in-Binary-Tree-979" class="headerlink" title="Distribute Coins in Binary Tree 979"></a>Distribute Coins in Binary Tree 979</h2><h2 id="Path-Sum-112-1"><a href="#Path-Sum-112-1" class="headerlink" title="Path Sum 112"></a>Path Sum 112</h2><p>Consider <code>[1,2]</code></p>
+<h2 id="Flatten-Binary-Tree-to-Linked-List-114"><a href="#Flatten-Binary-Tree-to-Linked-List-114" class="headerlink" title="Flatten Binary Tree to Linked List 114"></a>Flatten Binary Tree to Linked List 114</h2><p>return tail or root</p>
+<p>##All Nodes Distance K in Binary Tree 863 </p>
+<p>##Delete Nodes And Return Forest 1110 ​</p>
+<h2 id="Binary-Tree-Maximum-Path-Sum-124-1"><a href="#Binary-Tree-Maximum-Path-Sum-124-1" class="headerlink" title="Binary Tree Maximum Path Sum 124"></a>Binary Tree Maximum Path Sum 124</h2><h2 id="Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal-105-1"><a href="#Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal-105-1" class="headerlink" title="Construct Binary Tree from Preorder and Inorder Traversal 105"></a>Construct Binary Tree from Preorder and Inorder Traversal 105</h2><h2 id="Binary-Tree-Vertical-Order-Traversal-314-1"><a href="#Binary-Tree-Vertical-Order-Traversal-314-1" class="headerlink" title="Binary Tree Vertical Order Traversal 314"></a>Binary Tree Vertical Order Traversal 314</h2><p>get the difference between stack and queue</p>
+<h2 id="All-Nodes-Distance-K-in-Binary-Tree-863"><a href="#All-Nodes-Distance-K-in-Binary-Tree-863" class="headerlink" title="All Nodes Distance K in Binary Tree 863"></a>All Nodes Distance K in Binary Tree 863</h2><h2 id="Find-Leaves-of-Binary-Tree-366"><a href="#Find-Leaves-of-Binary-Tree-366" class="headerlink" title="Find Leaves of Binary Tree 366"></a>Find Leaves of Binary Tree 366</h2><h2 id="Convert-Sorted-List-to-Binary-Search-Tree-109"><a href="#Convert-Sorted-List-to-Binary-Search-Tree-109" class="headerlink" title="Convert Sorted List to Binary Search Tree 109"></a>Convert Sorted List to Binary Search Tree 109</h2><h2 id="Symmetric-Tree-101"><a href="#Symmetric-Tree-101" class="headerlink" title="Symmetric Tree 101"></a>Symmetric Tree 101</h2><h2 id="Convert-Sorted-Array-to-Binary-Search-Tree-108"><a href="#Convert-Sorted-Array-to-Binary-Search-Tree-108" class="headerlink" title="Convert Sorted Array to Binary Search Tree 108"></a>Convert Sorted Array to Binary Search Tree 108</h2><h2 id="Delete-Nodes-And-Return-Forest-1110"><a href="#Delete-Nodes-And-Return-Forest-1110" class="headerlink" title="Delete Nodes And Return Forest 1110"></a>Delete Nodes And Return Forest 1110</h2><p>The question is composed of two requirements:</p>
+<ul>
+<li>To remove a node, the child need to <strong>notify</strong> its parent about the child’s existance.</li>
+<li>To determine whether a node is a root node in the final forest, we need to know [1] whether the node is removed (which is trivial), and [2] whether its parent is removed (which requires the parent to <strong>notify</strong> the child)</li>
+</ul>
+<p>It is very obvious that a tree problem is likely to be solved by recursion. The two components above are actually examining interviewees’ understanding to the two key points of <strong>recursion</strong>:</p>
+<ul>
+<li>passing info downwards – by arguments</li>
+<li>passing info upwards – by return value</li>
+</ul>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T14:45:33-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：Apr 21, 2021</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/LC/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>LC</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2020/08/12/OOP-Basics/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>OOP-Basics</p>
+                <p class='content'>Object-Oriented Programming or OOPs refers to languages that uses objects in programming. Object-...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/08/12/DFS-Graph/'>
+                <p class='title'>DFS-Graph<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>Here DFS is just like recursion, two things to be noted in def dfs():
+
+pass arguments down  sums,...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow floatable blur desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>Table of Content</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Root-Issue"><span class="toc-text">Root Issue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Binary-Tree-Path-257"><span class="toc-text">Binary Tree Path 257</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Path-Sum-112"><span class="toc-text">Path Sum 112</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Backtracking"><span class="toc-text">Backtracking</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Diameter-of-Binary-Tree-543"><span class="toc-text">Diameter of Binary Tree 543</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Binary-Tree-Maximum-Path-Sum-124"><span class="toc-text">Binary Tree Maximum Path Sum 124</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lowest-Common-Ancestor-of-a-Binary-Tree"><span class="toc-text">Lowest Common Ancestor of a Binary Tree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Stack"><span class="toc-text">Stack</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Binary-Search-Tree-Iterator-173"><span class="toc-text">Binary Search Tree Iterator 173</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pass-arguments-in-left-and-right"><span class="toc-text">Pass arguments in left and right</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Binary-tree-right-side-view-199"><span class="toc-text">Binary tree right side view 199</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal-105"><span class="toc-text">Construct Binary Tree from Preorder and Inorder Traversal 105</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Validate-Binary-Search-Tree"><span class="toc-text">Validate Binary Search Tree</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maximum-Difference-Between-Node-and-Ancestor-1026"><span class="toc-text">Maximum Difference Between Node and Ancestor 1026</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Binary-Tree-Vertical-Order-Traversal-314"><span class="toc-text">Binary Tree Vertical Order Traversal 314</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DP"><span class="toc-text">DP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Unique-Binary-Search-Trees-96"><span class="toc-text">Unique Binary Search Trees 96</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Distribute-Coins-in-Binary-Tree-979"><span class="toc-text">Distribute Coins in Binary Tree 979</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Path-Sum-112-1"><span class="toc-text">Path Sum 112</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flatten-Binary-Tree-to-Linked-List-114"><span class="toc-text">Flatten Binary Tree to Linked List 114</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Tree-Maximum-Path-Sum-124-1"><span class="toc-text">Binary Tree Maximum Path Sum 124</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal-105-1"><span class="toc-text">Construct Binary Tree from Preorder and Inorder Traversal 105</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary-Tree-Vertical-Order-Traversal-314-1"><span class="toc-text">Binary Tree Vertical Order Traversal 314</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#All-Nodes-Distance-K-in-Binary-Tree-863"><span class="toc-text">All Nodes Distance K in Binary Tree 863</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Find-Leaves-of-Binary-Tree-366"><span class="toc-text">Find Leaves of Binary Tree 366</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Convert-Sorted-List-to-Binary-Search-Tree-109"><span class="toc-text">Convert Sorted List to Binary Search Tree 109</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Symmetric-Tree-101"><span class="toc-text">Symmetric Tree 101</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Convert-Sorted-Array-to-Binary-Search-Tree-108"><span class="toc-text">Convert Sorted Array to Binary Search Tree 108</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Delete-Nodes-And-Return-Forest-1110"><span class="toc-text">Delete Nodes And Return Forest 1110</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+
+    </div>
+    
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='320px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+              <a href="mailto:shirleylee1389@gmail.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/Gilemore"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2021</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  <div>
+    
+      
+  
+
+  <div id="rightmenu-wrapper">
+    <ul class="list-v rightmenu" id="rightmenu-content">
+      <li class='option'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-text' onclick='document.execCommand("copy")'><i class='fa fa-copy fa-fw'></i>Copy Text</a>
+        <hr id='hr-text'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-href'><i class='fa fa-link fa-fw'></i>Copy Link</a>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-open-href'><i class='fa fa-external-link-square-alt fa-fw'></i>Open Link in New Tab</a>
+        <hr id='hr-href'>
+        <a class='vlts-menu opt fix-cursor-default' id='menu-copy-src'><i class='fa fa-image fa-fw'></i>Copy Image Link</a>
+        <hr id='hr-src'>
+      </li>
+      <li class='navigation'>
+        <a class='nav icon-only fix-cursor-default' onclick='history.back()'><i class='fa fa-arrow-left fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='history.forward()'><i class='fa fa-arrow-right fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' onclick='window.location.reload()'><i class='fa fa-redo fa-fw'></i></a>
+        <a class='nav icon-only fix-cursor-default' href='/'><i class='fa fa-home fa-fw'></i></a>
+      </li>
+      <hr>
+      
+        
+      
+        
+          
+    <li>
+      <a class='vlts-menu fix-cursor-default' 
+        
+        
+        
+          onclick="document.execCommand('print')"
+        
+        >
+        <i class='fa fa-print fa-fw'></i> 打印页面
+      </a>
+    </li>
+  
+        
+      
+        
+          <hr>
+        
+      
+        
+          <li class='music name'>
+            <p class='nav music-title fix-cursor-default'></p>
+          </li>
+          <li class='music ctrl'>
+            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
+            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
+            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
+          </li>
+          <li class='music volume'>
+            <a class='nav volume'>
+              <div class="aplayer-volume-bar-wrap">
+                <div class="aplayer-volume-bar fix-cursor-pointer">
+                  <div class="aplayer-volume"></div>
+                  <i class='left fa fa-volume-off fa-fw'></i>
+                  <i class='right fa fa-volume-up fa-fw'></i>
+                </div>
+              </div>
+            </a>
+          </li>
+        
+      
+    </ul>
+  </div>
+
+  <script>
+    window.document.oncontextmenu = function (event) {
+      if (event.ctrlKey) return true;
+      if (/Android|webOS|BlackBerry/i.test(navigator.userAgent)) return true;
+      return popMenu(event);
+    };
+    document.addEventListener("click", function (event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      mymenu.style.display = "none";
+    });
+    function popMenu(event) {
+      var mymenu = document.getElementById('rightmenu-wrapper');
+      var menuContent = document.getElementById('rightmenu-content');
+      var screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var screenHeight = document.documentElement.clientHeight || document.body.clientHeight;
+      mymenu.style.left = event.clientX + "px"; // 获取鼠标位置
+      mymenu.style.top = event.clientY + "px";
+      mymenu.style.display = 'block';
+      if (event.clientX * 2 > screenWidth) {
+        menuContent.classList.add('left');
+      } else {
+        menuContent.classList.remove('left');
+      }
+      if (event.clientY * 2 > screenHeight) {
+        menuContent.classList.add('top');
+      } else {
+        menuContent.classList.remove('top');
+      }
+
+      let hrText = document.getElementById('hr-text');
+      let hrSrc = document.getElementById('hr-src');
+      let hrHref = document.getElementById('hr-href');
+
+      // 选中图片
+      let copySrc = document.getElementById('menu-copy-src');
+      if (copySrc != undefined) {
+        if (event.target.currentSrc) {
+          copySrc.style.display = 'block';
+          copySrc.addEventListener("click", function (e) {
+            copyString(event.target.currentSrc);
+          },{once: true});
+          hrSrc.style.display = 'block';
+        } else {
+          copySrc.style.display = 'none';
+          hrSrc.style.display = 'none';
+        }
+      }
+
+      // 选中按钮
+      // 判断是不是按钮
+      let href = '';
+      if (event.path) {
+        for (i = 0; i < event.path.length; i++) {
+          if (event.path[i].href != undefined && event.path[i].href.length > 0) {
+            href = event.path[i].href;
+          }
+        }
+      }
+
+      let copyText = document.getElementById('menu-copy-text');
+      copyText.style.display = 'none';
+      hrText.style.display = 'none';
+      if (href.length == 0) {
+        // 选中文本
+        if (window.getSelection().toString()) {
+          copyText.style.display = 'block';
+          hrText.style.display = 'block';
+        }
+      }
+
+      // 在新标签页打开
+      let openHref = document.getElementById('menu-open-href');
+      if (openHref != undefined) {
+        if (href.length > 0) {
+          openHref.style.display = 'block';
+          openHref.addEventListener("click", function (e) {
+            window.open(href);
+          },{once: true});
+          hrHref.style.display = 'block';
+        } else {
+          openHref.style.display = 'none';
+          hrHref.style.display = 'none';
+        }
+      }
+      // 复制链接
+      let copyHref = document.getElementById('menu-copy-href');
+      if (copyHref != undefined) {
+        if (href.length > 0) {
+          copyHref.style.display = 'block';
+          copyHref.addEventListener("click", function (e) {
+            copyString(href);
+          },{once: true});
+        } else {
+          copyHref.style.display = 'none';
+        }
+      }
+
+      // 有音乐播放器
+      if (true == true) {
+        // 如果有aplayer，初始化一下
+      	try {
+      		checkAPlayer();
+          updateTitle();
+      	} catch (error) {
+      		console.log(error);
+      	}
+      }
+
+      return false; // 该行代码确保系统自带的右键菜单不会被调出
+    }
+    function hideMenu() {
+      document.getElementById('rightmenu-wrapper').style.display = 'none';
+    }
+    function copyString(str) {
+      const input = document.createElement('input');
+      input.setAttribute('readonly', 'readonly');
+      document.body.appendChild(input);
+      input.setAttribute('value', str);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    }
+    document.execCommand('click');
+  </script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["/images/omoide016.jpeg"];
+        if ('false' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  <script>
+    let APlayerController = new Object();
+    APlayerController.id = '3175833810';  // 设定全局音乐播放ID
+    APlayerController.volume = '0.7';
+  </script>
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+    
+<script src="/js/aplayer.js"></script>
+
+  
+
+
+
+
+  
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  var GUEST_INFO = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link'.split(',').filter(function (item) {
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick', 'mail', 'link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function (item) {
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+
+  function pjax_valine() {
+    let pageUrl = $.trim($('#pjax-comment-path').text()) === "none" ? 
+      decodeURI(window.location.pathname) : $.trim($('#pjax-comment-path').text());
+    let pagePlaceholder = $.trim($('#pjax-comment-placeholder').text()) === "none" ?
+      "快来评论吧~" : $.trim($('#"pjax-comment-placeholder').text());
+
+    let ALLPATH = '';
+    if(ALLPATH != '') pageUrl = ALLPATH;
+
+    var valine = new Valine();
+    valine.init({
+      el: '#valine_container',
+      meta: meta,
+      placeholder: pagePlaceholder,
+      path: pageUrl,
+      appId: "",
+      appKey: "",
+      pageSize: '10',
+      avatar: 'robohash',
+      lang: 'zh-cn',
+      visitor: 'true',
+      highlight: 'true',
+      mathJax: 'false',
+      enableQQ: 'false',
+      requiredFields: requiredFields,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps
+    })
+  }
+
+  $(function () {
+    pjax_valine();
+  });
+</script>
+
+
+
+
+<!-- darkmodejs -->
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+    var clipboard = new ClipboardJS('.btn-copy', {
+        target: function (trigger) {
+            return trigger.nextElementSibling
+        }
+    });
+    function wait(callback, seconds) {
+        var timelag = null;
+        timelag = window.setTimeout(callback, seconds)
+    }
+    function pjax_initCopyCode() {
+        var copyHtml = '';
+        copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+        copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+        copyHtml += '</button>';
+        $(".highlight .code pre").before(copyHtml);
+        $(".article pre code").before(copyHtml);
+        clipboard.off('success').on('success', function (e) {
+            let $btn = $(e.trigger);
+            $btn.addClass('copied');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-check-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPIED';
+            wait(function () {
+                $icon.removeClass('fa-check-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        });
+        clipboard.off('error').on('error', function (e) {
+            e.clearSelection();
+            let $btn = $(e.trigger);
+            $btn.addClass('copy-failed');
+            let $icon = $($btn.find('i'));
+            $icon.removeClass('fa-copy');
+            $icon.addClass('fa-times-circle');
+            let $span = $($btn.find('span'));
+            $span[0].innerText = 'COPY FAILED';
+            wait(function () {
+                $icon.removeClass('fa-times-circle');
+                $icon.addClass('fa-copy');
+                $span[0].innerText = 'COPY'
+            }, 2000)
+        })
+    }
+    $(function () {
+        pjax_initCopyCode()
+    });
+</script>
+
+
+<!-- scrollreveal -->
+
+<!-- ******************************** -->
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+<!-- ******************************** -->
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+
+  
+    
+<script src="/js/search.js"></script>
+
+  
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js" data-pjax></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function () {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+
+    
+      
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+<!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+</div>
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+      $.fancybox.close();    // 关闭弹窗
+      $('.l_header .switcher .s-search').removeClass('active'); // 关闭移动端激活的搜索框
+      $('.l_header').removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      $('.wrapper').removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      $('.s-top').unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+      window.ShowLoading();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      // 关于百度统计对 SPA 页面的处理：
+      // 方案一：百度统计>管理>单页应用设置中，打开开启按钮即可对SPA进行统计。 https://tongji.baidu.com/web/help/article?id=324
+      // 方案二：取消注释下列代码。 https://tongji.baidu.com/web/help/article?id=235
+      // 
+
+      // 关于谷歌统计对 SPA 页面的处理：
+      // 当应用以动态方式加载内容并更新地址栏中的网址时，也应该更新通过 gtag.js 存储的网页网址。
+      // https://developers.google.cn/analytics/devguides/collection/gtagjs/single-page-applications?hl=zh-cn
+      
+
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+
+      try{
+        pjax_fancybox();
+        
+          
+          if ('.cover') {
+            $('.cover').backstretch("resize");
+          } else {
+            $.backstretch("resize");
+          }
+        
+        
+        
+        
+          pjax_initCopyCode();
+        
+        
+          pjax_valine();
+        
+        
+        
+        
+        
+      } catch (e) {
+        console.log(e);
+      }
+      window.HideLoading();
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.HideLoading();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+
+    
+  </div>
+</body>
+</html>
