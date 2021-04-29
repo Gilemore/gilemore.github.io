@@ -2,82 +2,84 @@
 <html>
 <head hexo-theme='https://volantis.js.org/#3.0.0-rc.1'>
   <meta charset="utf-8">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- SEO相关 -->
   
-    
-  
-  <!-- 渲染优化 -->
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      
+                      
+                        <!-- 渲染优化 -->
+                        <meta name="renderer" content="webkit">
+                        <meta name="force-rendering" content="webkit">
+                        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+                        <meta name="HandheldFriendly" content="True">
+                        <meta name="apple-mobile-web-app-capable" content="yes">
+                        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- 页面元数据 -->
-  
-  <title>PriorityQueue - Gilmore&#39;s Blog</title>
-  
-    <meta name="keywords" content="LC">
-  
+                        <!-- 页面元数据 -->
+                        
+                          <title>
+                            
+                              PriorityQueue - 
+                                  Gilmore&#39;s Blog
+                          </title>
+                          
+                            <meta name="keywords" content="LC">
+                            
 
-  
-    <meta name="description" content="Dynamic inserting values and also keep the array sorted: Priority Queue, Heap
+                              
+                                <meta name="description" content="Dynamic inserting values and also keep the array sorted: Priority Queue, Heap
 Top K largest / smallest:
 Leetcode: Merge k Sorted Lists (23), K Closest Points...">
-  
+                                
 
-  <!-- feed -->
-  
+                                  <!-- feed -->
+                                  
 
-  <!-- import meta -->
-  
+                                        <!-- import meta -->
+                                        
 
-  <!-- link -->
-  
-    
+                                                  <!-- link -->
+                                                  
+                                                    
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
 
-  
-  
-    
+                                                      
+                                                        
+                                                          
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
 
-  
-  
-    
+                                                            
+                                                              
+                                                                
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
-  
+                                                                  
 
-  
-    
+                                                                    
+                                                                      
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
 
-  
+                                                                        
 
-  
+                                                                          
 
-  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
-  
+                                                                              
 
-  
+                                                                                  
 
-  <!-- import link -->
-  
+                                                                                      <!-- import link -->
+                                                                                      
 
-  
-  
-    
+                                                                                                
+                                                                                                          
+                                                                                                                
 <link rel="stylesheet" href="/css/style.css">
 
-  
+                                                                                                                  
 
-  
-  
+                                                                                                                    
+                                                                                                                        
 </head>
-
 <body>
   
   
@@ -156,6 +158,8 @@ Leetcode: Merge k Sorted Lists (23), K Closest Points...">
           
             <img no-lazy class='logo' src='/images/favion.png'/>
           
+          
+            <i class='hhh'></i>
           
           
         </a>
@@ -368,10 +372,12 @@ Leetcode: Merge k Sorted Lists (23), K Closest Points...">
 
 <div class='l_main'>
   
-
   
-    <article id="post" class="post white-box reveal shadow floatable blur article-type-post" itemscope itemprop="blogPost">
-      
+    
+      <article id="post"
+        class="post white-box reveal shadow floatable blur article-type-post" itemscope
+        itemprop="blogPost">
+        
 
 
   <section class='meta'>
@@ -441,11 +447,11 @@ Leetcode: Merge k Sorted Lists (23), K Closest Points...">
   </section>
 
 
-      <section class="article typo">
-        <div class="article-entry" itemprop="articleBody">
-          
-          
-          <p>Dynamic inserting values and also keep the array sorted: Priority Queue, Heap</p>
+          <section class="article typo">
+            <div class="article-entry" itemprop="articleBody">
+              
+                  
+                      <p>Dynamic inserting values and also keep the array sorted: Priority Queue, Heap</p>
 <p><em>Top K largest / smallest:</em></p>
 <p>Leetcode: Merge k Sorted Lists (23), K Closest Points to Origin (973), Top K Frequent Words (692), Kth Largest Element in an Array (215)</p>
 <p><em>Two Heaps:</em></p>
@@ -642,10 +648,11 @@ Leetcode: Merge k Sorted Lists (23), K Closest Points...">
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MedianFinder</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        initialize your data structure here.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        self.minHeap=[]</span><br><span class="line">        self.maxHeap=[]</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">addNum</span>(<span class="params">self, num: int</span>) -&gt; <span class="keyword">None</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.minHeap)==<span class="number">0</span>:</span><br><span class="line">            heapq.heappush(self.minHeap,-num)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">if</span> num&lt;=-self.minHeap[<span class="number">0</span>]:</span><br><span class="line">            heapq.heappush(self.minHeap,-num)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            heapq.heappush(self.maxHeap,num)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">if</span> len(self.minHeap)&gt;len(self.maxHeap)+<span class="number">1</span>:</span><br><span class="line">            new=heapq.heappop(self.minHeap)</span><br><span class="line">            heapq.heappush(self.maxHeap,-new)</span><br><span class="line">        <span class="keyword">elif</span> len(self.maxHeap)&gt;len(self.minHeap)+<span class="number">1</span>:</span><br><span class="line">            new=heapq.heappop(self.maxHeap)</span><br><span class="line">            heapq.heappush(self.minHeap,-new)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findMedian</span>(<span class="params">self</span>) -&gt; float:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.minHeap)==len(self.maxHeap):</span><br><span class="line">            <span class="keyword">return</span> (self.maxHeap[<span class="number">0</span>]-self.minHeap[<span class="number">0</span>])/<span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> -self.minHeap[<span class="number">0</span>] <span class="keyword">if</span> len(self.minHeap)&gt;len(self.maxHeap) <span class="keyword">else</span> self.maxHeap[<span class="number">0</span>]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
-          
-            <div class='article_footer'>
-              
-                
+                        
+                            
+                              <div class='article_footer'>
+                                
+                                      
   
     
     
@@ -665,12 +672,12 @@ Leetcode: Merge k Sorted Lists (23), K Closest Points...">
   
 
 
-              
+                                        
+                              </div>
+                              
             </div>
-          
-        </div>
-        
-          
+            
+              
 
 
   <section class='meta' id="footer-meta">
@@ -708,38 +715,45 @@ Leetcode: Merge k Sorted Lists (23), K Closest Points...">
   </section>
 
 
-        
-        
-          <div class="prev-next">
-            
-              <a class='prev' href='/2020/08/17/MST/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>MST</p>
-                <p class='content'>Minimum Spanning Tree (MST) 生成树
-Given a connected and undirected graph, a spanning tree of that g...</p>
-              </a>
-            
-            
-              <a class='next' href='/2020/08/13/VMware-OA/'>
-                <p class='title'>VMware-OA<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>Timeline: OA 8.16 – no response
+                
+                  
+                    <div class="prev-next">
+                      
+                        <a class='prev' href='/2020/08/17/MST/'>
+                          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>
+                            MST
+                          </p>
+                          <p class='content'>
+                            Minimum Spanning Tree (MST) 生成树
+Given a connected and undirected graph, a spanning tree of that g...
+                          </p>
+                        </a>
+                        
+                          
+                            <a class='next' href='/2020/08/13/VMware-OA/'>
+                              <p class='title'>
+                                VMware-OA<i class="fas fa-chevron-right" aria-hidden="true"></i>
+                              </p>
+                              <p class='content'>
+                                Timeline: OA 8.16 – no response
 
 
 Multiple Choices
-FIFO System, 4 pages, 一开始没有load，先access 100个不同...</p>
-              </a>
-            
-          </div>
-        
-      </section>
-    </article>
-  
+FIFO System, 4 pages, 一开始没有load，先access 100个不同...
+                              </p>
+                            </a>
+                            
+                    </div>
+                    
+          </section>
+      </article>
+      
+                
 
+                  
 
-
-
-<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
-
-
+                    <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+                    
 </div>
 <aside class='l_side'>
   
@@ -780,22 +794,6 @@ FIFO System, 4 pages, 一开始没有load，先access 100个不同...</p>
       
         <div class="aplayer-container">
           
-
-  
-    <meting-js
-      theme='#1BCDFC'
-      autoplay='false'
-      volume='0.7'
-      loop='all'
-      order='list'
-      fixed='false'
-      list-max-height='320px'
-      server='netease'
-      type='playlist'
-      id='3175833810'
-      list-folded='true'>
-    </meting-js>
-  
 
 
         </div>
@@ -886,26 +884,6 @@ FIFO System, 4 pages, 一开始没有load，先access 100个不同...</p>
           <hr>
         
       
-        
-          <li class='music name'>
-            <p class='nav music-title fix-cursor-default'></p>
-          </li>
-          <li class='music ctrl'>
-            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
-            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
-            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
-          </li>
-          <li class='music volume'>
-            <a class='nav volume'>
-              <div class="aplayer-volume-bar-wrap">
-                <div class="aplayer-volume-bar fix-cursor-pointer">
-                  <div class="aplayer-volume"></div>
-                  <i class='left fa fa-volume-off fa-fw'></i>
-                  <i class='right fa fa-volume-up fa-fw'></i>
-                </div>
-              </div>
-            </a>
-          </li>
         
       
     </ul>
@@ -1009,7 +987,7 @@ FIFO System, 4 pages, 一开始没有load，先access 100个不同...</p>
       }
 
       // 有音乐播放器
-      if (true == true) {
+      if (false == true) {
         // 如果有aplayer，初始化一下
       	try {
       		checkAPlayer();
@@ -1098,25 +1076,6 @@ FIFO System, 4 pages, 一开始没有load，先access 100个不同...</p>
   
 
 
-
-  <script>
-    let APlayerController = new Object();
-    APlayerController.id = '3175833810';  // 设定全局音乐播放ID
-    APlayerController.volume = '0.7';
-  </script>
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
-
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
-
-  
-    
-<script src="/js/aplayer.js"></script>
-
-  
 
 
 

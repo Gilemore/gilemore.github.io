@@ -2,85 +2,87 @@
 <html>
 <head hexo-theme='https://volantis.js.org/#3.0.0-rc.1'>
   <meta charset="utf-8">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- SEO相关 -->
   
-    
-  
-  <!-- 渲染优化 -->
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      
+                      
+                        <!-- 渲染优化 -->
+                        <meta name="renderer" content="webkit">
+                        <meta name="force-rendering" content="webkit">
+                        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+                        <meta name="HandheldFriendly" content="True">
+                        <meta name="apple-mobile-web-app-capable" content="yes">
+                        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- 页面元数据 -->
-  
-  <title>Design Data Intensive Application (1-4) - Gilmore&#39;s Blog</title>
-  
-    <meta name="keywords" content="system design">
-  
+                        <!-- 页面元数据 -->
+                        
+                          <title>
+                            
+                              Design Data Intensive Application (1-4) - 
+                                  Gilmore&#39;s Blog
+                          </title>
+                          
+                            <meta name="keywords" content="system design">
+                            
 
-  
-    <meta name="description" content="Encoding and Evolution
+                              
+                                <meta name="description" content="Encoding and Evolution
 Backward compatibility and forward compatibility
 
 programming language-specific encodings
 JSON, XML, CSV
 Binary schema–driven formats ...">
-  
+                                
 
-  <!-- feed -->
-  
+                                  <!-- feed -->
+                                  
 
-  <!-- import meta -->
-  
+                                        <!-- import meta -->
+                                        
 
-  <!-- link -->
-  
-    
+                                                  <!-- link -->
+                                                  
+                                                    
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
 
-  
-  
-    
+                                                      
+                                                        
+                                                          
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
 
-  
-  
-    
+                                                            
+                                                              
+                                                                
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
-  
+                                                                  
 
-  
-    
+                                                                    
+                                                                      
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
 
-  
+                                                                        
 
-  
+                                                                          
 
-  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
-  
+                                                                              
 
-  
+                                                                                  
 
-  <!-- import link -->
-  
+                                                                                      <!-- import link -->
+                                                                                      
 
-  
-  
-    
+                                                                                                
+                                                                                                          
+                                                                                                                
 <link rel="stylesheet" href="/css/style.css">
 
-  
+                                                                                                                  
 
-  
-  
+                                                                                                                    
+                                                                                                                        
 </head>
-
 <body>
   
   
@@ -159,6 +161,8 @@ Binary schema–driven formats ...">
           
             <img no-lazy class='logo' src='/images/favion.png'/>
           
+          
+            <i class='hhh'></i>
           
           
         </a>
@@ -371,10 +375,12 @@ Binary schema–driven formats ...">
 
 <div class='l_main'>
   
-
   
-    <article id="post" class="post white-box reveal shadow floatable blur article-type-post" itemscope itemprop="blogPost">
-      
+    
+      <article id="post"
+        class="post white-box reveal shadow floatable blur article-type-post" itemscope
+        itemprop="blogPost">
+        
 
 
   <section class='meta'>
@@ -444,11 +450,11 @@ Binary schema–driven formats ...">
   </section>
 
 
-      <section class="article typo">
-        <div class="article-entry" itemprop="articleBody">
-          
-          
-          <p>Encoding and Evolution</p>
+          <section class="article typo">
+            <div class="article-entry" itemprop="articleBody">
+              
+                  
+                      <p>Encoding and Evolution</p>
 <p>Backward compatibility and forward compatibility</p>
 <ul>
 <li>programming language-specific encodings</li>
@@ -538,10 +544,11 @@ Binary schema–driven formats ...">
 <h3 id="Distributed-actor-frameworks"><a href="#Distributed-actor-frameworks" class="headerlink" title="Distributed actor frameworks"></a>Distributed actor frameworks</h3><p>The <strong><em>actor model</em></strong> is a programming model for concurrency in a single process.  (metioned in NYU CS-2250 Distributed System final projects)</p>
 <p>Rather than dealing directly with threads (and the associated problems of race conditions, locking, and deadlock), logic is encapsulated in <em>actors</em>. Each actor typically represents one client or entity, it may have some local state (which is not shared with any other actor), and it communicates with other actors by sending and receiving asynchro‐ nous messages. Message delivery is not guaranteed: in certain error scenarios, mes‐ sages will be lost. Since each actor processes only one message at a time, it doesn’t need to worry about threads, and each actor can be scheduled independently by the framework.</p>
 
-          
-            <div class='article_footer'>
-              
-                
+                        
+                            
+                              <div class='article_footer'>
+                                
+                                      
   
     
     
@@ -561,12 +568,12 @@ Binary schema–driven formats ...">
   
 
 
-              
+                                        
+                              </div>
+                              
             </div>
-          
-        </div>
-        
-          
+            
+              
 
 
   <section class='meta' id="footer-meta">
@@ -604,33 +611,40 @@ Binary schema–driven formats ...">
   </section>
 
 
-        
-        
-          <div class="prev-next">
-            
-              <a class='prev' href='/2020/12/31/Design-Data-Intensive-Application-2-1/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Design Data Intensive Application (2-1)</p>
-                <p class='content'>Replication: keeping a copy of the same data on multiple machines that are connected via a networ...</p>
-              </a>
-            
-            
-              <a class='next' href='/2020/12/28/Design-Data-Intensive-Application-1-3/'>
-                <p class='title'>Design Data Intensive Application (1-3)<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>We will examine two families of storage engines: log-structured storage engines, and page-oriente...</p>
-              </a>
-            
-          </div>
-        
-      </section>
-    </article>
-  
+                
+                  
+                    <div class="prev-next">
+                      
+                        <a class='prev' href='/2020/12/31/Design-Data-Intensive-Application-2-1/'>
+                          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>
+                            Design Data Intensive Application (2-1)
+                          </p>
+                          <p class='content'>
+                            Replication: keeping a copy of the same data on multiple machines that are connected via a networ...
+                          </p>
+                        </a>
+                        
+                          
+                            <a class='next' href='/2020/12/28/Design-Data-Intensive-Application-1-3/'>
+                              <p class='title'>
+                                Design Data Intensive Application (1-3)<i class="fas fa-chevron-right" aria-hidden="true"></i>
+                              </p>
+                              <p class='content'>
+                                We will examine two families of storage engines: log-structured storage engines, and page-oriente...
+                              </p>
+                            </a>
+                            
+                    </div>
+                    
+          </section>
+      </article>
+      
+                
 
+                  
 
-
-
-<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
-
-
+                    <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+                    
 </div>
 <aside class='l_side'>
   
@@ -671,22 +685,6 @@ Binary schema–driven formats ...">
       
         <div class="aplayer-container">
           
-
-  
-    <meting-js
-      theme='#1BCDFC'
-      autoplay='false'
-      volume='0.7'
-      loop='all'
-      order='list'
-      fixed='false'
-      list-max-height='320px'
-      server='netease'
-      type='playlist'
-      id='3175833810'
-      list-folded='true'>
-    </meting-js>
-  
 
 
         </div>
@@ -777,26 +775,6 @@ Binary schema–driven formats ...">
           <hr>
         
       
-        
-          <li class='music name'>
-            <p class='nav music-title fix-cursor-default'></p>
-          </li>
-          <li class='music ctrl'>
-            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
-            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
-            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
-          </li>
-          <li class='music volume'>
-            <a class='nav volume'>
-              <div class="aplayer-volume-bar-wrap">
-                <div class="aplayer-volume-bar fix-cursor-pointer">
-                  <div class="aplayer-volume"></div>
-                  <i class='left fa fa-volume-off fa-fw'></i>
-                  <i class='right fa fa-volume-up fa-fw'></i>
-                </div>
-              </div>
-            </a>
-          </li>
         
       
     </ul>
@@ -900,7 +878,7 @@ Binary schema–driven formats ...">
       }
 
       // 有音乐播放器
-      if (true == true) {
+      if (false == true) {
         // 如果有aplayer，初始化一下
       	try {
       		checkAPlayer();
@@ -989,25 +967,6 @@ Binary schema–driven formats ...">
   
 
 
-
-  <script>
-    let APlayerController = new Object();
-    APlayerController.id = '3175833810';  // 设定全局音乐播放ID
-    APlayerController.volume = '0.7';
-  </script>
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
-
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
-
-  
-    
-<script src="/js/aplayer.js"></script>
-
-  
 
 
 

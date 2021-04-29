@@ -2,81 +2,83 @@
 <html>
 <head hexo-theme='https://volantis.js.org/#3.0.0-rc.1'>
   <meta charset="utf-8">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- SEO相关 -->
   
-    
-  
-  <!-- 渲染优化 -->
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      
+                      
+                        <!-- 渲染优化 -->
+                        <meta name="renderer" content="webkit">
+                        <meta name="force-rendering" content="webkit">
+                        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+                        <meta name="HandheldFriendly" content="True">
+                        <meta name="apple-mobile-web-app-capable" content="yes">
+                        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- 页面元数据 -->
-  
-  <title>Design Data Intensive Application (2-2) - Gilmore&#39;s Blog</title>
-  
-    <meta name="keywords" content="system design">
-  
+                        <!-- 页面元数据 -->
+                        
+                          <title>
+                            
+                              Design Data Intensive Application (2-2) - 
+                                  Gilmore&#39;s Blog
+                          </title>
+                          
+                            <meta name="keywords" content="system design">
+                            
 
-  
-    <meta name="description" content="Partition (shard/region): break the dataset up into partitions
+                              
+                                <meta name="description" content="Partition (shard/region): break the dataset up into partitions
 Scalability –&gt; different partitions can be placed on different nodes in a shard-nothing clu...">
-  
+                                
 
-  <!-- feed -->
-  
+                                  <!-- feed -->
+                                  
 
-  <!-- import meta -->
-  
+                                        <!-- import meta -->
+                                        
 
-  <!-- link -->
-  
-    
+                                                  <!-- link -->
+                                                  
+                                                    
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
 
-  
-  
-    
+                                                      
+                                                        
+                                                          
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css">
 
-  
-  
-    
+                                                            
+                                                              
+                                                                
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
-  
+                                                                  
 
-  
-    
+                                                                    
+                                                                      
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
 
-  
+                                                                        
 
-  
+                                                                          
 
-  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
-  
+                                                                              
 
-  
+                                                                                  
 
-  <!-- import link -->
-  
+                                                                                      <!-- import link -->
+                                                                                      
 
-  
-  
-    
+                                                                                                
+                                                                                                          
+                                                                                                                
 <link rel="stylesheet" href="/css/style.css">
 
-  
+                                                                                                                  
 
-  
-  
+                                                                                                                    
+                                                                                                                        
 </head>
-
 <body>
   
   
@@ -155,6 +157,8 @@ Scalability –&gt; different partitions can be placed on different nodes in a s
           
             <img no-lazy class='logo' src='/images/favion.png'/>
           
+          
+            <i class='hhh'></i>
           
           
         </a>
@@ -367,10 +371,12 @@ Scalability –&gt; different partitions can be placed on different nodes in a s
 
 <div class='l_main'>
   
-
   
-    <article id="post" class="post white-box reveal shadow floatable blur article-type-post" itemscope itemprop="blogPost">
-      
+    
+      <article id="post"
+        class="post white-box reveal shadow floatable blur article-type-post" itemscope
+        itemprop="blogPost">
+        
 
 
   <section class='meta'>
@@ -440,11 +446,11 @@ Scalability –&gt; different partitions can be placed on different nodes in a s
   </section>
 
 
-      <section class="article typo">
-        <div class="article-entry" itemprop="articleBody">
-          
-          
-          <p><span style="color:navy"><strong>Partition (shard/region)</strong></span>: break the dataset up into partitions</p>
+          <section class="article typo">
+            <div class="article-entry" itemprop="articleBody">
+              
+                  
+                      <p><span style="color:navy"><strong>Partition (shard/region)</strong></span>: break the dataset up into partitions</p>
 <p>Scalability –&gt; different partitions can be placed on different nodes in a shard-nothing cluster. Thus, a large dataset can be distributed across many disks, and the query load can be distributed across many processors.</p>
 <ul>
 <li>different approaches of partitioning large datasets and observe how the indexing of data interacts with partitioning</li>
@@ -526,10 +532,11 @@ Scalability –&gt; different partitions can be placed on different nodes in a s
 <p>Each node registers itself in ZooKeeper, and ZooKeeper maintains the authoritative mapping of partitions to nodes. Other actors, such as the routing tier or the partitioning-aware client, can subscribe to this information in ZooKeeper. Whenever a partition changes ownership, or a node is added or removed, ZooKeeper notifies the routing tier so that it can keep its routing information up to date.</p>
 <p><span style="color:navy"><strong>gossip protocol</strong></span>: they use a <em>gossip protocol</em> among the nodes to disseminate any changes in cluster state. Requests can be sent to any node, and that node forwards them to the appropriate node for the requested partition (approach 1 in Figure 6-7). This model puts more complexity in the database nodes but avoids the dependency on an external coordination service such as ZooKeeper.</p>
 <h2 id="Parallel-Query-Execution"><a href="#Parallel-Query-Execution" class="headerlink" title="Parallel Query Execution"></a>Parallel Query Execution</h2>
-          
-            <div class='article_footer'>
-              
-                
+                        
+                            
+                              <div class='article_footer'>
+                                
+                                      
   
     
     
@@ -549,12 +556,12 @@ Scalability –&gt; different partitions can be placed on different nodes in a s
   
 
 
-              
+                                        
+                              </div>
+                              
             </div>
-          
-        </div>
-        
-          
+            
+              
 
 
   <section class='meta' id="footer-meta">
@@ -592,26 +599,33 @@ Scalability –&gt; different partitions can be placed on different nodes in a s
   </section>
 
 
-        
-        
-          <div class="prev-next">
-            
-              <a class='prev' href='/2021/01/03/Design-Data-Intensive-Application-2-2-summary/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Design Data Intensive Application (2-2-summary)</p>
-                <p class='content'>Partition Summary
+                
+                  
+                    <div class="prev-next">
+                      
+                        <a class='prev' href='/2021/01/03/Design-Data-Intensive-Application-2-2-summary/'>
+                          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>
+                            Design Data Intensive Application (2-2-summary)
+                          </p>
+                          <p class='content'>
+                            Partition Summary
 
 
 Toc
 partitioning and replication
 partition of key-value data
 key range
-hash o...</p>
-              </a>
-            
-            
-              <a class='next' href='/2021/01/02/Design-Data-Intensive-Application-2-1-summary/'>
-                <p class='title'>Design Data Intensive Application (2-1-summary)<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>Three modes:
+hash o...
+                          </p>
+                        </a>
+                        
+                          
+                            <a class='next' href='/2021/01/02/Design-Data-Intensive-Application-2-1-summary/'>
+                              <p class='title'>
+                                Design Data Intensive Application (2-1-summary)<i class="fas fa-chevron-right" aria-hidden="true"></i>
+                              </p>
+                              <p class='content'>
+                                Three modes:
 
 single leader
 multiple leader
@@ -619,21 +633,21 @@ leaderless (Dynamo)
 
 
 
-Table of Contents for Chapter ...</p>
-              </a>
-            
-          </div>
-        
-      </section>
-    </article>
-  
+Table of Contents for Chapter ...
+                              </p>
+                            </a>
+                            
+                    </div>
+                    
+          </section>
+      </article>
+      
+                
 
+                  
 
-
-
-<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
-
-
+                    <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+                    
 </div>
 <aside class='l_side'>
   
@@ -674,22 +688,6 @@ Table of Contents for Chapter ...</p>
       
         <div class="aplayer-container">
           
-
-  
-    <meting-js
-      theme='#1BCDFC'
-      autoplay='false'
-      volume='0.7'
-      loop='all'
-      order='list'
-      fixed='false'
-      list-max-height='320px'
-      server='netease'
-      type='playlist'
-      id='3175833810'
-      list-folded='true'>
-    </meting-js>
-  
 
 
         </div>
@@ -780,26 +778,6 @@ Table of Contents for Chapter ...</p>
           <hr>
         
       
-        
-          <li class='music name'>
-            <p class='nav music-title fix-cursor-default'></p>
-          </li>
-          <li class='music ctrl'>
-            <a class='nav icon-only backward fix-cursor-default' onclick='aplayerBackward()'><i class='fa fa-step-backward fa-fw'></i></a>
-            <a class='nav icon-only toggle fix-cursor-default' onclick='aplayerToggle()'><i class='fa fa-play fa-fw'></i></a>
-            <a class='nav icon-only forward fix-cursor-default' onclick='aplayerForward()'><i class='fa fa-step-forward fa-fw'></i></a>
-          </li>
-          <li class='music volume'>
-            <a class='nav volume'>
-              <div class="aplayer-volume-bar-wrap">
-                <div class="aplayer-volume-bar fix-cursor-pointer">
-                  <div class="aplayer-volume"></div>
-                  <i class='left fa fa-volume-off fa-fw'></i>
-                  <i class='right fa fa-volume-up fa-fw'></i>
-                </div>
-              </div>
-            </a>
-          </li>
         
       
     </ul>
@@ -903,7 +881,7 @@ Table of Contents for Chapter ...</p>
       }
 
       // 有音乐播放器
-      if (true == true) {
+      if (false == true) {
         // 如果有aplayer，初始化一下
       	try {
       		checkAPlayer();
@@ -992,25 +970,6 @@ Table of Contents for Chapter ...</p>
   
 
 
-
-  <script>
-    let APlayerController = new Object();
-    APlayerController.id = '3175833810';  // 设定全局音乐播放ID
-    APlayerController.volume = '0.7';
-  </script>
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
-
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
-
-  
-    
-<script src="/js/aplayer.js"></script>
-
-  
 
 
 
