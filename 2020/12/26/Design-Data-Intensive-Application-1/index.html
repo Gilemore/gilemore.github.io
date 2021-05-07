@@ -19,15 +19,17 @@
                         
                           <title>
                             
-                              Design Data Intensive Application (1-1) - 
+                              DDIA (1) - 
                                   Gilmore&#39;s Blog
                           </title>
                           
-                            <meta name="keywords" content="system design">
+                            <meta name="keywords" content="system design,DDIA">
                             
 
                               
-                                <meta name="description" content="Chapter 1 introduces the terminology and approach that we’re going to use throughout this book. It examines what we actually mean by words like reliability, ...">
+                                <meta name="description" content="
+Reliability: system works correctly, even when faults (hardward, software, human) occurs
+Scalability: keep performance (response time) good, even when load ...">
                                 
 
                                   <!-- feed -->
@@ -329,7 +331,7 @@
  
 <div id="pjax-data" style="display: none"> 
   <div id="pjax-ispage">true</div> 
-  <div id="pjax-pageTitle">Design Data Intensive Application (1-1)</div> 
+  <div id="pjax-pageTitle">DDIA (1)</div> 
   <div id="pjax-enable-cover">true</div> 
   <div id="pjax-comment-path">none</div> 
   <div id="pjax-comment-placeholder">none</div> 
@@ -380,7 +382,7 @@
           
   <h1 class="title">
     <a href="/2020/12/26/Design-Data-Intensive-Application-1/">
-      Design Data Intensive Application (1-1)
+      DDIA (1)
     </a>
   </h1>
 
@@ -442,15 +444,14 @@
             <div class="article-entry" itemprop="articleBody">
               
                   
-                      <p>Chapter 1 introduces the terminology and approach that we’re going to use throughout this book. It examines what we actually mean by words like <strong><em>reliability</em>, <em>scalability</em>, and <em>maintainability</em></strong>, and how we can try to achieve these goals. </p>
-<ul>
-<li>Reliability: system works correctly, even when faults (hardward, software, human) occurs</li>
-<li>Scalability: keep performance (response time) gooe, even when load increases</li>
-<li>Maintainability: better life for engineers and operations teams</li>
+                      <ul>
+<li><span style="color:navy"><strong>Reliability</strong></span>: system works correctly, even when faults (hardward, software, human) occurs</li>
+<li><span style="color:navy"><strong>Scalability</strong></span>: keep performance (response time) good, even when load increases</li>
+<li><span style="color:navy"><strong>Maintainability</strong></span>: better life for engineers and operations teams</li>
 </ul>
 <a id="more"></a>
 
-<p>Data-intensive (密集的) for applications, for example, many applications need to:</p>
+<p>Data-intensive for applications, for example, many applications need to:</p>
 <ul>
 <li>store data (<em>databases</em>)</li>
 <li>speed up reads (<em>caches</em>)</li>
@@ -462,7 +463,7 @@
 <p>batch processing:</p>
 <p>Computerized batch processing is the running of “jobs that can run without end user interaction, or can be scheduled to run as resources permit.</p>
 </blockquote>
-<h2 id="Thinking-about-Data-System"><a href="#Thinking-about-Data-System" class="headerlink" title="Thinking about Data System"></a>Thinking about Data System</h2><p>a database and a message queue can be lumped together into <strong><em>data system</em></strong>.</p>
+<h1 id="Thinking-about-Data-System"><a href="#Thinking-about-Data-System" class="headerlink" title="Thinking about Data System"></a>Thinking about Data System</h1><p>a database and a message queue can be lumped together into <strong><em>data system</em></strong>.</p>
 <ul>
 <li>Redis (datastores that are also used as message queues)</li>
 <li>Apache Kafka (message queues with database-like durability guarantees)</li>
@@ -486,43 +487,32 @@
 <li>the application performs the function that the user expected </li>
 <li>it can tolerate the user making mistakes or usnig the software in unexpected ways</li>
 <li>its performance is good enough for the required use case, under the expected load and data volume</li>
-<li>the system prevents any unauthorized access and abuse</li>
+<li>the system prevents any unauthorized access and abuse </li>
 </ul>
-<p>the things that can go wroing are called faults, and systems that anticipate faults and can cope with them are called fault-tolerant or resilient. </p>
 <p>fault vs failure:</p>
 <ul>
 <li>Fault: one component of the system deviating from its spec</li>
 <li>Failture: when the system as a whole stops providing the required service to the user</li>
 </ul>
-<p>In such fault-tolerant systems, it can make sense to <em><u>increase</u></em> the rate of faults by triggering them deliberately – for example, by randomly killing individual processes without warning. By deliberately inducing faults, you ensure that the fault-tolerance machinery is continually exercised and tested, which can increase your confidence that faults will be handled correctly when they occur naturally. (The Netflix <a target="_blank" rel="noopener" href="https://netflixtechblog.com/the-netflix-simian-army-16e57fbab116">“Chaos Monkey”</a>)</p>
-<h1 id="Hardware-Faults"><a href="#Hardware-Faults" class="headerlink" title="Hardware Faults"></a>Hardware Faults</h1><ul>
+<p>In such fault-tolerant systems, it can make sense to <wavy>increase</wavy> the rate of faults by triggering them deliberately – for example, by randomly killing individual processes without warning. By deliberately inducing faults, you ensure that the fault-tolerance machinery is continually exercised and tested, which can increase your confidence that faults will be handled correctly when they occur naturally. (The Netflix <a target="_blank" rel="noopener" href="https://netflixtechblog.com/the-netflix-simian-army-16e57fbab116">“Chaos Monkey”</a>)</p>
+<h2 id="Hardware-Faults"><a href="#Hardware-Faults" class="headerlink" title="Hardware Faults"></a>Hardware Faults</h2><ul>
 <li>hard disks crash</li>
 <li>RAM becomes faulty</li>
 <li>the power grid has a blackout</li>
 <li>someone unplugs the wrong network cable</li>
 </ul>
 <p>–&gt; add redundancy to the individual hardware components in order to reduce the failure rate of the system. When one component dies, the redundant component can take its place while the broken component is replaced. </p>
-<p>However, more applications have begun using larger numbers of machines, which proportionally increases the rate of hardware faults. </p>
-<p>Moreover, in some cloud platforms such as AWS it is fairly common for virtual machine instances to become unavailable without warning, as the platforms are designed to prioritize flexibility and elasticity over single-machine reliability.</p>
 <p>using software fault-tolerance techniques in preference:</p>
 <ul>
 <li>single-server system requires planned downtime if you need to reboot the machine (to apply operating system security patches)</li>
 <li>a system that can tolerate machine failure can be patched one node at a time, without downtime of the entire system (a rolling update)</li>
 </ul>
-<h1 id="Software-Errors"><a href="#Software-Errors" class="headerlink" title="Software Errors"></a>Software Errors</h1><p>Software errors are harder to anticipate, and they are correlated across nodes, they tend to cause many more system failures than uncorrelated hardware faults. </p>
-<h1 id="Human-Errors"><a href="#Human-Errors" class="headerlink" title="Human Errors"></a>Human Errors</h1><ul>
-<li>design systems in a way that minimizes opportunities for error.</li>
-<li>decouple the places where people make the most mistakse from the places where they can cause failures.</li>
-<li>test thoroughly at all levels. </li>
-<li>allow quick and easy recovery from human errors, to minimize the impact in the case of a failure</li>
-<li>set up detailed and clear monitoring, such as performance metrics and error rates</li>
-<li>Implement good management practices and training </li>
-</ul>
-<h1 id="Scalability"><a href="#Scalability" class="headerlink" title="Scalability"></a>Scalability</h1><ul>
+<h2 id="Software-Errors"><a href="#Software-Errors" class="headerlink" title="Software Errors"></a>Software Errors</h2><p>Software errors are harder to anticipate, and they are correlated across nodes, they tend to cause many more system failures than uncorrelated hardware faults. </p>
+<h2 id="Human-Errors"><a href="#Human-Errors" class="headerlink" title="Human Errors"></a>Human Errors</h2><h1 id="Scalability"><a href="#Scalability" class="headerlink" title="Scalability"></a>Scalability</h1><ul>
 <li>if the system grows in a particular way, what are our options for coping with the growth?</li>
 <li>How can we add computing resources to handle the additional load?</li>
 </ul>
-<h1 id="Describing-Load"><a href="#Describing-Load" class="headerlink" title="Describing Load"></a>Describing Load</h1><p>Load can be described with <em>load parameters</em>. The best choice of parameters depends on the architecture of your system: it may be requests per second to a web server, the ratio of reads to writes in a database, the number of simultaneously active users in a chat room, the hit rate on a cache, or others. </p>
+<h2 id="Describing-Load"><a href="#Describing-Load" class="headerlink" title="Describing Load"></a>Describing Load</h2><p>Load can be described with <wavy>load parameters</wavy>. The best choice of parameters depends on the architecture of your system: it may be requests per second to a web server, the ratio of reads to writes in a database, the number of simultaneously active users in a chat room, the hit rate on a cache, or others. </p>
 <p>Example, Twitter, 2 of Twitter main operations are:</p>
 <ul>
 <li><p><em>Post tweet</em></p>
@@ -546,7 +536,7 @@
 <p>The 1st version of Twitter used approach 1, but the systems struggled to keep up with the load of home timeline queries, so the company switched to approach 2. This works better because the average rate of published tweets is almost two orders of magnitude lower than the rate of home timeline reads, and so in this case it’s perferable to do more work at write time and less at read time. </p>
 <p>However, the downside of approach 2 is that posting a tweet now requires a lot of extra work. On average, a tweet is delivered to about 75 followers. But this average hides the fact that the number of followers per user varies wildly, and some users have over 30 million followers. This means that a single tweet may result in over 30 million writes to home timelines! –&gt; challenges.</p>
 <p>In this case, <strong><em>the distribution of followers per user</em></strong> is a key <em>load parameter</em> for discussing scalability. </p>
-<h1 id="Describing-Performance"><a href="#Describing-Performance" class="headerlink" title="Describing Performance"></a>Describing Performance</h1><ul>
+<h2 id="Describing-Performance"><a href="#Describing-Performance" class="headerlink" title="Describing Performance"></a>Describing Performance</h2><ul>
 <li>when you increase a load parameter and keep the system resource (CPU, memory, network bandwidth, etc.) unchanged, how is the performace of your system affected?</li>
 <li>When you increase a load parameter, how much do you need to increase the resources if you wnat to keep performance unchanged?</li>
 </ul>
@@ -567,7 +557,7 @@
 <li>Median</li>
 <li>high percentiles of response time (<em>tail latencies</em>)</li>
 </ul>
-<h1 id="Approaches-for-Coping-with-Load"><a href="#Approaches-for-Coping-with-Load" class="headerlink" title="Approaches for Coping with Load"></a>Approaches for Coping with Load</h1><p>How do we maintain good performance even when our load parameters increase by some amount?</p>
+<h2 id="Approaches-for-Coping-with-Load"><a href="#Approaches-for-Coping-with-Load" class="headerlink" title="Approaches for Coping with Load"></a>Approaches for Coping with Load</h2><p>How do we maintain good performance even when our load parameters increase by some amount?</p>
 <ul>
 <li><em>scaling up</em> (vertical scaling, moving to a more powerful machine)</li>
 <li><em>scaling out</em> (horizontal scaling, distribuing the load across multiple smaller machines)</li>
@@ -615,10 +605,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-12-26T22:34:13-05:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-06T23:19:27-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Dec 26, 2020</p>
+    <p>Updated on：May 6, 2021</p>
   </a>
 </div>
 
@@ -627,7 +617,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/DDIA/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>DDIA</p></a></div>
 
 
         
@@ -724,7 +714,7 @@ shopee
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-about-Data-System"><span class="toc-text">Thinking about Data System</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hardware-Faults"><span class="toc-text">Hardware Faults</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Software-Errors"><span class="toc-text">Software Errors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Human-Errors"><span class="toc-text">Human Errors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Describing-Load"><span class="toc-text">Describing Load</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Describing-Performance"><span class="toc-text">Describing Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approaches-for-Coping-with-Load"><span class="toc-text">Approaches for Coping with Load</span></a></li></ol>
     </div>
   </section>
 
