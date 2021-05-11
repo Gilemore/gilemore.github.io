@@ -370,9 +370,360 @@
         
           
         
+          
+        
+          
+        
+          
+        
       
     
     
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow floatable blur reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2020/12/30/Design-Data-Intensive-Application-4/">
+      DDIA (4)
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>Release on：Dec 30, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-11T16:01:41-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：May 11, 2021</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Encoding and Evolution</p>
+<p>Backward compatibility and forward compatibility</p>
+<ul>
+<li>programming language-specific encodings</li>
+<li>JSON, XML, CSV</li>
+<li>Binary schema–driven formats like Thrift, Protocol Buffers, and Avro</li>
+</ul>
+<p>Several modes of data flows:</p>
+<ul>
+<li>Databases, where the process writing to the database encodes the data and the process reading from the database decodes it</li>
+<li>RPC and REST APIs, where the client encodes a request, the server decodes the request and encodes a response, and the client finally decodes the response</li>
+<li>Asynchronous message passing (using message brokers or actors), where nodes communicate by sending each other messages that are encoded by the sender and decoded by the recipient</li>
+</ul>
+      
+    </div>
+    
+      
+        <a class= "readmore" href="/2020/12/30/Design-Data-Intensive-Application-4/">
+          Read More <i class="fas fa-chevron-right"></i>
+        </a>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow floatable blur reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2020/12/28/Design-Data-Intensive-Application-3/">
+      DDIA (3)
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>Release on：Dec 28, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-11T16:01:27-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：May 11, 2021</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>We will examine two families of storage engines: <em>log-structured</em> storage engines, and <em>page-oriented</em> storage engines such as B-trees.</p>
+<p>storage engines fall into two broad categories: those opti‐ mized for <strong>transaction processing</strong> (OLTP), and those optimized for <strong>analytics</strong> (OLAP).</p>
+<ul>
+<li>OLTP: a huge volume of requests from users –&gt; only touch a small number of records in each query. The application requests records using some kind of key, and the storage engine uses an <strong><em>index</em></strong> to find the data for the requested key. <strong><em>Disk seek time</em></strong> is often the bottleneck here.</li>
+<li>Data warehouses: a much lower volume of queries , but each query is typically very demanding, requiring many millions of records to be scanned in a short time.   <strong><em>Disk bandwidth</em></strong> (not seek time) is often the bottleneck here, and <strong><em>column- oriented storage</em></strong> is an increasingly popular solution for this kind of workload.</li>
+</ul>
+<p>On the OLTP side, we saw storage engines from two main schools of thought:</p>
+<ul>
+<li><p>The <strong><em>log-structured</em></strong> school, which only permits appending to files and deleting obsolete files, but never updates a file that has been written. Bitcask, SSTables, LSM-trees, LevelDB, Cassandra, HBase, Lucene, and others belong to this group.</p>
+<p>–&gt; higher write throughput</p>
+</li>
+<li><p>The update-in-place school, which treats the disk as a set of fixed-size pages that can be overwritten. <strong><em>B-trees</em></strong> are the biggest example of this philosophy, being used in all major relational databases and also many nonrelational ones.</p>
+</li>
+</ul>
+      
+    </div>
+    
+      
+        <a class= "readmore" href="/2020/12/28/Design-Data-Intensive-Application-3/">
+          Read More <i class="fas fa-chevron-right"></i>
+        </a>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <article class="post white-box shadow floatable blur reveal ">
+  
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h2 class="title">
+    <a href="/2020/12/26/Design-Data-Intensive-Application-2/">
+      DDIA (2)
+    </a>
+  </h2>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a class='author' href="" rel="nofollow">
+    <img no-lazy src="/images/avatar.png">
+    <p>Gilmore</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/interview/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>interview</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>Release on：Dec 26, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-11T15:08:27-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：May 11, 2021</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+  <section class="article typo">
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Compare the <span style="color:navy">relational model</span>, <span style="color:navy">the document model</span>, and a few <span style="color:navy">graph-based data models</span>.</p>
+<ol>
+<li>Relational Model vs. Document Model<ol>
+<li>scalability</li>
+<li>specialized query operations</li>
+<li>schemasless, dynamic and expressive</li>
+</ol>
+</li>
+<li>Query Languages for Data<ol>
+<li>declarative languages: SQL, CSS</li>
+<li>map reduce</li>
+</ol>
+</li>
+<li>Graph-like Data Models</li>
+</ol>
+      
+    </div>
+    
+      
+        <a class= "readmore" href="/2020/12/26/Design-Data-Intensive-Application-2/">
+          Read More <i class="fas fa-chevron-right"></i>
+        </a>
+      
+    
+  </section>
+</article>
+
+          </div>
+        
       
         
           <div class='post-wrapper'>
@@ -434,27 +785,13 @@
             
           
             
-              
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-06T23:19:27-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：May 6, 2021</p>
+  </a>
+</div>
 
-            
-          
-            
-              
-  <div class="new-meta-item browse valine">
-    <a class='notlink'>
-      <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-      
-      <span id="/2020/12/26/Design-Data-Intensive-Application-1/" class="leancloud_visitors" data-flag-title="DDIA (1)">
-      <p>
-        <span class="leancloud-visitors-count"></span>
-      </p>
-      </span>
-    </a>
-  </div>
-
-
-            
-          
             
           
             
@@ -504,6 +841,59 @@
     
     <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
+    
+      <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
     
 
   
@@ -626,7 +1016,7 @@
 
 
     <div class='content'>
-      <a href="/tags/Classes/" style="font-size: 14px; color: #999">Classes</a> <a href="/tags/DDIA/" style="font-size: 14px; color: #999">DDIA</a> <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/tags/LC/" style="font-size: 22px; color: #636363">LC</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/OOP/" style="font-size: 16px; color: #8b8b8b">OOP</a> <a href="/tags/Projects/" style="font-size: 14px; color: #999">Projects</a> <a href="/tags/interview/" style="font-size: 18px; color: #7e7e7e">interview</a> <a href="/tags/review/" style="font-size: 20px; color: #707070">review</a> <a href="/tags/system-design/" style="font-size: 24px; color: #555">system design</a>
+      <a href="/tags/Classes/" style="font-size: 14px; color: #999">Classes</a> <a href="/tags/DDIA/" style="font-size: 18px; color: #7e7e7e">DDIA</a> <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/tags/LC/" style="font-size: 22px; color: #636363">LC</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/OOP/" style="font-size: 16px; color: #8b8b8b">OOP</a> <a href="/tags/Projects/" style="font-size: 14px; color: #999">Projects</a> <a href="/tags/interview/" style="font-size: 18px; color: #7e7e7e">interview</a> <a href="/tags/review/" style="font-size: 20px; color: #707070">review</a> <a href="/tags/system-design/" style="font-size: 24px; color: #555">system design</a>
     </div>
   </section>
 
@@ -680,8 +1070,8 @@
         <div class="webinfo-item">
           <div>Last Update：</div>
           
-            <div id="last-update" style="display: none;">Thu May 06 2021 23:27:14 GMT-0400 (Eastern Daylight Time)</div>
-            <div id="last-update-show">2021-05-06 </div>
+            <div id="last-update" style="display: none;">Tue May 11 2021 16:06:29 GMT-0400 (Eastern Daylight Time)</div>
+            <div id="last-update-show">2021-05-11 </div>
           
         </div>
         
@@ -731,7 +1121,7 @@
           try { 
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate)); 
           } catch (error) { 
-            document.getElementById('last-update-show').innerHTML = '2021-05-06 '; 
+            document.getElementById('last-update-show').innerHTML = '2021-05-11 '; 
           } 
         </script> 
         

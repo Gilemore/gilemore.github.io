@@ -19,16 +19,19 @@
                         
                           <title>
                             
-                              Design Data Intensive Application (1-2) - 
+                              DDIA (2) - 
                                   Gilmore&#39;s Blog
                           </title>
                           
-                            <meta name="keywords" content="system design">
+                            <meta name="keywords" content="system design,DDIA">
                             
 
                               
-                                <meta name="description" content="look at a range of general-purpose data models for data storage and querying. 
-Compare the relational model, the document model. and a few graph-based data m...">
+                                <meta name="description" content="Compare the relational model, the document model, and a few graph-based data models.
+
+Relational Model vs. Document Model
+scalability
+specialized query opera...">
                                 
 
                                   <!-- feed -->
@@ -330,7 +333,7 @@ Compare the relational model, the document model. and a few graph-based data m..
  
 <div id="pjax-data" style="display: none"> 
   <div id="pjax-ispage">true</div> 
-  <div id="pjax-pageTitle">Design Data Intensive Application (1-2)</div> 
+  <div id="pjax-pageTitle">DDIA (2)</div> 
   <div id="pjax-enable-cover">true</div> 
   <div id="pjax-comment-path">none</div> 
   <div id="pjax-comment-placeholder">none</div> 
@@ -381,7 +384,7 @@ Compare the relational model, the document model. and a few graph-based data m..
           
   <h1 class="title">
     <a href="/2020/12/26/Design-Data-Intensive-Application-2/">
-      Design Data Intensive Application (1-2)
+      DDIA (2)
     </a>
   </h1>
 
@@ -426,6 +429,16 @@ Compare the relational model, the document model. and a few graph-based data m..
             
           
             
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-11T15:08:27-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：May 11, 2021</p>
+  </a>
+</div>
+
+            
+          
+            
               
 
             
@@ -443,106 +456,74 @@ Compare the relational model, the document model. and a few graph-based data m..
             <div class="article-entry" itemprop="articleBody">
               
                   
-                      <p>look at a range of general-purpose data models for data storage and querying. </p>
-<p>Compare the relational model, the document model. and a few graph-based data models.</p>
+                      <p>Compare the <span style="color:navy">relational model</span>, <span style="color:navy">the document model</span>, and a few <span style="color:navy">graph-based data models</span>.</p>
+<ol>
+<li>Relational Model vs. Document Model<ol>
+<li>scalability</li>
+<li>specialized query operations</li>
+<li>schemasless, dynamic and expressive</li>
+</ol>
+</li>
+<li>Query Languages for Data<ol>
+<li>declarative languages: SQL, CSS</li>
+<li>map reduce</li>
+</ol>
+</li>
+<li>Graph-like Data Models</li>
+</ol>
 <a id="more"></a>
 
-<h1 id="Relational-Model-vs-Document-Model"><a href="#Relational-Model-vs-Document-Model" class="headerlink" title="Relational Model vs. Document Model"></a>Relational Model vs. Document Model</h1><p>Data is organized into <em>relations</em> (called <em>tables</em> in SQL), where each relation is an unordered collection of <em>tuples</em> (<em>rows</em> in SQL).</p>
-<h2 id="The-Birth-of-NoSQL"><a href="#The-Birth-of-NoSQL" class="headerlink" title="The Birth of NoSQL"></a>The Birth of NoSQL</h2><p>NoSQL was intended as a cathy Twitter hashtag for a meetup on oper source, distributed, non relational databases. driving forces behind the adoption of NoSQL including:</p>
+<h2 id="Relational-Model-vs-Document-Model"><a href="#Relational-Model-vs-Document-Model" class="headerlink" title="Relational Model vs. Document Model"></a>Relational Model vs. Document Model</h2><p>Data is organized into <em>relations</em> (called <em>tables</em> in SQL), where each relation is an unordered collection of <em>tuples</em> (<em>rows</em> in SQL).</p>
+<h3 id="The-Birth-of-NoSQL"><a href="#The-Birth-of-NoSQL" class="headerlink" title="The Birth of NoSQL"></a>The Birth of NoSQL</h3><p>NoSQL: Not Only SQL:</p>
 <ul>
-<li>a need for <strong><em>greater scalability</em></strong> than relational databases can easily achieve, including very <em>large datasets</em> or very <em>high write throughput</em></li>
-<li>a widespread preference for free and open source software over commercial database products</li>
-<li><strong><em>specialized query operations</em></strong> that are not well supported by the relational model</li>
-<li>frustration with the restrictiveness of relational schemas, and a desire for a <strong><em>more dynamic and expressive data model</em></strong></li>
+<li><span style="color:navy">greater scalability</span>, including very <em>large datasets</em> or very <em>high write throughput</em></li>
+<li><span style="color:navy">free and open source </span>software over commercial database products</li>
+<li><span style="color:navy">specialized query operations</span> that are not well supported by the relational model</li>
+<li><span style="color:navy">schemasless and dynamic and expressive</span> data model</li>
 </ul>
-<h2 id="The-Object-Relational-Mismatch"><a href="#The-Object-Relational-Mismatch" class="headerlink" title="The Object-Relational Mismatch"></a>The Object-Relational Mismatch</h2><p> If data is stored in relational tables, an awkward translation layer is required between the objects in the application code and the database model of tables, rows, and columns. The discon‐ nect between the models is sometimes called an <em>impedance mismatch</em>.</p>
-<p><img src="/image/NoSQL-resume.png" alt="Representing a LinkedIn profile using a relational schema"></p>
-<ul>
-<li>Traditional SQL model, put positions, education, and contact info in separate tables iwht a foreigh key reference to the <code>users</code> table</li>
-<li>Later versions of the SQL added support for structured datatypes and XML data, which allowed multi-valued data to be stored within a single row, with support for querying and indexing inside those documents. </li>
-<li>3rd option is to encode jobs, education, and contact info as a JSON or XML document, store it on a text column in the database, and let the application inter‐ pret its structure and content. In this setup, you typically cannot use the database to query for values inside that encoded column.</li>
-</ul>
-<p>Document-oriented databases like MongoDB, RethinkDB, CouchDB, and Espresso support this data model.</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;user_id&quot;</span>: <span class="number">251</span>,</span><br><span class="line">  <span class="attr">&quot;first_name&quot;</span>: <span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;last_name&quot;</span>:<span class="string">&quot;Gates&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;region_id&quot;</span>:<span class="string">&quot;us:91&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;industry_id&quot;</span>:<span class="number">131</span>,</span><br><span class="line">  <span class="attr">&quot;positions&quot;</span>: [</span><br><span class="line">    &#123;<span class="attr">&quot;job_title&quot;</span>: <span class="string">&quot;Co-chair&quot;</span>, <span class="attr">&quot;organization&quot;</span>: <span class="string">&quot;Bill &amp; Melinda Gates Foundation&quot;</span>&#125;, </span><br><span class="line">    &#123;<span class="attr">&quot;job_title&quot;</span>: <span class="string">&quot;Co-founder, Chairman&quot;</span>, <span class="attr">&quot;organization&quot;</span>: <span class="string">&quot;Microsoft&quot;</span>&#125;</span><br><span class="line">  ], </span><br><span class="line">  <span class="attr">&quot;education&quot;</span>: [</span><br><span class="line">      &#123;<span class="attr">&quot;school_name&quot;</span>: <span class="string">&quot;Harvard University&quot;</span>, <span class="attr">&quot;start&quot;</span>: <span class="number">1973</span>, <span class="attr">&quot;end&quot;</span>: <span class="number">1975</span>&#125;,</span><br><span class="line">      &#123;<span class="attr">&quot;school_name&quot;</span>: <span class="string">&quot;Lakeside School, Seattle&quot;</span>, <span class="attr">&quot;start&quot;</span>: <span class="literal">null</span>, <span class="attr">&quot;end&quot;</span>: <span class="literal">null</span>&#125; </span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">&quot;contact_info&quot;</span>: &#123;</span><br><span class="line">      <span class="attr">&quot;blog&quot;</span>: <span class="string">&quot;http://thegatesnotes.com&quot;</span>, <span class="attr">&quot;twitter&quot;</span>: <span class="string">&quot;http://twitter.com/BillGates&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Many-to-One-and-Many-to-Many-Relationships"><a href="#Many-to-One-and-Many-to-Many-Relationships" class="headerlink" title="Many-to-One and Many-to-Many Relationships"></a>Many-to-One and Many-to-Many Relationships</h2><p>Notice <code>region_id</code> and <code>industry_id</code> are given as IDs, not as plain-text strings <code>Greater Seattle Area</code> and <code>Philanthropy</code>.</p>
+<h3 id="The-Object-Relational-Mismatch"><a href="#The-Object-Relational-Mismatch" class="headerlink" title="The Object-Relational Mismatch"></a>The Object-Relational Mismatch</h3><p> If data is stored in relational tables, an awkward translation layer is required between the objects in the application code and the database model of tables, rows, and columns. The discon‐ nect between the models is sometimes called an <wavy>impedance mismatch</wavy>.</p>
+<h3 id="Many-to-One-and-Many-to-Many-Relationships"><a href="#Many-to-One-and-Many-to-Many-Relationships" class="headerlink" title="Many-to-One and Many-to-Many Relationships"></a>Many-to-One and Many-to-Many Relationships</h3><p>Notice <code>region_id</code> and <code>industry_id</code> are given as IDs, not as plain-text strings <code>Greater Seattle Area</code> and <code>Philanthropy</code>.</p>
 <p>Reasons:</p>
 <ul>
 <li>consistent style and spelling across profiles</li>
 <li>avoiding ambiguity (several cities with the same name)</li>
-<li>Ease of updating</li>
-<li>Localization support – when the site is translated into other languages, the standardized lists can be localized, so the region and industry can be displayed in the view’s language</li>
+<li>ease of updating</li>
+<li>localization support</li>
 <li>better search </li>
 </ul>
-<h2 id="Are-Document-Databases-Repeating-History"><a href="#Are-Document-Databases-Repeating-History" class="headerlink" title="Are Document Databases Repeating History?"></a>Are Document Databases Repeating History?</h2><ul>
-<li>network model</li>
-<li>relational database</li>
-<li>document database</li>
-</ul>
-<h2 id="Relational-vs-Document-Databases-Today"><a href="#Relational-vs-Document-Databases-Today" class="headerlink" title="Relational vs. Document Databases Today"></a>Relational vs. Document Databases Today</h2><p>There are many differences to consider when comparing relational databases to document databases, including their fault-tolerance properties and handling of concurrency. </p>
+<h3 id="Are-Document-Databases-Repeating-History"><a href="#Are-Document-Databases-Repeating-History" class="headerlink" title="Are Document Databases Repeating History?"></a>Are Document Databases Repeating History?</h3><h3 id="Relational-vs-Document-Databases-Today"><a href="#Relational-vs-Document-Databases-Today" class="headerlink" title="Relational vs. Document Databases Today"></a>Relational vs. Document Databases Today</h3><p>There are many differences to consider when comparing relational databases to document databases, including their fault-tolerance properties and handling of concurrency. </p>
 <p>Document data model: schema flexibility, better performance due to locality, and that for some application it is closer to the data structures used by the application</p>
 <p>relational model: providing better support for joins, and many-to-one and many-to-many relationships.</p>
 <p>For highly interconnected data, the document model is awkward, the relational model is acceptable, and graph models are the most natural. </p>
-<h3 id="Schema-flexibility-in-the-document-model"><a href="#Schema-flexibility-in-the-document-model" class="headerlink" title="Schema flexibility in the document model"></a>Schema flexibility in the document model</h3><p>No schema means that arbitrary keys and values can be added to a document, and when reading, clients have no guarantees as to what fields the documents may contain. </p>
-<p><strong><em>schema-on-read</em></strong>: the structure of the data is implicit, and only interpreted when the data is read. </p>
-<p><strong><em>schema-on-write:</em></strong> the traditional approach of relational databases, where the schema is explicit and the database ensures all written data conforms to it. </p>
-<p>Schema-on-read is similar to dynamic (runtime) type checking in programming lan‐ guages, whereas schema-on-write is similar to static (compile-time) type checking.</p>
-<p>The difference between the approaches is particularly noticeable in situtaions where an application wants to change the format of its data. For example, say you are currently storing each users’ full name in one field, and you instead want to store the first name and last name separately. In a document database, you would just start writing new documents with the new fields and have code in the application that handles the case when old documents are read. For example”</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (user &amp;&amp; user.name &amp;&amp; !user.first_name)&#123;</span><br><span class="line">  <span class="comment">// Documents written before Dec.8 2020 don&#x27;t have first_name</span></span><br><span class="line">  user.first_name=user.name.split(&quot; &quot;)[0];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>On the other hand, in a “statically typed” database schema, you would typically perform a migration along the lines of:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> <span class="keyword">users</span> <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> first_name <span class="built_in">text</span>;</span><br><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">users</span> <span class="keyword">SET</span> first_name= substring_index(<span class="keyword">name</span>,<span class="string">&quot; &quot;</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-
-<p>Schema changes have a bad reputation of being slow and requiring downtime. </p>
-<p>The shema-on-read approach is advantageous if the itesm in the collection don’t all have the same structure for some reason (i.e. the data is heterogeneous) – for example, because:</p>
-<ul>
-<li>there are many different types of objects, and it is not practical to put each type of object in its own table </li>
-<li>the structure of the data is determined by external systems over which you have no control and which may change at any time</li>
-</ul>
-<h3 id="Data-locality-for-queries"><a href="#Data-locality-for-queries" class="headerlink" title="Data locality for queries"></a>Data locality for queries</h3><p>A document is usually stored as a single continuous string, encoded as JSON, XML, or a binary variant thereof (such as MongoDB’s BSON). If your application often needs to access the entire document (for example, to render it on a web page), there is a performance advantage to this <strong><em>storage locality</em></strong>.</p>
+<h4 id="Schema-flexibility-in-the-document-model"><a href="#Schema-flexibility-in-the-document-model" class="headerlink" title="Schema flexibility in the document model"></a>Schema flexibility in the document model</h4><p>No schema means that arbitrary keys and values can be added to a document, and when reading, clients have no guarantees as to what fields the documents may contain. </p>
+<p><span style="color:navy">schema-on-read</span>: the structure of the data is implicit, and only interpreted when the data is read. </p>
+<p><span style="color:navy">schema-on-write</span>: the traditional approach of relational databases, where the schema is explicit and the database ensures all written data conforms to it. </p>
+<h4 id="Data-locality-for-queries"><a href="#Data-locality-for-queries" class="headerlink" title="Data locality for queries"></a>Data locality for queries</h4><p>A document is usually stored as a single continuous string, encoded as JSON, XML, or a binary variant thereof (such as MongoDB’s BSON). If your application often needs to access the entire document (for example, to render it on a web page), there is a performance advantage to this <strong><em>storage locality</em></strong>.</p>
 <p>The locality advantage only applies if you need large parts of the document at the same time. </p>
 <p>It’s worth pointing out that the idea of grouping related data together for locality is not limited to the document model.</p>
-<h3 id="Convergence-of-document-and-relational-databases"><a href="#Convergence-of-document-and-relational-databases" class="headerlink" title="Convergence of document and relational databases"></a>Convergence of document and relational databases</h3><h1 id="Query-Languages-for-Data"><a href="#Query-Languages-for-Data" class="headerlink" title="Query Languages for Data"></a>Query Languages for Data</h1><p>When the relational model was introduced, it included a new way of querying data: SQL is a <strong><em>declarative</em></strong> query language.</p>
-<p>Many commonly used programming languages are imperative. For example, if you have a list of animal species, you might write the following code to return only the sharks in the list:</p>
+<h2 id="Query-Languages-for-Data"><a href="#Query-Languages-for-Data" class="headerlink" title="Query Languages for Data"></a>Query Languages for Data</h2><ul>
+<li><span style="color:brown">imperative code</span>: <wavy>perform certain operations in a certain order</wavy></li>
+</ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">getSharks</span><span class="params">()</span>:</span></span><br><span class="line"><span class="function">    var sharks</span>=[];</span><br><span class="line">    <span class="keyword">for</span> (var i=<span class="number">0</span>;i&lt;animals.length;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span> (animals[i].family==<span class="string">&quot;Sharks&quot;</span>)&#123;</span><br><span class="line">      sharks.push(anmials[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    <span class="keyword">return</span> sharks;</span><br></pre></td></tr></table></figure>
 
-<p>In the relational algebar, you would instead write:<br>$$<br>sharks=\sigma_{family=”Sharks”}(animals)<br>$$<br>Where $\sigma$ is the selection operator, returning only those animals that match the condition $family=”Sharks”$.</p>
-<p>When SQL was defined, it followed the structure of the relational algebra fairly closely:</p>
+<ul>
+<li><span style="color:brown">declarative code</span>: <wavy>specify the pattern of the data you want</wavy></li>
+</ul>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> animals <span class="keyword">WHERE</span> family=<span class="string">&#x27;Sharks&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
-<p>An <strong><em>imperative</em></strong> language tells the computer to perform certain operations in a certain order. You can imagine stepping through the code line by line, evaluating conditions, updating variables, and deciding whether to go around the loop one more time.</p>
-<p>In a declarative query language, like SQL or relational algebra, you just specify the pattern of the data you want—what conditions the results must meet, and how you want the data to be transformed (e.g., sorted, grouped, and aggregated)—but not <em>how</em> to achieve that goal.</p>
-<p>declarative languages often lend themselves to parallel execution. Imperative code is very hard to parallelize across mul‐ tiple cores and multiple machines, because it specifies instructions that must be per‐ formed in a particular order. Declarative languages have a better chance of getting faster in parallel execution because they specify only the pattern of the results, not the algorithm that is used to determine the results.</p>
-<h2 id="Delarative-Queries-on-the-Web"><a href="#Delarative-Queries-on-the-Web" class="headerlink" title="Delarative Queries on the Web"></a>Delarative Queries on the Web</h2><p>The advantages of declarative query languages are not limited to just databases. </p>
-<p>For example, in a web browser:</p>
-<p>Say you have a website about animals in the ocean. The user is currently viewing the page on sharks, so you mark the navigation item “Sharks” as currently selected, like this:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;selected&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Sharks<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>Great White Shark<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>Tiger Shark<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>Hammerhead Shark<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Whales<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>Blue Whale<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>Humpback Whale<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>Fin Whale<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>Now way you want the title of the currently selected page to have a blue background, so that it is visually highlighted. This is easy, using CSS:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">li</span><span class="selector-class">.selected</span>&gt;<span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>:blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>CSS is a <em>declarative</em> language for specifying the styling of a document.</p>
-<p>Imagine what life would be like if you had to use an imperative approach. In Java‐ Script, using the core Document Object Model (DOM) API, the result might look something like this:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> liElements= <span class="built_in">document</span>.getElementsByTagName(<span class="string">&quot;li&quot;</span>);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;liElements.length;i++)&#123;</span><br><span class="line">  <span class="keyword">if</span> (liElements[i].className===<span class="string">&quot;selected&quot;</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> children=liElements[i].childNodes;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;children.length;j++)&#123;</span><br><span class="line">      <span class="keyword">var</span> child=children[j];</span><br><span class="line">      <span class="keyword">if</span> (child.nodeType===Node.ELEMENT_NODE &amp;&amp; child.tagName===<span class="string">&quot;P&quot;</span>)&#123;</span><br><span class="line">        child.setAttributed(<span class="string">&quot;style&quot;</span>,<span class="string">&quot;background-color: blue&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="MapReducing-Querying"><a href="#MapReducing-Querying" class="headerlink" title="MapReducing Querying"></a>MapReducing Querying</h2><p><strong><em>MapReduce</em></strong> is a programming model for processing large amounts of data in bluk across many machines. </p>
-<p>MapReduce is neither a declarative query language nor a fully imperative query API, but somewhere in between : the logic of the query is expressed with snippets of code, which are called repeatedly by the processing framework. It is based on the <code>map</code> and <code>reduce</code>.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> date_trunc(<span class="string">&#x27;month&#x27;</span>,observation_timestamp) <span class="keyword">AS</span> observation_month, <span class="keyword">sum</span>(num_animals) <span class="keyword">AS</span> total_animals</span><br><span class="line"><span class="keyword">FROM</span> observations</span><br><span class="line"><span class="keyword">WHERE</span> family=<span class="string">&quot;Sharks&quot;</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> observation_month; </span><br></pre></td></tr></table></figure>
-
-<p>The same can be expressed with MongoDB’s MapReduce feature as follows:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">db.observations.mapReduce(</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">map</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> year=<span class="built_in">this</span>.observationTimestamp.getFullYear();</span><br><span class="line">    <span class="keyword">var</span> month=<span class="built_in">this</span>.observationTimestampe.getMonth()+<span class="number">1</span>;</span><br><span class="line">    emit(year+<span class="string">&quot;-&quot;</span>+month,<span class="built_in">this</span>.numAnimals);</span><br><span class="line">    &#125;,</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">reduce</span>(<span class="params">key,values</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Array</span>.sum(values);</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    query:&#123;<span class="attr">family</span>:<span class="string">&quot;Sharks&quot;</span>&#125;,</span><br><span class="line">    out:<span class="string">&quot;monthlySharkReport&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>The <code>map</code> and <code>reduce</code> must be pure functions, which means they only use the data that is passed to them as input, they cannot perform additional database queries, and they must not have any side effects. </p>
-<p>A usability problem with MapReduce is that you have to write two carefully coordinated JS functions, which is often harder than writing a single query. MongoDB 2.2 added support for a declarative query language called the <strong><em>aggregation pipeline</em></strong>:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">db.observations.aggregate([</span><br><span class="line">  &#123;<span class="attr">$match</span>:&#123;<span class="attr">family</span>:<span class="string">&quot;Sharks&quot;</span>&#125;&#125;,</span><br><span class="line">  &#123;<span class="attr">$group</span>:&#123;</span><br><span class="line">    _id:&#123;</span><br><span class="line">      year:&#123;<span class="attr">$year</span>:<span class="string">&quot;$observationTimestamp&quot;</span>&#125;,</span><br><span class="line">      month:&#123;<span class="attr">$month</span>:<span class="string">&quot;$observationTimestamp&quot;</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    totalAnimals:&#123;<span class="attr">$sum</span>:<span class="string">&quot;$numAnimals&quot;</span>&#125;</span><br><span class="line">  &#125;&#125;</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
-
-<h1 id="Graph-Like-Data-Models"><a href="#Graph-Like-Data-Models" class="headerlink" title="Graph-Like Data Models"></a>Graph-Like Data Models</h1><p>The relational model can handle simple cases of many-to-many relationships, but as the connections within your data become more complex, it becomes more natural to start modeling your data as a graph. </p>
-<p>a graph consists of 2 kinds of objects:</p>
+<p>Declarative advantages:</p>
 <ul>
-<li><em>vertices</em> (nodes or entities)</li>
-<li><em>edges</em> (relationships or arcs)</li>
+<li>concise and easier to work with</li>
+<li>hide implementation details, leave to query optimizer</li>
+<li>parallel execution</li>
+</ul>
+<h3 id="Delarative-Queries-on-the-Web"><a href="#Delarative-Queries-on-the-Web" class="headerlink" title="Delarative Queries on the Web"></a>Delarative Queries on the Web</h3><p>CSS is a <em>declarative</em> language for specifying the styling of a document, better than Javascript sometimes.</p>
+<h3 id="MapReducing-Querying"><a href="#MapReducing-Querying" class="headerlink" title="MapReducing Querying"></a>MapReducing Querying</h3><p><span style="color:brown">MapReduce</span> is a programming model for processing large amounts of data in bluk across many machines. </p>
+<p>MapReduce is neither a declarative query language nor a fully imperative query API, but somewhere in between : the logic of the query is expressed with snippets of code, which are called repeatedly by the processing framework. It is based on the <code>map</code> and <code>reduce</code>.</p>
+<h2 id="Graph-Like-Data-Models"><a href="#Graph-Like-Data-Models" class="headerlink" title="Graph-Like Data Models"></a>Graph-Like Data Models</h2><p>a graph consists of 2 kinds of objects:</p>
+<ul>
+<li><span style="color:brown">vertices</span> (nodes or entities)</li>
+<li><span style="color:brown">edges</span> (relationships or arcs)</li>
 </ul>
 <p>examples:</p>
 <ul>
@@ -550,7 +531,6 @@ Compare the relational model, the document model. and a few graph-based data m..
 <li>the web graph: vertices are web pages, and edges indicate HTML links to other pages</li>
 <li>road or ail networks: vertices are junctions, and edges represent the roads or railway lines between them </li>
 </ul>
-<p><img src="/image/graph-structure.png" alt="Example of graph-structured data"></p>
 <p>Property graph model and triple-store model</p>
 <p>three declarative query language:</p>
 <ul>
@@ -558,7 +538,7 @@ Compare the relational model, the document model. and a few graph-based data m..
 <li>SPARQL</li>
 <li>Datalog</li>
 </ul>
-<h2 id="Property-Graphs"><a href="#Property-Graphs" class="headerlink" title="Property Graphs"></a>Property Graphs</h2><p>In the property graph model, each vertex consists of:</p>
+<h3 id="Property-Graphs"><a href="#Property-Graphs" class="headerlink" title="Property Graphs"></a>Property Graphs</h3><p>In the property graph model, each vertex consists of:</p>
 <ul>
 <li>a unique identifier</li>
 <li>a set of outgoing edges</li>
@@ -578,16 +558,16 @@ Compare the relational model, the document model. and a few graph-based data m..
 
 
 
-<h2 id="The-Cypher-Query-Language"><a href="#The-Cypher-Query-Language" class="headerlink" title="The Cypher Query Language"></a>The Cypher Query Language</h2><p>Cypher is a declarative query language for property graphs. </p>
+<h3 id="The-Cypher-Query-Language"><a href="#The-Cypher-Query-Language" class="headerlink" title="The Cypher Query Language"></a>The Cypher Query Language</h3><p>Cypher is a declarative query language for property graphs. </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE </span><br><span class="line">(NAmerica: Location &#123;name:&#39;North America&#39;, type: &#39;continent&#39;&#125;),</span><br><span class="line">(USA: Location &#123;name:&#39;United States&#39;, type: &#39;country&#39;&#125;),</span><br><span class="line">(Idaho:Location    &#123;name:&#39;Idaho&#39;,         type:&#39;state&#39;    &#125;),</span><br><span class="line">(Lucy: Person &#123;name:&#39;Lucy&#39;&#125;), </span><br><span class="line">(Idaho) -[:WITHIN]-&gt; (USA) -[:WITHIN]-&gt; (NAmerica), (Lucy) -[:BORN_IN]-&gt; (Idaho)                </span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MATCH </span><br><span class="line">    (person) -[:BORN_IN] -&gt; () -&gt;[:WITHIN*0..]-&gt;(us:Location &#123;name:&#39;United States&#39;&#125;),</span><br><span class="line">    (person) -[:LIVES_IN]-&gt; () -[:WITHIN*0..]-&gt; (eu:Location &#123;name:&#39;Europe&#39;&#125;)                                                 RETURN person.name                             </span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="Graph-Queries-in-SQL"><a href="#Graph-Queries-in-SQL" class="headerlink" title="Graph Queries in SQL"></a>Graph Queries in SQL</h2><h2 id="Triple-Stores-and-SPARQL"><a href="#Triple-Stores-and-SPARQL" class="headerlink" title="Triple-Stores and SPARQL"></a>Triple-Stores and SPARQL</h2><p>The triple-store model is mostly equivalent to the property graph model, using differ‐ ent words to describe the same ideas.</p>
+<h3 id="Graph-Queries-in-SQL"><a href="#Graph-Queries-in-SQL" class="headerlink" title="Graph Queries in SQL"></a>Graph Queries in SQL</h3><h3 id="Triple-Stores-and-SPARQL"><a href="#Triple-Stores-and-SPARQL" class="headerlink" title="Triple-Stores and SPARQL"></a>Triple-Stores and SPARQL</h3><p>The triple-store model is mostly equivalent to the property graph model, using differ‐ ent words to describe the same ideas.</p>
 <p>In a triple-store, all info is stored in the form of very simple three-part statements: (<em>subject, predicate, object</em>). For example, in the triple (<em>Jim, likes, bananas</em>), Jim is the subject, likes is the predicate (verb), and bananas is the object. </p>
-<h2 id="The-Foundation-DataLog"><a href="#The-Foundation-DataLog" class="headerlink" title="The Foundation: DataLog"></a>The Foundation: DataLog</h2>
+<h3 id="The-Foundation-DataLog"><a href="#The-Foundation-DataLog" class="headerlink" title="The Foundation: DataLog"></a>The Foundation: DataLog</h3>
                         
                             
                               <div class='article_footer'>
@@ -624,10 +604,10 @@ Compare the relational model, the document model. and a few graph-based data m..
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-12-28T13:02:14-05:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-11T15:08:27-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Dec 28, 2020</p>
+    <p>Updated on：May 11, 2021</p>
   </a>
 </div>
 
@@ -636,7 +616,7 @@ Compare the relational model, the document model. and a few graph-based data m..
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/DDIA/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>DDIA</p></a></div>
 
 
         
@@ -659,9 +639,9 @@ Compare the relational model, the document model. and a few graph-based data m..
                   
                     <div class="prev-next">
                       
-                        <a class='prev' href='/2020/12/28/Design-Data-Intensive-Application-1-3/'>
+                        <a class='prev' href='/2020/12/28/Design-Data-Intensive-Application-3/'>
                           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>
-                            Design Data Intensive Application (1-3)
+                            DDIA (3)
                           </p>
                           <p class='content'>
                             We will examine two families of storage engines: log-structured storage engines, and page-oriente...
@@ -691,6 +671,59 @@ Scalabi...
 
                     <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
                     
+                      <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+                        
 </div>
 <aside class='l_side'>
   
@@ -710,7 +743,7 @@ Scalabi...
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Birth-of-NoSQL"><span class="toc-text">The Birth of NoSQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Object-Relational-Mismatch"><span class="toc-text">The Object-Relational Mismatch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Many-to-One-and-Many-to-Many-Relationships"><span class="toc-text">Many-to-One and Many-to-Many Relationships</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Are-Document-Databases-Repeating-History"><span class="toc-text">Are Document Databases Repeating History?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Relational-vs-Document-Databases-Today"><span class="toc-text">Relational vs. Document Databases Today</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Schema-flexibility-in-the-document-model"><span class="toc-text">Schema flexibility in the document model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-locality-for-queries"><span class="toc-text">Data locality for queries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Convergence-of-document-and-relational-databases"><span class="toc-text">Convergence of document and relational databases</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Delarative-Queries-on-the-Web"><span class="toc-text">Delarative Queries on the Web</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MapReducing-Querying"><span class="toc-text">MapReducing Querying</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Property-Graphs"><span class="toc-text">Property Graphs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Cypher-Query-Language"><span class="toc-text">The Cypher Query Language</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph-Queries-in-SQL"><span class="toc-text">Graph Queries in SQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Triple-Stores-and-SPARQL"><span class="toc-text">Triple-Stores and SPARQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Foundation-DataLog"><span class="toc-text">The Foundation: DataLog</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Relational-Model-vs-Document-Model"><span class="toc-text">Relational Model vs. Document Model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Birth-of-NoSQL"><span class="toc-text">The Birth of NoSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Object-Relational-Mismatch"><span class="toc-text">The Object-Relational Mismatch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Many-to-One-and-Many-to-Many-Relationships"><span class="toc-text">Many-to-One and Many-to-Many Relationships</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Are-Document-Databases-Repeating-History"><span class="toc-text">Are Document Databases Repeating History?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Relational-vs-Document-Databases-Today"><span class="toc-text">Relational vs. Document Databases Today</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Schema-flexibility-in-the-document-model"><span class="toc-text">Schema flexibility in the document model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Data-locality-for-queries"><span class="toc-text">Data locality for queries</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Query-Languages-for-Data"><span class="toc-text">Query Languages for Data</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Delarative-Queries-on-the-Web"><span class="toc-text">Delarative Queries on the Web</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MapReducing-Querying"><span class="toc-text">MapReducing Querying</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Graph-Like-Data-Models"><span class="toc-text">Graph-Like Data Models</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Property-Graphs"><span class="toc-text">Property Graphs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Cypher-Query-Language"><span class="toc-text">The Cypher Query Language</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Graph-Queries-in-SQL"><span class="toc-text">Graph Queries in SQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Triple-Stores-and-SPARQL"><span class="toc-text">Triple-Stores and SPARQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-Foundation-DataLog"><span class="toc-text">The Foundation: DataLog</span></a></li></ol></li></ol>
     </div>
   </section>
 

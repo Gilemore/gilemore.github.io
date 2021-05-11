@@ -427,6 +427,16 @@ Scalability: keep performance (response time) good, even when load ...">
             
           
             
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-06T23:19:27-04:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>Updated on：May 6, 2021</p>
+  </a>
+</div>
+
+            
+          
+            
               
 
             
@@ -467,7 +477,7 @@ Scalability: keep performance (response time) good, even when load ...">
 <p>batch processing:</p>
 <p>Computerized batch processing is the running of “jobs that can run without end user interaction, or can be scheduled to run as resources permit.</p>
 </blockquote>
-<h1 id="Thinking-about-Data-System"><a href="#Thinking-about-Data-System" class="headerlink" title="Thinking about Data System"></a>Thinking about Data System</h1><p>a database and a message queue can be lumped together into <strong><em>data system</em></strong>.</p>
+<h2 id="Thinking-about-Data-System"><a href="#Thinking-about-Data-System" class="headerlink" title="Thinking about Data System"></a>Thinking about Data System</h2><p>a database and a message queue can be lumped together into <strong><em>data system</em></strong>.</p>
 <ul>
 <li>Redis (datastores that are also used as message queues)</li>
 <li>Apache Kafka (message queues with database-like durability guarantees)</li>
@@ -486,7 +496,7 @@ Scalability: keep performance (response time) good, even when load ...">
 <p>Over time, many different people will work on the system (engineering and operations, both maintaining current behavior and adapting ther system to new use cases), and they should all be able to work on it productively. </p>
 </li>
 </ul>
-<h1 id="Reliability"><a href="#Reliability" class="headerlink" title="Reliability"></a>Reliability</h1><p>typical expectations include:</p>
+<h2 id="Reliability"><a href="#Reliability" class="headerlink" title="Reliability"></a>Reliability</h2><p>typical expectations include:</p>
 <ul>
 <li>the application performs the function that the user expected </li>
 <li>it can tolerate the user making mistakes or usnig the software in unexpected ways</li>
@@ -499,7 +509,7 @@ Scalability: keep performance (response time) good, even when load ...">
 <li>Failture: when the system as a whole stops providing the required service to the user</li>
 </ul>
 <p>In such fault-tolerant systems, it can make sense to <wavy>increase</wavy> the rate of faults by triggering them deliberately – for example, by randomly killing individual processes without warning. By deliberately inducing faults, you ensure that the fault-tolerance machinery is continually exercised and tested, which can increase your confidence that faults will be handled correctly when they occur naturally. (The Netflix <a target="_blank" rel="noopener" href="https://netflixtechblog.com/the-netflix-simian-army-16e57fbab116">“Chaos Monkey”</a>)</p>
-<h2 id="Hardware-Faults"><a href="#Hardware-Faults" class="headerlink" title="Hardware Faults"></a>Hardware Faults</h2><ul>
+<h3 id="Hardware-Faults"><a href="#Hardware-Faults" class="headerlink" title="Hardware Faults"></a>Hardware Faults</h3><ul>
 <li>hard disks crash</li>
 <li>RAM becomes faulty</li>
 <li>the power grid has a blackout</li>
@@ -511,12 +521,12 @@ Scalability: keep performance (response time) good, even when load ...">
 <li>single-server system requires planned downtime if you need to reboot the machine (to apply operating system security patches)</li>
 <li>a system that can tolerate machine failure can be patched one node at a time, without downtime of the entire system (a rolling update)</li>
 </ul>
-<h2 id="Software-Errors"><a href="#Software-Errors" class="headerlink" title="Software Errors"></a>Software Errors</h2><p>Software errors are harder to anticipate, and they are correlated across nodes, they tend to cause many more system failures than uncorrelated hardware faults. </p>
-<h2 id="Human-Errors"><a href="#Human-Errors" class="headerlink" title="Human Errors"></a>Human Errors</h2><h1 id="Scalability"><a href="#Scalability" class="headerlink" title="Scalability"></a>Scalability</h1><ul>
+<h3 id="Software-Errors"><a href="#Software-Errors" class="headerlink" title="Software Errors"></a>Software Errors</h3><p>Software errors are harder to anticipate, and they are correlated across nodes, they tend to cause many more system failures than uncorrelated hardware faults. </p>
+<h3 id="Human-Errors"><a href="#Human-Errors" class="headerlink" title="Human Errors"></a>Human Errors</h3><h2 id="Scalability"><a href="#Scalability" class="headerlink" title="Scalability"></a>Scalability</h2><ul>
 <li>if the system grows in a particular way, what are our options for coping with the growth?</li>
 <li>How can we add computing resources to handle the additional load?</li>
 </ul>
-<h2 id="Describing-Load"><a href="#Describing-Load" class="headerlink" title="Describing Load"></a>Describing Load</h2><p>Load can be described with <wavy>load parameters</wavy>. The best choice of parameters depends on the architecture of your system: it may be requests per second to a web server, the ratio of reads to writes in a database, the number of simultaneously active users in a chat room, the hit rate on a cache, or others. </p>
+<h3 id="Describing-Load"><a href="#Describing-Load" class="headerlink" title="Describing Load"></a>Describing Load</h3><p>Load can be described with <wavy>load parameters</wavy>. The best choice of parameters depends on the architecture of your system: it may be requests per second to a web server, the ratio of reads to writes in a database, the number of simultaneously active users in a chat room, the hit rate on a cache, or others. </p>
 <p>Example, Twitter, 2 of Twitter main operations are:</p>
 <ul>
 <li><p><em>Post tweet</em></p>
@@ -540,7 +550,7 @@ Scalability: keep performance (response time) good, even when load ...">
 <p>The 1st version of Twitter used approach 1, but the systems struggled to keep up with the load of home timeline queries, so the company switched to approach 2. This works better because the average rate of published tweets is almost two orders of magnitude lower than the rate of home timeline reads, and so in this case it’s perferable to do more work at write time and less at read time. </p>
 <p>However, the downside of approach 2 is that posting a tweet now requires a lot of extra work. On average, a tweet is delivered to about 75 followers. But this average hides the fact that the number of followers per user varies wildly, and some users have over 30 million followers. This means that a single tweet may result in over 30 million writes to home timelines! –&gt; challenges.</p>
 <p>In this case, <strong><em>the distribution of followers per user</em></strong> is a key <em>load parameter</em> for discussing scalability. </p>
-<h2 id="Describing-Performance"><a href="#Describing-Performance" class="headerlink" title="Describing Performance"></a>Describing Performance</h2><ul>
+<h3 id="Describing-Performance"><a href="#Describing-Performance" class="headerlink" title="Describing Performance"></a>Describing Performance</h3><ul>
 <li>when you increase a load parameter and keep the system resource (CPU, memory, network bandwidth, etc.) unchanged, how is the performace of your system affected?</li>
 <li>When you increase a load parameter, how much do you need to increase the resources if you wnat to keep performance unchanged?</li>
 </ul>
@@ -561,12 +571,12 @@ Scalability: keep performance (response time) good, even when load ...">
 <li>Median</li>
 <li>high percentiles of response time (<em>tail latencies</em>)</li>
 </ul>
-<h2 id="Approaches-for-Coping-with-Load"><a href="#Approaches-for-Coping-with-Load" class="headerlink" title="Approaches for Coping with Load"></a>Approaches for Coping with Load</h2><p>How do we maintain good performance even when our load parameters increase by some amount?</p>
+<h3 id="Approaches-for-Coping-with-Load"><a href="#Approaches-for-Coping-with-Load" class="headerlink" title="Approaches for Coping with Load"></a>Approaches for Coping with Load</h3><p>How do we maintain good performance even when our load parameters increase by some amount?</p>
 <ul>
 <li><em>scaling up</em> (vertical scaling, moving to a more powerful machine)</li>
 <li><em>scaling out</em> (horizontal scaling, distribuing the load across multiple smaller machines)</li>
 </ul>
-<h1 id="Maintainability"><a href="#Maintainability" class="headerlink" title="Maintainability"></a>Maintainability</h1><p>We will pay particular attention to 3 design principles for software systems:</p>
+<h2 id="Maintainability"><a href="#Maintainability" class="headerlink" title="Maintainability"></a>Maintainability</h2><p>We will pay particular attention to 3 design principles for software systems:</p>
 <ul>
 <li>Operability: make it easy for operations teams to keep the system running smoothly</li>
 <li>Simplicity: make it easy for new engineers to understand the system, by removing as much complexity as possible from the system </li>
@@ -646,11 +656,12 @@ Scalability: keep performance (response time) good, even when load ...">
                       
                         <a class='prev' href='/2020/12/26/Design-Data-Intensive-Application-2/'>
                           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>
-                            Design Data Intensive Application (1-2)
+                            DDIA (2)
                           </p>
                           <p class='content'>
-                            look at a range of general-purpose data models for data storage and querying. 
-Compare the relati...
+                            Compare the relational model, the document model, and a few graph-based data models.
+
+Relational ...
                           </p>
                         </a>
                         
@@ -718,7 +729,7 @@ shopee
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hardware-Faults"><span class="toc-text">Hardware Faults</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Software-Errors"><span class="toc-text">Software Errors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Human-Errors"><span class="toc-text">Human Errors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Describing-Load"><span class="toc-text">Describing Load</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Describing-Performance"><span class="toc-text">Describing Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approaches-for-Coping-with-Load"><span class="toc-text">Approaches for Coping with Load</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thinking-about-Data-System"><span class="toc-text">Thinking about Data System</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reliability"><span class="toc-text">Reliability</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hardware-Faults"><span class="toc-text">Hardware Faults</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Software-Errors"><span class="toc-text">Software Errors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Human-Errors"><span class="toc-text">Human Errors</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scalability"><span class="toc-text">Scalability</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Describing-Load"><span class="toc-text">Describing Load</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Describing-Performance"><span class="toc-text">Describing Performance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Approaches-for-Coping-with-Load"><span class="toc-text">Approaches for Coping with Load</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maintainability"><span class="toc-text">Maintainability</span></a></li></ol>
     </div>
   </section>
 
