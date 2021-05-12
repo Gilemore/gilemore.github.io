@@ -1101,19 +1101,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>We will examine two families of storage engines: <em>log-structured</em> storage engines, and <em>page-oriented</em> storage engines such as B-trees.</p>
-<p>storage engines fall into two broad categories: those opti‐ mized for <strong>transaction processing</strong> (OLTP), and those optimized for <strong>analytics</strong> (OLAP).</p>
-<ul>
-<li>OLTP: a huge volume of requests from users –&gt; only touch a small number of records in each query. The application requests records using some kind of key, and the storage engine uses an <strong><em>index</em></strong> to find the data for the requested key. <strong><em>Disk seek time</em></strong> is often the bottleneck here.</li>
-<li>Data warehouses: a much lower volume of queries , but each query is typically very demanding, requiring many millions of records to be scanned in a short time.   <strong><em>Disk bandwidth</em></strong> (not seek time) is often the bottleneck here, and <strong><em>column- oriented storage</em></strong> is an increasingly popular solution for this kind of workload.</li>
-</ul>
-<p>On the OLTP side, we saw storage engines from two main schools of thought:</p>
-<ul>
-<li><p>The <strong><em>log-structured</em></strong> school, which only permits appending to files and deleting obsolete files, but never updates a file that has been written. Bitcask, SSTables, LSM-trees, LevelDB, Cassandra, HBase, Lucene, and others belong to this group.</p>
-<p>–&gt; higher write throughput</p>
+<ol>
+<li>Data Structures<ol>
+<li>Hash Indexes (append-only, segments, compaction, in-memory)</li>
+<li>SSTables and LSM-trees (sorted by key, large dataset, range queries)</li>
+<li>B-trees (break into pages, tree-structured for pages, overwrite)</li>
+</ol>
 </li>
-<li><p>The update-in-place school, which treats the disk as a set of fixed-size pages that can be overwritten. <strong><em>B-trees</em></strong> are the biggest example of this philosophy, being used in all major relational databases and also many nonrelational ones.</p>
-</li>
-</ul>
+</ol>
       
     </div>
     
@@ -1762,8 +1757,8 @@
         <div class="webinfo-item">
           <div>Last Update：</div>
           
-            <div id="last-update" style="display: none;">Tue May 11 2021 16:06:29 GMT-0400 (Eastern Daylight Time)</div>
-            <div id="last-update-show">2021-05-11 </div>
+            <div id="last-update" style="display: none;">Wed May 12 2021 17:30:23 GMT-0400 (Eastern Daylight Time)</div>
+            <div id="last-update-show">2021-05-12 </div>
           
         </div>
         
@@ -1813,7 +1808,7 @@
           try { 
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate)); 
           } catch (error) { 
-            document.getElementById('last-update-show').innerHTML = '2021-05-11 '; 
+            document.getElementById('last-update-show').innerHTML = '2021-05-12 '; 
           } 
         </script> 
         
