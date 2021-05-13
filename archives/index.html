@@ -374,6 +374,24 @@
 			          </div>
 		      		
 		          <div class="archive-item archive-post mark">
+		            <a class='ai' href="/2021/05/12/Binary-Search/">
+		              <time>05-12</time>
+		              <span class="title">
+		                
+		                  Binary Search
+		                
+		                
+										
+										
+		              </span>
+		            </a>
+		          </div>
+						
+	      
+	          
+						
+							
+		          <div class="archive-item archive-post mark">
 		            <a class='ai' href="/2021/04/12/Tools-and-Techniques-for-ML-Project/">
 		              <time>04-12</time>
 		              <span class="title">
@@ -1211,7 +1229,7 @@
           <li><a class="flat-box"
             title="/categories/interview/" href="/categories/interview/"
             id="categoriesinterview"
-            ><div class='name'>interview</div><div class='badge'>(31)</div></a></li>
+            ><div class='name'>interview</div><div class='badge'>(32)</div></a></li>
         
       </ul>
     </div>
@@ -1260,7 +1278,7 @@
       
         <div class="webinfo-item">
           <div>Articles：</div>
-          <div>41 </div>
+          <div>42 </div>
         </div>
       
 
@@ -1289,7 +1307,7 @@
         <div class="webinfo-item">
           <div>Last Update：</div>
           
-            <div id="last-update" style="display: none;">Wed May 12 2021 17:34:46 GMT-0400 (Eastern Daylight Time)</div>
+            <div id="last-update" style="display: none;">Wed May 12 2021 22:05:26 GMT-0400 (Eastern Daylight Time)</div>
             <div id="last-update-show">2021-05-12 </div>
           
         </div>
@@ -1360,6 +1378,59 @@
 
 	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
 	
+
+	
+	    <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 	
 

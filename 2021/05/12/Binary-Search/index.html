@@ -6,8 +6,6 @@
   <!-- SEO相关 -->
   
       
-                    <meta name="robots" content="noindex,follow">
-                    
                       
                         <!-- 渲染优化 -->
                         <meta name="renderer" content="webkit">
@@ -21,12 +19,22 @@
                         
                           <title>
                             
-                              Tag: interview - 
+                              Binary Search - 
                                   Gilmore&#39;s Blog
                           </title>
                           
+                            <meta name="keywords" content="LC">
+                            
 
                               
+                                <meta name="description" content="
+target specified
+left largest
+right smallest
+first position
+last position
+">
+                                
 
                                   <!-- feed -->
                                   
@@ -81,7 +89,7 @@
   
   
   <div class="cover-wrapper">
-    <cover class='cover ' style="display: none;">
+    <cover class='cover post' style="display: none;">
       <div class='cover-body'>
   <div class='a'>
     
@@ -326,8 +334,8 @@
  
  
 <div id="pjax-data" style="display: none"> 
-  <div id="pjax-ispage">false</div> 
-  <div id="pjax-pageTitle"></div> 
+  <div id="pjax-ispage">true</div> 
+  <div id="pjax-pageTitle">Binary Search</div> 
   <div id="pjax-enable-cover">true</div> 
   <div id="pjax-comment-path">none</div> 
   <div id="pjax-comment-placeholder">none</div> 
@@ -359,31 +367,14 @@
       
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow floatable blur reveal ">
   
+    
+      <article id="post"
+        class="post white-box reveal shadow floatable blur article-type-post" itemscope
+        itemprop="blogPost">
+        
 
 
   <section class='meta'>
@@ -393,11 +384,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/12/21/Interviews-Summary-cn/">
-      Interviews Summary (cn)
+  <h1 class="title">
+    <a href="/2021/05/12/Binary-Search/">
+      Binary Search
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -433,17 +424,17 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>Release on：Dec 21, 2020</p>
+    <p>Release on：May 12, 2021</p>
   </a>
 </div>
 
             
           
             
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T15:00:17-04:00">
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-12T21:54:48-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Apr 21, 2021</p>
+    <p>Updated on：May 12, 2021</p>
   </a>
 </div>
 
@@ -463,464 +454,197 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <table>
-<thead>
-<tr>
-<th>日期</th>
-<th>公司</th>
-<th>职位</th>
-<th>状态</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>7.7</td>
-<td>字节飞数</td>
-<td>大数据开发工程师</td>
-<td>笔试-一面-终止</td>
-</tr>
-<tr>
-<td>7.14</td>
-<td>shopee</td>
-<td>大数据开发工程师</td>
-<td>笔试-一面-二面-三面-hr面-终止</td>
-</tr>
-<tr>
-<td>7.20</td>
-<td>阿里</td>
-<td>数据挖掘工程师</td>
-<td>一面-终止</td>
-</tr>
-<tr>
-<td><strong>7.29</strong></td>
-<td><strong>跟谁学</strong></td>
-<td><strong>大数据开发工程师</strong></td>
-<td><strong>笔试-一面-二面-终面-意向书</strong></td>
-</tr>
-<tr>
-<td>8.1</td>
-<td>猿辅导</td>
-<td>大数据研发工程师</td>
-<td>笔试-一面-二面-终止</td>
-</tr>
-<tr>
-<td><strong>8.5</strong></td>
-<td><strong>快手</strong></td>
-<td><strong>数据研发工程师</strong></td>
-<td><strong>一面-二面-hr面-意向书</strong></td>
-</tr>
-<tr>
-<td>8.9</td>
-<td>老虎集团</td>
-<td>数据开发工程师</td>
-<td>笔试</td>
-</tr>
-</tbody></table>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/12/21/Interviews-Summary-cn/">
-          Read More <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
+          <section class="article typo">
+            <div class="article-entry" itemprop="articleBody">
+              
+                  
+                      <ol>
+<li>target specified</li>
+<li>left largest</li>
+<li>right smallest</li>
+<li>first position</li>
+<li>last position</li>
+</ol>
+<a id="more"></a>
+<h2 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h2><details brown><summary> <p>704 Binary Search</p> </summary>
+              <div class='content'>
+              <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binarySearch</span>(<span class="params">arr,target</span>):</span></span><br><span class="line">  l,r=<span class="number">0</span>,len(arr)<span class="number">-1</span></span><br><span class="line">  <span class="keyword">while</span> l&lt;=r:</span><br><span class="line">    mid=l+(r-l)//<span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> arr[mid]==target:</span><br><span class="line">      <span class="keyword">return</span> mid</span><br><span class="line">    <span class="keyword">if</span> arr[mid]&lt;target:</span><br><span class="line">      l=mid<span class="number">-1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      r=mid+<span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+<h2 id="Target-Specified"><a href="#Target-Specified" class="headerlink" title="Target Specified"></a>Target Specified</h2><details brown><summary> <p>374 guess number higher or lower</p> </summary>
+              <div class='content'>
+              <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">guessNumber</span>(<span class="params">n</span>):</span></span><br><span class="line">  l,r=<span class="number">1</span>,n</span><br><span class="line">  <span class="keyword">while</span> l&lt;=r:</span><br><span class="line">    mid=l+(r-l)//<span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> guess(mid)==<span class="number">0</span>:</span><br><span class="line">      <span class="keyword">return</span> mid</span><br><span class="line">    <span class="keyword">if</span> guess(mid)&gt;<span class="number">0</span>:</span><br><span class="line">      l=mid+<span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      r=mid<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow floatable blur reveal ">
+<details brown><summary> <p>367 valid perfect square</p> </summary>
+              <div class='content'>
+              <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isPerfectSquare</span>(<span class="params">num</span>):</span></span><br><span class="line">  l,r=<span class="number">1</span>,num//<span class="number">2</span>+<span class="number">1</span></span><br><span class="line">  <span class="keyword">while</span> l&lt;=r:</span><br><span class="line">    mid=l+(r-l)//<span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> mid**<span class="number">2</span>==num:</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> mid**<span class="number">2</span>&gt;num:</span><br><span class="line">      r=mid<span class="number">-1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      l=mid+<span class="number">1</span></span><br><span class="line">   <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>所以Medium以上的题目会对<wavy>边界的选定模糊化</wavy>，我们要做的是明确边界，然后再套公式。
+              </div>
+            </details>
+
+<details brown><summary> <p>33 Search in Rotated Sorted Array</p> </summary>
+              <div class='content'>
+              <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">searchRotatedArray</span>(<span class="params">arr,target</span>):</span></span><br><span class="line">  l,r=<span class="number">0</span>,len(arr)<span class="number">-1</span></span><br><span class="line">  <span class="keyword">while</span> l&lt;=r:</span><br><span class="line">    mid=l+(r-l)//<span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> arr[mid]==target:</span><br><span class="line">      <span class="keyword">return</span> mid</span><br><span class="line">       <span class="keyword">if</span> arr[mid]&gt;=arr[l]:</span><br><span class="line">      <span class="keyword">if</span> arr[mid]&gt;target <span class="keyword">and</span> target&gt;=arr[l]:</span><br><span class="line">        r=mid<span class="number">-1</span></span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        l=mid+<span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      <span class="keyword">if</span> arr[mid]&lt;target <span class="keyword">and</span> target&lt;=arr[l]:</span><br><span class="line">        l=mid+<span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">        r=mid<span class="number">-1</span></span><br><span class="line"> <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+
+
+<h2 id="比target大的最小值-left容易越界"><a href="#比target大的最小值-left容易越界" class="headerlink" title="比target大的最小值, left容易越界"></a>比target大的最小值, left容易越界</h2><details brown><summary> <p>35</p> </summary>
+              <div class='content'>
+              <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+
+                        
+                            
+                              <div class='article_footer'>
+                                
+                                      
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
   
 
 
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/12/21/Interviews_summary_en/">
-      Interviews Summary (en)
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
+                                        
+                              </div>
+                              
+            </div>
             
               
-<div class='new-meta-item author'>
-  <a class='author' href="" rel="nofollow">
-    <img no-lazy src="/images/avatar.png">
-    <p>Gilmore</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/interview/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>interview</p>
-    </a>
-  </div>
 
 
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>Release on：Dec 21, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T15:00:35-04:00">
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-12T21:54:48-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Apr 21, 2021</p>
+    <p>Updated on：May 12, 2021</p>
   </a>
 </div>
 
-            
-          
-            
-              
-
-            
-          
-        </div>
         
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
       
-        <table>
-<thead>
-<tr>
-<th>date</th>
-<th>company</th>
-<th>position</th>
-<th>status</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>7.12</td>
-<td>Goldman Sachs</td>
-<td>Analyst-SDE</td>
-<td>hackerrank finished-byebye</td>
-</tr>
-<tr>
-<td><strong><em>8.16</em></strong></td>
-<td><strong><em>Amazon</em></strong></td>
-<td><strong><em>Software Engineer</em></strong></td>
-<td><strong><em>OA1 - OA2 - OA3 - VO - offer</em></strong></td>
-</tr>
-<tr>
-<td>8.16</td>
-<td>VMware</td>
-<td>Software Engineer</td>
-<td>OA</td>
-</tr>
-<tr>
-<td>8.19</td>
-<td>RobinHood</td>
-<td>Data Analyst</td>
-<td>OA-byebye</td>
-</tr>
-<tr>
-<td>8.27</td>
-<td>NordStrom</td>
-<td>Software Engineer</td>
-<td>OA1-OA2-</td>
-</tr>
-<tr>
-<td>8.27</td>
-<td>Microsoft</td>
-<td>Data Science</td>
-<td>Greetings from recruiter</td>
-</tr>
-<tr>
-<td><strong><em>9.7</em></strong></td>
-<td><strong><em>Moody’s</em></strong></td>
-<td><strong><em>Moody’s Analytics Technology Rotation (MATR)</em></strong></td>
-<td><strong><em>OA - 1st Interview -Superday - Offer</em></strong></td>
-</tr>
-<tr>
-<td>9.17</td>
-<td>Verisk</td>
-<td>DSEP (Data Science Excellence Program) - 2020/ 2021</td>
-<td>OA-byebye</td>
-</tr>
-<tr>
-<td>9.17</td>
-<td>Bloomberg</td>
-<td>2021 Software Engineer at Bloomberg</td>
-<td>Phone Interview-withdraw</td>
-</tr>
-<tr>
-<td>9.28</td>
-<td>Barclays</td>
-<td>Database Developer Grace Hopper</td>
-<td>Value Interview-withdraw</td>
-</tr>
-</tbody></table>
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/LC/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>LC</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+
+        
       
     </div>
-    
-      
-        <a class= "readmore" href="/2020/12/21/Interviews_summary_en/">
-          Read More <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow floatable blur reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/13/VMware-OA/">
-      VMware-OA
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' href="" rel="nofollow">
-    <img no-lazy src="/images/avatar.png">
-    <p>Gilmore</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/interview/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>interview</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>Release on：Aug 13, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T14:43:29-04:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Apr 21, 2021</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
+                
+                  
+                    <div class="prev-next">
+                      
+                          
+                            <a class='next' href='/2021/04/12/Tools-and-Techniques-for-ML-Project/'>
+                              <p class='title'>
+                                Tools and Techniques for ML Project<i class="fas fa-chevron-right" aria-hidden="true"></i>
+                              </p>
+                              <p class='content'>
+                                just started…
+
+
+
+Paper ReadingOff-policy evaluation for slate recommendationProposalBackgroundWe ...
+                              </p>
+                            </a>
+                            
+                    </div>
+                    
+          </section>
+      </article>
       
-        <p>Timeline: OA 8.16 – no response</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/13/VMware-OA/">
-          Read More <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
+                
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow floatable blur reveal ">
-  
+                  
 
+                    <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+                    
+                      <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/08/13/Amazon-OA/">
-      Amazon-OA
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' href="" rel="nofollow">
-    <img no-lazy src="/images/avatar.png">
-    <p>Gilmore</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/interview/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>interview</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>Release on：Aug 13, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T14:42:16-04:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Apr 21, 2021</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Timeline: 8.13 –&gt; 8.13 –&gt; 8.21</p>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2020/08/13/Amazon-OA/">
-          Read More <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
-
-
-    
-  
+                        
 </div>
 <aside class='l_side'>
   
@@ -928,232 +652,28 @@
     
     
 
-<section class="widget blogger shadow floatable blur desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='/images/favion.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">Gilmore's Blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-        
-          
-            <a href="mailto:shirleylee1389@gmail.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://github.com/Gilemore"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
 
-  
-    
-    
-  
-
-  <section class="widget category shadow floatable blur desktop">
+  <section class="widget toc-wrapper shadow floatable blur desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog_2/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>Table of Content</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Books/" href="/categories/Books/"
-            id="categoriesBooks"
-            ><div class='name'>Books</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Stand-up/" href="/categories/Stand-up/"
-            id="categoriesStand-up"
-            ><div class='name'>Stand-up</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Tools-and-Techniques-for-ML/" href="/categories/Tools-and-Techniques-for-ML/"
-            id="categoriesTools-and-Techniques-for-ML"
-            ><div class='name'>Tools and Techniques for ML</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/interview/" href="/categories/interview/"
-            id="categoriesinterview"
-            ><div class='name'>interview</div><div class='badge'>(32)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Template"><span class="toc-text">Template</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Target-Specified"><span class="toc-text">Target Specified</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94target%E5%A4%A7%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC-left%E5%AE%B9%E6%98%93%E8%B6%8A%E7%95%8C"><span class="toc-text">比target大的最小值, left容易越界</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow floatable blur desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Classes/" style="font-size: 14px; color: #999">Classes</a> <a href="/tags/DDIA/" style="font-size: 18px; color: #7e7e7e">DDIA</a> <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/tags/LC/" style="font-size: 22px; color: #636363">LC</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/OOP/" style="font-size: 16px; color: #8b8b8b">OOP</a> <a href="/tags/Projects/" style="font-size: 14px; color: #999">Projects</a> <a href="/tags/interview/" style="font-size: 18px; color: #7e7e7e">interview</a> <a href="/tags/review/" style="font-size: 20px; color: #707070">review</a> <a href="/tags/system-design/" style="font-size: 24px; color: #555">system design</a>
-    </div>
-  </section>
-
-
-  
-
-  
-    
-    
-
-<section class="widget shadow floatable blur desktop">
-  
-  <header>
-    
-      <i class="fas fa-award fa-fw" aria-hidden="true"></i><span class='name'>Website Info</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>Articles：</div>
-          <div>42 </div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>Age：</div>
-          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
-        </div>
-        <script>
-          var BirthDay = new Date(new Date('2020/04/30'));
-          var today = new Date();
-          var timeold = (today.getTime() - BirthDay.getTime());
-          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
-          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' ';
-        </script>
-      
-
-
-      
-
-      
-
-      
-
-      
-        <div class="webinfo-item">
-          <div>Last Update：</div>
-          
-            <div id="last-update" style="display: none;">Wed May 12 2021 22:05:26 GMT-0400 (Eastern Daylight Time)</div>
-            <div id="last-update-show">2021-05-12 </div>
-          
-        </div>
-        
-        <script> 
-          function timeago(dateTimeStamp) { 
-              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示 
-              var hour = minute * 60; 
-              var day = hour * 24; 
-              var week = day * 7; 
-              var month = day * 30; 
-              var now = new Date().getTime(); //获取当前时间毫秒 
-              var diffValue = now - dateTimeStamp; //时间差 
-              if (diffValue < 0) { 
-                  return; 
-              } 
-              var minC = diffValue / minute; //计算时间差的分，时，天，周，月 
-              var hourC = diffValue / hour; 
-              var dayC = diffValue / day; 
-              var weekC = diffValue / week; 
-              var monthC = diffValue / month; 
-              if (monthC >= 1 && monthC <= 3) { 
-                  result = " " + parseInt(monthC) + " 月前" 
-              } else if (weekC >= 1 && weekC <= 3) { 
-                  result = " " + parseInt(weekC) + " 周前" 
-              } else if (dayC >= 1 && dayC <= 6) { 
-                  result = " " + parseInt(dayC) + " 天前" 
-              } else if (hourC >= 1 && hourC <= 23) { 
-                  result = " " + parseInt(hourC) + " 小时前" 
-              } else if (minC >= 1 && minC <= 59) { 
-                  result = " " + parseInt(minC) + " 分钟前" 
-              } else if (diffValue >= 0 && diffValue <= minute) { 
-                  result = "刚刚" 
-              } else { 
-                  var datetime = new Date(); 
-                  datetime.setTime(dateTimeStamp); 
-                  var Nyear = datetime.getFullYear(); 
-                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1; 
-                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate(); 
-                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours(); 
-                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes(); 
-                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds(); 
-                  result = Nyear + "-" + Nmonth + "-" + Ndate 
-              } 
-              return result; 
-          } 
-          var lastUpDate = document.getElementById('last-update').innerHTML; 
-          try { 
-            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate)); 
-          } catch (error) { 
-            document.getElementById('last-update-show').innerHTML = '2021-05-12 '; 
-          } 
-        </script> 
-        
-      
-    </div>
-  </div>
-</section>
 
   
 
 
 </aside>
+
 
 
     </div>
