@@ -27,10 +27,11 @@
                             
 
                               
-                                <meta name="description" content="We will examine two families of storage engines: log-structured storage engines, and page-oriented storage engines such as B-trees.
-
+                                <meta name="description" content="
 Data Structures
-Hash Ind...">
+Hash Indexes (append-only, segments, compaction, in-memory)
+SSTables and LSM-trees (sorted by key, large dataset, range queries)
+B-trees (br...">
                                 
 
                                   <!-- feed -->
@@ -428,10 +429,10 @@ Hash Ind...">
             
           
             
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-11T16:01:27-04:00">
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-14T16:01:27-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：May 11, 2021</p>
+    <p>Updated on：May 14, 2021</p>
   </a>
 </div>
 
@@ -455,14 +456,20 @@ Hash Ind...">
             <div class="article-entry" itemprop="articleBody">
               
                   
-                      <p>We will examine two families of storage engines: <em>log-structured</em> storage engines, and <em>page-oriented</em> storage engines such as B-trees.</p>
-<ol>
+                      <ol>
 <li>Data Structures<ol>
 <li>Hash Indexes (append-only, segments, compaction, in-memory)</li>
-<li>SSTables and LSM-trees (sorted by key, large dataset, range queries)</li>
-<li>B-trees (break into pages, tree-structured for pages, overwrite)</li>
+<li><span style="color:navy">SSTables and LSM-trees</span> (sorted by key, large dataset, range queries)</li>
+<li><span style="color:navy">B-trees</span> (break into pages, tree-structured for pages, overwrite)</li>
+<li>comparison (high write throughput, compression)</li>
 </ol>
 </li>
+<li>Transaction Processing or Analytics?<ol>
+<li>OLTP</li>
+<li>OLAP</li>
+</ol>
+</li>
+<li><span style="color:navy">Column-Oriented Storage</span></li>
 </ol>
 <a id="more"></a>
 
@@ -556,45 +563,113 @@ Hash Ind...">
             </details>
 
 
-<h2 id="Comparing-B-Trees-and-LSM-Trees"><a href="#Comparing-B-Trees-and-LSM-Trees" class="headerlink" title="Comparing B-Trees and LSM-Trees"></a>Comparing B-Trees and LSM-Trees</h2><h3 id="Advantages-of-LSM-trees"><a href="#Advantages-of-LSM-trees" class="headerlink" title="Advantages of LSM-trees"></a>Advantages of LSM-trees</h3><ul>
-<li><p>higher write throughput</p>
-<p>lower write amplication</p>
-<p>sequentially write compact SSTable files rather than having to overwrite several pages in the tree</p>
-</li>
-<li><p>compressed better, and produce smaller files on disk </p>
-<p>B-tree storage engines leave some disk space unused</p>
-</li>
-</ul>
-<h3 id="Downsides-of-LSM-trees"><a href="#Downsides-of-LSM-trees" class="headerlink" title="Downsides of LSM-trees"></a>Downsides of LSM-trees</h3><p>the compaction process can sometimes interfere with the performance of ongoing reads and writes. B-trees can be more predictable.</p>
-<p>the disk’s finite write bandwidth needs to be shared between the initial write (logging and flushing a memtable to disk) and the compaction threads running in the background.</p>
-<p>An advantage of B-trees is that each key exists in exactly one place in the index, whereas a log-structured storage engine may have multiple copies of the same key in different segments. This aspect makes B-trees attractive in databases that want to offer strong transactional semantics: in many relational databases, transaction isola‐ tion is implemented using locks on ranges of keys,</p>
-<h2 id="Other-Indexing-Structures"><a href="#Other-Indexing-Structures" class="headerlink" title="Other Indexing Structures"></a>Other Indexing Structures</h2><p>secondary indexes.</p>
-<h3 id="Storing-values-within-the-index"><a href="#Storing-values-within-the-index" class="headerlink" title="Storing values within the index"></a>Storing values within the index</h3><p>the value can be a reference to the row stored elsewhere. the place where rows are stored is known as a <em>heap file</em>.</p>
-<p><strong><em>clustered index:</em></strong> the extra hop from the index to the heap file is too much of a per‐ formance penalty for reads, so it can be desirable to store the indexed row directly within an index.</p>
-<p>A compromise between a clustered index (storing all row data within the index) and a nonclustered index (storing only references to the data within the index) is known as a <strong><em>covering index</em></strong> or index with included columns, which stores some of a table’s col‐ umns within the index</p>
-<h3 id="Multi-column-indexes"><a href="#Multi-column-indexes" class="headerlink" title="Multi-column indexes"></a>Multi-column indexes</h3><p><strong><em>concatenated index</em></strong>: simply combines several fields into one key by appending one column to another </p>
-<p><strong><em>Multi-dimensional indexes</em></strong></p>
-<h3 id="Full-text-search-and-fuzzy-indexes"><a href="#Full-text-search-and-fuzzy-indexes" class="headerlink" title="Full-text search and fuzzy indexes"></a>Full-text search and fuzzy indexes</h3><h3 id="Keeping-everything-in-memory"><a href="#Keeping-everything-in-memory" class="headerlink" title="Keeping everything in memory"></a>Keeping everything in memory</h3><h1 id="Transaction-Processing-or-Analytics"><a href="#Transaction-Processing-or-Analytics" class="headerlink" title="Transaction Processing or Analytics?"></a>Transaction Processing or Analytics?</h1><p><strong><em>transaction</em></strong>: a group of reads and writes that form a logical unit</p>
-<p>online transaction processing: OLTP</p>
-<p>online analytic processing: OLAP</p>
-<h2 id="Data-Warehousing"><a href="#Data-Warehousing" class="headerlink" title="Data Warehousing"></a>Data Warehousing</h2><p>Data warehouse: a separate database that analysts can query to their heart’s content, without affecting OLTP operations. </p>
-<p>Extract-Transform-Load (ETL): data is extracted from OLTP databases, transformed into an analysis-friendly schema, cleaned up, and then loaded into the data warehouse. </p>
-<p><img src="/image/ETL.png" alt="Simplified outline of ETL into a data warehouse"></p>
-<h3 id="The-divergence-between-OLTP-databases-and-data-warehouses"><a href="#The-divergence-between-OLTP-databases-and-data-warehouses" class="headerlink" title="The divergence between OLTP databases and data warehouses"></a>The divergence between OLTP databases and data warehouses</h3><h1 id="Stars-and-Snowflakes-Schemas-for-Analytics"><a href="#Stars-and-Snowflakes-Schemas-for-Analytics" class="headerlink" title="Stars and Snowflakes: Schemas for Analytics"></a>Stars and Snowflakes: Schemas for Analytics</h1><p>Many dataware houses are used in a fairly formulaic style, known as a <em>star schema</em>. </p>
-<p>A variation of this template is known as the <em>snowflake schema</em>, where dimensions are further broken down into subdimensions.</p>
-<h1 id="Column-Oriented-Storage"><a href="#Column-Oriented-Storage" class="headerlink" title="Column-Oriented Storage"></a>Column-Oriented Storage</h1><p>In most OLTP databases, storage is laid out in a <em>row-oriented</em> fashion: all the values from one row of a table are stored next to each other.</p>
-<p>The idea behind <em>column-oriented storage</em> is simple: don’t store all the values from one row together, but store all the values from each <em>column</em> together instead. </p>
-<blockquote>
-<p>Learnt Column-Oriented Storage in Big Data nyu DS-1004. Parquet is a columnar storage format that supports a document data model, based on Google’s Dremel. </p>
-</blockquote>
-<h1 id="Column-Compression"><a href="#Column-Compression" class="headerlink" title="Column Compression"></a>Column Compression</h1><p> <em>bitmap encoding</em></p>
-<h2 id="Memory-bandwidth-and-vectorized-processing"><a href="#Memory-bandwidth-and-vectorized-processing" class="headerlink" title="Memory bandwidth and vectorized processing"></a>Memory bandwidth and vectorized processing</h2><p><em>vectorized processing</em>: the query engine can take a chunk of compressed column data that fits comfortably in the CPU’s L1 cache and iterate through it in a tight loop (that is, with no function calls). </p>
-<h1 id="Sort-Order-in-Column-Storage"><a href="#Sort-Order-in-Column-Storage" class="headerlink" title="Sort Order in Column Storage"></a>Sort Order in Column Storage</h1><h2 id="Several-different-sort-orders"><a href="#Several-different-sort-orders" class="headerlink" title="Several different sort orders"></a>Several different sort orders</h2><p>store the same data sorted in <em>several different</em> ways</p>
-<p>he row- oriented store keeps every row in one place (in the heap file or a clustered index), and secondary indexes just contain pointers to the matching rows. In a column store, there normally aren’t any pointers to data elsewhere, only columns containing values.</p>
-<h1 id="Writing-to-Column-Oriented-Storage"><a href="#Writing-to-Column-Oriented-Storage" class="headerlink" title="Writing to Column-Oriented Storage"></a>Writing to Column-Oriented Storage</h1><p>LSM-trees: When enough writes have accumulated, they are merged with the column files on disk and written to new files in bulk.</p>
-<h1 id="Aggregation-Data-Cubes-and-Materialized-Views"><a href="#Aggregation-Data-Cubes-and-Materialized-Views" class="headerlink" title="Aggregation: Data Cubes and Materialized Views"></a>Aggregation: Data Cubes and Materialized Views</h1><p><em>materialized aggregates</em>: cache some of the aggregation methods that queries use most often</p>
-<p><em>materialized view</em>: an actual copy of the query results, written to disk</p>
-<p>A common special case of a materialized view is known as a <em>data cube</em> or <em>OLAP cube</em>:  a grid of aggregates grouped by different dimensions.</p>
+<h3 id="Comparing-B-Trees-and-LSM-Trees"><a href="#Comparing-B-Trees-and-LSM-Trees" class="headerlink" title="Comparing B-Trees and LSM-Trees"></a>Comparing B-Trees and LSM-Trees</h3><div class="tabs" id="tab-id"><ul class="nav-tabs"><li class="tab active"><a href="#tab-id-1">Advantages of LSM-Trees vs B-Trees</a></li><li class="tab"><a href="#tab-id-2">Downsides of LSM-Trees vs B-Trees</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-id-1"><details brown><summary> <p>Higher write throughput</p> </summary>
+              <div class='content'>
+              <ul><li>LSM-Trees have lower write amplication<ul><li><span style="color:navy">write amplication</span>: one write to the database results in multiple writes to the disk over the course of the database’s liftime ( SSD concern: can only overwrite blocks a limited number of times before wearing out)</li><li>LSM-trees rewrite data multiple times due to repeated compaction and merging of SSTables</li><li>B-trees must write every piece of data at least twice: WAL and tree page itself. Maybe have some other writes.</li></ul></li><li>LSM-Trees write compact SSTable files (sequential writes) rather than having to overwrite several pages in the tree (random writes)</li></ul>
+              </div>
+            </details>
+
+<details brown><summary> <p>Better Compression</p> </summary>
+              <div class='content'>
+              <ul><li>LSM-Trees compressed better, and produce smaller files on disk </li><li>B-tree storage engines leave some disk space unused due to fragmentation</li></ul>
+              </div>
+            </details></div><div class="tab-pane" id="tab-id-2"><details brown><summary> <p>Compaction Process</p> </summary>
+              <div class='content'>
+              <ul><li>LSM-Trees: the compaction process can sometimes interfere with the performance of ongoing reads and writes. </li><li>B-trees can be more predictable. (Overwrite)</li></ul>
+              </div>
+            </details>
+
+<details brown><summary> <p>Compaction can’t keep up with the rate of incoming writes</p> </summary>
+              <div class='content'>
+              <ul><li>LSM-Trees: the disk’s finite write bandwidth needs to be shared between the initial write (logging and flushing a memtable to disk) and the compaction threads running in the background. If write throughput is high and compaction is not configured carefully, it can happen that compaction cannot keep up with the rate of incoming writes. </li></ul>
+              </div>
+            </details>
+
+<details brown><summary> <p>Transaction Semantics</p> </summary>
+              <div class='content'>
+              <ul><li>LSM-Trees: have multiple copies of the same key in different segments</li><li>B-Trees: each key exists in only one place in the index –&gt; transaction isolation is implemented using locks on range of keys</li></ul>
+              </div>
+            </details></div></div></div>
+
+<h3 id="Other-Indexing-Structures"><a href="#Other-Indexing-Structures" class="headerlink" title="Other Indexing Structures"></a>Other Indexing Structures</h3><details brown><summary> <p>Storing values within the index</p> </summary>
+              <div class='content'>
+              <p><span style="color:navy">heap file</span>: the place where rows are stored. The value of a key can be a reference to the row stored elsewhere. </p><p><span style="color:navy">clustered index</span>: the extra hop from the index to the heap file is too much of a performance penalty for reads, so it can be desirable to store the indexed row directly within an index.</p><p><span style="color:navy">covering index</span>: a compromise between a clustered index (storing all row data within the index) and a nonclustered index (storing only references to the data within the index), which stores some of a table’s columns within the index</p>
+              </div>
+            </details>
+
+<details brown><summary> <p>Multi-column indexes</p> </summary>
+              <div class='content'>
+              <p><span style="color:navy">concatenated index</span>: simply combines several fields into one key by appending one column to another </p><p><span style="color:navy">multi-dimensional indexes</span>: for example, R-tree</p>
+              </div>
+            </details>
+
+<details brown><summary> <p>Full-text search and fuzzy indexes</p> </summary>
+              <div class='content'>
+              
+              </div>
+            </details>
+
+<details brown><summary> <p>Keeping everything in memory</p> </summary>
+              <div class='content'>
+              
+              </div>
+            </details>
+
+
+<h2 id="Transaction-Processing-or-Analytics"><a href="#Transaction-Processing-or-Analytics" class="headerlink" title="Transaction Processing or Analytics?"></a>Transaction Processing or Analytics?</h2><p><span style="color:navy">transaction</span>: a group of reads and writes that form a logical unit</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>online transaction processing: OLTP</th>
+<th>online analytic processing: OLAP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Main read pattern</td>
+<td>Small number of records per query, fetched by key</td>
+<td>Aggregate over large number of records</td>
+</tr>
+<tr>
+<td>Main write pattern</td>
+<td>Random-access, low-latency writes from user input</td>
+<td>Bulk import (ETL) or event stream</td>
+</tr>
+<tr>
+<td>Primarily used by</td>
+<td>End user/customer, via web application</td>
+<td>Internal analyst, for decision support</td>
+</tr>
+<tr>
+<td>What data represents</td>
+<td>Latest state of data (current point in time)</td>
+<td>History of events that happened over time</td>
+</tr>
+<tr>
+<td>Dataset size</td>
+<td>Gigabytes to terabytes</td>
+<td>Terabytes to petabytes</td>
+</tr>
+</tbody></table>
+<details brown><summary> <p>Data Warehousing</p> </summary>
+              <div class='content'>
+              <p><span style="color:navy">Data warehouse</span>: a separate database that analysts can query to their heart’s content, without affecting OLTP operations. </p><p><span style="color:navy">Extract-Transform-Load (ETL)</span>: data is extracted from OLTP databases, transformed into an analysis-friendly schema, cleaned up, and then loaded into the data warehouse. </p><p><img src="/image/ETL.png" alt="Simplified outline of ETL into a data warehouse"></p>
+              </div>
+            </details>
+
+<h2 id="Column-Oriented-Storage"><a href="#Column-Oriented-Storage" class="headerlink" title="Column-Oriented Storage"></a>Column-Oriented Storage</h2><p><span style="color:navy">row-oriented</span>: all the values from one row of a table are stored next to each other.</p>
+<p><span style="color:navy">column-oriented</span>: don’t store all the values from one row together, but store all the values from each <em>column</em> together instead. </p>
+<details brown><summary> <p>DS-GA 1004 Big Data</p> </summary>
+              <div class='content'>
+              <ul><li>Dremel <ul><li>Repetition levels</li><li>Definition levels</li><li>Values</li></ul></li><li>Parquet</li></ul>
+              </div>
+            </details>
+
+<details brown><summary> <p>DS-GA 1004 Big Data</p> </summary>
+              <div class='content'>
+              <ul><li>Column Compression: bitmap encoding, run-length encoding</li><li>Memory bandwidth and vectorized processing</li><li>Sort Order in Column Storage</li><li>Several different sort orders</li><li>Writing to Column-Oriented Storage<ul><li>all writes first go to an in-memory store, where they are added to a sorted structure and prepared for writing to disk. When enough writes have accumulated, they are merged with the column files on disk and written to new files in bulk.</li></ul></li><li>Data Cubes and Materialized Views<ul><li>materialized view: an actual copy of the query results, written to disk</li><li>virtual view: a shortcut for writing queries</li></ul></li></ul>
+              </div>
+            </details>
 
                         
                             
@@ -632,10 +707,10 @@ Hash Ind...">
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-11T16:01:27-04:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-14T16:01:27-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：May 11, 2021</p>
+    <p>Updated on：May 14, 2021</p>
   </a>
 </div>
 
@@ -774,7 +849,7 @@ Relational ...
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Structures-That-Power-Your-Database"><span class="toc-text">Data Structures That Power Your Database</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hash-Indexes"><span class="toc-text">Hash Indexes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSTables-and-LSM-Trees"><span class="toc-text">SSTables and LSM-Trees</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Trees"><span class="toc-text">B-Trees</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Comparing-B-Trees-and-LSM-Trees"><span class="toc-text">Comparing B-Trees and LSM-Trees</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Advantages-of-LSM-trees"><span class="toc-text">Advantages of LSM-trees</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Downsides-of-LSM-trees"><span class="toc-text">Downsides of LSM-trees</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Other-Indexing-Structures"><span class="toc-text">Other Indexing Structures</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Storing-values-within-the-index"><span class="toc-text">Storing values within the index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-column-indexes"><span class="toc-text">Multi-column indexes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Full-text-search-and-fuzzy-indexes"><span class="toc-text">Full-text search and fuzzy indexes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keeping-everything-in-memory"><span class="toc-text">Keeping everything in memory</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Warehousing"><span class="toc-text">Data Warehousing</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-divergence-between-OLTP-databases-and-data-warehouses"><span class="toc-text">The divergence between OLTP databases and data warehouses</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Memory-bandwidth-and-vectorized-processing"><span class="toc-text">Memory bandwidth and vectorized processing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Several-different-sort-orders"><span class="toc-text">Several different sort orders</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Structures-That-Power-Your-Database"><span class="toc-text">Data Structures That Power Your Database</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hash-Indexes"><span class="toc-text">Hash Indexes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSTables-and-LSM-Trees"><span class="toc-text">SSTables and LSM-Trees</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Trees"><span class="toc-text">B-Trees</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comparing-B-Trees-and-LSM-Trees"><span class="toc-text">Comparing B-Trees and LSM-Trees</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Other-Indexing-Structures"><span class="toc-text">Other Indexing Structures</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transaction-Processing-or-Analytics"><span class="toc-text">Transaction Processing or Analytics?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Column-Oriented-Storage"><span class="toc-text">Column-Oriented Storage</span></a></li></ol>
     </div>
   </section>
 
