@@ -430,10 +430,10 @@ Binary schema–driven formats ...">
             
           
             
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-11T16:01:41-04:00">
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-22T13:21:34-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：May 11, 2021</p>
+    <p>Updated on：May 22, 2021</p>
   </a>
 </div>
 
@@ -472,67 +472,60 @@ Binary schema–driven formats ...">
 </ul>
 <a id="more"></a>
 
-<h1 id="Formats-for-Encoding-Data"><a href="#Formats-for-Encoding-Data" class="headerlink" title="Formats for Encoding Data"></a>Formats for Encoding Data</h1><p><strong><em>Encoding</em></strong>: translation from the in-memory representation (data structures, e.g. lists, arrays…) to a byte sequence (e.g. JSON document)</p>
-<p>(serialization or marshalling, I remember serialization in leetcode)</p>
-<h2 id="Language-Specific-Formats"><a href="#Language-Specific-Formats" class="headerlink" title="Language-Specific Formats"></a>Language-Specific Formats</h2><p>Java: <code>java.io.Serializable</code></p>
-<p>Ruby: <code>Marshal</code></p>
-<p>Python: <code>pickle</code></p>
-<p>problems:</p>
-<ul>
-<li>partiuclar language</li>
-<li>security issue in restoring data</li>
-<li>versioning data</li>
-<li>efficiency</li>
-</ul>
-<h2 id="JSON-XML-and-Binary-Variants"><a href="#JSON-XML-and-Binary-Variants" class="headerlink" title="JSON, XML, and Binary Variants"></a>JSON, XML, and Binary Variants</h2><p>JSON, XML, CSV problems:</p>
-<ul>
-<li>ambiguity between number and string (JSON: integer and float)</li>
-<li>no support for binary strings (sequences of bytes without a character encoding)</li>
-</ul>
-<h3 id="Binary-encoding"><a href="#Binary-encoding" class="headerlink" title="Binary encoding"></a>Binary encoding</h3><p>JSON is less verbose than XML, but both still use a lot of space compared to binary formats. This observation led to the development of a profusion of binary encodings for JSON (MessagePack, BSON, BJSON, UBJSON, BISON, and Smile, to name a few)</p>
-<p>binary encoding can save some small spaces (and perhaps a speedup in parsing), but we are not sure whether this is worth the loss of human-readability. </p>
-<h2 id="Thrift-and-Protocol-Buffers"><a href="#Thrift-and-Protocol-Buffers" class="headerlink" title="Thrift and Protocol Buffers"></a>Thrift and Protocol Buffers</h2><p>Apache Thrift [15] and Protocol Buffers (protobuf) [16] are binary encoding libraries. and they require a schema for any data that is encoded.</p>
-<p>Thrift has two different binary encoding formats:</p>
-<ul>
-<li><p><em>BinaryProtocol</em> </p>
-<p>similar with Binary encoding, but with no field names, instead, the encoded data contains <em>field tags</em>. </p>
-</li>
-<li><p><em>CompactProtocol</em></p>
-<p>The Thrift CompactProtocol encoding is semantically equivalent to BinaryProtocol. But it packs the field type and tag number into a single byte, and by using variable-length integers.</p>
-</li>
-</ul>
-<h3 id="Field-tags-and-schema-evolution"><a href="#Field-tags-and-schema-evolution" class="headerlink" title="Field tags and schema evolution"></a>Field tags and schema evolution</h3><p>How do Thrift and Protocol Buffers handle schema changes while keeping backward and forward compatibility?</p>
-<p>field tags</p>
-<h3 id="Datatypes-and-schema-evolution"><a href="#Datatypes-and-schema-evolution" class="headerlink" title="Datatypes and schema evolution"></a>Datatypes and schema evolution</h3><h2 id="Avro"><a href="#Avro" class="headerlink" title="Avro"></a>Avro</h2><p>Apache Avro is another binary encoding format that is interestingly different from Protocol Buffers and Thrift.</p>
-<p>Avro also uses a schema to specify the structure of the data being encoded. It has two schema languages: one (Avro IDL) intended for human editing, and one (based on JSON) that is more easily machine-readable.</p>
-<p>There is nothing to identify fields or their datatypes. The encoding simply consists of values concatenated together. </p>
-<h3 id="The-writer’s-schema-and-the-reader’s-schema"><a href="#The-writer’s-schema-and-the-reader’s-schema" class="headerlink" title="The writer’s schema and the reader’s schema"></a>The writer’s schema and the reader’s schema</h3><p>the writer’s schema and the reader’s schema <em>don’t have to be the same</em>—they only need to be compatible.</p>
-<h2 id="The-Merits-and-Schemas"><a href="#The-Merits-and-Schemas" class="headerlink" title="The Merits and Schemas"></a>The Merits and Schemas</h2><h1 id="Modes-of-Dataflow"><a href="#Modes-of-Dataflow" class="headerlink" title="Modes of Dataflow"></a>Modes of Dataflow</h1><p>Compatibility is a rela‐ tionship between one process that encodes the data, and another process that decodes it.</p>
-<p>That’s a fairly abstract idea—there are many ways data can flow from one process to another. Who encodes the data, and who decodes it? </p>
-<ul>
-<li>via databases</li>
-<li>via service calls</li>
-<li>via asynchronous message passing</li>
-</ul>
-<h2 id="Dataflow-Through-Databases"><a href="#Dataflow-Through-Databases" class="headerlink" title="Dataflow Through Databases"></a>Dataflow Through Databases</h2><p>storing something in the database as <em>sending a message to your future self</em>.</p>
-<h3 id="Different-values-written-at-different-times"><a href="#Different-values-written-at-different-times" class="headerlink" title="Different values written at different times"></a>Different values written at different times</h3><p> <em>data outlives code</em></p>
-<h2 id="Dataflow-Through-Services-REST-and-RPC"><a href="#Dataflow-Through-Services-REST-and-RPC" class="headerlink" title="Dataflow Through Services: REST and RPC"></a>Dataflow Through Services: REST and RPC</h2><p>When you have processes that need to communicate over a network, there are a few different ways of arranging that communication. The most common arrangement is to have two roles: <strong><em>clients</em></strong> and <strong><em>servers</em></strong>. The servers expose an API over the network, and the clients can connect to the servers to make requests to that API. <strong>The API exposed by the server is known as a <em>service</em>.</strong></p>
-<p><strong><em>service-oriented architecture (SOA) / microservices architecture</em></strong>: decompose a large application into smaller services by area of functionality, such that one service makes a request to another when it requires some functionality or data from that other service. </p>
-<h3 id="Web-services"><a href="#Web-services" class="headerlink" title="Web services"></a>Web services</h3><p>web services: HTTP is used as the underlying protocol for talking to the service</p>
-<p>There are 2 popular approaches to web services: REST and SOAP. </p>
-<p><strong><em>REST</em></strong> is not a protocol, but rather a design philosophy that builds upon the principles of HTTP. An API designed according to the principles of REST is called <em>RESTful</em>.</p>
-<p>SOAP is an XML-based protocol for making network API requests.</p>
-<h3 id="The-problems-with-remote-procedure-calls-RPCs"><a href="#The-problems-with-remote-procedure-calls-RPCs" class="headerlink" title="The problems with remote procedure calls (RPCs)"></a>The problems with remote procedure calls (RPCs)</h3><p>The RPC model tries to make a request to a remote network service look the same as calling a function or method in your programming language, within the same process (this abstraction is called <em>location transparency</em>).</p>
-<p>But a network request is very different from a local function call:</p>
-<ul>
-<li>unpredictable vs predictable</li>
-<li>network: return without a result due to a timeout</li>
-<li>If you retry a failed network request, it could happen that the requests are actually getting through, and only the responses are getting lost. In that case, retrying will cause the action to be performed multiple times, unless you build a mechanism for deduplication (<em>idempotence</em>) into the protocol.</li>
-<li>A network request is much slower than a function call, and its latency is also wildly variable</li>
-<li>When you call a local function, you can efficiently pass it references (pointers) to objects in local memory. When you make a network request, all those parameters need to be encoded into a sequence of bytes that can be sent over the network.</li>
-<li>The client and the service may be implemented in different programming lan‐ guages, so the RPC framework must translate datatypes from one language into another.</li>
-</ul>
-<h3 id="Current-directions-for-RPC"><a href="#Current-directions-for-RPC" class="headerlink" title="Current directions for RPC"></a>Current directions for RPC</h3><h3 id="Data-encoding-and-evolution-for-RPC"><a href="#Data-encoding-and-evolution-for-RPC" class="headerlink" title="Data encoding and evolution for RPC"></a>Data encoding and evolution for RPC</h3><h2 id="Messages-Passing-Dataflow"><a href="#Messages-Passing-Dataflow" class="headerlink" title="Messages-Passing Dataflow"></a>Messages-Passing Dataflow</h2><p><em>asynchronous message-passing</em> systems, which are somewhere between RPC and databases. They are similar to RPC in that a client’s request (usually called a <em>message</em>) is delivered to another process with low latency. They are similar to databases in that the message is not sent via a direct net‐ work connection, but goes via an intermediary called a <em>message broker</em> (also called a <em>message queue</em> or <em>message-oriented middleware</em>), which stores the message temporarily.</p>
+<h2 id="Formats-for-Encoding-Data"><a href="#Formats-for-Encoding-Data" class="headerlink" title="Formats for Encoding Data"></a>Formats for Encoding Data</h2><p><span style="color:navy">Encoding or Serialization</span>: translation from the in-memory representation (data structures, e.g. lists, arrays…) to a byte sequence (e.g. JSON document)</p>
+<details brown><summary> <p>Language-Specific Formats</p> </summary>
+              <div class='content'>
+              <div class="tabs" id="tab-id"><ul class="nav-tabs"><li class="tab active"><a href="#tab-id-1">Examples</a></li><li class="tab"><a href="#tab-id-2">Problems</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-id-1"><ul><li><p>Java: <code>java.io.Serializable</code></p></li><li><p>Ruby: <code>Marshal</code></p></li><li><p>Python: <code>pickle</code></p></li></ul></div><div class="tab-pane" id="tab-id-2"><ul><li>partiuclar language</li><li>security issue in restoring data</li><li>versioning data</li><li>efficiency (CPU time taken to encode and decode)</li></ul></div></div></div>
+              </div>
+            </details>
+
+
+
+<details brown><summary> <p>JSON</p> </summary>
+              <div class='content'>
+              <p>JSON, XML, CSV problems:</p><ul><li>ambiguity between number and string (JSON: no specifition on precision)</li><li>no support for binary strings (sequences of bytes without a character encoding)</li></ul><p>JSON is less verbose than XML, but both still use a lot of space compared to binary formats. This observation led to the development of a profusion of binary encodings for JSON (MessagePack, BSON, BJSON, UBJSON, BISON, and Smile, to name a few)</p><p>binary encoding can save some small spaces (compact) and perhaps a speedup in parsing, but we are not sure whether this is worth the loss of human-readability. </p>
+              </div>
+            </details>
+
+
+
+<details brown><summary> <p>Thrift and Protocol Buffers</p> </summary>
+              <div class='content'>
+              <p>Apache Thrift [15] and Protocol Buffers (protobuf) [16] are binary encoding libraries. and they require a schema for any data that is encoded.</p><p>Thrift has two different binary encoding formats:</p><ul><li><p><em>BinaryProtocol</em> </p><p>similar with Binary encoding, but with no field names, instead, the encoded data contains <em>field tags</em>. </p></li><li><p><em>CompactProtocol</em></p><p>The Thrift CompactProtocol encoding is semantically equivalent to BinaryProtocol. But it packs the field type and tag number into a single byte, and by using variable-length integers.</p></li></ul>
+              </div>
+            </details>
+
+
+
+
+<h2 id="Modes-of-Dataflow"><a href="#Modes-of-Dataflow" class="headerlink" title="Modes of Dataflow"></a>Modes of Dataflow</h2><p>Compatibility is a relationship between one process that encodes the data, and another process that decodes it.</p>
+<p>There are many ways data can flow from one process to another. The most common ways how data flows between processes:</p>
+<details brown><summary> <p>Dataflow Through Databases (via databases)</p> </summary>
+              <div class='content'>
+              <ul><li>a single process: <em>sending a message to your future self</em> –&gt; backward compatibility</li><li>several different processes access the database at the same time: forward compatibility</li><li>unknown field preservation</li></ul><div class='checkbox gray checked'><input type="checkbox" checked="checked"/>            <p>Different values written at different times</p>            </div><div class='checkbox gray checked'><input type="checkbox" checked="checked"/>            <p>Archival storage</p>            </div>
+              </div>
+            </details>
+
+
+<details brown open><summary> <p>Dataflow Through Services: REST and RPC (via service calls)</p> </summary>
+              <div class='content'>
+              <p>When you have processes that need to communicate over a network, there are a few different ways of arranging that communication. The most common arrangement is to have two roles: <wavy>clients</wavy> and <wavy>servers</wavy>. The servers expose an API over the network, and the clients can connect to the servers to make requests to that API. The API exposed by the server is known as a service.</p><ul><li><span style="color:navy">Service-oriented (SOA) / Microservices architecture</span>: decompose a large application into smaller services by area of functionality, such that one service makes a request to another when it requires some functionality or data from that other service. </li></ul><div class="timenode"><div class="meta"><p><p>Web Service</p></p></div><div class="body"><p><span style="color:navy">Web services</span>: HTTP is used as the underlying protocol for talking to the service</p><p>There are 2 popular approaches to web services: REST and SOAP. </p><ul><li><p><span style="color:navy">REST</span>:a design philosophy that builds upon the principles of HTTP (not a protocol). An API designed according to the principles of REST is called <wavy>RESTful</wavy>.</p></li><li><p><span style="color:navy">SOAP</span>: SOAP is an XML-based protocol for making network API requests.</p></li></ul></div></div><div class="timenode"><div class="meta"><p><p>The Problems with remote procedure calls (RPCs)</p></p></div><div class="body"><p><span style="color:navy">RPC</span>: the RPC model tries to make a request to a remote network service look the same as calling a function or method in your programming language, within the same process. </p><p>But a network request is very different from a local function call:</p><ul><li>A local function call is predictable and depends only oin parameters that are under your control. A network request is <wavy>unpredictable</wavy>: the request or reponse may be lost due to a network problem, or the remote machine may be slow ot unavailable…</li><li>A local function call either returns a result, or throws an exception, or never returns (infinite loop or the responses without a result). A network request may return without a result, due to a <wavy>timeout</wavy>. </li><li>Retrying may cause the action to be performed <wavy>multiple times</wavy>, unless you build a mechanism for deduplication. </li><li>A local function normally takes about the same time to execute. A network request is much slower than a function call, and its latency is also wildly <wavy>variable</wavy>. </li><li>When you call a local function, you can efficiently pass it references (pointers) to objects in local memory. When you make a network request, all those parameters need to be encoded into a <wavy>sequence of bytes</wavy> that can be sent over the network.</li><li>The client and the service may be implemented in different programming languages, so the RPC framework must <wavy>translate datatypes</wavy> from one language into another.</li></ul></div></div><div class="timenode"><div class="meta"><p><p>Current directions for RPC</p></p></div><div class="body"></div></div>
+              </div>
+            </details>
+
+
+
+<details brown><summary> <p>Message-passing Dataflow (via asynchronous message passing)</p> </summary>
+              <div class='content'>
+              
+              </div>
+            </details>
+
+
+
+
+
+<h3 id="Data-encoding-and-evolution-for-RPC"><a href="#Data-encoding-and-evolution-for-RPC" class="headerlink" title="Data encoding and evolution for RPC"></a>Data encoding and evolution for RPC</h3><h2 id="Messages-Passing-Dataflow"><a href="#Messages-Passing-Dataflow" class="headerlink" title="Messages-Passing Dataflow"></a>Messages-Passing Dataflow</h2><p><em>asynchronous message-passing</em> systems, which are somewhere between RPC and databases. They are similar to RPC in that a client’s request (usually called a <em>message</em>) is delivered to another process with low latency. They are similar to databases in that the message is not sent via a direct net‐ work connection, but goes via an intermediary called a <em>message broker</em> (also called a <em>message queue</em> or <em>message-oriented middleware</em>), which stores the message temporarily.</p>
 <p>Using a message broker has several advantages compared to direct RPC:</p>
 <ul>
 <li>buffer</li>
@@ -583,10 +576,10 @@ Binary schema–driven formats ...">
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-11T16:01:41-04:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-22T13:21:34-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：May 11, 2021</p>
+    <p>Updated on：May 22, 2021</p>
   </a>
 </div>
 
@@ -670,7 +663,7 @@ SSTables and LSM-tre...
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Language-Specific-Formats"><span class="toc-text">Language-Specific Formats</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON-XML-and-Binary-Variants"><span class="toc-text">JSON, XML, and Binary Variants</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Binary-encoding"><span class="toc-text">Binary encoding</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thrift-and-Protocol-Buffers"><span class="toc-text">Thrift and Protocol Buffers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Field-tags-and-schema-evolution"><span class="toc-text">Field tags and schema evolution</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Datatypes-and-schema-evolution"><span class="toc-text">Datatypes and schema evolution</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Avro"><span class="toc-text">Avro</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-writer%E2%80%99s-schema-and-the-reader%E2%80%99s-schema"><span class="toc-text">The writer’s schema and the reader’s schema</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Merits-and-Schemas"><span class="toc-text">The Merits and Schemas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dataflow-Through-Databases"><span class="toc-text">Dataflow Through Databases</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Different-values-written-at-different-times"><span class="toc-text">Different values written at different times</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dataflow-Through-Services-REST-and-RPC"><span class="toc-text">Dataflow Through Services: REST and RPC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-services"><span class="toc-text">Web services</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-problems-with-remote-procedure-calls-RPCs"><span class="toc-text">The problems with remote procedure calls (RPCs)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Current-directions-for-RPC"><span class="toc-text">Current directions for RPC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-encoding-and-evolution-for-RPC"><span class="toc-text">Data encoding and evolution for RPC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Messages-Passing-Dataflow"><span class="toc-text">Messages-Passing Dataflow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Message-brokers"><span class="toc-text">Message brokers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Distributed-actor-frameworks"><span class="toc-text">Distributed actor frameworks</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Formats-for-Encoding-Data"><span class="toc-text">Formats for Encoding Data</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Modes-of-Dataflow"><span class="toc-text">Modes of Dataflow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Data-encoding-and-evolution-for-RPC"><span class="toc-text">Data encoding and evolution for RPC</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Messages-Passing-Dataflow"><span class="toc-text">Messages-Passing Dataflow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Message-brokers"><span class="toc-text">Message brokers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Distributed-actor-frameworks"><span class="toc-text">Distributed actor frameworks</span></a></li></ol></li></ol>
     </div>
   </section>
 
