@@ -19,11 +19,11 @@
                         
                           <title>
                             
-                              Design Data Intensive Application (2-1) - 
+                              DDIA (5) - 
                                   Gilmore&#39;s Blog
                           </title>
                           
-                            <meta name="keywords" content="system design">
+                            <meta name="keywords" content="system design,DDIA">
                             
 
                               
@@ -332,7 +332,7 @@ keep data geographically close to you...">
  
 <div id="pjax-data" style="display: none"> 
   <div id="pjax-ispage">true</div> 
-  <div id="pjax-pageTitle">Design Data Intensive Application (2-1)</div> 
+  <div id="pjax-pageTitle">DDIA (5)</div> 
   <div id="pjax-enable-cover">true</div> 
   <div id="pjax-comment-path">none</div> 
   <div id="pjax-comment-placeholder">none</div> 
@@ -382,8 +382,8 @@ keep data geographically close to you...">
         
           
   <h1 class="title">
-    <a href="/2020/12/31/Design-Data-Intensive-Application-2-1/">
-      Design Data Intensive Application (2-1)
+    <a href="/2020/12/31/Design-Data-Intensive-Application-5/">
+      DDIA (5)
     </a>
   </h1>
 
@@ -428,10 +428,10 @@ keep data geographically close to you...">
             
           
             
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T15:05:10-04:00">
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-23T16:01:27-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Apr 21, 2021</p>
+    <p>Updated on：May 23, 2021</p>
   </a>
 </div>
 
@@ -755,10 +755,10 @@ keep data geographically close to you...">
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-21T15:05:10-04:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-23T16:01:27-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Apr 21, 2021</p>
+    <p>Updated on：May 23, 2021</p>
   </a>
 </div>
 
@@ -767,7 +767,7 @@ keep data geographically close to you...">
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/DDIA/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>DDIA</p></a></div>
 
 
         
@@ -792,7 +792,7 @@ keep data geographically close to you...">
                       
                         <a class='prev' href='/2021/01/02/Design-Data-Intensive-Application-2-1-summary/'>
                           <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>
-                            Design Data Intensive Application (2-1-summary)
+                            DDIA (5) (Part II - summary)
                           </p>
                           <p class='content'>
                             Three modes:
@@ -803,7 +803,7 @@ leaderless (Dynamo)
 
 
 
-Table of Contents for Chapter ...
+IntroWhat happens if multiple ...
                           </p>
                         </a>
                         
@@ -832,6 +832,59 @@ Binary schema–...
 
                     <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
                     
+                      <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+                        
 </div>
 <aside class='l_side'>
   

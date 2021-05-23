@@ -19,11 +19,11 @@
                         
                           <title>
                             
-                              Design Data Intensive Application (2-1-summary) - 
+                              DDIA (5) (Part II - summary) - 
                                   Gilmore&#39;s Blog
                           </title>
                           
-                            <meta name="keywords" content="system design">
+                            <meta name="keywords" content="system design,DDIA">
                             
 
                               
@@ -334,7 +334,7 @@ leaderless (Dynamo)
  
 <div id="pjax-data" style="display: none"> 
   <div id="pjax-ispage">true</div> 
-  <div id="pjax-pageTitle">Design Data Intensive Application (2-1-summary)</div> 
+  <div id="pjax-pageTitle">DDIA (5) (Part II - summary)</div> 
   <div id="pjax-enable-cover">true</div> 
   <div id="pjax-comment-path">none</div> 
   <div id="pjax-comment-placeholder">none</div> 
@@ -385,7 +385,7 @@ leaderless (Dynamo)
           
   <h1 class="title">
     <a href="/2021/01/02/Design-Data-Intensive-Application-2-1-summary/">
-      Design Data Intensive Application (2-1-summary)
+      DDIA (5) (Part II - summary)
     </a>
   </h1>
 
@@ -430,10 +430,10 @@ leaderless (Dynamo)
             
           
             
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-02T18:42:01-05:00">
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-23T16:01:27-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Jan 2, 2021</p>
+    <p>Updated on：May 23, 2021</p>
   </a>
 </div>
 
@@ -465,7 +465,18 @@ leaderless (Dynamo)
 </ul>
 <a id="more"></a>
 
-<h1 id="Table-of-Contents-for-Chapter-5-Replication"><a href="#Table-of-Contents-for-Chapter-5-Replication" class="headerlink" title="Table of Contents for Chapter 5: Replication"></a>Table of Contents for Chapter 5: Replication</h1><ul>
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p>What happens if <wavy>multiple machines</wavy> are involved in storage and retrieval of data?</p>
+<ul>
+<li><span style="color:brown">Scalability</span>: If your data volume, read load, or write load grows bigger than a single machine can handle, you can potentially spread the load across multiple machines.</li>
+<li><span style="color:brown">Fault tolerance/ high availability</span>: If your application needs to continue working even if one machine (or several machines, or the network, or an entire datacenter) goes down, you can use multiple machines to give you redundancy. When one fails, another one can take over.</li>
+<li><span style="color:brown">Latency</span>: If you have users around the world, you might want to have servers at various locations worldwide so that each user can be served from a datacenter that is geographically close to them. That avoids the users having to wait for network packets to travel halfway around the world. </li>
+</ul>
+<p>There are 2 common ways data is distributed across multiple nodes:</p>
+<ul>
+<li><span style="color:brown">Replication</span>: Keeping a copy of the same data on several different nodes, potentially in different locations. Replication provides redundancy: if some nodes are unavailable, the data can still be served from the remaining nodes. Replication can also help improve performance. </li>
+<li><span style="color:brown">Partitioning</span>: Splitting a big database into smaller called patitions so that different partitions can be assigned to different nodes (also known as sharding).</li>
+</ul>
+<h2 id="Table-of-Contents-for-Chapter-5-Replication"><a href="#Table-of-Contents-for-Chapter-5-Replication" class="headerlink" title="Table of Contents for Chapter 5: Replication"></a>Table of Contents for Chapter 5: Replication</h2><ul>
 <li>Leaders and Followers<ul>
 <li>synchronous vs asynchronous</li>
 <li>how to set up new followers</li>
@@ -526,7 +537,7 @@ leaderless (Dynamo)
 </ul>
 </li>
 </ul>
-<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>Replication can serve several purposes:</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Replication can serve several purposes:</p>
 <ul>
 <li><p>high availability</p>
 <p>keep the system running, even when one machine goes down</p>
@@ -598,10 +609,10 @@ leaderless (Dynamo)
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-02T18:42:01-05:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-23T16:01:27-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Jan 2, 2021</p>
+    <p>Updated on：May 23, 2021</p>
   </a>
 </div>
 
@@ -610,7 +621,7 @@ leaderless (Dynamo)
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/system-design/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>system design</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/DDIA/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>DDIA</p></a></div>
 
 
         
@@ -644,9 +655,9 @@ Scalability –&gt; different partit...
                         </a>
                         
                           
-                            <a class='next' href='/2020/12/31/Design-Data-Intensive-Application-2-1/'>
+                            <a class='next' href='/2020/12/31/Design-Data-Intensive-Application-5/'>
                               <p class='title'>
-                                Design Data Intensive Application (2-1)<i class="fas fa-chevron-right" aria-hidden="true"></i>
+                                DDIA (5)<i class="fas fa-chevron-right" aria-hidden="true"></i>
                               </p>
                               <p class='content'>
                                 Replication: keeping a copy of the same data on multiple machines that are connected via a networ...
@@ -664,6 +675,59 @@ Scalability –&gt; different partit...
 
                     <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
                     
+                      <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+                        
 </div>
 <aside class='l_side'>
   
@@ -683,7 +747,7 @@ Scalability –&gt; different partit...
 
 
     <div class='content'>
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Intro"><span class="toc-text">Intro</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Table-of-Contents-for-Chapter-5-Replication"><span class="toc-text">Table of Contents for Chapter 5: Replication</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-text">Summary</span></a></li></ol>
     </div>
   </section>
 

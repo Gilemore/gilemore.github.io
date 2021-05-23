@@ -781,111 +781,6 @@
         
       
         
-          <div class='post-wrapper'>
-            <article class="post white-box shadow floatable blur reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2021/01/02/Design-Data-Intensive-Application-2-1-summary/">
-      Design Data Intensive Application (2-1-summary)
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a class='author' href="" rel="nofollow">
-    <img no-lazy src="/images/avatar.png">
-    <p>Gilmore</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/interview/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>interview</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>Release on：Jan 2, 2021</p>
-  </a>
-</div>
-
-            
-          
-            
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-01-02T18:42:01-05:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：Jan 2, 2021</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Three modes:</p>
-<ul>
-<li>single leader</li>
-<li>multiple leader</li>
-<li>leaderless (Dynamo)</li>
-</ul>
-      
-    </div>
-    
-      
-        <a class= "readmore" href="/2021/01/02/Design-Data-Intensive-Application-2-1-summary/">
-          Read More <i class="fas fa-chevron-right"></i>
-        </a>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
       
     
   </section>
@@ -908,6 +803,59 @@
     
     <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
+    
+      <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
     
 
   
@@ -1029,7 +977,7 @@
 
 
     <div class='content'>
-      <a href="/tags/Classes/" style="font-size: 14px; color: #999">Classes</a> <a href="/tags/DDIA/" style="font-size: 18px; color: #7e7e7e">DDIA</a> <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/tags/LC/" style="font-size: 22px; color: #636363">LC</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/OOP/" style="font-size: 16px; color: #8b8b8b">OOP</a> <a href="/tags/Projects/" style="font-size: 14px; color: #999">Projects</a> <a href="/tags/interview/" style="font-size: 18px; color: #7e7e7e">interview</a> <a href="/tags/review/" style="font-size: 20px; color: #707070">review</a> <a href="/tags/system-design/" style="font-size: 24px; color: #555">system design</a>
+      <a href="/tags/Classes/" style="font-size: 14px; color: #999">Classes</a> <a href="/tags/DDIA/" style="font-size: 20.67px; color: #6c6c6c">DDIA</a> <a href="/tags/DesignPattern/" style="font-size: 14px; color: #999">DesignPattern</a> <a href="/tags/Java/" style="font-size: 14px; color: #999">Java</a> <a href="/tags/LC/" style="font-size: 22.33px; color: #606060">LC</a> <a href="/tags/ML/" style="font-size: 14px; color: #999">ML</a> <a href="/tags/OOP/" style="font-size: 15.67px; color: #8e8e8e">OOP</a> <a href="/tags/Projects/" style="font-size: 14px; color: #999">Projects</a> <a href="/tags/interview/" style="font-size: 17.33px; color: #828282">interview</a> <a href="/tags/review/" style="font-size: 19px; color: #777">review</a> <a href="/tags/system-design/" style="font-size: 24px; color: #555">system design</a>
     </div>
   </section>
 
@@ -1083,8 +1031,8 @@
         <div class="webinfo-item">
           <div>Last Update：</div>
           
-            <div id="last-update" style="display: none;">Sat May 22 2021 14:17:17 GMT-0400 (Eastern Daylight Time)</div>
-            <div id="last-update-show">2021-05-22 </div>
+            <div id="last-update" style="display: none;">Sun May 23 2021 18:11:41 GMT-0400 (Eastern Daylight Time)</div>
+            <div id="last-update-show">2021-05-23 </div>
           
         </div>
         
@@ -1134,7 +1082,7 @@
           try { 
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate)); 
           } catch (error) { 
-            document.getElementById('last-update-show').innerHTML = '2021-05-22 '; 
+            document.getElementById('last-update-show').innerHTML = '2021-05-23 '; 
           } 
         </script> 
         
@@ -1154,6 +1102,59 @@
 
 	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
 	
+
+	
+	    <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 	
 
