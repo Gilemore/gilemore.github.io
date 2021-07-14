@@ -33,6 +33,7 @@ left largest
 right smallest
 first position
 last position
+peak position
 ">
                                 
 
@@ -431,10 +432,10 @@ last position
             
           
             
-              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-12T21:54:48-04:00">
+              <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-14T08:31:37-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：May 12, 2021</p>
+    <p>Updated on：Jul 14, 2021</p>
   </a>
 </div>
 
@@ -464,6 +465,7 @@ last position
 <li>right smallest</li>
 <li>first position</li>
 <li>last position</li>
+<li>peak position</li>
 </ol>
 <a id="more"></a>
 <h2 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h2><details brown><summary> <p>704 Binary Search</p> </summary>
@@ -493,6 +495,12 @@ last position
 <h2 id="比target大的最小值-left容易越界"><a href="#比target大的最小值-left容易越界" class="headerlink" title="比target大的最小值, left容易越界"></a>比target大的最小值, left容易越界</h2><details brown><summary> <p>35</p> </summary>
               <div class='content'>
               <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+
+<h2 id="找到peak位置"><a href="#找到peak位置" class="headerlink" title="找到peak位置"></a>找到peak位置</h2><details brown><summary> <p>162 Find Peak Element</p> </summary>
+              <div class='content'>
+              <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findPeakElement</span><span class="params">(<span class="keyword">int</span>[] nums)</span>&#125;</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l=nums.length;</span><br><span class="line">    <span class="keyword">int</span> low=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> high=l-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(low&lt;high)&#123;</span><br><span class="line">      <span class="keyword">int</span> mid1=(low+high)/<span class="number">2</span>;</span><br><span class="line">      <span class="keyword">int</span> mid2=mid1+<span class="number">1</span>;</span><br><span class="line">      <span class="keyword">if</span>(nums[mid1]&lt;nums[mid2])</span><br><span class="line">        low=mid2;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">        high=mid1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> low;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
               </div>
             </details>
 
@@ -532,10 +540,10 @@ last position
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-12T21:54:48-04:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-07-14T08:31:37-04:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Updated on：May 12, 2021</p>
+    <p>Updated on：Jul 14, 2021</p>
   </a>
 </div>
 
@@ -678,7 +686,7 @@ Paper ReadingOff-policy evaluation for slate recommendationProposalBackgroundWe 
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Template"><span class="toc-text">Template</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Target-Specified"><span class="toc-text">Target Specified</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94target%E5%A4%A7%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC-left%E5%AE%B9%E6%98%93%E8%B6%8A%E7%95%8C"><span class="toc-text">比target大的最小值, left容易越界</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Template"><span class="toc-text">Template</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Target-Specified"><span class="toc-text">Target Specified</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94target%E5%A4%A7%E7%9A%84%E6%9C%80%E5%B0%8F%E5%80%BC-left%E5%AE%B9%E6%98%93%E8%B6%8A%E7%95%8C"><span class="toc-text">比target大的最小值, left容易越界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%BE%E5%88%B0peak%E4%BD%8D%E7%BD%AE"><span class="toc-text">找到peak位置</span></a></li></ol>
     </div>
   </section>
 
